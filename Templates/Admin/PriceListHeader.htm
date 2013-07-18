@@ -1,0 +1,40 @@
+<h2>Event Pricing Information</h2>
+<table class='navigation'>
+  <tr>
+  <td width='100px;'><#PREVNAV></td>
+  <td align='center'><#LISTNAV></td>
+  <td width='100px' align='right'><#NEXTNAV></td>
+  </tr>
+</table>
+
+<div class="info">
+  <table>
+  	<thead>
+    <tr>
+          <th>Event </th>
+          <th>Price Description</th>
+          <th>Price Amount</th>
+		  <th>Edit</th>
+          
+      </tr>
+    </thead>
+     
+    <tbody>
+    <#CONTENT>
+    </tbody>
+    
+     <tr>
+          <th colspan="4">&nbsp;</th>
+      </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+<p align="center"><a href="../../cgi-bin/admin.dll/eventview?sessionaltcd=<#SESSIONALTCD>&RESPONSEPAGE=EventInfo_Update.htm">Edit Event Information</a> | <a href="priceinfo?itemaltcd=<#sessionaltcd>">Add New Price</a></p>
+<table class='navigation'>
+<tr>
+<td width='100px;'><#PREVNAV></td>
+<td align='center'><#LISTNAV></td>
+<td width='100px' align='right'><#NEXTNAV></td>
+</tr>
+</table>
+

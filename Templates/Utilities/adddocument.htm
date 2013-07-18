@@ -1,0 +1,68 @@
+<script>
+var toWrite = '';
+
+function addFiles(){
+var fileString = '';
+if('<#FILEFIELD1>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD1" value="<#FILEFIELD1>">';
+}
+document.getElementById('fileSection').innerHTML = fileString;
+}
+
+</script>
+
+<form name='order' Action="../documentdll.dll/UpdateInfo" Method="POST" enctype="multipart/form-data" >
+
+<input type='hidden' name='DOCCLASS' value='<#DOCCLASS>'>
+<input type='hidden' name='DOCDES_N0' value='<#DOCDES_N1>'>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="PARENTGROUPCD" value="<#PARENTGROUPCD>">
+<input type="hidden" name="OWNERCD" value="<#OWNERCD>">
+<input type="hidden" name="UPLOADONLY" value="Y">
+<input type="hidden" name="SAVETOFILE" value="N">
+<input type="hidden" name="OWNERTYPECD" value="I">
+<input type='hidden' name='FILENAMEPATTERN' value='#CUSTOMERCD_#FILENAME'>
+<input type='hidden' name='WRP' value='formConfirm.htm'>
+
+
+<h2>Document Upload</h2>
+<fieldset>
+	<ul>
+		<li>
+			<label for="FILEFIELD1">Select your document</label>
+			<input type='file' name='FILEFIELD1' value='<#FILEFIELD1>'>
+		</li>
+		<li>
+			<label for="TITLETXT">Document Description</label>
+			<input type='text' name='TITLETXT' value='<#TITLETXT>'>
+		</li>
+		<li>
+			<label for="DOCTYPE">Document Type</label>
+			<select name="DOCTYPE">
+				<option value="Picture">Profile Picture</option>
+				<option value="Logo">Organization Logo</option>
+				<option value="Contract">Contract</option>
+				<option value="Bio">Bio</option>
+			</select>
+			<script>
+				function ownerCdSwitch(){
+					if(document.order.DOCTYPE.value == 'Logo'){
+						document.order.OWNERCD.value = '<#COOKIE_ORGCD>';
+						document.order.OWNERTYPECD.value = 'O';
+					}
+				}
+			</script>
+		</li>
+		<li>
+			<label for="FILETYPE">File Type</label>
+			<select name="FILETYPE">
+				<option value="I">Image</option>
+				<option value="T">Text</option>
+				<option value="O">Other</option>
+			</select>
+		</li>
+	</ul>
+	<div class="buttons"><input type="submit" name="Submit" value="Submit" onclick="ownerCdSwitch()"></div>
+</fieldset>
+<p></p>
+</form>

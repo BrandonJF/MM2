@@ -1,0 +1,134 @@
+<!-- Start of new navigation -BJF -->
+    <ul data-role="listview" data-inset="false" class="privateLink">
+        <li data-role="list-divider" id="panelLeftHeader">
+            <h4>
+                <#COOKIE_FIRSTNAME>
+                    <#COOKIE_LASTNAME>
+            </h4>
+        </li>
+        <li class="active" data-icon="home">
+            <a href="../memberdll.dll/info?wrp=mainloginwelcome.htm" class="contentLink">Home</a>
+        </li>
+    </ul>
+    <!-- end listview -->
+    <div data-role="collapsible-set" data-theme="a" data-content-theme="z"
+    data-inset="false" id="main_menu" data-iconpos="right" data-collapsed-icon="arrow-r"
+    data-expanded-icon="arrow-d">
+        <div data-role="collapsible" id="myaccount">
+
+            <h2>
+                <#MLGLBL TEXT="My Account">
+            </h2>
+            <ul data-role="listview" data-inset="false">
+                <li>
+                    <a href="../Personalize.dll/counts"><#MLGLBL TEXT="Account Summary"></a>
+                </li>
+                <li>
+                  <!--   <a href="#" onClick="createPOST('../memberdll.dll/Info',{'wrp':'Customer_Update.htm'}); return false">Update My Profile</a> -->
+                    <a href="../memberdll.dll/Info?wrp=Customer_Update.htm" >Update My Profile</a>
+
+                </li>
+                <li>
+                    <a href="../memberdll.dll/Info?WRP=username_Update.htm"><#MLGLBL TEXT="Change My Password"></a>
+                </li>
+                <li>
+                    <a href="../dues.dll/List?customercd=<#COOKIE_CUSTOMERCD>"><#MLGLBL TEXT="Renew Dues"></a>
+                </li>
+                <li>
+                    <!-- <a href="#" onClick="createPOST('../Invoicedll.dll/List',{'payeecd':CUSTOMERCD,'BALANCEDUE':'>-1','sort':'INVOICEDATE DESC'}); return false">Transaction History</a> -->
+                    <a href="../Invoicedll.dll/List?payeecd=<#COOKIE_CUSTOMERCD>&BALANCEDUE=>-1&sort=INVOICEDATE DESC" data-ajax="false">Transaction History</a>
+                </li>
+                <!-- <li>
+                    <a href="#" onClick="createPOST('../memberdll.dll/info',{'wrp':'org_membershipapp.htm'}); return false">Organization Membership</a>
+                </li> -->
+                <li>
+                    <a href="../committeedll.dll/indlist?customercd=<#COOKIE_CUSTOMERCD>&whp=committee.htm&wbp=committeeList.htm">My Committees</a>
+                </li>
+            </ul>
+        </div>
+        <div data-role="collapsible" class="privateLink">
+            <h2 id="hdr_events">
+                <#MLGLBL TEXT="Events">
+            </h2>
+            <ul data-role="listview" data-inset="false">
+                <li>
+                    <a href="../Registrationdll.dll/List?c.customercd=<#COOKIE_CUSTOMERCD>&sessionbegdate=>getDate()&SORT=SESSIONBEGDATE DESC"><#MLGLBL TEXT="My Event Registrations"></a>
+                </li>
+                <li>
+                    <a href="../eventsdll.dll/EventList?ONWEBFLG=Y&REGONLINEFLG=Y&Range=1/10&SESSIONBEGDATE=>getdate()-1&SORT=SESSIONBEGDATE">Register for an Event</a>
+                </li>
+               <!--  <li>
+                    <a href="#" onClick="createPOST('../eventsdll.dll/EventList',{'ONWEBFLG':'Y','REGONLINEFLG':'Y','CALVIEW':'now','SORT':'SESSIONBEGDATE','RESPONSEHEADERPAGE':'main_template.htm'}); return false">Event Calendar</a>
+                </li> -->
+            </ul>
+        </div>
+        <div data-role="collapsible">
+            <h2>
+                Directories
+            </h2>
+            <ul data-role="listview" data-inset="false">
+                <li>
+                   <!--  <a href="#" onClick="createPOST('../utilities.dll/OpenPage',{'wrp':'memberSearch.htm'}); return false">Member Directory</a> -->
+                    <a href="../utilities.dll/openpage?wrp=membersearch.htm">Member Directory</a>
+                </li>
+              <!--   <li>
+
+                    <a href="../committeedll.dll/list?ONWEBFLG=Y&RANGE=1/20&SORT=NAME">Committee Directory</a>
+                </li> -->
+               <!--  <li>
+                    <a href="#" onClick="createPOST('../chapterdll.dll/list',{'ONWEBFLG':'Y','RANGE':'1/20','SORT':'CHAPTERNAME'}); return false">Chapter Directory</a>
+                </li> -->
+                <li>
+                    <!-- <a href="#" onClick="createPOST('../utilities.dll/OpenPage',{'wrp':'orgSearch.htm'}); return false">Organization Directory</a> -->
+                    <a href="../utilities.dll/OpenPage?wrp=orgSearch.htm/">Organization Directory</a>
+                </li>
+                <!-- <li><a href="#" onClick="createPOST('../memberdll.dll/CustomList',{'SQLNAME':'Surveys','ACTIVEFLG':'Y','WHP':'SurveyListHeader.htm','WBP':'SurveyList.htm'}); return false">Surveys</a></li> -->
+            </ul>
+        </div>
+        <div data-role="collapsible">
+            <h2>
+                <#MLGLBL TEXT="Products">
+            </h2>
+            <ul data-role="listview" data-inset="false">
+                <li>
+                  <!--   <a href="#" onClick="createPOST('../msascartdll.dll/productlist',{'ONWEBFLG':'Y','RANGE':'1/5','SORT':'UDEF1QTY'}); return false"> <#MLGLBL TEXT="Shop"></a> -->
+                  <a href="../msascartdll.dll/productlist?ONWEBFLG=Y&RANGE=1/5&SORT=UDEF1QTY" data-ajax="false"> <#MLGLBL TEXT="Shop"></a>
+                </li>
+                <li>
+                    <a href="../msascartdll.dll/showCart">View My Cart</a>
+                </li>
+                   <li>
+                    <a href="../utilities.dll/openpage?wrp=productSearch.htm">Search Products</a>
+                </li>
+            </ul>
+        </div>
+        <!--<div data-role="collapsible">
+
+          <h2>LOGOFF</h2>
+
+          <a href='../logindll.dll/indlogoff'>LOGOFF</a>
+
+        </div>-->
+    </div>
+    <!-- end collapsiblie set -->
+    <ul data-role="listview" data-inset="false" class="menuWidthFix">
+        <li class="active" data-icon="delete">
+            <a href="../logindll.dll/indlogoff" class="contentLink" data-ajax="false">Sign Out</a>
+        </li>
+
+    </ul>
+    <!-- <div class='clear'></div> -->
+
+<!-- end of new navigation -BJF -->
+<script>
+   if (CUSTOMERCD == '') {
+       // $('.publicLink').show();
+       // $('.privateLink').hide();
+   } else {
+       // $('.publicLink').hide();
+       // $('.privateLink').show();
+   }
+   if (ISMEMBERFLG == 'Y') {
+       $("#lijoinMem").hide();
+   }
+</script>

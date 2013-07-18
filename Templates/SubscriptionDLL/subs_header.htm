@@ -1,0 +1,10 @@
+<h2>Subscriptions - <#RECORDCOUNT> Result(s) </h2>
+<form name="order" method="POST">
+    <div class="formIntro">
+        <p><#PREVNAV> <#NEXTNAV> |  <a href="../msascartdll.dll/showcart">[?] View Cart</a> | <a href="javascript:emptyCartConfirmation();">[-] Empty Cart </a></p>
+    </div>
+<#CONTENT>
+
+<input type="hidden" name="ADD" />
+<div class="buttons"><input type="button" name="button" value="Add Items To Cart" onClick="addToCart_newCart(document.order,'D');" /></div>   
+</form>

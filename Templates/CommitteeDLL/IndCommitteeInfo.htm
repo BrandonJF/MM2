@@ -1,0 +1,55 @@
+<h2>Committee Member Information</h2>
+<div class="buttons"><a href="../Committeedll.dll/Info?committeecd=<#COMMITTEECD>" class="button">View
+    Committee Info</a></div>
+<script>
+  $(function() {
+		$( ".dates" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<form method="POST" action="JoinCommittee">
+  <fieldset>
+	<ul>
+	  <li>
+		<label for="COMMITTEECD">Committee CD</label> <#COMMITTEECD>
+	  </li>
+	  <li>
+		<label for="CUSTOMERCD">Member CD</label>
+		<input name="CUSTOMERCD" size="30" value="<#CUSTOMERCD>">&nbsp;
+        <a href="../memberdll.dll/Info?customercd=<#CUSTOMERCD>&wrp=customer_profile.htm">Open Member Notebook</a>
+	  </li>
+	  <li>
+		<label for="CUSTOMERNAME">Member Name</label>
+		<input type="text" name="CUSTOMERNAME" value="<#CUSTOMERNAME>">
+	  </li>
+	  <li>
+		<label for="ORGNAME">Organization Name</label>
+		<input type="text" name="ORGNAME" value="<#ORGNAME>">
+	  </li>
+	  <li>
+		<label for="STATUSSTT">Member Status</label> <#STATUSSTT>
+	  </li>
+	  <li>
+		<label for="JOINDATE">Join Date</label>
+		<input type="text" name="JOINDATE" value="<#JOINDATE>" class="dates">
+	  </li>
+	  <li>
+		<label for="TERMINATIONDATE">Termination Date</label>
+		<input type="text" name="TERMINATIONDATE" value="<#TERMINATIONDATE>" class="dates">
+	  </li>
+	  <li>
+		<label for="NOTES">Notes</label>
+		<textarea rows="8" name="NOTES" cols="56"><#NOTES></textarea>
+	  </li>
+	</ul>
+  </fieldset>
+  <div class="buttons">
+	<input type="submit" value="Update">
+  </div>
+
+	  <input type="hidden" name="COMMITTEECD" value="<#COMMITTEECD>">
+	<input type="hidden" name=CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name=CMT value="WORKER">
+</form>

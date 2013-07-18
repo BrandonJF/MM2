@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Clearvantage Web</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+
+<link href="/baseline/CSS/defaultStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/formStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/eventStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/listStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/cartStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/newCart.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/newStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/jquery.validity.css" rel="stylesheet" type="text/css">
+
+<script language="javascript" src="/baseline/js/euclidScripts.js"></script>
+<script language="javascript" src="/baseline/js/VerificationLib.js"></script>
+<script language="javascript" src="/baseline/js/datetimepicker.js"></script>
+<script language="javascript" src="/baseline/js/eventScripts.js"></script>
+<script language="javascript" src="/baseline/js/customerScripts.js"></script>
+<script language="javascript" src="/baseline/js/duesScripts.js"></script>
+<script language="javascript" src="/baseline/js/cartScripts.js"></script>
+<script type="text/javascript" src="/baseline/js/overLib.js"></script>
+<script type="text/javascript" src="/baseline/js/overLibHideForm.js"></script>
+<script type="text/javascript" src="/baseline/js/jQuery.validity.min.js"></script>
+<script>
+//GLOBAL VARIABLES
+
+var LOGGEDIN = false;
+var CUSTOMERCD = '<#COOKIE_CUSTOMERCD>';
+var ISMEMBERFLG = '<#COOKIE_ISMEMBERFLG>';
+var MEMBERNAME = '<#COOKIE_MEMBERNAME>';
+var STATUSSTT = '<#COOKIE_STATUSSTT>';
+var CUSTOMERTYPE = '<#COOKIE_CUSTOMERTYPE>';
+var ORGCD = '<#COOKIE_ORGCD>';
+var DEBUG = false; //turns on or off debug alerts
+var NAME = '';
+
+
+</script>
+</script>
+
+</head>
+
+
+<!--<body  style='background-color:#E9E9E9;'>-->
+<body onLoad="loadHeadBar();">
+<table id='container'>
+<tr>
+<td width="23"  valign="top" background="/images/leftGrad_transparent.png">&nbsp;</td>
+
+<td id='mainCell'>
+	<table>
+    <tr>
+    <td colspan='2' id='header'>
+     <#PAGEHEADER></td>
+    </tr>
+    
+    <tr>
+    <td id='leftNav'>
+       	<#LEFTNAV>
+    </td> 
+ 	<td id='content'>
+    	<#CONTENT>
+       <!-- <div id='spacer' style='display:none;height:300px;'>
+		&nbsp;
+        </div>-->
+    </td>
+	</tr>
+    
+    <tr>
+    <td colspan='2' id='footer'>
+    <#PAGEFOOTER>
+    </td>
+    </tr>
+    </table>
+</td>
+
+<td width="23" align="center" valign="top" background="/images/rightGrad_transparent.png">&nbsp;</td>
+</tr>
+
+<tr>
+    <td background="/images/bottomLeftGrad_transparent.png">&nbsp;</td>
+    <td background="/images/bottomGrad_transparent.png">&nbsp;</td>
+    <td background="/images/bottomRightGrad_transparent.png">&nbsp;</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+
+<h3>Update My Organization</h3>
+<div class="formIntro">
+	<p>Please enter the information requested below to update your Organization record.</p>
+<ul>
+<li> All fields marked * are required.</li>
+<li>For users from the USA, please enter all phone numbers in the format (302)392-3929</li>
+</ul>
+</div>
+
+<form method="POST" name="abc" id="abc" action='../organizationdll.dll/updateInfo'>
+
+	<#SECTION NAME="ORG_basicInfo.htm" >
+	<#SECTION NAME="ORG_contactInfo.htm" >
+
+
+<div class="buttons"><input name="Button" type="submit" onClick="formValidate()" value="Update Profile"></div>
+<div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="RESPONSEPAGE" value="org_update_confirm.htm">
+</form>
+<script language="javascript">
+	$(function() { 
+        $("#abc").validity(function() {
+            $(".reqField").require("#{field} is required.");
+			$("#Email").require().match("email","Please enter your email address in the correct format. XXX@XXX.XXX");
+            
+		});
+    });
+	
+	
+</script>

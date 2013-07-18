@@ -1,0 +1,103 @@
+<script language="javascript">
+	 function formValidate(){
+		  if  (getFunction()){
+			   document.order.submit();
+			   return true;
+		  }	  
+	 }   
+	 function getFunction(){
+		  var tmpint ="";
+		  var pos="";
+		  var size="";
+		  for (var i=0; i<document.order.length; i++){
+			   if (document.order.elements[i].type =='checkbox'){
+					if (document.order.elements[i].checked==true){
+						 tmpint = tmpint + ',' + document.order.elements[i].name;
+					} //make sure auto registration price is checked
+			   }
+		  } 
+		  pos = tmpint.indexOf(',');
+		  pos = pos +1;
+		  size = tmpint.length;
+		  var finalstr = tmpint.substring(pos,size);
+		  document.order.FUNCTIONSADDED.value=finalstr;
+		  return true;
+	 }
+</script>
+<h2>Registration Info</h2>
+<form name="order" method="POST" action="ConfirmChange">
+<dl class="profile">
+	 <dt>Confirmation ID:</dt>
+	 <dd><#ASSIGNEDSESSIONCD></dd>
+	 
+	 <dt>Customer ID:</dt>
+	 <dd><#CUSTOMERCD></dd>
+	 
+	 <dt>Customer Name :</dt>
+	 <dd><#CUSTOMERNAME></dd>
+	 
+	 <dt>Event Name:</dt>
+	 <dd><#SESSIONNAME></dd>
+	 
+	 <dt>Event ID:</dt>
+	 <dd><#SESSIONALTCD></dd>
+	 
+	 <dt>Location Name:</dt>
+	 <dd><#LOCATIONNAME></dd>
+	 <dt>City:</dt>
+	 <dd><#LOCATIONCITY></dd>
+	 <dt>State:</dt>
+	 <dd><#LOCATIONSTATECD></dd>
+	 <p class="clear"></p>
+</dl>
+<fieldset>
+	 <legend>Enrolled Functions</legend>
+
+<table class="gutters">
+	 <tr>
+		  <th>Name</th>
+		  <th>Total Amount</th>
+	 </tr>
+		  <#ENROLLEDFUNCTIONS>
+	 <tr class="subtotal">
+		  <td class="text">Registration Total:</td>
+		  <td class="price"><#PRICEAMT FORMAT="$0.00"></td>  
+	 </tr>
+	 <tr class="subtotal">
+		  <td class="text">Registered Function Totals:</td>
+		  <td class="price"><#UDEF1AMT FORMAT="$0.00"></td>  
+	 </tr>
+</table>
+</fieldset>
+<fieldset class="myevents">
+	 <legend>Available Functions</legend>
+	 <table class="gutters">
+	 <tr>
+		  <th> </th>
+		  <th>Name</th>
+		  <th>Price</th>
+	 </tr>
+		  <#AVAILABLEFUNCTIONS HIDEENROLLED=Y>
+	 </table>
+</fieldset>
+      <div class="buttons">
+		<input name="button" class="myevents" type="button" onClick="formValidate()" value="Continue">
+	</div>
+			<input type="hidden" name="ASSIGNEDSESSIONCD" value="<#ASSIGNEDSESSIONCD>">    
+			<input type="hidden" name="FUNCTIONSADDED" value="">  
+</form>
+<script>
+	 var now = new Date(); //hide available functions and continue button if event already happened
+	 var curDay = now.getDate();
+	 var curMonth = now.getMonth();
+	 curMonth++;
+	 var curYear = now.getFullYear();
+	 var today = Date.parse(curMonth + '/' + curDay + '/' + curYear); 
+	 var eventDate = Date.parse('<#SESSIONBEGDATE>');
+	 if(eventDate < today) {
+		  $('.myevents').hide();
+	 }
+	 else {
+		  $('.myevents').show();
+	 }
+</script>

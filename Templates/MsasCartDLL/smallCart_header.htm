@@ -1,0 +1,28 @@
+
+<div class="info">
+
+  <form name="cartForm" method="post" action="GetCart">
+  <table>
+  <tr>
+  	<td><b>Shopping Cart</b></td>
+    </tr>
+
+  <tr>
+    <th>Name</th>
+    <th align='right'>Quantity</td>
+    <th align='right'>Subtotal</td>
+  </tr>
+
+  <#SHOPPINGCART>
+
+  <tr>
+    <td>&nbsp;</td>
+    <td><b>TOTAL:</b></td>
+    <td align="center"><b><#CARTTOTAL FORMAT="$0.00"></b></td>
+  </tr>
+
+  </table>
+  </form>
+</div>
+
+<p><h3><a href="../memberdll.dll/openpage?wrp=products.htm">Keep Shopping</a> | <a href="../msascartdll.dll/Orderconfirm">Checkout</a></h3></p>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3./TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>aca</title>
+
+<script language = "javascript">
+
+function amt() 
+{
+    ji = "DONAMT";
+    hu = window.location.search.substring(1);
+    gy = hu.split("&");
+    for (i=0;i<gy.length;i++) {
+    ft = gy[i].split("=");
+    if (ft[0] == ji) {
+    document.abc.DONAMT.value = ft[1];
+    return ft[1]; }
+}}
+
+function fund() 
+{
+    ki = "SUBSCRIPTIONNAME";
+    ku = window.location.search.substring(1);
+    ky = ku.split("&");
+    for (i=0;i<ky.length;i++) 
+    {
+    kt = ky[i].split("=");
+    if (kt[0] == ki) 
+    {
+    for (var i = 0; i < document.abc.SUBSCRIPTIONNAME.length; i++)
+    {
+        if (document.abc.SUBSCRIPTIONNAME[i].value==kt[1])
+		{
+		    document.abc.SUBSCRIPTIONNAME[i].checked = true;
+		    
+		}
+    }
+  
+    return kt[1]; 
+    }}
+}
+
+function go(){
+    amt();
+    fund();
+}
+
+
+</script>
+</head>
+<body onload="go()">
+<h3>Thank You for making a donation to aca!</h3>
+<h3>Payment confirmed.</h3>
+<p style="color:#FF0000;font-weight:bold;">RECEIPT - PLEASE PRINT FOR YOUR RECORDS</p>
+<p><a href="javascript:printpage()"><img src="../../images/print_button.gif" alt="Print Button" width="48" height="17" border="0" /></a></p>
+
+<p>Invoice number: <b><#INVOICENUM></b><br />
+
+<div class="info">
+<table>
+<tr bgcolor="#CCCCCC">
+  <td width=350 align="left"><b>Fund</b></td>
+  <td align="right"><b>Donation Amount</b></td>	
+ 
+</tr>
+
+<#INVOICEITEMS>
+<tr>
+  <td colspan=3>&nbsp</td>
+</tr>
+<tr>
+  <td align="right">
+   <b>Total:</b>
+  </td>
+  <td align="right">
+   $<#TOTALAMT>
+  </td>
+</tr>
+</table>
+</div>
+<br/>
+
+   First Name: <b><#FIRSTNAME></b><br/>
+Last Name: <b><#LASTNAME></b><br/>
+<br />
+ Name: <b><#NAME></b><br/>
+Job Title: <b><#JOBTITLE></b><br/>
+Work Phone: <b><#WORKPHONE></b><br/>
+Fax Phone: <b><#FAXPHONE></b><br/>
+Email: <b><#EMAIL></b><br/>
+<br />
+Address: </br><b><#ADDRESS1><br />
+<script>
+   if('<#ADDRESS2>'!=""){
+	document.write('<#ADDRESS2><br />');
+   }
+</script>
+<#CITY>, <#STATECD>, <#ZIP><br />
+
+</b>
+</p>
+<p>
+  Thank you for your donation.
+</p>
+<p>
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+<tr>
+    <td><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true" title="Remove this item from the cart">Remove</a></td>
+        <td><#VENDORCD></td>
+        <td><#VENDORNAME></td>
+        <td>
+        <select onchange="submit()" name="ITEMCD_<#ORDERITEMCD>">
+        	<#REFTABLEVALS TABLENAME=SHIPVIAREF SCV=VENDORCD>
+        </select></td>
+        <td><#QTY></td>
+        <td><#TAXAMT></td> 
+        <td><#PRICE>
+		<td class="prices"><#ITEMTOTAL></td>
+        
+</tr>

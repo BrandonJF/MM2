@@ -1,0 +1,83 @@
+        <h3 align="left"><strong>Fees</strong></h3>
+        Web site ads are billed at a <STRONG>monthly</STRONG>, per word rate, according to the following   categories:
+
+        <TABLE cellSpacing="0" cellPadding="3" class="listing" align="center" border="0">
+          <TBODY>
+            <TR>
+              <TD class="td1"><strong>RATES:</strong> </TD>
+              <TD class="td1">&nbsp;</TD>
+            </TR>
+            <TR>
+              <TD class="none">Non-Organizational Affiliates</TD>
+              <TD class="none">$1.50   per word per 30 days </TD>
+            </TR>
+            <TR>
+              <TD class="td1">Organizational   Affiliates: </TD>
+              <TD class="td1">&nbsp;</TD>
+            </TR>
+            <TR>
+              <TD class="none"><ul>
+                <li>Affiliate</li>
+              </ul></TD>
+              <TD class="none">$1.35 per word per   30 days</TD>
+            </TR>
+            <TR>
+              <TD class="td1"><ul>
+                <li>Supporting Affiliate</li>
+              </ul></TD>
+              <TD class="td1">$1.20 per word per   30 days</TD>
+            </TR>
+            <TR>
+              <TD class="none"><ul>
+                <li>Contributing Affiliate</li>
+              </ul></TD>
+              <TD class="none">$1.05 per word per   30 days</TD>
+            </TR>
+          </TBODY>
+        </TABLE>
+        <div><A href="https://www.academyhealth.org/membership/affiliates.htm" target="_blank">Not sure if your institution is an   organizational affiliate or at what level?</A></div>
+        <div>*Individual members   do NOT receive a discounted rate for ads.<BR>
+            Discounted rates are for Organizational Affiliates ONLY.</div>
+        <div><strong>Ads will be   placed within two business days.</strong></div>
+        <div><STRONG>Note:</STRONG> if using Microsoft Word, you can determine the number of words in an ad by clicking on File, Properties, Statistics.</div>
+        <div><STRONG>Interested   in including a logo or graphics?</STRONG><BR>
+          A logo can be included   for an additional one-time fee of $50. Ads may include one hypertext link to   your Web site and one e-mail link.</div>
+        <TABLE class="listing" cellSpacing="0" cellPadding="3" border="0">
+          <TBODY>
+            <TR>
+              <TD class="td1" colspan="2"><STRONG>Is there a minimum   charge?</STRONG> <STRONG><BR>
+                Ads ranging from one to   50 words will be billed for 50 words.</STRONG> <BR>
+                For example, if an   individual places an ad with only 30 words for 1 month the person would pay the   following based on each category:</TD>
+            </TR>
+
+            <TR>
+              <TD class="none">&nbsp;</TD>
+            </TR>
+            <TR>
+              <TD class="td1">Non-Organizational Affiliates </TD>
+              <TD class="td1">50 words   x $1.50 = $75.00</TD>
+            </TR>
+            <TR>
+              <TD class="none">Organizational   Affiliates: </TD>
+              <TD class="none">&nbsp;</TD>
+            </TR>
+            <TR>
+              <TD class="td1"><ul>
+                <li>Affiliate</li>
+              </ul></TD>
+              <TD class="td1">50 words x $1.35 =   $67.50</TD>
+            </TR>
+            <TR>
+              <TD class="none"><ul>
+                <li>Supporting Affiliate</li>
+              </ul></TD>
+              <TD class="none">50 words x $1.20 =   $60.00</TD>
+            </TR>
+            <TR>
+              <TD class="td1"><ul>
+                <li>Contributing Affiliate</li>
+              </ul></TD>
+              <TD class="td1">50 words x $1.05 =   $52.50</TD>
+            </TR>
+          </TBODY>
+        </TABLE>

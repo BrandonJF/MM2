@@ -1,0 +1,29 @@
+<tr>
+    <td><#DOCUMENTNUM></td>
+    <td>
+	<script>
+	if('<#FILENAME>' == ''){
+		document.write('N/A');
+	}else{
+		document.write('<#FILENAME>');
+	}
+	</script>
+    </td>
+    <td>
+	<script>
+	if('<#FILENAME>' == ''){
+		document.write('<b><a  href="javascript:openPreview_text(\'<#DOCUMENTNUM>\');">Abstract Text</a></b>');
+	}else{
+		document.write('<b><a href="javascript:openPreview_doc(\'<#DOCUMENTNUM>\');">Document Preview</a></b>');
+	}
+	</script>
+    </td>
+  </tr>
+
+<script>
+titletxt = '<#TITLETXT>';
+documentnum = '<#DOCUMENTNUM>';
+topic = '<#ABSTRACTTOPIC>';
+groupcd = '<#GROUPCD>';
+parentgroupcd = '<#PARENTGROUPCD>';
+</script>

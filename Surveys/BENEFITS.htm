@@ -1,0 +1,582 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ClearVantage Web - Baseline</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--CLEARVANTAGE STYLES-->
+<link href="../../CSS/defaultStyles.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/formStyles.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/eventStyles.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/listStyles.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/cartStyles.css" rel="stylesheet" type="text/css"> 
+<link href="../../CSS/newCart.css" rel="stylesheet" type="text/css"> 
+<link href="../../CSS/newStyles.css" rel="stylesheet" type="text/css"> 
+
+<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+<link rel="stylesheet" type="text/css" href="../../css/style_cf.css" />
+<!-- <link rel="stylesheet" type="text/css" href="../../css/prettyPhoto.css" media="screen" /> -->
+
+<!--CLEARVANTAGE JAVASCRIPT-->
+<script language="javascript" src="../../JS/euclidScripts.js"></script>
+<script language="javascript" src="../../JS/VerificationLib.js"></script>
+<script language="javascript" src="../../JS/datetimepicker.js"></script>
+<script language="javascript" src="../../JS/eventScripts.js"></script>
+<script language="javascript" src="../../JS/customerScripts.js"></script>
+<script language="javascript" src="../../JS/duesScripts.js"></script>
+<script language="javascript" src="../../JS/cartScripts.js"></script> 
+
+
+<script>
+	//GLOBAL VARIABLES FOR LOGGED IN USER
+	var CUSTOMERCD = '';
+	var ISMEMBERFLG = '';
+	var MEMBERNAME = '';
+	var STATUSSTT = '';
+	var CUSTOMERTYPE = '';
+	var ORGCD = '';
+	var DEBUG = false; //turns on or off debug alerts
+</script>
+
+<script>
+//populate cart summary:
+function loadHeadBar(){
+	alert('load head bar');
+	var cartHeaderURL = '../msascartdll.dll/showcart?WMT=none&WRP=cartSum.htm';
+	//debug(URL);
+	new Ajax.Request(cartHeaderURL, {method:'get',
+		onSuccess:function(content){
+			var response = content.responseText || '';
+			//debug(response);
+			//debug($('cartHeaderSummary').innerHTML);
+			if(response.match('Your cart is empty') || response.match('No Cart Items')){
+				var emptyString = 	'<a href="../msascartdll.dll/showcart">0 Item(s) In Cart</a> &nbsp;&nbsp;&nbsp; Total: $0.00&nbsp;&nbsp;';
+				$('cartHeaderSummary').innerHTML = emptyString;
+			}else{
+				$('cartHeaderSummary').innerHTML = response;
+			}
+		}
+	});
+}
+
+</script>
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+startList = function() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("nav");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.nodeName=="LI") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+window.onload=startList;
+
+//--><!]]></script>
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" href="../../css/ie6.css" />
+<script type='text/javascript' src='../../js/dd_belated_png.js'></script>
+<script>DD_belatedPNG.fix('.png,#numbers a,.first_ul');</script>
+<![endif]-->
+
+</head>
+<body>
+<div id="container">
+<!-- header -->
+<div id="header">
+    <!-- logo -->
+           <a href="../../index.htm" title=""><img src="../../images/logo.gif" alt="" class="png" /></a>
+    <!-- /logo -->
+
+    <!-- header right -->
+           
+<br /><br />
+
+<ul class="nav">
+
+	<li><a href="../../index.htm">HOME</a></li>
+
+	<li><a onClick="createPOST('../Eventsdll.dll/EventList',{'sessionbegdate':'>getdate()-1','RANGE':'1/10','ONWEBFLG':'Y','REGONLINE':'Y'}); return false">EVENTS</a>
+		<ul>
+			<li><a href="#" onClick="createPOST('../Registrationdll.dll/List',{'sessionbegdate':'>getdate()','SHOWTOP':'50','c.customercd':CUSTOMERCD,'SORT':'SESSIONBEGDATE DESC'}); return false">VIEW MY EVENT REGISTRATIONS</a></li>
+            <li><a href="#" onClick="createPOST('../eventsdll.dll/EventList',{'ONWEBFLG':'Y','REGONLINEFLG':'Y','CALVIEW':'now','SORT':'SESSIONBEGDATE','RESPONSEHEADERPAGE':'main_template.htm'}); return false">EVENT CALENDAR</a></li>  
+
+
+		</ul>
+	</li>
+
+	<li><a href="#" onClick="createPOST('../msascartdll.dll/productlist',{'ONWEBFLG':'Y','INSTOCKSTT':'Y','RANGE':'1/10','COLUMNS':2}); return false">PRODUCTS</a>
+		<ul>
+            <li><a href="#" onClick="createPOST('../utilities.dll/OpenPage',{'wrp':'subscriptionsearch.htm','wmt':'../main_template_css.htm'}); return false">PURCHASE SUBSCRIPTION</a></li>
+            <li><a href="../msascartdll.dll/showCart">VIEW MY CART</a></li>
+		</ul>
+	</li>
+	<script>if(CUSTOMERCD == "")document.write("<li><a href='#' onClick=\"createPOST('../utilities.dll/openpage',{'WRP':'mainlogin.htm'});\">MEMBER'S ONLY</a>");</script>
+    <script>if(CUSTOMERCD != "")document.write("<li><a href='#' onClick=\"createPOST('../memberdll.dll/info',{'wrp':'mainloginwelcome.htm'});\">MEMBER'S ONLY</a>");</script>
+		<ul>
+			<li><a href="#" onClick="createPOST('../memberdll.dll/info',{'wrp':'membershipapp_nm.htm'}); return false">JOIN NOW</a></li>
+            <script>if(CUSTOMERCD == "")document.write("<li><a href='#' onClick=\"createPOST('../memberdll.dll/openpage',{'LASTNAME':'reed','RANGE':'1/10','SORT':'firstname'});\">CREATE AN ACCOUNT</a></li>");</script>
+			<li><a href="#" onClick="createPOST('../memberdll.dll/Info',{'wrp':'Customer_Update.htm'}); return false">UPDATE MY PROFILE</a></li>
+            <li><a href="../dues.dll/List">RENEW MEMBERSHIP DUES</a></li>
+            <li><a href="#" onClick="createPOST('../Invoicedll.dll/List',{'payeecd':CUSTOMERCD,'BALANCEDUE':'>0','sort':'INVOICEDATE DESC','range':'1/20'}); return false">TRANSACTION HISTORY</a></li>
+            <li><a href="#" onClick="createPOST('../utilities.dll/OpenPage',{'wrp':'memberSearch.htm','wmt':'../main_template_innerpage.htm'}); return false">MEMBER DIRECTORY</a></li>
+            <li><a href="#" onClick="createPOST('../Registrationdll.dll/List',{'sessionbegdate':'>getdate()','SHOWTOP':'50','c.customercd':CUSTOMERCD,'SORT':'SESSIONBEGDATE DESC'}); return false">VIEW MY EVENT REGISTRATIONS</a></li>
+            <li><a href="#" onClick="createPOST('../exhibit.dll/showfloorplan',{'sessionaltcd':'IP060111L'}); return false">BOOTH REGISTRATION</a></li>
+			<li><a href="#" onClick="createPOST('../committeedll.dll/list',{'ONWEBFLG':'Y','RANGE':'1/20','SORT':'NAME'}); return false">COMMITTEE DIRECTORY</a></li>
+            <li><a href="#" onClick="createPOST('../chapterdll.dll/list',{'ONWEBFLG':'Y','RANGE':'1/20','SORT':'CHAPTERNAME'}); return false">CHAPTER DIRECTORY</a></li>
+            <li><a href="#" onClick="createPOST('../memberdll.dll/info',{'WRP':'abstractMgm.htm','wmt':'../main_template_full.htm'}); return false">ABSTRACT SUBMISSION</a></li>																																
+            <li><a href="#" onClick="createPOST('../memberdll.dll/openpage',{'WRP':'abstractReview.htm','wmt':'../main_template_full.htm'}); return false">ABSTRACT REVIEW</a></li>
+            <li><a href="#" onClick="createPOST('../memberdll.dll/openpage',{'WRP':'abstractSelect.htm','wmt':'../main_template_full.htm'}); return false">ABSTRACT SELECTION</a></li>
+            <li><a href="#" onClick="createPOST('../certificationdll.dll/masterlist',{'customercd':CUSTOMERCD}); return false">VIEW MY CERTIFICATIONS</a></li>
+            <li><a href="#" onClick="createPOST('../memberdll.dll/CustomList',{'SQLNAME':'Surveys','ACTIVEFLG':'Y'}); return false">SURVEYS</a></li>
+            <li><a href="#" onClick="createPOST('../awards.dll/list',{'wrp':'awardlist.htm','EVALUATIONSTT':'Accepting'}); return false">AWARDS</a></li>
+
+		</ul>
+	</li>
+		<li><a href="#" onClick="createPOST('../JobBoard.dll/List',{'ADVISACTIVEFLG':'Y'}); return false">CAREERS</a>
+		<ul>
+            <li><a href="#" onClick="createPOST('../JobBoard.dll/AppInfo',{'WRP':'MyResume.htm'}); return false">SUBMIT MY RESUME</a></li>
+            <li><a href="#" onClick="createPOST('../JobBoard.dll/List',{'ADVISACTIVEFLG':'Y'}); return false">APPLY FOR A JOB</a></li>
+            <li><a href="#" onClick="createPOST('../JobBoard.dll/AppList',{'J.CUSTOMERCD':CUSTOMERCD,'J.CONTRACTNUM':'<>0'}); return false">VIEW JOBS I'VE APPLIED FOR</a></li>
+            <li><a href="#" onClick="createPOST('../JobBoard.dll/AppList',{'J.CUSTOMERCD':CUSTOMERCD,'J.CONTRACTNUM':'0','WHP':'myResumes_Header.htm','WBP':'myResumeList.htm'}); return false">MY RESUMES</a></li>
+		</ul>
+	</li>
+<script>if(CUSTOMERCD == "")document.write("<li><a href='#' onClick=\"createPOST('../utilities.dll/openpage',{'WRP':'mainlogin.htm'});\">LOGIN</a></li>");</script>                                                                                 
+<script>if(CUSTOMERCD != ""){document.write("<li><a href='../logindll.dll/indlogoff'>LOGOFF</a></li>");}</script>
+</ul>
+
+    <!-- /header right -->
+</div>
+<div id="cartHeaderSummary"></div>
+<br class="clearfloat" />
+<!-- /header -->
+
+
+<div id="container1">
+<div id="container2">
+<div id="container3">    
+    <div class="page_curv_top png"></div>
+    <div class="content_con png">
+	    <div class="sub_header">
+		<!-- Page navigation-->
+			<div class="breadcrumb">You are here: <a href="../../index.html">Home</a> \ Product List</div>
+		<!-- /Page navigation-->
+
+		<!-- search -->
+			<div class="search_bar">
+			    <form action="#" method="get">
+				<input type="text" class="search_text" name="q" value="SEARCH" /><input type="image" src="../../images/pixel.gif" class="searchsubmit" alt="" />
+			    </form>
+			</div>
+		<!-- / search-->		    
+	    </div>
+	    
+	    <div class="content_con2">
+
+	    <!-- left side content -->
+			
+	    <div class="content productlist">
+	    
+	    	    
+	    
+		    <!-- box -->   
+			    
+<script language="javascript" SRC="/cvweb_baseline_test/js/CheckBoxGroup.js"></script>
+
+<script language = "javascript">
+var TQLM4_= new CheckBoxGroup();
+TQLM4_.addToGroup("TQLM4*");
+TQLM4_.setMaxAllowed(3,"Please Choose No More Than 3");
+
+</script>
+
+<script language = "javascript">
+<!--
+
+
+
+
+//
+function chkRequiredPage1() {
+var count = 0;
+for (var i = 0; i <=4; i++)
+{if (document.response.TQ10[i].checked==true)
+{ count = count + 1; } }
+if (count==0){
+alert("\nYou must select a value for question 1.")
+document.response.TQ10[0].focus();
+return false;}
+return true
+}
+
+function chkRequiredPage2() {
+return true
+}
+ //Do not remove this line
+
+function chkRequired()
+{
+	return true;
+}
+
+function validate() {
+   //need validation code here'
+	if  (chkRequired()) {
+	
+		var thisURL = this.location+'';
+		var urlArray = thisURL.split('&');
+		var parentGroupCD = urlArray[1];
+		//document.response.LINKCD.value = parentGroupCD;
+		//document.response.RGROUPNUM.value = document.response.CUSTOMERCD.value+'_'+parentGroupCD;
+		//alert(document.response.RGROUPNUM.value);
+		//alert(document.response.LINKCD.value);
+		
+		document.response.action = "../../cgi-bin/msastestdll.dll/PostResults"
+		document.response.submit();
+	  	return true;
+	}
+}	
+
+function clearForm() {
+	document.response.CUSTOMERCD.value = CUSTOMERCD;
+	document.response.CUSTOMERCODE.value=document.response.CUSTOMERCD.value
+	}	
+
+
+//doesn't let you change the Memberid.
+function PredefMemberid()
+{
+alert("\nThe MemberID field is a pre-defined field.")
+document.response.Q01.focus();
+}
+
+function goNextAnchor(where) {
+	window.location.hash = where
+}
+
+-->
+</script>
+
+<form method="POST" action="PostResults" name="response">
+  <table  border="0">
+    <tr>
+      <td ><strong>Member Benefit Survey</strong></td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+    <tr >
+      <td height="5">&nbsp;</td>
+    </tr>
+    <tr >
+      <td>
+        <input type="hidden" name="CUSTOMERCODE" size="20" value="" disabled>
+          </td>
+    </tr>
+   
+   <tr><td>
+   <table>
+   <!-- Question 1 -->
+<tr> 
+<td valign="top" width='20px;'><a name="TQ10">1.<br><img src=images/clear.gif alt="" width="25" height="8"></td>
+<td valign="top">Which most accurately reflects your role in your organization?<br>
+<img src=images/clear.gif alt="" width="8" height="8"></td>
+</tr>
+<tr> 
+<td valign="top">&nbsp; </td>
+<td valign="top"> <table class="questionRadioButtonTable"><TR><td valign="top"><input type="radio" name="TQ10" value="1"   ></td><td>Executive Staff</td></TR>
+<TR><td valign="top"><input type="radio" name="TQ10" value="2"   ></td><td>Management</td></TR>
+<TR><td valign="top"><input type="radio" name="TQ10" value="3"   ></td><td>Program Staff</td></TR>
+<TR><td valign="top"><input type="radio" name="TQ10" value="4"   ></td><td>Administration and Finance Staff</td></TR>
+<TR><td valign="top"><input type="radio" name="TQ10" value="5"   ></td><td>Other&nbsp;<input type="text" name="OE58" value="" size="20"> <br></td></TR>
+</TABLE>
+
+<br>
+<img src=images/clear.gif alt="" width="8" height="8"> </td>
+</tr>
+<!-- Question 3 -->
+<tr> 
+<td valign="top" width='20px;'><a name="TQ11">3.<br><img src=images/clear.gif alt="" width="25" height="8"></td>
+<td valign="top">Think about the membership benefits you currently receive in relation to the dues that you pay. Select your preferred option from the dropdown<br>
+<img src=images/clear.gif alt="" width="8" height="8"></td>
+</tr>
+<tr> 
+<td valign="top">&nbsp; </td>
+<td valign="top"> <select size="1" name="TQ11"><option  value="0">Select One</option><option  value="1">Higher Dues with More Member Benefits</option><option  value="2">Same Dues with Same Member Benefits</option><option  value="3">Lower Dues with Reduced Member Benefits</option></select>
+<br>
+<img src=images/clear.gif alt="" width="8" height="8"> </td>
+</tr>
+<!-- Question 4 -->
+<tr> 
+<td valign="top" width='20px;'><a name="TQ15">4.<br><img src=images/clear.gif alt="" width="25" height="8"></td>
+<td valign="top">Please check the 3 member benefits you find most useful: <br>
+<img src=images/clear.gif alt="" width="8" height="8"></td>
+</tr>
+<tr> 
+<td valign="top">&nbsp; </td>
+<td valign="top"> <table class="questionCheckBoxTable">
+<tr><td valign="top"><input type="checkbox" name="TQLM4_16" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Online Resources </td></tr>
+<tr><td valign="top"><input type="checkbox" name="TQLM4_17" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Member Directory </td></tr>
+<tr><td valign="top"><input type="checkbox" name="TQLM4_18" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Event Registration Discounts </td></tr>
+<tr><td valign="top"><input type="checkbox" name="TQLM4_19" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Product Discounts </td></tr>
+<tr><td valign="top"><input type="checkbox" name="TQLM4_20" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Legiuslative Updates </td></tr>
+<tr><td valign="top"><input type="checkbox" name="TQLM4_21" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Certification Tracking </td></tr>
+<tr><td valign="top"><input type="checkbox" name="TQLM4_22" value="2"  onClick="TQLM4_.check(this);"></td><td valign="top">Publications </td></tr>
+</tr>
+</table>
+
+<br>
+<img src=images/clear.gif alt="" width="8" height="8"> </td>
+</tr>
+<!-- Question 5 -->
+<tr> 
+<td valign="top" width='20px;'><a name="TQ23">5.<br><img src=images/clear.gif alt="" width="25" height="8"></td>
+<td valign="top">Please check all of the appropriate responses to the following potential member benefits:<br>
+<img src=images/clear.gif alt="" width="8" height="8"></td>
+</tr>
+<tr> 
+<td valign="top">&nbsp; </td>
+<td valign="top"> <table border="1"  width="750" cellspacing="1" cellpadding="1"  >
+<tr>
+<td valign="top" colspan="4"></td>
+</tr>
+
+<TR class="questionTableHeader">
+<TD class="questionTableColumnLeft"></TD>
+<TD class="questionTableColumnOther">Not Interested</TD>
+<TD class="questionTableColumnOther">Interested if no additional cost</TD>
+<TD class="questionTableColumnOther">Interested at an additional cost</TD>
+<TD class="questionTableColumnOther">Depends on the Topic</TD>
+</tr>
+
+</tr>
+
+<TR class="rowOdd">
+<td valign="top">Members-only Events</td>
+<td valign="top"><input type="checkbox" name="TQ24" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ25" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ26" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ27" value="2" ></td>
+</tr>
+
+<TR class="rowEven">
+<td valign="top">Monthly Email Blast</td>
+<td valign="top"><input type="checkbox" name="TQ28" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ29" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ30" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ31" value="2" ></td>
+</tr>
+
+<TR class="rowOdd">
+<td valign="top">Monthly Magazine</td>
+<td valign="top"><input type="checkbox" name="TQ32" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ33" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ34" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ35" value="2" ></td>
+</tr>
+
+<TR class="rowEven">
+<td valign="top">Online Member Directory</td>
+<td valign="top"><input type="checkbox" name="TQ36" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ37" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ38" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ39" value="2" ></td>
+</tr>
+
+<TR class="rowOdd">
+<td valign="top">Social Events</td>
+<td valign="top"><input type="checkbox" name="TQ40" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ41" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ42" value="2" ></td>
+<td valign="top"><input type="checkbox" name="TQ43" value="2" ></td>
+</tr>
+
+</table>
+
+<br>
+<img src=images/clear.gif alt="" width="8" height="8"> </td>
+</tr>
+<!-- Question 6 -->
+<tr> 
+<td valign="top" width='20px;'><a name="TQ44">6.<br><img src=images/clear.gif alt="" width="25" height="8"></td>
+<td valign="top">As a member, indicate where you Agree, Have No Opinion, or Disagree with the following statements.<br>
+<img src=images/clear.gif alt="" width="8" height="8"></td>
+</tr>
+<tr> 
+<td valign="top">&nbsp; </td>
+<td valign="top"> <table cellspacing = "0" class="questionTable">
+<tr>
+<td valign="top" colspan="1"></td>
+</tr>
+
+<TR class="questionTableHeader">
+<TD class="questionTableColumnLeft"></TD><TD class="questionTableColumnOther">Agree</TD><TD class="questionTableColumnOther">Have No Opinion</TD><TD class="questionTableColumnOther">Disagree</TD>
+</tr>
+
+<TR class="rowOdd">
+<td valign="top">My membership dues are a good value</td><TD class="questionTableColumnOther"><input type="radio" name="TQ45" value="1"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ45" value="2"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ45" value="3"   >&nbsp;&nbsp;<br></TD>
+
+
+</tr>
+
+<TR class="rowEven">
+<td valign="top">I would recommend that a colleague become a member</td><TD class="questionTableColumnOther"><input type="radio" name="TQ46" value="1"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ46" value="2"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ46" value="3"   >&nbsp;&nbsp;<br></TD>
+
+
+</tr>
+
+<TR class="rowOdd">
+<td valign="top">I feel that my membership provides professional benefits</td><TD class="questionTableColumnOther"><input type="radio" name="TQ47" value="1"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ47" value="2"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ47" value="3"   >&nbsp;&nbsp;<br></TD>
+
+
+</tr>
+
+<TR class="rowEven">
+<td valign="top">I feel that my membership provides personal benefits</td><TD class="questionTableColumnOther"><input type="radio" name="TQ48" value="1"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ48" value="2"   >&nbsp;&nbsp;<br></TD>
+<TD class="questionTableColumnOther"><input type="radio" name="TQ48" value="3"   >&nbsp;&nbsp;<br></TD>
+
+
+</tr>
+
+</table>
+
+<br>
+<img src=images/clear.gif alt="" width="8" height="8"> </td>
+</tr>
+<!-- Question 7 -->
+<tr> 
+<td valign="top" width='20px;'><a name="TQ57">7.<br><img src=images/clear.gif alt="" width="25" height="8"></td>
+<td valign="top">Please share any additional thoughts on member benefits.<br>
+<img src=images/clear.gif alt="" width="8" height="8"></td>
+</tr>
+<tr> 
+<td valign="top">&nbsp; </td>
+<td valign="top"> <textarea rows="3" wrap="virtual" name="OE57" cols="55"></textarea><br>
+<br>
+<img src=images/clear.gif alt="" width="8" height="8"> </td>
+</tr>
+
+    </table>
+    </td></tr>
+    
+    <tr>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><input name="button" type="button" onClick="validate()" value="Submit"></td>
+    </tr>
+  </table>
+  <p align="left">
+    <input type="hidden" name="TESTCD" value="BENEFITS">
+    <input type="hidden" name="CUSTOMERCD" value="">
+    <input type="hidden" name="RGROUPNUM" value="" />
+</p>
+</form>
+
+<script>
+	clearForm();
+</script>
+
+
+
+
+		    <!-- /box -->
+	    
+		    
+		 
+             </div>
+            <!-- / left side content -->
+            
+            <!-- side bar -->
+            <div class="sidebar"><div class="sidebars1"><div class="sidebars2">
+	    
+
+		<!-- box -->	
+			<div class="box small">
+
+                            <!-- box title-->
+                            <h5><a href="">Product Categories</a></h5>
+			    
+			<!-- sub link-->
+				<ul id="sub_menu">
+					<li><a href="#" onClick="createPOST('../utilities.dll/openpage',{'wrp':'productsearch.htm','wmt':'../main_template_innerpage.htm'}); return false">Product Search</a></li>													
+					<li><a href="#" onClick="createPOST('../msascartdll.dll/ProductList',{'ONWEBFLG':'Y','INSTOCKSTT':'Y','RANGE':'1/10','COLUMNS':2}); return false">Product List Page</a></li>										
+					<li><a href="#" onClick="createPOST('../msascartdll.dll/ProductList',{'ONWEBFLG':'Y','majorcat':'featured','columns':'2','RANGE':'1/10'}); return false">Featured Products</a></li>
+					
+				</ul>			
+			<!-- /sub link-->
+			</div>
+		<!-- box -->	
+	    
+	    
+                <!-- box -->
+                        <div class="box small">
+
+                            <!-- box title-->
+                            <h5><a href="">Featured Events</a></h5><div id="eventDiv"></div>                            
+                                <!-- news line -->
+                               <!-- <span class="news_date">03/10/2010</span><br />
+                                Nullam at dolor sit amet enim bibendum accumsan in sit amet velit fusce et est congue.  <a href="" class="read_more">read more</a><br />
+                                <div class="news_line"></div>-->
+                                
+                                                  
+                        </div>
+                <!-- /box -->
+
+                <!-- box -->
+                <div class="clear"></div>
+                <!-- /box -->
+                
+            </div></div></div>
+            <div class="clear"></div>
+            <!-- / side bar -->            
+
+        </div>
+    
+    
+</div>
+</div>
+</div>                                          
+</div>
+<!-- footer -->
+	<div id="footer">
+            <div class="footer_con"> <div class="footer_con2">
+                <!-- copyright text -->
+                <div class="part1">Copyright &copy; 2011 Euclid Technology, LLC. </div>
+                <!-- social media icons -->
+                <div class="part2">
+                         <a href="#" title=""><img src="../../images/social_media/twitter.png" alt="" /></a>
+                         <a href="#" title=""><img src="../../images/social_media/facebook.png" alt="" /></a>
+                         <a href="#" title=""><img src="../../images/social_media/rss.png" alt="" /></a>
+                </div>
+                <!-- / social media icons -->
+                             
+                <!-- links -->
+                <div class="part3">
+                         <a  href="../../index.htm" title="">Home</a> | <a  href="../../index.htm" title="">Legal</a> | <a  href="../../index.htm" title="">Privacy</a> | <a  href="../../index.htm" title="">Contact</a>
+                </div>
+           </div></div>
+	</div>
+<!-- /footer -->
+</div>
+ <script>
+var listURL = '../eventsdll.dll/EventList?ONWEBFLG=Y&REGONLINEFLG=Y&showtop=5&Range=1/10&SESSIONBEGDATE=>getdate()-1&SORT=SESSIONBEGDATE&WHP=featuredEventList_header.htm&WBP=featuredEventList.htm&WNR=noevents.htm&WMT=none';	
+new Ajax.Updater('eventDiv', listURL, {method:'get',evalScripts:true,asynchronous:false});
+</script>
+</body>
+</html>
+

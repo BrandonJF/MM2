@@ -1,0 +1,28 @@
+<h2><#CHAPTERNAME> Chapter</h2>
+<#WEBPROFILE>
+<BR /><BR />
+<table class="gutters">
+    <tr>
+        <th colspan="2">Upcoming Meetings and Events</th>
+    </tr>
+    <#INCLUDE DLL="eventsdll.dll" ACT="EventList" WHP="none" WBP="chapterEventList.htm" WNR="chapterEvents_norec.htm" PARAMS="CHAPTERCD,ONWEBFLG=Y,SESSIONBEGDATE=>getdate()" SORT=SESSIONBEGDATE>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+     <tr>
+        <th colspan="2">Committee Officers</th>
+    </tr>
+     <#INCLUDE DLL="utilities.dll" ACT="CustomList" WHP="none" WBP="chpOfficers_list.htm" WNR="chpOfficers_norec.htm" PARAMS="SQLNAME=COMMITTEEOFF,I.COMMITTEECD={CHAPTERCD}~,COMMITTEESTATUSSTT=ACTIVE,CPOSITION=Staff">
+     <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr><tr>
+        <th colspan="2">Board Members</th>
+    </tr>
+     <#INCLUDE DLL="committeedll.dll" ACT="IndFullList" WHP="none" WBP="cBoard_list.htm" WNR="cboard_norec.htm" PARAMS="IC.COMMITTEECD={CHAPTERCD}~,CPOSITION=Chair">
+     <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr><tr>
+        <th colspan="2">Executive Committee Officers</th>
+    </tr>
+     <#INCLUDE DLL="committeedll.dll" ACT="IndFullList" WHP="none" WBP="exBoard_list.htm" WNR="cexec_norec.htm" PARAMS="IC.COMMITTEECD={CHAPTERCD}~,CPOSITION=President">
+</table>

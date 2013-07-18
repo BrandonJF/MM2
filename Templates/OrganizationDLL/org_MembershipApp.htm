@@ -1,0 +1,58 @@
+<script>
+function setvalues(){};
+var isOrgapp = true;
+</script>
+
+<h2>Organization Membership Application</h2>
+
+<div id="primContact">
+	<div class="formIntro">
+    <p>Please enter the information requested below to create the primary contact for your organization membership.	</p>
+	<ul>
+		<li> All fields marked * are required.</li>
+		<li>For users from the USA, please enter all phone numbers in the format (302)392-3929</li>
+	</ul>
+</div>
+
+<form method="post" name="order" action='../memberdll.dll/UpdateInfo' id="org_profile">
+	<div id="step2">
+        <div class="breadcrumbs">
+        <span>1. Create Organization Profile</span> &raquo; <span class="current">2. Create Primary Contact</span> &raquo; <span>3. Select Membership/Payment</span>
+    </div>
+	<#SECTION NAME="orgapp_basicInfo.htm" >
+	<#SECTION NAME="org_primcontact.htm" >
+    <div class="buttons"><input type="submit" name="submit" value="Continue"></div>
+     <div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+</div>
+    <input type="hidden" name="ORGADDRESS1" value="<#ADDRESS1>">
+    <input type="hidden" name="ORGADDRESS2" value="<#ADDRESS2>">
+    <input type="hidden" name="ORGCITY" value="<#CITY>">
+    <input type="hidden" name="ORGSTATECD" value="<#STATECD>">
+    <input type="hidden" name="ORGZIP" value="<#ZIP>">
+    <input type="hidden" name="ORGCOUNTRY" value="<#COUNTRY>">
+    <input type="hidden" name="ORGEMAIL" value="<#EMAIL>">
+    <input type="hidden" name="ORGPHONE" value="<#HOMEPHONE>">
+<input type="hidden" name="CUSTOMERCD" value="">
+	<input type="hidden" name="RESPONSEPAGE" value="org_membershipApp2.htm">
+	<input type="hidden" name="AUTOCUSTOMERCD" value="Y" />
+	<input type="hidden" name="CHECKUSERDUP" value="Y" />
+	<input type="hidden" name="DUPCHECKLIST" value="EMAIL" />
+	<input type="hidden" name="UDC" value="duplicateUser.htm" />
+<input type="hidden" name="ORGCD" value="<#ORGCD>" id="ORGID"/>
+
+</form>
+</div>
+<script>
+	updateTotals();
+$(function() { 
+        $("#org_profile").validity(function() {
+            $(".reqField").require();
+			$("#ORGNAME").require("Organization Name is required.");
+			$("#Email").require().match("email");
+			$("#Website").match("url", "Please use correct format http://xxxxxxx.xxx");
+            
+        });
+    });	
+</script>

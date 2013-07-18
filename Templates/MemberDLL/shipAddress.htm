@@ -1,0 +1,31 @@
+
+    <div data-role="fieldcontain">
+        <label for="Address1">Address 1<sup class="req_star">*</sup></label>
+        <input type=text name='SHIPADDRESS1' id='Address1' value='' class='reqField' />
+    </div>
+    <div data-role="fieldcontain">
+         <label for="Shipaddress2">Address 2</label>
+         <input type=text name='SHIPADDRESS2' id="Shipaddress2" value=''  >
+    </div>
+    <div data-role="fieldcontain">
+        <label for="City">City<sup class="req_star">*</sup></label>
+        <input type=text name='SHIPCITY' id='City' value='' class='reqField' />
+    </div>
+    <div data-role="fieldcontain">
+        <label for="State">State<sup class="req_star">*</sup></label>
+        <SELECT NAME="SHIPSTATECD" id="State">
+            <option value=''>Select One...</option>
+            <option><#RTVSTATEREFSCVNONE></option>
+        </SELECT>
+    </div>
+    <div data-role="fieldcontain">
+        <label for="ZipCode">Zip Code<sup class="req_star">*</sup></label>
+        <input type=text name='SHIPZIP' id='ZipCode' value='' class='reqField' onBlur="ShipZipToState($(this).val())" />
+    </div>
+    <div data-role="fieldcontain">
+        <label for="Country">Country<sup class="req_star">*</sup></label>
+        <select name="SHIPCOUNTRY" id="Country" onchange="international();">
+            <option value=''>Select One...</option>
+            <option><#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESCVNONE></option>
+        </SELECT>
+    </div>

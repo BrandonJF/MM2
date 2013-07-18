@@ -1,0 +1,76 @@
+
+<!-- <div id="welcomeSlider" class='swipe'>
+  <ul>
+    <li style='display:block'><div>This will hold welcome content!</div></li>
+    <li style='display:none'><div>So will this one!</div></li>
+    <li style='display:none'><div>Welcome to Euclid!</div></li>
+    <li style='display:none'><div>Where big things happen daily!</div></li>
+    <li style='display:none'><div>Mmmm registrations!</div></li>
+  </ul>
+</div>
+
+<a href='#' onclick='welcomeSlider.prev();return false;'>prev</a>
+<a href='#' onclick='welcomeSlider.next();return false;'>next</a>
+<br><br>
+<script>$(document).ready(function(){
+var welcomeSlider = new Swipe(document.getElementById('welcomeSlider'),{
+	startSlide:0,
+	 speed: 400,
+	 auto: 2000
+});
+});</script> -->
+<script>
+$("[data-role=content]").addClass("noPadding");
+$(document).ready(function(){
+
+	if ($('#camera_wrap_1').css('display') == "none"){
+	$('#camera_wrap_1').camera({
+		thumbnails: false,
+		fx:'scrollLeft',
+		loaderStroke:3,
+		loaderOpacity:.5,
+		pagination:false,
+		width:'100%'
+	});
+
+	}
+
+});
+
+
+</script>
+<div class="fluid_container">
+	<div class="camera_wrap camera_olive_skin" id="camera_wrap_1">
+		<div data-thumb="../../images/camera/slides/thumbs/feature-image-01.jpg" data-src="../../images/camera/slides/feature-image-01.jpg">
+			<div class="camera_caption fadeFromBottom">
+				Euclid AMS: What you need, where and when you need it.
+
+			</div>
+		</div>
+		<div data-thumb="../../images/camera/slides/thumbs/feature-image-02.jpg" data-src="../../images/camera/slides/feature-image-02.jpg">
+			<div class="camera_caption fadeFromBottom">
+				Working for an association? Euclid has what you need to succeed.
+			</div>
+		</div>
+		<div data-thumb="../../images/camera/slides/thumbs/feature-image-04.jpg" data-src="../../images/camera/slides/feature-image-04.jpg">
+			<div class="camera_caption fadeFromBottom">
+				This is an example slide for the new Mobile Member.
+			</div>
+		</div>
+
+
+	</div><!-- #camera_wrap_1 -->
+</div> <!-- endfluid_container -->
+
+<div class="container_12" align='' id="welcomeGridContainer">
+	<h2 class="alpha grid_8  prefix_1 suffix_2">Baseline Mobile</h2>
+
+	<p class = "aboutParagraph prefix_1 grid_10 alpha">All of our features are wrapped into a stunning interface specially designed for today's (and tomorrow's) mobile devices.  One of the best features of Mobile Member is that it can be up and running at your organization in a matter of hours! <br>
+
+To go mobile, contact us for more information.</p>
+
+
+</div>
+
+
+

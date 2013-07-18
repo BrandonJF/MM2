@@ -1,0 +1,7 @@
+<GroupMember>
+          <EndDate><#TERMINATIONDATE></EndDate>
+          <MemberKey><#CUSTOMERCD ENCRYPT=N></MemberKey>
+          <MemberRole><#CPOSITION></MemberRole>
+          <SinceDate><#JOINDATE></SinceDate>
+          <StartDate><#JOINDATE></StartDate>
+</GroupMember>

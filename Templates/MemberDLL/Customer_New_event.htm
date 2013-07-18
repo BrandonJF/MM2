@@ -1,0 +1,31 @@
+<script language="javascript">
+	function formValidate(){
+		if(validateAll(document.order)){
+			document.order.submit();
+		}
+	}
+</script>
+<h3>Create an Attendee Account</h3>
+<div class="formIntro">
+	<p>Please enter the information requested below to create a new User Account record.</p>
+	<ul>
+		<li> All fields marked * are required.</li>
+		<li>For users from the USA, please enter all phone numbers in the format (555)555-5555</li>
+	</ul>
+</div>
+
+
+<form method="POST" name="order" action='../memberdll.dll/updateInfo'>
+	<#SECTION NAME="basicInfo.htm">
+	<#SECTION NAME="primContact.htm">
+	<div class="buttons">
+		<input name="Button" type="button" onClick="formValidate()" value="Create New Account">
+	</div>
+	<input type="hidden" name="CUSTOMERCD" value="">
+	<input type="hidden" name="PARENTCD" value="<#CUSTOMERCD>">
+	<input type="hidden" name="RESPONSEPAGE" value="Customer_new_event_Confirm.htm">
+	<input type="hidden" name="WMT" value="../main_template_none.htm">
+		<input type="hidden" name="CHECKUSERDUP" value="Y" />
+	<input type="hidden" name="DUPCHECKLIST" value="EMAIL" />
+	<input type="hidden" name="MULTIEDUCATIONLIST">
+</form>

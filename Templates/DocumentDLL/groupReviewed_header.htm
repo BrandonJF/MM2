@@ -1,0 +1,73 @@
+<script src='../../js/scriptsAJAX.js'></script>
+<script>
+//alert('hello!');
+var toWrite = '';
+
+function formValidate(){
+	//alert('Voting!');
+	if(document.abc.TESTCD.value == ''){
+		alert('Error: There is no review survey associated with this abstract.');
+		return false;
+	}else{
+		var survey_link = '../../msastestdll.dll/displayq?TESTCD='+document.abc.TESTCD.value+'&'+parentgroupcd;
+		window.open(survey_link,"","fullscreen=no,location=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=400")
+	}
+}
+
+
+var documentnum = '';
+var titletxt='';
+</script>
+<h3><span id='titleDiv'></span> - Abstract Review</h3>
+    <form name='abc' Action="" Method="POST" enctype="" >
+
+<h4>Author(s):</h4>
+<div id='authorsDiv'></div>
+
+<br /><br />
+
+<h4>Files:</h4>
+ <table class="gutters">
+              	<tr>
+                	<th width='150'>Document #</th>
+                	<th width='150'>File Name</th>
+                	<th>&nbsp;</th>
+                </tr>
+                <#CONTENT>
+               </table>        
+            
+
+<br />
+ <div id='surveyDiv' style='display:none;'></div>
+ 
+         
+       <!-- <input type='button' name='VOTEBUTTON' value='Vote' onclick='formValidate();' />  -->
+       <div class="buttons"><input type='hidden' name='TESTCD' value=''> <a class="button" href='javascript:history.go(-1)'>Back to Abstract Review list.</a></div>  
+</form>
+
+ 
+<script>
+//alert('TITLE: '+titletxt+'\nDocumentNum: '+documentnum);
+document.getElementById('titleDiv').innerHTML = titletxt;
+
+//get Authors
+var authorURL = '../../memberdll.dll/customlist?sqlname=AUTHORS&wmt=none&wnr=noAuthors.htm&whp=authors_header.htm&wbp=authors_list.htm&docnum='+documentnum;
+doAjaxFill(authorURL, 'authorsDiv');
+
+
+//get survey
+var surveyURL = '../../memberdll.dll/customlist?sqlname=getSurvey2&wmt=none&whp=getSurvey_header.htm&wbp=getSurvey_list.htm&wnr=noSurvey.htm&groupcd='+groupcd+
+				'&abstractTopic='+topic;
+//alert('survey url:'+surveyURL);
+doAjaxFill(surveyURL, 'surveyDiv');
+
+var surveyCode = document.getElementById('surveyDiv').innerHTML;
+if(surveyCode == ''){
+	//nothing
+}else{
+	//alert(surveyCode);
+	document.abc.TESTCD.value=surveyCode;
+}
+
+
+</script>

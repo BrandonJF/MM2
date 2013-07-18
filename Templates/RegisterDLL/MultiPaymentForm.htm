@@ -1,0 +1,110 @@
+<h2><#SESSIONNAME></h2>
+<div class="formIntro">
+  <p>Please review the below information, then enter your payment information to register yourself and your guests for this event.</p>
+</div>
+<form name="order" id="order" method="POST" action="../registerdll.dll/mpost">
+<div class='totalContainer'>
+<fieldset>
+		<legend>Registration Review</legend>
+		<div class='cartTotals'>
+			<table class="gutters">
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th class="prices">Price</th>
+				</tr>
+				<#CONTENT>
+				  <tr class="subtotal">
+					<td> </td>
+					<td class="text"> <a href="javascript:history.go(-1)">Modify Information </a></td>
+					<td></td>
+				</tr>
+				<tr class="subtotal">
+					<td>&nbsp;</td>
+					<td class="text">Total Event Cost:</td>
+					<td class="prices"><#TOTALREGPRICE FORMAT="$0.00"></td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+<div class="buttons">
+        <input type="button" value="Add to Cart" onClick='multiEventReg_addToCart(document.order)';>
+        <input type="button" data-theme="g" value="Pay Now" onClick='$("#cartPayment").show(); $("#selectPayment").hide();'>
+    </div>
+<div class='cartPayment' id='cartPayment' style="display:none;">
+    <input type="hidden" name="RESPONSEPAGE" value="MultiRegisterPost.htm">
+<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm" >
+<div class="buttons">
+  <input type="submit" id='submitButton' value="Submit Registration"  />
+</div>
+</div>
+</div>
+<div class="validity-summary-container missing">
+        <p>Required fields are missing. Please them in before continuing:</p>
+        <ul></ul>
+    </div>
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="SHIPTOCD" value="O">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONS" value="<#FUNCTIONS>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="MULTICUSTOMERLIST" value="<#MULTICUSTOMERLIST>">
+<input type="hidden" name="MULTIFUNCTIONLIST" value="<#MULTIFUNCTIONLIST>">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="TOTALREGPRICE" value="<#TOTALREGPRICE>">
+
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="<#SESSIONNAME> Event Registration Confirmation for <#FIRSTNAME> <#LASTNAME>">
+<input type="hidden" name="ENTERUSERCD" value="WEBUSER">
+<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+<input type="hidden" name="EMAILCCADDRESS" value="">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="EMAILREPLYFORM" value="MultiRegisterPost.htm">
+
+<input type="hidden" name="WER" value="">
+<input type="hidden" name="WSI" value="none">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="PAYMENTTYPECD" value="<#PAYMENTTYPECD>">
+<input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>" id="FCOMMENTS">
+
+</form>
+
+<script>
+$("#BILLME").click(function() {
+	//document.order.ISSUEBILLFLG.value = 'Y';
+	$('.cardInfo').removeClass('reqField')
+});
+$(".cardType").click(function() {
+	//document.order.ISSUEBILLFLG.value = 'N';
+	if (!$('.cardInfo').hasClass){
+		$(this).addClass('reqField')
+	}
+});
+ $("#order").validity(function() {
+            $(".reqField").require("#{field} is required.");
+
+		});
+</script>

@@ -1,0 +1,98 @@
+<script src='../../js/scriptsAJAX.js'></script>
+<script>
+//alert('hello!');
+var toWrite = '';
+
+function formValidate(){
+	//alert('Voting!');
+	if(document.abc.TESTCD.value == ''){
+		alert('Error: There is no review survey associated with this abstract.');
+		return false;
+	}else{
+        var dupeCheck = '../memberdll.dll/customlist?sqlname=votedList&wmt=none&whp=none&wbp=votes.htm&TESTCD=ABSTRACTEVAL&CUSTOMERCD='+CUSTOMERCD;
+        $.ajax({url:dupeCheck, type:"get",
+		success:function(content){
+			if (content.match(parentgroupcd)){
+				alert('You have already reviewd this survey.');
+			}else{
+               var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/msastestdll.dll/displayq?TESTCD='+document.abc.TESTCD.value+'&PARENTGROUPCD='+parentgroupcd+'&CUSTOMERCD='+CUSTOMERCD+'&wmt=../main_template_none.htm&wrp=vote.htm';
+				 return parent.uiPopUp(page);
+			
+			
+			}  
+		}
+	});
+		
+	}
+}
+
+function openPreview_doc(docNum){
+	var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/documentdll.dll/view?DOCUMENTNUM='+docNum+'&wmt=../main_template_none.htm';
+	 return parent.uiPopUp(page);
+}
+
+function openPreview_text(docNum){
+	
+	var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/documentdll.dll/info?DOCUMENTNUM='+docNum+'&wrp=abstractText.htm&wmt=../main_template_none.htm';
+	 return parent.uiPopUp(page);
+
+}
+
+
+var documentnum = '';
+var titletxt='';
+</script>
+
+    
+
+<h2><span id='titleDiv'></span> - Abstract Review</h2>
+<form name='abc' Action="" Method="POST" enctype="" >
+<br /><br />
+<h4>Author(s)</h4>
+<div id='authorsDiv'></div>
+
+<br /><br />
+
+<h4>Files</h4>
+ <table class="gutters">
+              	<tr>
+                	<th>Document #</th>
+                	<th>File Name</th>
+                	<th>&nbsp;</th>
+                </tr>
+                <#CONTENT>
+               </table>
+
+<br /><br />
+ <div id='surveyDiv' style='display:none;'></div>
+ <div class="buttons">
+	<input type='button' name='VOTEBUTTON' value='Vote' onclick='formValidate();' />  
+        <input type='hidden' name='TESTCD' value=''>   <a href="#" onclick="createPOST('../memberdll.dll/openpage',{'WRP':'abstractReview.htm','WMT':'../main_template_css.htm'}); return false" class="button">Back to Abstract Review List</a>
+ </div>
+</form>
+
+<script>
+//alert('TITLE: '+titletxt+'\nDocumentNum: '+documentnum);
+document.getElementById('titleDiv').innerHTML = titletxt;
+
+//get Authors
+var authorURL = '../../cgi-bin/memberdll.dll/customlist?sqlname=AUTHORS&wmt=none&wnr=noAuthors.htm&whp=authors_header.htm&wbp=authors_list.htm&docnum='+documentnum;
+doAjaxFill(authorURL, 'authorsDiv');
+
+
+//get survey
+var surveyURL = '../../cgi-bin/memberdll.dll/customlist?sqlname=getSurvey2&wmt=none&whp=getSurvey_header.htm&wbp=getSurvey_list.htm&wnr=noSurvey.htm&groupcd='+groupcd+
+				'&abstractTopic='+topic;
+//alert('survey url:'+surveyURL);
+doAjaxFill(surveyURL, 'surveyDiv');
+
+var surveyCode = document.getElementById('surveyDiv').innerHTML;
+if(surveyCode == ''){
+	//nothing
+}else{
+	//alert(surveyCode);
+	document.abc.TESTCD.value=surveyCode;
+}
+
+
+</script>

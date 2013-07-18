@@ -1,0 +1,27 @@
+<Job>
+<JobNumber>
+	<#JOBAPPNUM>
+</JobNumber>
+<JobCode>
+	<#JobCode>
+</JobCode>
+<JobTitle>
+	<#JobTitle>
+</JobTitle>
+<JobCity>
+	<#JobCity>
+</JobCity>
+<JobState>
+	<#JobState>
+</JobState>
+</Job>
+
+
+
+
+
+
+
+
+
+

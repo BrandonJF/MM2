@@ -1,0 +1,73 @@
+<fieldset>
+<legend>Subscriber's Contact Information</legend>
+<ul>
+	<li>
+		<label for="ADDRESSTYPE">Address Type</label>
+		<select size="1" name="ADDRESSTYPE">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="ADDRTYPEREF" SCF="ADDRESSTYPE" FLD2="ADDRESSTYPE" FLQ="ONWEBFLG=Y">
+        </select>
+	</li>
+	<li>
+		<label for="ADDRESS1" class="required">Mailing Address</label>
+		<input type="text" name="ADDRESS1" value="<#ADDRESS1>" class='reqField'>
+	</li>
+	<li>
+		<label for="ADDRESS2">Mailing Address Cont.</label>
+		<input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+	</li>
+	<li>
+		<label for="CITY" class="required">City</label>
+		<input type="text" name="CITY" value="<#CITY>" class='reqField'>
+	</li>
+	<li>
+		<label for="STATECD" class="required">State/Province</label>
+		<select size="1" name="STATECD" class='reqField' id="State" onchange="updateTotals();">
+			<option value='' >Select One...</option>
+			<#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD">
+        </select>
+	</li>
+	<li>
+		<label for="ZIP" class="required">Zip/Postal Code</label>
+		<input type="text" name="ZIP" value="<#ZIP>" class='reqField'>
+	</li>
+	<li>
+		<label for="COUNTRY">Country</label>
+		<select size="1" name="COUNTRY" onChange="checkCountryMask(this.value);international();">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+		</select>
+        <script>
+			checkCountryMask("<#COUNTRY>"); //set correct phone mask on load
+		</script>
+	</li>
+	<li>
+		<label for="WORKPHONE" class="required">Work Phone</label>
+		<input type="text" name="WORKPHONE" value="<#WORKPHONE>" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="WORKPHONEEXT">Work Extension</label>
+		<input type="text" size="10" name="WORKPHONEEXT" value="<#WORKPHONEEXT>" >
+	</li>
+	<li>
+		<label for="FAXPHONE">Fax</label>
+		<input type="text" name="FAXPHONE" value="<#FAXPHONE>" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="MOBILEPHONE">Cell Phone</label>
+		<input name='MOBILEPHONE' value='<#MOBILEPHONE>' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="HOMEPHONE">Home Phone</label>
+		<input name='HOMEPHONE' value='<#HOMEPHONE>' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="EMAIL" class="required">Email</label>
+		<input type="text" name="EMAIL" value="<#EMAIL>" class='reqField'>
+	</li>
+	<li>
+		<label for="WWWADDRESS">Website</label>
+		<input type="text" name="WWWADDRESS" value="<#WWWADDRESS>">
+	</li>
+</ul>
+</fieldset>

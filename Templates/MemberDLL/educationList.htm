@@ -1,0 +1,41 @@
+<tr>
+    <td ID='DEGREE_<#KEYNUM>'>
+		<select name="<#DEGREE ISFIELDNAME=Y>" value="<#DEGREE>" id="<#DEGREE ISFIELDNAME=Y>">
+			<option value=''></option>
+			<#RTVEDUCATIONLEVELREFSCVEDUCATIONDEGREEFLTTYPECDFLVEDUC>
+		</select>
+    </td>   
+    <td>
+		<input name='<#INSTITUTION ISFIELDNAME=Y>' type="text" id="<#INSTITUTION ISFIELDNAME=Y>" value='<#INSTITUTION>'>
+	</td>
+    <td>
+		<input name="<#MAJOR ISFIELDNAME=Y>" type="text" id="<#MAJOR ISFIELDNAME=Y>" value="<#MAJOR>">
+	</td>
+    <td> 
+		<!--<input name="<#DEGREEYEAR ISFIELDNAME=Y>" type="text" id="<#DEGREEYEAR ISFIELDNAME=Y>" value="<#DEGREEYEAR>" size="10">-->
+		<select style="width:auto;" name="<#DEGREEYEAR ISFIELDNAME=Y>" id="<#DEGREEYEAR ISFIELDNAME=Y>">
+			<script>
+				writeYear("NOW", 1950);
+			</script>
+		</select>
+    </td>
+</tr>
+<input type="hidden" name='<#TYPECD ISFIELDNAME=Y>' value="<#GROUPNAME>" />
+
+<script>
+$("#<#DEGREE ISFIELDNAME=Y> option").each(function(element){ //prepopultate degrees dropdown
+	if(this.value == '<#DEGREE>'){
+		this.selected = true;
+	}
+});
+var degreeYear = '<#DEGREEYEAR>';
+if (degreeYear.length == 1){
+    degreeYear ='0'+degreeYear;
+}
+$("#<#DEGREEYEAR ISFIELDNAME=Y> option").each(function(element){ //prepopultate year dropdown\
+	
+    if(this.value == degreeYear){
+		this.selected = true;
+	}
+});
+</script>

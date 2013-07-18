@@ -1,0 +1,83 @@
+<script>
+	function RefreshChkBx(ischecked){
+		if (ischecked){
+			document.cartForm.ORGORDERFLG.value='Y';
+		}else{
+			document.cartForm.ORGORDERFLG.value='N';
+		}
+		document.cartForm.submit();
+	}
+	function AddShippingCD(shipcd){
+		var addStr = 'ORDERTYPE=Z,ITEMCD='+shipcd;
+		document.AddShip.ADD.value=addStr;
+		document.AddShip.submit();
+	}
+	var isInvoices = false;
+</script>
+
+<h2>Shopping Cart </h2>
+
+<form name="cartForm" method="POST" action="RefreshCart">
+  <ul data-role="listview" data-inset="true" data-split-icon="gear" data-split-theme="d">
+	<#SHOPPINGCART>
+	 <li data-role="list-divider">Other Invoices</li>
+	<#INVOICELIST>
+</ul>
+</form>
+<br><br>
+<div id="invoiceSection" style="display:none;">
+    <!-- <h3><#MLGLBL TEXT="Other Invoices"></h3> -->
+
+</div>
+<br><br>
+<fieldset>
+ <ul data-role="listview" data-count-theme="c" data-inset="true">
+ 	<li data-role="list-divider" data-theme="b"><#MLGLBL TEXT="Totals">  </li>
+	<li>
+		<label for="ITEMTOTAL"><#MLGLBL TEXT="Cart Total:"></label>
+		<span class="ui-li-count"><#ITEMTOTAL FORMAT='$0.00'></span>
+	</li>
+    <li>
+        <label for="DISCOUNTSTOTAL"><#MLGLBL TEXT="Discounts:"></label>
+        <span class="ui-li-count"><#DISCOUNTSTOTAL></span>
+    </li>
+	<li>
+		<label for="TAXTOTAL"><#MLGLBL TEXT="Tax Charged:"></label>
+		<span class="ui-li-count"><#TAXTOTAL FORMAT='$0.00'></span>
+	</li>
+	<li id="invoiceTotals" style="display:none;">
+		<label for="INVOICESTOTAL"><#MLGLBL TEXT="Other Invoices:"></label>
+		<span class="ui-li-count"><#INVOICESTOTAL></span>
+	</li>
+	<li>
+		<label for="CARTTOTAL"><#MLGLBL TEXT="Final Total:"></label>
+		<span class="ui-li-count"><#CARTTOTAL FORMAT='$0.00'></span>
+	</li>
+	<li class='finalTotal'>
+		<label for="totalAmt"><#MLGLBL TEXT="Total Payment:"></label>
+		<span class="ui-li-count">$<span id='totalAmt'>0.00</span></span>
+	</li>
+</ul>
+<div class="clear"></div>
+</fieldset>
+<div class='cartnav'>
+	<a href="ReviewOrder" data-role="button" data-icon="check" data-theme="g">Checkout</a>
+
+	<a href="../utilities.dll/openpage?wrp=productSearch.htm" data-role="button" data-icon="back">Keep Shopping</a>
+
+	<a href="ClearCart" data-role="button" data-icon="trash">Clear Cart</a>
+
+
+
+
+
+
+</div>
+<input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>">
+</form>
+<script>
+	if(isInvoices){
+		$("#invoiceTotals").show();
+	}
+</script>
+

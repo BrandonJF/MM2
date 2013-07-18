@@ -1,0 +1,100 @@
+
+<legend><#MLGLBL TEXT="Basic Information"></legend>
+
+
+	<zzzSECTION NAME="username.htm" COOKIEHIDE=CUSTOMERCD=| PARAMS="CUSTOMERCD">
+	<zzzSECTION NAME="password.htm" COOKIEHIDE=CUSTOMERCD=| PARAMS="CUSTOMERCD">
+
+
+
+	<div data-role="fieldcontain">
+		<label for="FirstName"><#MLGLBL TEXT="First Name"><sup class="req_star">*</sup></label>
+		<input type="text" name="FIRSTNAME" id="FirstName" value="<#FIRSTNAME>" class='reqField' >
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="MiddleName"><#MLGLBL TEXT="Middle Name"></label>
+		<input name="MIDDLENAME" id="MiddleName" value="<#MIDDLENAME>" type="text" >
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="LastName"><#MLGLBL TEXT="Last Name"><sup class="req_star">*</sup></label>
+		<input type="text" name="LASTNAME" id="LastName" value="<#LASTNAME>" class='reqField' >
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="JobTitle"><#MLGLBL TEXT="Title"><sup class="req_star">*</sup></label>
+		<input name="JOBTITLE" id="JobTitle" type="text" value="<#JOBTITLE>" class='reqField' >
+	</div>
+
+	<div data-role="fieldcontain">
+		<label>&nbsp;</label>
+		<a href="#popupBasic" data-rel="popup" data-position-to="window" class="org_link">Organization Search</a>
+
+		<div data-role="popup" id="popupBasic" data-overlay-theme="a" data-theme="a" data-tolerance="15,15" class="ui-content">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<iframe id="frame" width="497" height="298" seamless></iframe>
+		</div>
+
+		<!-- <div style="float:right; padding-left: 170px; color:red; font-weight:bold;padding-bottom:10px;">Please type in at least the first-two letters of the organization and then click on <a href="#popupBasic" data-rel="popup" data-position-to="window" class="org_link">Organization Search</a>. A pop-up window will appear and then select your organization from the list by selecting the Organization Number and close the window.</div> -->
+
+</div>
+
+
+<script>
+
+	$('.org_link').bind('click', function() {
+		var newSearch = document.order.ORGNAME.value;
+		var page = '../organizationdll.dll/List?ORGNAME='+newSearch+'~&SORT=ORGNAME&WMT=../main_template_none.htm&WHP=addOrg_header.htm&WBP=addOrg_list.htm&WNR=addOrg_noRec.htm&RANGE=1/25';
+		$('#frame').attr('src', page);
+
+		$( "#popupBasic iframe" )
+			.attr( "width", 0 )
+			.attr( "height", 0 );
+
+		$( "#popupBasic" ).on({
+			popupbeforeposition: function() {
+				var size = scale( 900, 800, 15, 1 ),
+					w = size.width,
+					h = size.height;
+
+				$( "#popupBasic iframe" )
+					.attr( "width", w )
+					.attr( "height", h );
+			},
+			popupafterclose: function() {
+				$( "#popupBasic iframe" )
+					.attr( "width", 0 )
+					.attr( "height", 0 );
+			}
+		});
+	});
+
+
+
+function scale( width, height, padding, border ) {
+    var scrWidth = $( window ).width() - 30,
+        scrHeight = $( window ).height() - 30,
+        ifrPadding = 2 * padding,
+        ifrBorder = 2 * border,
+        ifrWidth = width + ifrPadding + ifrBorder,
+        ifrHeight = height + ifrPadding + ifrBorder,
+        h, w;
+
+    if ( ifrWidth < scrWidth && ifrHeight < scrHeight ) {
+        w = ifrWidth;
+        h = ifrHeight;
+    } else if ( ( ifrWidth / scrWidth ) > ( ifrHeight / scrHeight ) ) {
+        w = scrWidth;
+        h = ( scrWidth / ifrWidth ) * ifrHeight;
+    } else {
+        h = scrHeight;
+        w = ( scrHeight / ifrHeight ) * ifrWidth;
+    }
+
+    return {
+        'width': w - ( ifrPadding + ifrBorder ),
+        'height': h - ( ifrPadding + ifrBorder )
+    };
+};
+</script>

@@ -1,0 +1,223 @@
+<script>
+function formValidate(formName) {
+    var eventList = document.order.EVENTLIST.value;
+    var packageCD = document.order.PACKAGECD.value;
+    $('.pckgItem').each(function(){
+		if(this.checked){
+				eventList += this.name+',';
+                packageCD = '';
+			}
+		});
+    if (!$('input[type=checkbox].pckgItem:not(:checked)').length){
+        eventList = '';
+        packageCD = '<#PACKAGECD>';
+    }
+document.order.EVENTLIST.value = eventList;
+document.order.PACKAGECD.value = packageCD;
+    if ($('#BILLME').attr('checked')=='checked'){
+        if(validateAll(formName,false)){
+            formName.ISSUEBILLFLG.value="Y";
+            formName.WMT.value = '../main_template_css.htm';
+			formName.RESPONSEPAGE.value = 'packagepost_bm.htm';
+			formName.submit();
+        }
+    }else{
+        if(validateAll(formName,true)){
+			formName.WMT.value = '../main_template_css.htm';
+			formName.RESPONSEPAGE.value = 'packagePost.htm';
+			formName.submit();
+        }
+		}
+}  
+	
+</script>
+<h2>Package Registration</h2>
+<dl class="profile">
+    <dt>Name</dt><dd><#PACKAGENAME></dd>
+    <dt>Package ID</dt><dd><#PACKAGECD></dd>
+    <dt>Description</dt><dd><#PACKAGEDESC></dd>
+    <p class="clear"></p>
+</dl>
+<form name="order" method="POST" action="post">
+<fieldset>
+    <legend>Registrant Information</legend>
+    <ul>
+        <li>
+		<label for="PREFIX"><#MLGLBL TEXT="Prefix"></label>
+		<select name="PREFIX" id="Prefix">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="SALUTATIONREF" FLD1="SALUTATION" FLD2="SALUTATION" SCV="PREFIX" MLG="Y">
+		</select>
+	</li>
+
+	<li>
+		<label for="FIRSTNAME" class="required"><#MLGLBL TEXT="First Name"></label>
+		<input type="text" name="FIRSTNAME" id="FirstName" value="<#FIRSTNAME>" class='reqField' >
+	</li>
+	
+	<li>
+		<label for="MIDDLENAME"><#MLGLBL TEXT="Middle Name"></label>
+		<input name="MIDDLENAME" id="MiddleName" value="<#MIDDLENAME>" type="text" >
+	</li>
+	
+	<li>
+		<label for="LASTNAME" class="required"><#MLGLBL TEXT="Last Name"></label>
+		<input type="text" name="LASTNAME" id="LastName" value="<#LASTNAME>" class='reqField' >
+	</li>
+	
+	<li><label for="SUFFIX"><#MLGLBL TEXT="Suffix"></label>
+		<select name='SUFFIX' id='suffixField'>
+			<option value=''>Select One...</option>
+			<#CBXSUFFIX>
+		</select>        
+		<script>$('#suffixField').val("<#SUFFIX>");</script>
+	</li>
+	<li>
+		<label for="JOBTITLE" class="required"><#MLGLBL TEXT="Job Title"></label>
+		<input name="JOBTITLE" id="JobTitle" type="text" value="<#JOBTITLE>" class='reqField' >
+	</li>
+	
+	<li>
+		<label for="ORGNAME" class="required"><#MLGLBL TEXT="Organization"></label>
+		<input id="ORGNAME" name="ORGNAME"  value='<#ORGNAME>' class='reqField' type="text">
+    </li>
+    <li><label>&nbsp;</label>
+		<a href="#" id="orgSearch">Search</a>
+<script>
+//opens org search results in a jquery dialog
+$(document).ready(function () {
+            $('a#orgSearch').live('click', function (e) {
+                e.preventDefault();
+				var newSearch = document.order.ORGNAME.value;
+                var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/organizationdll.dll/List?ORGNAME='+newSearch+'~&SORT=ORGNAME&WMT=../main_template_none.htm&WHP=addOrg_header.htm&WBP=addOrg_list.htm&WNR=addOrg_noRec.htm&RANGE=1/25'
+                var pagetitle = $(this).attr("title");
+                return parent.uiPopUp(page);
+        });
+	});
+</script>
+	</li>
+    <li>
+		<label for="ADDRESSTYPE"><#MLGLBL TEXT="Address Type"></label>
+		<select name="ADDRESSTYPE">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="ADDRTYPEREF" SCV="ADDRESSTYPE" FLD2="ADDRESSTYPE" FLQ="ONWEBFLG=Y" MLG="Y">
+        </select>
+	</li>
+	<li>
+		<label for="ADDRESS1" class="required"><#MLGLBL TEXT="Mailing Address"></label>
+		<input type="text" name="ADDRESS1" id="MailingAddress" value="<#ADDRESS1>" class='reqField'>
+	</li>
+	<li>
+		<label for="ADDRESS2"><#MLGLBL TEXT="Mailing Address Cont."></label>
+		<input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+	</li>
+	<li>
+		<label for="CITY" class="required"><#MLGLBL TEXT="City"></label>
+		<input type="text"  name="CITY" id="City" value="<#CITY>" class='reqField'>
+	</li>
+	<li>
+		<label for="STATECD" class="required"><#MLGLBL TEXT="State/Province"></label>
+		<select name="STATECD" id="State" onchange="updateTotals();" class='reqField'>
+			<option value='' >Select One...</option>
+			<#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD">
+        </select>
+	</li>
+	
+	<li>
+		<label for="ZIP" class="required"><#MLGLBL TEXT="Zip/Postal Code"></label>
+		<input type="text" name="ZIP" id="Zip" value="<#ZIP>" class='reqField'></td>
+	</li>
+	<li>
+		<label for="COUNTRY"><#MLGLBL TEXT="Country"></label>
+        <select size="1" name="COUNTRY" id="Country" onChange="checkCountryMask(this.value);">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+        <script>
+			checkCountryMask("<#COUNTRY>"); //set correct phone mask on load
+		</script>
+	</li>
+	<li>
+		<label for="WORKPHONE" class="required"><#MLGLBL TEXT="Work Phone"></label>
+		<input name="WORKPHONE" id="WorkPhone" value="<#WORKPHONE>" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="WORKPHONEEXT" ><#MLGLBL TEXT="Work Extension"></label>
+		<input name="WORKPHONEEXT" value="<#WORKPHONEEXT>" >
+	</li>
+	<li>
+		<label for="FAXPHONE" ><#MLGLBL TEXT="Fax"></label>
+		<input name="FAXPHONE" value="<#FAXPHONE>" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="EMAIL" class="required"><#MLGLBL TEXT="Email Address"></label>
+		<input type="text" name="EMAIL" value="<#EMAIL>" id="Email" class='reqField'>
+	</li>
+    </ul>
+</fieldset>
+<h4>Event Costs</h4>
+
+    <table class="gutters">
+        <tr>
+            <th></th>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Event Location</th>
+            <th>Event Price</th>
+        </tr>
+        <#ITEMLIST>
+            <tr class="subtotal">
+                <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                <td class="text">Package Total</td>
+                <td class="price"><#PKGTOTAL></td>
+            </tr>
+    </table>
+
+<br><br>
+<input type="hidden" name="RESPONSEPAGE" value="packagePost.htm">
+<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
+        <div class="buttons">
+                    <input name="button" type="button" onClick="formValidate(document.order)" value="Submit">
+                                   </div>
+                      <div class="validity-summary-container missing">
+        <p>Required fields are missing. Please them in before continuing:</p>
+        <ul></ul>
+    </div>
+  <input type="hidden" name="WMT" value="main_template_css.htm">
+      
+  <input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+  <input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+  <input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+  <input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+  <input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+  <input type="hidden" name="PAYMENTREFEXPDATE" value="">
+  <input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+  <input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+  <input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+  <input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+  <input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+  <input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+  <input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+  <input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+  <input type="hidden" name="UPDATEUSERCD" value="N">
+                      
+  <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+  <input type="hidden" name="SENDEMAIL" value="Y">
+  <input type="hidden" name="EMAILSUBJECT" value="Your Registration Info">
+  <input type="hidden" name="ENTERUSERCD" value="WEBUSER">
+  <input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+                      
+  <input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+  <input type="hidden" name="REGSTATUSCD" value="1">
+  <input type="hidden" name="ISSUEBILLFLG" value="N">
+  <input type="hidden" name="INVOICESTT" value="">
+  <input type="hidden" name="UDEF1QTY" value="1">
+  <input type="hidden" name="ACKNOWLEDGEDFLG" value="Y">
+  <input type="hidden" name="PROCESSONLINECREDIT" value="N">
+  <input type="hidden" name="PACKAGECD" id="PACKAGECD" value="<#PACKAGECD>">
+  <input type="hidden" name="EVENTLIST" id="EVENTLIST" value="">
+
+                      
+                </form>

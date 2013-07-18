@@ -1,0 +1,55 @@
+<!-- <form  Action="../documentdll.dll/UpdateInfo" Method="POST" enctype="multipart/form-data" >
+
+<input type='hidden' name='DOCTYPE' value='Other'>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="UPLOADONLY" value="Y">
+<input type='hidden' name='FILETYPE' value='O'>
+<input type='hidden' name='FILENAMEPATTERN' value='#CUSTOMERCD_#FILENAME'>
+<input type="hidden" name="SAVETOFILE" value="N">
+<input type='hidden' name='WRP' value='formConfirm.htm'>
+
+<fieldset>
+                <ul>
+                                <li>
+                                                <label for="FILEFIELD1" class='required'>Select your file</label>
+                                                <input type='file' name='FILEFIELD1' value='<#FILEFIELD1>'>
+                                </li>
+                                <li>
+                                                <label for="TITLETXT" class='required'>Document Description</label>
+                                                <input type='text' name='TITLETXT' value='<#TITLETXT>'>
+                                </li>
+                </ul>
+                <div class="buttons"><input type="submit" name="Submit" value="Submit"></div>
+</fieldset>
+
+    <input type='file' name="file" >
+    <input type="submit" name="Submit" value="Submit" >
+</form>
+ -->
+
+ <form  Action="../documentdll.dll/UpdateInfo" Method="POST" enctype="multipart/form-data" data-ajax="false" >
+
+
+<input type='hidden' name='DOCTYPE' value='Picture'>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<!-- <input type="hidden" name="TITLETXT_N1" value="title text 1"> -->
+<input type="hidden" name="UPLOADONLY" value="Y">
+<input type='hidden' name='FILETYPE' value='O'>
+<input type='hidden' name='FILENAMEPATTERN' value='#CUSTOMERCD_#FILENAME'>
+<input type="hidden" name="SAVETOFILE" value="N">
+<input type='hidden' name='WRP' value='formConfirm.htm'>
+<fieldset>
+                <ul>
+                                <li>
+                                                <label for="FILEFIELD1" class='required'>Select your file</label>
+                                                <input type='file' name='FILEFIELD1' value='<#FILEFIELD1>'>
+                                </li>
+                                <li>
+                                                <label for="TITLETXT" class='required'>Document Description</label>
+                                                <input type='text' name='TITLETXT' value='<#TITLETXT>'>
+                                </li>
+                </ul>
+                <div class="buttons"><input type="submit" name="Submit" value="Submit"></div>
+</fieldset>
+<!-- <input type="submit" name="Submit" value="Submit" > -->
+</form>

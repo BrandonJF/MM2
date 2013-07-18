@@ -1,0 +1,48 @@
+<h2><#SESSIONNAME> Registration Confirmation</h2>
+<div class="formIntro">
+  <p>If you selected "Bill Me" or have any amount greater than $0.00 on the "Total Amount Due" line, all payments must be submitted before <#SESSIONBEGDATE> in order for you to be admitted to this event. If you have any questions please contact Mike Smith at <a href='mailto:info@domain.org'>info@domain.org</a> or call (555) 555-5555.</p>
+</div>
+<h4>Event Details</h4>
+<dl class="profile">
+  <dt>Event</dt>
+  <dd><#SESSIONNAME></dd>
+  <dt>Location</dt>
+  <dd><#LOCATIONCITY>, <#LOCATIONSTATECD></dd>
+  <dt>Date</dt>
+  <dd><#SESSIONRANGE></dd>
+  <p class="clear"></p>
+</dl>
+
+<h4>Main Registrant Details</h4>
+<dl class="profile">
+  <dt>Name</dt>
+  <dd><#FIRSTNAME> <#LASTNAME></dd>
+  <dt>Organization</dt>
+  <dd><#ORGNAME></dd>
+  <dt>Address</dt>
+  <dd><#ADDRESS1><br /><#ADDRESS2><br /><#CITY>, <#STATECD> <#ZIP></dd>
+  <dt>Work Phone</dt>
+  <dd><#WORKPHONE></dd>
+  <dt>Email</dt>
+  <dd><#EMAIL></dd>
+  <p class="clear"></p>
+</dl>
+<h4>Invoice Summary</h4>
+<table class="gutters">
+  <tr>
+	<th>Type</th>
+	<th>Name</th>
+	<th>Price</th>
+  </tr>
+  <#LISTCART>
+  <tr class="subtotal">
+	<td> </td>
+	<td>Total Amount Paid:</td>
+	<td><#TOTALAMOUNT format='$0.00'></td>
+  </tr>
+  <tr class="subtotal">
+	<td> </td>
+	<td>Total Amount Due:</td>
+	<td><#BALANCEDUE format='$0.00'></td>
+  </tr>
+</table>

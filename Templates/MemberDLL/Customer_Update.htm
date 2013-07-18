@@ -1,0 +1,240 @@
+<!-- This section contains the CSS and scripts for the Mobiscroll plugin I am using for the datepickers -BJF 4.24.2013 -->
+<#SECTION NAME="mobiscrollDateScripts.htm">
+<script>
+setTitle();
+function GetZipInfo(zipValue){
+	var updStr='../memberdll.dll/ZipInfo?ZIP='+zipValue+'&WRP=zipInfo.htm&WMT=none&WNR=none';
+	$.ajax({url:updStr, type:'GET',
+		success:function(response){
+			//alert(response);
+			if (response != '')
+			{
+				var ZipList = new Array();
+				ZipList =  response.split(',');
+				ZipList[1] = ZipList[1].substr(0,ZipList[1].length-2);
+
+
+
+				document.order.CHAPTERID.value  = ZipList[0];
+				//alert(document.order.CHAPTERID.value);
+				for (var i = 0; i < document.order.STATECD.length; i++)
+				{
+					if (document.order.STATECD.options[i].value == ZipList[1])
+  					{
+						document.order.STATECD.options[i].selected=true;
+						break;
+    					}
+				}
+			}
+			else
+			{
+				alert('The Zip Code that you entered is not valid. Please try again!');
+				document.order.ZIP.value = '';
+		        	document.order.ZIP.select();
+        			document.order.ZIP.focus();
+			}
+		}
+	});
+}
+</script>
+
+<h1 class ="title"><#MLGLBL TEXT="Update My Information"></h1>
+<!-- <div class="formIntro">
+		<p>
+			<#MLGLBL TEXT="Please enter the information requested below in all 3 sections to maintain/complete your Member Profile."><br />
+			<em>* = required</em><br />
+		</p>
+
+
+
+
+
+</div> -->
+
+<div data-role="collapsible-set" >
+
+	<div data-role="collapsible"  data-content-theme="d" data-expanded-icon="arrow-d" data-inset="true" id='profileInformation' data-collapsed="false">
+
+		<h2>Edit Profile Information</h2>
+
+
+
+		<form method="POST" name="order" action='../memberdll.dll/updateInfo' id="fullPageForm">
+			<#SECTION NAME="basicInfo_update.htm">
+			<#SECTION NAME="primContact_update.htm">
+
+			<a href="#" data-role="button" data-theme="g" data-icon="check"  onclick="formValidate()">Update Profile</a>
+
+
+
+			<div class="missing" style="display: none;">
+				<p>Required fields are missing. Please fill those in before continuing.</p>
+			</div>
+			<input type="hidden" name="CHAPTERID" value="">
+			<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+			<input type="hidden" name="RESPONSEPAGE" value="Customer_Update_Confirm.htm">
+			<input type="hidden" name="USEMULTIEDULIST" value="Y">
+		<!-- </form> -->
+	</div>
+
+	<div data-role="collapsible"  data-content-theme="d"   data-inset="true" data-collapsed="true">
+
+
+
+
+<SCRIPT LANGUAGE="Javascript">
+
+
+// function getCheckboxes(){
+
+// 	for (var i=0; i<document.demo.length; i++) {
+//    		if ((document.demo.elements[i].type == "radio") && (document.demo.elements[i].name=='EDUCATIONCDLST') && (document.demo.elements[i].value=='<#EDUCATIONCDLST>'))
+
+//    		 {
+//        		document.demo.elements[i].checked=true;
+//   		 }
+//   														  }
+
+//   	for (var i=0; i<document.demo.length; i++) {
+//    		if ((document.demo.elements[i].type == "radio") && (document.demo.elements[i].name=='GENDER') && (document.demo.elements[i].value=='<#GENDER>'))
+
+//    		 {
+//        		document.demo.elements[i].checked=true;
+//   		 }
+//   														  }
+
+
+//   	for (var i=0; i<document.demo.length; i++) {
+//   		if ((document.demo.elements[i].type == "radio") && (document.demo.elements[i].name=='ETHNICITY') && (document.demo.elements[i].value=='<#ETHNICITY>'))
+
+// 		{
+// 			document.demo.elements[i].checked=true;
+// 		}
+
+// 											  }
+
+
+// }
+
+
+
+</SCRIPT>
+
+
+<h2><#MLGLBL TEXT="Demographics"></h2>
+<!-- <form method="POST" name="demo" action="UpdateInfo"> -->
+
+
+	<div data-role="fieldcontain">
+
+	<fieldset data-role="controlgroup">
+		<legend><#MLGLBL TEXT="Gender"></legend>
+
+				<input type="radio" name="GENDER" class="req" id="Educationcdlst-1" value="M">
+				<label for="Educationcdlst-1">Male</label>
+				<input type="radio" name="GENDER" class="req" id="Educationcdlst-2" value="F">
+				<label for="Educationcdlst-2">Female</label>
+				<!-- <input type="text" name="lname" value="DOG"> -->
+
+	</fieldset>
+	</div>
+
+	<div data-role="fieldcontain">
+
+		<label for="BIRTHDATE"><#MLGLBL TEXT="DOB"></label>
+		<input  name="BIRTHDATE" class="date" id="BIRTHDATE" value="<#BIRTHDATE>"  >
+
+		</div>
+
+
+
+
+
+	<!--<a href="#" data-role="button" data-icon="check" data-inline="true" onclick="formValidate2()">Update Your Demographics</a>-->
+	<!-- <input type="submit"  class="button" value="Update" data-theme="g" data-icon="check"> -->
+
+	<a href="#" data-role="button" data-theme="g" data-icon="check"  onclick="formValidate()">Update Profile</a>
+
+	<input type="reset" name="Submit2" value="Reset Form" href="#" data-theme="c" data-icon="refresh">
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RESPONSEPAGE" value="changes_saved.htm">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="MULTIEDUCATIONLIST">
+<!--<input type="hidden" name="INT100" value="">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="INTERESTCDLST" value="">-->
+
+
+</form>
+
+<script language="javascript">
+//getCheckboxes();
+</script>
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+</div>
+
+<div data-role="popup" id="errorPop" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+	<h3 class="ui-title" id="error_content">test</h3>
+	<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">OK</a>
+</div>
+<a href="#errorPop" data-rel="popup" data-position-to="window" data-transition="pop"  id="popBtn" style="display:none;">hi</a>
+
+
+<script type="text/javascript">
+
+
+function formValidate() {
+	var fObj = document.order;
+
+	if(validateAll(document.order)){
+		document.order.submit();
+	}
+
+}
+function formValidate2() {
+	if(!document.demo.GENDER.checked){
+		$('#error_content').html('A Gender selection is required.<br />Please select a Gender.');
+		$('#popBtn').click();
+	}
+	if(!document.demo.ETHNICITY.checked){
+		$('#error_content').html('An Ethnicity selection is required.<br />Please select a Ethnicity.');
+		$('#popBtn').click();
+	}
+	if(!document.demo.EDUCATIONCDLST.checked){
+		$('#error_content').html('A Degree selection is required.<br />Please select a Degree.');
+		$('#popBtn').click();
+	}
+	if(!document.demo._MULTIPLE_DESIGNATIONLST.checked){
+		$('#error_content').html('A Certification selection is required.<br />Please select a Certification.');
+		$('#popBtn').click();
+	}
+
+}
+</script>

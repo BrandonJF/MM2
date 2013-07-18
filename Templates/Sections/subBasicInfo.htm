@@ -1,0 +1,44 @@
+<fieldset>
+<legend>Subcriber's Information</legend>
+<ul>
+	<li>
+		<label for="PREFIX">Prefix</label>
+		<select name='PREFIX'>
+       		<option value=''>Select One...</option>
+            <#REFTABLEVALS TABLENAME="SALUTATIONREF" FLD1="SALUTATION" FLD2="SALUTATION" SCV="PREFIX">
+        </select>
+	</li>
+	<li>
+		<label for="FIRSTNAME" class="required">First Name</label>
+		<input type="text" name="FIRSTNAME" value="<#FIRSTNAME>" class='reqField'>
+	</li>
+	<li>
+		<label for="MIDDLENAME">Middle Name</label>
+		<input name="MIDDLENAME" value="<#MIDDLENAME>">
+	</li>
+	<li>
+		<label for="LASTNAME" class="required">Last Name</label>
+		<input type="text" name="LASTNAME" value="<#LASTNAME>" class='reqField'>
+	</li>
+	<li>
+		<label for="SUFFIX">Suffix</label>
+		<select name='SUFFIX' id='suffixField'>
+			<option value=''>Select One...</option>
+			<#CBXSUFFIX>
+        </select>        
+        <script>
+			$('#suffixField').val("<#SUFFIX>"); //pre-populate suffix
+		</script>
+	</li>
+	<li>
+		<label for="JOBTITLE" class="required">Job Title</label>
+		<input name="JOBTITLE" type="text" value="<#JOBTITLE>"class='reqField'>
+	</li>
+	<li>
+		<label for="ORGNAME" class="required">Organization</label>
+		<input id='ORGNAME' name="ORGNAME"  value='<#ORGNAME>' class='reqField'>
+		<a href="#" onClick="RunOrgSearch(document.abc);" >Search</a>
+        <input type="hidden" name="ORGCD" value="<#ORGCD>"> 
+	</li>
+</ul>
+</fieldset>

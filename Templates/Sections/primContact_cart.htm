@@ -1,0 +1,110 @@
+<legend><#MLGLBL TEXT="Primary Contact Information"></legend>
+
+	<div data-role="fieldcontain">
+		<label for="MailingAddress"><#MLGLBL TEXT="Address Line 1:"><sup class="req_star">*</sup></label>
+		<input type="text" name="ADDRESS1" id="MailingAddress" value="<#ADDRESS1>" class='reqField'>
+	</div>
+	
+	<div data-role="fieldcontain">
+		<label for="City"><#MLGLBL TEXT="City"><sup class="req_star">*</sup></label>
+		<input type="text"  name="CITY" id="City" value="<#CITY>" class='reqField'>
+	</div>
+	<div data-role="fieldcontain">
+		<label for="State"><#MLGLBL TEXT="State"><sup class="req_star">*</sup></label>
+		<select name="STATECD" id="State" onchange="updateTotals();" class='reqField'>
+			<option value='' >Select One...</option>
+			<#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD">
+        </select>
+	</div>
+	<div data-role="fieldcontain">
+		<label for="Country"><#MLGLBL TEXT="Country"></label>
+        <select size="1" name="COUNTRY" id="Country" onChange="checkCountryMask(this.value);international();">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+        <script>
+			checkCountryMask("<#COUNTRY>"); //set correct phone mask on load
+		</script>
+	</div>
+	<div data-role="fieldcontain">
+		<label for="Zip"><#MLGLBL TEXT="Zip Code"><sup class="req_star">*</sup></label>
+		<input type="text" name="ZIP" id="Zip" value="<#ZIP>" class='reqField' onBlur="GetZipInfo($(this).val())"></td>
+	</div>
+	
+	<div data-role="fieldcontain">
+		<label for="WorkPhone"><#MLGLBL TEXT="Work Phone"><sup class="req_star">*</sup></label>
+		<input name="WORKPHONE" id="WorkPhone" value="<#WORKPHONE>" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</div>
+	<div data-role="fieldcontain">
+		<label for="WorkPhoneExt" ><#MLGLBL TEXT="Work Extension"></label>
+		<input name="WORKPHONEEXT" id="WorkPhoneExt" value="<#WORKPHONEEXT>" >
+	</div>
+	
+	<div data-role="fieldcontain">
+		<label for="FaxPhone" ><#MLGLBL TEXT="Fax"></label>
+		<input name="FAXPHONE" id="FaxPhone" value="<#FAXPHONE>" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</div>
+	
+	
+	<div data-role="fieldcontain">
+		<label for="Email"><#MLGLBL TEXT="Email Address"><sup class="req_star">*</sup></label>
+		<input type="text" name="EMAIL" value="<#EMAIL>" id="Email" class='reqField' onblur="if('<#customercd>'==''){checkEmailExists()}">
+	</div>
+    <div id="emailAvailable" style="display: none"><label>&nbsp;</label><span class="correct">Email hasn't been registered in the system yet.</span></div>
+        <div id="emailExists" style="display: none"><label>&nbsp;</label><span class="error">Email is already in the system.</span></div>
+        <script>
+            function checkEmailExists() {
+                var emailExistsUrl = "../utilities.dll/customlist?SQLNAME=EMAILCHECK&wbp=customercd.htm&whp=none&WMT=none&wnr=none&code=" + document.getElementById("Email").value;
+	$.ajax({url:emailExistsUrl, type:"get",
+		success:function(content){
+			if (content.length > 2){
+				$("#emailExists").show();
+                $("#emailAvailable").hide();
+			}else{
+                $("#emailExists").hide();
+                $("#emailAvailable").show();
+            }  
+		}
+	});
+	}
+</script>
+	
+	
+<script>
+    function prefCheck(formName){
+if(formName.NOEMAILFLG_field.checked){
+    formName.NOEMAILFLG.value = 'Y'
+}else{
+     formName.NOEMAILFLG.value = 'N'
+}
+if(formName.NOMAILFLG_field.checked){
+    formName.NOMAILFLG.value = 'Y'
+}else{
+     formName.NOMAILFLG.value = 'N'
+} }
+if (CUSTOMERCD != ''){
+		$(function(){
+			if ('<#NOEMAILFLG>' == 'Y'){
+				$('input[name=NOEMAILFLG_field]:eq(0)').attr('checked', true);
+			}else{
+				$('input[name=NOEMAILFLG_field]:eq(1)').attr('checked', true);
+			}		
+			if ('<#NOMAILFLG>' == 'Y'){
+				$('input[name=NOMAILFLG_field]:eq(0)').attr('checked', true);
+			}else{
+				$('input[name=NOMAILFLG_field]:eq(1)').attr('checked', true);
+			}
+			if ('<#NOCALLFLG>' == 'Y'){
+				$('input[name=NOCALLFLG_field]:eq(0)').attr('checked', true);
+			}else{
+				$('input[name=NOCALLFLG_field]:eq(1)').attr('checked', true);
+			}
+			if ('<#NOFAXFLG>' == 'Y'){
+				$('input[name=NOFAXFLG_field]:eq(0)').attr('checked', true);
+			}else{
+				$('input[name=NOFAXFLG_field]:eq(1)').attr('checked', true);
+			}
+		});
+	}
+</script>
+</fieldset>

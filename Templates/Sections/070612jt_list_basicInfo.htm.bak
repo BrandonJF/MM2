@@ -1,0 +1,21 @@
+
+ 	<li><label for="username"><#MLGLBL TEXT="Username">* </label><input name="WEBUSERID" type="text"  value="<#WEBUSERID>" size="50" class='reqField'></li>
+    	<li><label for="password"><#MLGLBL TEXT="Password">*</label><input name="WEBUSERPASSWORD" type="password"  value="<#WEBUSERPASSWORD>" size="50" class='reqField'></li>
+    	<li><label for="cpassword"><#MLGLBL TEXT="Confirm Password">*</label><input name="WEBUSERPASSWORD2" type="password"  value="" size="50" class='reqField'></li>
+    	<li><label for="prefix"><#MLGLBL TEXT="Prefix"></label><select name='PREFIX' class='reqField'>
+       		<option value=''>Select One...</option>
+            <#REFTABLEVALS TABLENAME="SALUTATIONREF" FLD1="SALUTATION" FLD2="SALUTATION" SCV="PREFIX">
+        </select>       	</li>
+        <li>
+          <label for="firstname"><#MLGLBL TEXT="First Name">*	</label><input type="text" size="50" name="FIRSTNAME" value="<#FIRSTNAME>" class='reqField'></li>
+    	<li><label for="middlename"><#MLGLBL TEXT="Middle Name"></label><input size="50" name="MIDDLENAME" value="<#MIDDLENAME>"></li>
+   		<li><label for="lastname"><#MLGLBL TEXT="Last Name">*</label><input type="text" size="50" name="LASTNAME" value="<#LASTNAME>" class='reqField'></li>
+   	<li><label for="suffix"><#MLGLBL TEXT="Suffix"></label><select name='SUFFIX' id='suffixField'><option value=''>Select One...</option><#CBXSUFFIX></select>        
+        <script>
+		//pre-populate suffix
+		$('#suffixField').val("<#SUFFIX>");
+		</script></li>
+       	<li><label for="jobtitle"><#MLGLBL TEXT="Job Title">*</label><input name="JOBTITLE" type="text" value="<#JOBTITLE>" size="50" class='reqField'></li>
+    	<li><label for="organization"><#MLGLBL TEXT="Organization">*</label><input id='ORGNAME' name="ORGNAME"  value='<#ORGNAME>' size='50' class='reqField'> <a href="#" onClick="RunOrgSearch(document.abc);" >Search</a>
+        <input type="hidden" name="ORGCD" value="<#ORGCD>"> </li>
+       

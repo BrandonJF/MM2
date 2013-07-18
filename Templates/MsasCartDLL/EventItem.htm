@@ -1,0 +1,31 @@
+<!--
+    <tr>
+    <td><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true" title="Remove tdis item from tde cart">Remove</a></td>
+
+        <td><#SESSIONNAME> <span class="appeal" style="display: none"><br><input name="APPEALCD_<#ORDERITEMCD>" type="text" onBlur="submit();" value="<#APPEALCD>"></span></td>
+        <td></td>
+        <td>1</td>
+		<td class="prices"></td>
+
+</tr> -->
+<#FUNCTIONS>
+
+
+
+<li>
+	<a href="Info?ORDERITEMCD=<#ORDERITEMCD>" data-transition="slide">
+		<h3> <#SESSIONNAME> </h3>
+		<p>1 x <#PRICE FORMAT='$0.00'>  </p>
+		<p class="ui-li-aside"><#ITEMTOTAL FORMAT='$0.00'></p>
+		 <a href="#popupMenuFor<#ORDERITEMCD>" data-rel="popup" data-position-to="window" data-transition="pop">Edit Item</a>
+	</a>
+</li>
+
+<div data-role="popup" id="popupMenuFor<#ORDERITEMCD>" data-theme="a">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+            <li data-role="divider" data-theme="b">Choose an action</li>
+            <!-- <li><a href="#">View details</a></li> -->
+            <!-- <li><a href="#">Edit</a></li> -->
+            <li><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>">Delete</a></li>
+        </ul>
+</div>

@@ -1,0 +1,30 @@
+<h2>Booth Purchase Confirmation</h2>
+<p>You have have successfully purchase booths for the <#SESSIONNAME>.Please print this form as a confirmation letter. Thank you for purchasing booths online, and we look forward to seeing you. </p>
+<p><SCRIPT> 
+if (window.print) { document.write('<input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()">'); }</script></p>
+<h4>Event Information</h4>
+<dl class="profile">
+    <dt>Event Date</dt><dd><#SESSIONRANGE FORMAT="mmmm dd, yyyy"></dd>
+    <dt>Start Time</dt><dd><#SESSIONSTARTTM></dd>
+    <dt>Location</dt><dd><#LOCATIONNAME><br>
+                <#ADDRESS1> <#ADDRESS2><br>
+                <#LOCATIONCITY>, <#LOCATIONSTATECD> <#ZIP></dd>
+    <p class="clear"></p>
+</dl>
+<h4>Payment Information</h4>
+<dl class="profile">
+    <dt>Invoice Number</dt><dd><#INVOICENUM></dd>
+    <dt>Total Invoice Amount</dt><dd><#TOTALPRICE></dd>
+    <dt>Total Price Paid</dt><dd><#TOTALPAIDAMOUNT></dd>
+    <p class="clear"></p>
+</dl>
+<h4>Payment Details</h4>
+<table class="gutters">
+	<tr>
+		<th>Booth Number</th>
+		<th>Size (sq. feet)</th>
+		<th>Price</th>
+	</tr>					
+		<#BOOTHLIST>
+</table>
+               

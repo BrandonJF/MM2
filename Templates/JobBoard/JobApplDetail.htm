@@ -1,0 +1,40 @@
+<h2><#FIRSTNAME> <#MIDDLEINIT> <#LASTNAME></h2>
+<dl class="profile">
+	<dt>Submitted</dt>
+	<dd><#JOBAPPTMS></dd>
+	<dt>Skills</dt>
+	<dd><#JOBREQUIREDSKILLSDSC><br><#JOBPREFERREDSKILLSDSC></dd>
+	<dt>Start Now</dt>
+	<dd><#IMMEDIATESTARTFLG></dd>
+	<dt>Employed</dt>
+	<dd><#EMPLOYEDFLG></dd>
+	<dt>Availability</dt>
+	<dd><#JOBSTARTDATE></dd>
+	<dt>Salary</dt>
+	<dd><#MINSALARLYAMT> - <#MAXSALARYAMT></dd>
+	<dt>Degree</dt>
+	<dd><#EDUCATIONDEGREE></dd>
+	<dt>GPA</dt>
+	<dd><#EDUCATIONGPAAMT></dd>
+	<dt>Resume</dt>
+	<dd><#RESUMETEXT></dd>
+	<dt>Contact Information</dt>
+	<dd><#ADDRESS1>, <#ADDRESS2><br>
+	<#CITY>, <#STATECD> <#ZIP>, <#COUNTRY><br>
+	<#CONTACTPHONE><br>
+	<#EMAIL><br>
+	<#FAXPHONE>
+	</dd>
+	<p class="clear"></p>
+</dl>
+<div class="buttons">
+	<input type="button" value="print" name="print" onClick="RunPrint()">
+</div>
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+
+function RunPrint() {	  
+window.open("ApplDetail?JOBAPPNUM=<#JOBAPPNUM>&TEMPLATEPAGE=JobPrinttemplate.htm", "","fullscreen=no,location=no,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width=640,height=480")
+      return true;
+}   
+		
+</script>

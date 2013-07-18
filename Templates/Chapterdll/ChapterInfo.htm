@@ -1,0 +1,16 @@
+<h2><#CHAPTERNAME> Chapter</h2>
+<#WEBPROFILE>
+<BR /><BR />
+<table class="gutters">
+    <tr>
+        <th colspan="2">Upcoming Meetings and Events</th>
+    </tr>
+    <#INCLUDE DLL="eventsdll.dll" ACT="EventList" WHP="none" WBP="chapterEventList.htm" WNR="chapterEvents_norec.htm" PARAMS="CHAPTERCD,ONWEBFLG=Y,SESSIONBEGDATE=>getdate()" SORT=SESSIONBEGDATE>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+     <tr>
+        <th colspan="2">Chapter Officers</th>
+    </tr>
+     <#INCLUDE DLL="committeedll.dll" ACT="IndFullList" WHP="none" WBP="cBoard_list.htm" WNR="cboard_norec.htm" PARAMS="IC.COMMITTEECD={CHAPTERCD}~,SORT=CPOSITION">
+</table>

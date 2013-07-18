@@ -1,0 +1,35 @@
+<tr>
+    <td><#DOCUMENTNUM></td>
+    <td>
+	<script>
+	if('<#FILENAME>' == ''){
+		document.write('N/A');
+	}else{
+		document.write('<#FILENAME>');
+	}
+	</script>
+    </td>
+    <td>
+	<script>
+	if('<#FILENAME>' == ''){
+		document.write('<b><a id="<#DOCUMENTNUM>" href="#">Abstract Text</a></b>');
+		$(document).ready(function () {
+            $('a#<#DOCUMENTNUM>').live('click', function (e) {
+                e.preventDefault();
+				var page = '../documentdll.dll/info?DOCUMENTNUM=<#DOCUMENTNUM>&wrp=abstractText.htm&wmt=../main_template_none.htm';
+                return parent.uiPopUp(page);
+			});
+        });
+	}else{
+		document.write('<b><a id="<#DOCUMENTNUM>" href="#" href="view?DOCUMENTNUM=<#DOCUMENTNUM>">Document Preview</a></b>');
+		$(document).ready(function () {
+            $('a#<#DOCUMENTNUM>').live('click', function (e) {
+                e.preventDefault();
+				var page = '../documentdll.dll/view?DOCUMENTNUM=<#DOCUMENTNUM>';
+                return parent.uiPopUp(page);
+			});
+        });
+	}
+	</script>
+    </td>
+  </tr>

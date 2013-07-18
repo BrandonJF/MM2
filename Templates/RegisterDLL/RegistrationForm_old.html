@@ -1,0 +1,49 @@
+<SCRIPT LANGUAGE="JavaScript1.2" TYPE="text/javascript">
+	 var isFunctions = false; //store whether or not there are functions in order to hide function section
+	 function formValidate() {
+		  if ((priceTest(document.event)) && (getFunctions(document.event)))
+		  document.event.submit();
+		  return true; 
+	 }   
+</script>
+<h2><#SESSIONNAME> Reigstration</h2>
+<form name="event" method="POST" action="../Registerdll.dll/Customer" >
+<fieldset>
+	 <legend>Price Selection</legend>
+	 <ul>
+		  <li>
+			   <label for="PRICETYPESTT">Price List</label>
+			   <select size="1" name="PRICETYPESTT" onchange="priceChanged()" id="selPrice"><#PRICELIST SORT="pricedes" ONLYOPTIONS=Y></select>
+
+		  </li>
+	 </ul>
+</fieldset>
+<fieldset>
+	 <legend>Function Selection</legend>
+	 <ul>
+		 <#FUNCTIONGROUPS>
+	 </ul>
+</fieldset>
+
+<div class="buttons"> <input type='button' name='continueButton' value='Continue' onClick='formValidate();'></div>
+
+
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="FPRICEAMT" value="">
+<input type="hidden" name="FPRICETYPESTT" value="">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="FUNCTIONSQTY" value="">
+<input type="hidden" name="PAYEETYPECD" value="I">
+<input type="hidden" name="REGSTATUSCD" value="<#REGSTATUSCD>">
+<input type="hidden" name="COUNTQTY" value="1">
+<input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>">
+
+
+</form>
+
+<script>
+	if(!isFunctions){ //hide functions section if no functions
+		$('.functionSection').hide();
+	}
+</script>	

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Response>
+  <LoginStatus>Accepted</LoginStatus>
+  <MemberData>
+    <memberid><#customercd></memberid>
+    <SESSIONID><#SESSIONID></SESSIONID>
+    <customercd><#customercd></customercd>
+    <email><#email></email>
+    <lastname><#lastname></lastname>
+    <firstname><#firstname></firstname>
+    <membertype><#customertype></membertype>
+    <ismember><#ismemberflg></ismember>
+    <committees><#committeelist></committees>
+    <subscriptions><#subscriptionlist></subscriptions>
+    <orgcd><#orgcd></orgcd>
+    <chapterid><#chapterid></chapterid>
+    <multimem><#multimem></multimem>
+  </MemberData>
+</Response>

@@ -1,0 +1,247 @@
+<!doctype html> 
+<html class="cufon-active cufon-ready">
+<head>
+<title>ClearVantage Web - Baseline</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+
+<!--CLEARVANTAGE STYLES-->
+<link href="/baseline/CSS/defaultStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/formStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/eventStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/listStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/cartStyles.css" rel="stylesheet" type="text/css"> 
+<link href="/baseline/CSS/newCart.css" rel="stylesheet" type="text/css"> 
+<link href="/baseline/CSS/newStyles.css" rel="stylesheet" type="text/css"> 
+<link href="/baseline/CSS/jquery.validity.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" type="text/css" href="/baseline/CSS/style.css" />
+<link rel="stylesheet" type="text/css" href="/baseline/CSS/style_cf.css" />
+
+<!--CLEARVANTAGE JAVASCRIPT-->
+<script type="text/javascript" src="/baseline/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="/baseline/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="/baseline/js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript" src="/baseline/js/jquery.validate.min.js"></script>
+<script language="javascript" src="/baseline/js/euclidScripts.js"></script>
+<script language="javascript" src="/baseline/js/VerificationLib.js"></script>
+<script language="javascript" src="/baseline/js/datetimepicker.js"></script>
+<script language="javascript" src="/baseline/js/eventScripts.js"></script>
+<script language="javascript" src="/baseline/js/customerScripts.js"></script>
+<script language="javascript" src="/baseline/js/duesScripts.js"></script>
+<script language="javascript" src="/baseline/js/cartScripts.js"></script>
+<script type="text/javascript" src="/baseline/js/overLib.js"></script>
+<script type="text/javascript" src="/baseline/js/overLibHideForm.js"></script>
+<script type="text/javascript" src="/baseline/js/jQuery.validity.min.js"></script>
+
+
+<script>
+	//GLOBAL VARIABLES FOR LOGGED IN USER
+	var CUSTOMERCD = '<#COOKIE_CUSTOMERCD>';
+	var ISMEMBERFLG = '<#COOKIE_ISMEMBERFLG>';
+	var MEMBERNAME = '<#COOKIE_MEMBERNAME>';
+	var STATUSSTT = '<#COOKIE_STATUSSTT>';
+	var CUSTOMERTYPE = '<#COOKIE_CUSTOMERTYPE>';
+	var ORGCD = '<#COOKIE_ORGCD>';
+	var DEBUG = false; //turns on or off debug alerts
+</script>
+
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+startList = function() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("nav");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.nodeName=="LI") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+window.onload=startList;
+
+//--><!]]></script>
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" href="/baseline/CSS/ie6.css" />
+<script type='text/javascript' src='/cvbaseline_jquery/js/dd_belated_png.js'></script>
+<script>DD_belatedPNG.fix('.png,#numbers a,.first_ul');</script>
+<![endif]-->
+
+</head>
+<body>
+<div id="container">
+<!-- header -->
+<div id="header">
+    <!-- logo -->
+           <a href="/index.htm" title=""><img src="/images/logo.gif" alt="" class="png" /></a><br /><br />
+    <!-- /logo -->
+
+    <!-- header right -->
+           <#LEFTNAV>
+    <!-- /header right -->
+</div>
+<div id="cartHeaderSummary"></div>
+<script>
+//populate cart summary:
+$(function(){
+	var cartHeaderURL = '../msascartdll.dll/showcart?WMT=none&WRP=cartSum.htm';
+	//debug(URL);
+	$.ajax({url:cartHeaderURL, type:'GET',
+		success:function(response){
+			if(response.match('Your cart is empty') || response.match('No Cart Items')){
+				var emptyString = 	'<a href="../msascartdll.dll/showcart">0 Item(s) In Cart</a> &nbsp;&nbsp;&nbsp; Total: $0.00&nbsp;&nbsp;';
+				$('#cartHeaderSummary').html(emptyString);
+			}else{
+				$('#cartHeaderSummary').html(response);
+			}
+		}
+	});
+});
+</script>
+
+<br class="clearfloat" />
+<!-- /header -->
+
+
+<div id="container1">
+<div id="container2">
+<div id="container3">    
+    <div class="page_curv_top png"></div>
+    <div class="content_con png">
+	    <div class="sub_header">
+				    
+	    </div>
+	    
+	    <div class="content_con2">
+
+	    <!-- left side content -->
+			
+	    <div class="content productlist">
+	    
+	    	    
+	    
+		    <!-- box -->   
+			    <#CONTENT>
+		    <!-- /box -->
+	    
+		    
+		 
+             </div>
+            <!-- / left side content -->
+            
+            <!-- side bar -->
+            <div class="sidebar"><div class="sidebars1"><div class="sidebars2">
+	    
+
+		<!-- box -->	
+			<div class="box small">
+
+                            <!-- box title-->
+                            <h5><a href=""><#MLGLBL TEXT="Product Categories"></a></h5>
+			    
+			<!-- sub link-->
+				<ul id="sub_menu">
+					<li><a href="#" onClick="createPOST('../utilities.dll/openpage',{'wrp':'productsearch.htm','wmt':'../main_template_innerpage.htm'}); return false"><#MLGLBL TEXT="Product Search"></a></li>													
+					<li><a href="#" onClick="createPOST('../msascartdll.dll/ProductList',{'ONWEBFLG':'Y','INSTOCKSTT':'Y','RANGE':'1/10','COLUMNS':2}); return false"><#MLGLBL TEXT="Product List Page"></a></li>										
+					<li><a href="#" onClick="createPOST('../msascartdll.dll/ProductList',{'ONWEBFLG':'Y','majorcat':'featured','WHP':'featured_header.htm','columns':'2','RANGE':'1/10'}); return false"><#MLGLBL TEXT="Featured Products"></a></li>
+				</ul>			
+			<!-- /sub link-->
+			</div>
+		<!-- box -->	
+	    
+	    
+                <!-- box -->
+                        <div class="box small">
+
+                            <!-- box title-->
+                             <!-- <h5><a href="">Featured Events</a></h5> --> <div id="eventDiv"></div>                          
+                                <!-- news line -->
+                               <!-- <span class="news_date">03/10/2010</span><br />
+                                Nullam at dolor sit amet enim bibendum accumsan in sit amet velit fusce et est congue.  <a href="" class="read_more">read more</a><br />
+                                <div class="news_line"></div>-->
+                                
+                                                  
+                        </div>
+                <!-- /box -->
+
+                <!-- box -->
+                <div class="clear"></div>
+                <!-- /box -->
+                
+            </div></div></div>
+            <div class="clear"></div>
+            <!-- / side bar -->            
+
+        </div>
+    
+    
+</div>
+</div>
+</div>                                          
+</div>
+<!-- footer -->
+	<div id="footer">
+            <div class="footer_con"> <div class="footer_con2">
+                <!-- copyright text -->
+                <div class="part1"><#MLGLBL TEXT="Copyright"> &copy; 2011 Euclid Technology, LLC.</div>
+                <!-- social media icons -->
+                <div class="part2">
+                         <a href="#" title=""><img src="/images/social_media/twitter.png" alt="" /></a>
+                         <a href="#" title=""><img src="/images/social_media/facebook.png" alt="" /></a>
+                         <a href="#" title=""><img src="/images/social_media/rss.png" alt="" /></a>
+                </div>
+                <!-- / social media icons -->
+                             
+                <!-- links -->
+                <div class="part3">
+                         <a  href="#" title=""><#MLGLBL TEXT="Home"></a> | <a  href="#" title=""><#MLGLBL TEXT="Legal"></a> | <a  href="#" title=""><#MLGLBL TEXT="Privacy"></a> | <a  href="#" title=""><#MLGLBL TEXT="Contact"></a>
+                </div>
+           </div></div>
+	</div>
+<!-- /footer -->
+</div>
+ <script>
+var listURL = '../eventsdll.dll/EventList?ONWEBFLG=Y&REGONLINEFLG=Y&showtop=5&Range=1/10&SESSIONBEGDATE=>getdate()-1&SORT=SESSIONBEGDATE&WHP=featuredEventList_header.htm&WBP=featuredEventList.htm&WNR=noevents.htm&WMT=none';	
+$("#eventDiv").load(listURL);
+</script>
+
+<div class="rw-js-container">
+    <script type="text/javascript">
+        // Async Rating-Widget initialization.
+        function RW_Async_Init(){
+            RW.init("EA25D8670FE95BB17E11462F676707DE",
+            {
+                theme: "star_oxygen",
+                advanced: {
+                    font: {
+                        size: "9px"
+                    }
+                },
+                type: "star"
+            });
+            RW.render();
+        }
+
+        // Append Rating-Widget JavaScript library.
+        if (typeof(RW) == "undefined"){
+            (function(){
+                var rw = document.createElement("script");
+                rw.type = "text/javascript"; rw.async = true;
+                rw.src = "http://rating-widget.com/js/external.min.php?t=js";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(rw, s);
+            })();
+        }
+
+    </script>
+</div>
+</body>
+</html>

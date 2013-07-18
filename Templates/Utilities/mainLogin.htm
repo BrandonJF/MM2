@@ -1,0 +1,132 @@
+<script>
+
+function konamiLogin(){
+	// console.log( "Konami Ready!") ;
+	var keyPresses = [];
+	var matchKeys = '69,85,67,76,73,68'; //"euclid"
+
+	$(document).keydown(
+		function(e){
+			keyPresses.push(e.keyCode);
+			// console.log(keyPresses.toString()) ;
+			// console.log(matchKeys) ;
+			if (keyPresses.toString().indexOf(matchKeys) >= 0){
+				console.log("Konami ignited!");
+				keyPresses.length = 0;
+			}
+		});
+
+
+}
+	$(document).ready(function(){
+		konamiLogin();
+		$(".showMenuBtn").hide();
+	$(".ui-body-a").css( 'backgroundImage', "url('../../images/retina_wood.png')");
+
+});
+</script>
+
+<div class="container_12" >
+	<div id="div_mainlogin" class="grid_10 prefix_1 suffix_1 " >
+	<h3 id="loginPrompt">USER LOGIN</h3>
+
+	<!-- <form method="get" action='../logindll.dll/IndLogin' name="login" id="login"> -->
+	<form method="get"  name="login" id="login">
+		<div data-role="fieldcontain">
+			<!-- <label for="UserId"><#MLGLBL TEXT="Username">: </label> -->
+			<input type='text' name='WEBUSERID' id='UserId' class="reqField" data-theme="d" size='12' placeholder="USERNAME"/>
+		</div>
+		<div data-role="fieldcontain">
+			<!-- <label for="Password"><#MLGLBL TEXT="Password">:</label> -->
+			<input type='password' data-theme="d" name='WEBUSERPASSWORD' id='Password' class="reqField" size='12' placeholder="PASSWORD" onkeypress="return submitenter(this,event,submitLogin,[document.login]);" />
+		</div>
+			<input type="submit" value="Sign In" data-mini="true" data-role="button" data-inline="false" onClick="submitLogin(document.login);"  data-theme="g"/>
+
+		<fieldset class="ui-grid-a" id="forgottenButtons" style="display:none;">
+			<div class="ui-block-a">
+				<a href="../utilities.dll/openpage?wrp=forgotPasswordForm.htm" data-role="button" data-mini="true" data-inline="false"><#MLGLBL TEXT="Forgot Password?"></a>
+			</div>
+
+
+			<div class="ui-block-b">
+				<a href="../utilities.dll/openpage?wrp=userRequestForm.htm" data-role="button" data-mini="true"  data-inline="false" >Forgot ID?</a>
+			</div>
+		</fieldset>
+
+		<input type="hidden" name="CUSTOMERCD" value="" >
+		<input type="hidden" name="REDIRECTURL" value="">
+	</form>
+	</div>
+</div>
+<p>&nbsp;</p>
+<div id="div_loggedin" style="display: none">
+	<h3><#MLGLBL TEXT="You're already logged in"></h3>
+	<p>
+		Please continue on to your <a href="../memberdll.dll/info?wrp=mainloginwelcome.htm">member dashboard</a>.
+	</p>
+</div>
+<script>
+$(function(){
+	if (CUSTOMERCD != "")
+	{window.location = "../memberdll.dll/info?wrp=mainloginwelcome.htm/";
+		$('#div_mainlogin').hide();
+$('#div_loggedin').show();
+
+	}
+});
+</script>
+
+<script>
+	$(function(){
+		$('#login').submit(function(){
+			var webID = $('#UserId').val();
+			var webPWD = $('#Password').val();
+			var jqxhr = $.post("../logindll.dll/IndLogin", {
+				WEBUSERID: webID,
+				WEBUSERPASSWORD: webPWD,
+				ALLOWSESSIONID: "Y",
+				wmt: "none"
+			}, function(data) {
+				console.log(data);
+				window.mdata = data;
+				if(data.indexOf("Invalid") !== -1){
+					invalidLogin();
+				}
+				else{
+					location.href="../../cgi-bin/memberdll.dll/info?wrp=mainloginwelcome.htm"
+				}
+			})
+			.done(function() {
+				console.log("second success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("finished");
+			});
+
+			return false;
+		});
+	});
+
+	function invalidLogin(){
+
+		$("#div_mainlogin").css("borderTop", "3px solid #DC4127");
+		setTimeout(function(){$("#div_mainlogin").css("borderTop", "none");},3000);
+		$('#loginPrompt').text("Invalid login. Please try again.")
+		$('#Password').val("")
+		$("#forgottenButtons").fadeIn("slow");
+		// alert("Invalid Login!");
+	}
+</script>
+
+
+<script type="text/javascript">
+     $(function() {
+        $("#login").validity(function() {
+            $(".reqField").require();
+
+		});
+    });
+</script>

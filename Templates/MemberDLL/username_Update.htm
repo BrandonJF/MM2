@@ -1,0 +1,46 @@
+<h2 class="title"><#MLGLBL TEXT="Change My Password"></h2>
+<!-- <div class="formIntro">
+	<p><#MLGLBL TEXT="Please enter the information requested below to update your login information">. To update your user account record, please <a href="../memberdll.dll/info?wrp=customer_update.htm">click here.</a></p>
+</div> -->
+<form action="updateInfo" name="abc" id="validate_form" method="post">
+<div data-role="fieldcontain">
+
+		<!-- <label for="UserId"><#MLGLBL TEXT="Username"><sup class="req_star">*</sup></label> -->
+		<!-- <input name="WEBUSERID" id="UserId" type="text" value="<#WEBUSERID>" class='reqField' > -->
+</div>
+	<#SECTION NAME="password.htm" PARAMS="CUSTOMERCD">
+
+
+
+
+    <input type="submit" value="Update Profile" data-icon="check" data-theme="g" />
+
+
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RESPONSEPAGE" value="Username_Update_Confirm.htm">
+</form>
+
+<script>
+$("#validate_form").validate({
+	rules: {
+		WEBUSERPASSWORD2:{
+			equalTo:"#Password"
+		}
+	},
+	messages:{
+		PASSWORD:{
+			required: "You must enter a password."
+		},
+		WEBUSERPASSWORD2:{
+			required: "You must enter a password.",
+			equalTo: "Passwords must match."
+		}
+	},
+  submitHandler: function(form) {
+    // do other stuff for a valid form
+    form.submit();
+  }
+});
+
+</script>

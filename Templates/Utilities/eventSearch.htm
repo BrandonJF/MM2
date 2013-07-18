@@ -1,0 +1,65 @@
+<script>
+
+function formValidate() {
+	document.abc.SESSIONNAME.value = '%' + document.abc.SESSIONNAME.value;
+    document.abc.SESSIONNAME.value += '~';
+    document.abc.SESSIONALTCD.value = '%' + document.abc.SESSIONALTCD.value;
+    document.abc.SESSIONALTCD.value += '~';
+     if (setDates(document.abc))
+     document.abc.submit();
+	  return true;
+}   
+$(function() {
+		$( ".datePicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<!-- <p>
+	<a id="aSpecOpen" class="search" href="#"  data-role="button" data-mini="true" onClick="$('#divEventSearch').show();$('#aSpecOpen').hide();return false;">
+		Click here to search for an event</a></p> -->
+	<!-- <div id="divEventSearch">
+<form name="abc" method="POST" action="../eventsdll.dll/EventList" onSubmit="">
+<fieldset>
+	<legend>Event Filter</legend>
+    
+	<p>Please enter your criteria. To broaden search, select fewer criteria.</p>
+
+	<ul>
+		<li>
+			<label for="SESSIONNAME">Event Name</label>
+			<input name="SESSIONNAME" type="text" />
+		</li>
+		<li>
+			<label for="SESSIONALTCD">Event ID</label>
+			<input name="SESSIONALTCD" type="text" id="SESSIONALTCD" />
+		</li>
+		<li>
+			<label for="fromDate">Date Range</label>
+			From <input name="fromDate"id="fromDate" size="20" class="datePicker"> To <input name="toDate" id="toDate" size="20" class="datePicker"> 
+		</li>
+		<li>
+			<label for="SORT">Sort By</label>
+			<select size="1" name="SORT">
+				<option selected value="SESSIONBEGDATE,PROGRAMALTCD,STATECD">Date</option>
+				<option value="PROGRAMALTCD,SESSIONBEGDATE">Program</option>
+				<option value="STATECD,SESSIONBEGDATE">State</option>
+			</select>
+		</li>
+	</ul>
+    <div class="buttons">
+        <input name="buttonA" type="button" onClick="$('#divEventSearch').hide();$('#aSpecOpen').show();return false;" value="Cancel Search">
+		<input name="buttonB" type="button" onClick="formValidate()" value="Search">
+	</div>    
+</fieldset>
+            
+	    <input type="hidden" name="SESSIONBEGDATE" value="">
+	    <input type="hidden" name="ONWEBFLG" value="Y">
+  	    <input type="hidden" name="RANGE" value="1/25">
+		</form><p></p>
+</div> -->
+    <script>
+setDates(document.abc);
+$("#divEventSearch").hide();
+</script>

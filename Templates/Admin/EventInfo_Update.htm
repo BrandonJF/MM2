@@ -1,0 +1,359 @@
+
+
+<script language="javascript">
+
+function Reset()
+   {
+   document.eventForm.SESSIONSTARTTM.value = "<#SESSIONSTARTTM>";
+   document.eventForm.SESSIONENDTIME.value = "<#SESSIONENDTIME>";
+   document.eventForm.STATUSSTT.value = "<#STATUSSTT>";
+   for (i=0;i<document.eventForm.CANCANCELFLG.length;i++)
+ 	{
+  		if (document.eventForm.CANCANCELFLG[i].value=="<#CANCANCELFLG>")
+  		{
+   			document.eventForm.CANCANCELFLG[i].checked = true;
+  			 break 
+  		}
+ 	}
+   }	
+   
+   function clearCancelOpt()
+{
+document.eventForm.LASTCANCELDATE.value = '';
+document.eventForm.CANCELFEEAMT.value = '';
+$("LASTCANCELDATE_section").hide()
+$("CANCELFEEAMT_section").hide()
+}
+
+function showCancelOpt()
+{
+	$("LASTCANCELDATE_section").show()
+	$("CANCELFEEAMT_section").show()
+}
+
+function getLocationInfo(locCode)
+{
+	var locDetailURL = '../utilities.dll/CustomList?QNAME=GetLocationDetail&LOCATIONCD='+locCode+'&WHP=locationHeader.htm&WBP=locationList.htm&WMT=none&WNR=none';
+	
+	new Ajax.Request(locDetailURL, 
+		{method:'get',
+		onSuccess: function(content){
+			var response = content.responseText || "";
+			
+			var locArray = response.split('||');
+			
+			var locCode = locArray[0];
+			var contactName = locArray[1];
+			var contactPhone = locArray[2];
+			var contactEmail = locArray[3];
+			var locAddress = locArray[4];
+			var locAddressAdd = locArray[5];
+			var locCity = locArray[6];
+			var locState = locArray[7];
+			var locZip = locArray[8];
+			var locCountry = locArray[9];
+			
+			//var orgcd = parseInt(locArray[3]);
+			//var tempAmt = 0	
+			
+			
+			
+			
+		
+			document.eventForm.CONTACTNAME.value = contactName;
+			document.eventForm.CONTACTPHONE.value = contactPhone;
+			document.eventForm.CONTACTEMAIL.value = contactEmail;
+			document.eventForm.ADDRESS1.value = locAddress;
+			document.eventForm.ADDRESS2.value = locAddressAdd;
+			document.eventForm.CITY.value = locCity;
+			document.eventForm.LOCATIONCITY.value = locCity;
+			document.eventForm.STATECD.value = locState;
+			document.eventForm.LOCATIONSTATECD.value = locState;
+			document.eventForm.ZIP.value = locZip;
+			document.eventForm.COUNTRY.value = locCountry;
+		
+
+		},
+		onFailure: function(){alert('An AJAX error has occured. Please ensure that you have Javascript-enabled browser and re-load the page to try again.');}
+	});
+}
+
+   
+   
+</script>
+ <h2>Edit a Chapter Event</h3>
+<p>Edit Event Detail Below:</p>
+<form name="eventForm" method="post" action="EventSave">
+
+
+ <table class='profileForm'>
+	<tr>
+	  <td colspan="2" class="highlight"><strong>Location Information</strong></td>
+	</tr>
+	<tr>
+	  <td>Select Event Location:</td>
+	  <td><select name="LOCATIONCD" onChange="getLocationInfo(this.value)">
+        <#RTVLOCATIONFLD2LOCATIONNAME>
+      </select><br>
+        <a href="LocationInfo" class="note">Location Not Listed? Click Here to Add a New Location </a> </td>
+    </tr>
+	
+	<tr>
+	  <td colspan="2" class="highlight"><strong>Event Information</strong></td>
+	</tr>
+	<tr>
+	  <td>Title:</td>
+	  <td><input name="SESSIONNAME" type="text" id="SESSIONNAME" value="<#SESSIONNAME>"></td>
+    </tr>
+	<tr>
+	  <td>Event CD:</td>
+	  <td><input type="text" name="SESSIONALTCDVIEW" value="<#SESSIONALTCD>" disabled></td>
+    </tr>
+	<tr>
+	  <td><div align="left">Brief Description:</div></td>
+		<td><input type="text" name="SESSIONDES" value="<#SESSIONDES>"></td>
+	</tr>
+	<tr>
+	  <td><div align="left">Status:</div></td>
+		<td><select name="STATUSSTT" >
+          <option value="Open">Open</option>
+          <option value="Closed">Closed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select></td>
+	</tr>
+	<tr>
+	  <td><div align="left">Begin Date:</div><span class="note">(MM/DD/YYYY)</span></td>
+		<td><input name="SESSIONBEGDATE" type="text" id="SESSIONBEGDATE" value="<#SESSIONBEGDATE>" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false' > 
+		  <span class="style1"><a href="javascript:NewCal('SESSIONBEGDATE','mmddyyyy')"><img src="../../images/cal.gif" width="16" height="16" border="0"></a></span></td>
+	</tr>
+	<tr>
+	  <td><div align="left">End Date:</div><span class="note">(MM/DD/YYYY)</span></td>
+		<td><input name="SESSIONENDDATE" type="text" id="SESSIONENDDATE" value="<#SESSIONENDDATE>" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false' >
+	      <a href="javascript:NewCal('SESSIONENDDATE','mmddyyyy')"><img src="../../images/cal.gif" width="16" height="16" border="0"></a></td>
+	</tr>
+	<tr>
+	  <td><div align="left">Early Reg Deadline:</div><span class="note">(MM/DD/YYYY)</span></td>
+		<td><input name="EARLYREGISTERDATE" type="text" id="EARLYREGISTERDATE" value="<#EARLYREGISTERDATE>" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false' >
+	    <a href="javascript:NewCal('EARLYREGISTERDATE','mmddyyyy')"><img src="../../images/cal.gif" width="16" height="16" border="0"></a></td>
+	</tr>
+	<tr>
+	  <td><div align="left">Last Day to Register:</div><span class="note">(MM/DD/YYYY)</span> </td>
+	  <td><input name="LASTREGISTERDATE" type="text" id="LASTREGISTERDATE" value="<#LASTREGISTERDATE>" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false' >
+      <span class="style1"><a href="javascript:NewCal('LASTREGISTERDATE','mmddyyyy')"><img src="../../images/cal.gif" width="16" height="16" border="0" ></a></span></td>
+    </tr>
+	<tr>
+	  <td>Can Cancel?</td>
+	  <td><input name="CANCANCELFLG" type="radio" value="Y" onClick="showCancelOpt(document.event)">
+	    YES 
+        <input name="CANCANCELFLG" type="radio" value="N" onClick="clearCancelOpt(document.event)"> 
+        NO</td>
+	</tr>
+	<tr id="LASTCANCELDATE_section" >
+	  <td><div align="left">Last Day to Cancel:</div><span class="note">(MM/DD/YYYY)</span></td>
+	  <td><input name="LASTCANCELDATE" type="text" id="LASTCANCELDATE" value="<#LASTCANCELDATE>" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false' > <a href="javascript:NewCal('LASTCANCELDATE','mmddyyyy')"><img src="../../images/cal.gif" width="16" height="16" border="0"></a></td>
+    </tr>
+	<tr id="CANCELFEEAMT_section" >
+	  <td>Cancellation Fee:</td>
+	  <td><input name="CANCELFEEAMT" type="text" id="CANCELFEEAMT" value="<#CANCELFEEAMT>" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false' ></td>
+    </tr>
+	<tr>
+	  <td><div align="left">Start Time:</div></td>
+		<td><select name="SESSIONSTARTTM" size="1">
+          <option selected>Select</option>
+          <option value="1:00 AM">1:00 AM</option>
+		<option value="1:30 AM">1:30 AM</option>
+        <option value="2:00 AM">2:00 AM</option>
+		<option value="2:30 AM">2:30 AM</option>
+        <option value="3:00 AM">3:00 AM</option>
+		<option value="3:30 AM">3:30 AM</option>
+        <option value="4:00 AM">4:00 AM</option>
+		<option value="4:30 AM">4:30 AM</option>
+        <option value="5:00 AM">5:00 AM</option>
+		<option value="5:30 AM">5:30 AM</option>
+        <option value="6:00 AM">6:00 AM</option>
+		<option value="6:30 AM">6:30 AM</option>
+        <option value="7:00 AM">7:00 AM</option>
+		<option value="7:30 AM">7:30 AM</option>
+        <option value="8:00 AM">8:00 AM</option>
+		<option value="8:30 AM">8:30 AM</option>
+        <option value="9:00 AM">9:00 AM</option>
+		<option value="9:30 AM">9:30 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+		<option value="10:30 AM">10:30 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+		<option value="11:30 AM">11:30 AM</option>
+        <option value="12:00 PM">NOON</option>
+		<option value="12:30 PM">12:30 PM</option>
+        <option value="1:00 PM">1:00 PM</option>
+		<option value="1:30 PM">1:30 PM</option>
+        <option value="2:00 PM">2:00 PM</option>
+		<option value="2:30 PM">2:30 PM</option>
+        <option value="3:00 PM">3:00 PM</option>
+		<option value="3:30 PM">3:30 PM</option>
+        <option value="4:00 PM">4:00 PM</option>
+		<option value="4:30 PM">4:30 PM</option>
+        <option value="5:00 PM">5:00 PM</option>
+		<option value="5:30 PM">5:30 PM</option>
+        <option value="6:00 PM">6:00 PM</option>
+		<option value="6:30 PM">6:30 PM</option>
+        <option value="7:00 PM">7:00 PM</option>
+		<option value="7:30 PM">7:30 PM</option>
+        <option value="8:00 PM">8:00 PM</option>
+		<option value="8:30 PM">8:30 PM</option>
+        <option value="9:00 PM">9:00 PM</option>
+		<option value="9:30 PM">9:30 PM</option>
+        <option value="10:00 PM">10:00 PM</option>
+		<option value="10:30 PM">10:30 PM</option>
+        <option value="11:00 PM">11:00 PM</option>
+		<option value="11:30 PM">11:30 PM</option>
+        <option value="12:00 AM">Midnight</option>
+		<option value="12:30 AM">12:30 AM</option>
+        </select></td>
+	</tr>
+	<tr>
+	  <td>End Time: </td>
+	  <td><select name="SESSIONENDTIME" size="1">
+        <option selected>Select</option>
+        <option value="1:00 AM">1:00 AM</option>
+		<option value="1:30 AM">1:30 AM</option>
+        <option value="2:00 AM">2:00 AM</option>
+		<option value="2:30 AM">2:30 AM</option>
+        <option value="3:00 AM">3:00 AM</option>
+		<option value="3:30 AM">3:30 AM</option>
+        <option value="4:00 AM">4:00 AM</option>
+		<option value="4:30 AM">4:30 AM</option>
+        <option value="5:00 AM">5:00 AM</option>
+		<option value="5:30 AM">5:30 AM</option>
+        <option value="6:00 AM">6:00 AM</option>
+		<option value="6:30 AM">6:30 AM</option>
+        <option value="7:00 AM">7:00 AM</option>
+		<option value="7:30 AM">7:30 AM</option>
+        <option value="8:00 AM">8:00 AM</option>
+		<option value="8:30 AM">8:30 AM</option>
+        <option value="9:00 AM">9:00 AM</option>
+		<option value="9:30 AM">9:30 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+		<option value="10:30 AM">10:30 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+		<option value="11:30 AM">11:30 AM</option>
+        <option value="12:00 PM">NOON</option>
+		<option value="12:30 PM">12:30 PM</option>
+        <option value="1:00 PM">1:00 PM</option>
+		<option value="1:30 PM">1:30 PM</option>
+        <option value="2:00 PM">2:00 PM</option>
+		<option value="2:0 PM">2:30 PM</option>
+        <option value="3:00 PM">3:00 PM</option>
+		<option value="3:30 PM">3:30 PM</option>
+        <option value="4:00 PM">4:00 PM</option>
+		<option value="4:30 PM">4:30 PM</option>
+        <option value="5:00 PM">5:00 PM</option>
+		<option value="5:30 PM">5:30 PM</option>
+        <option value="6:00 PM">6:00 PM</option>
+		<option value="6:30 PM">6:30 PM</option>
+        <option value="7:00 PM">7:00 PM</option>
+		<option value="7:30 PM">7:30 PM</option>
+        <option value="8:00 PM">8:00 PM</option>
+		<option value="8:30 PM">8:30 PM</option>
+        <option value="9:00 PM">9:00 PM</option>
+		<option value="9:30 PM">9:30 PM</option>
+        <option value="10:00 PM">10:00 PM</option>
+		<option value="10:30 PM">10:30 PM</option>
+        <option value="11:00 PM">11:00 PM</option>
+		<option value="11:30 PM">11:30 PM</option>
+        <option value="12:00 AM">Midnight</option>
+		<option value="12:30 AM">12:30 AM</option>
+      </select></td>
+    </tr>
+	<tr>
+	  <td colspan="2" class="highlight"><strong>Contact Information</strong></td>
+	</tr>
+	<tr>
+	  <td>Contact:</td>
+	  <td><input name="CONTACTNAME" type="text" id="CONTACTNAME" value="<#CONTACTNAME>"></td>
+    </tr>
+	<tr>
+	  <td>Contact Phone: </td>
+	  <td><input name="CONTACTPHONE" type="text" id="CONTACTPHONE" value="<#CONTACTPHONE>"></td>
+    </tr>
+	<tr>
+	  <td>Contact Email:</td>
+	  <td><input name="CONTACTEMAIL" type="text" id="CONTACTEMAIL" value="<#CONTACTEMAIL>"></td>
+    </tr>
+	<tr>
+	  <td>Address: </td>
+	  <td><input name="ADDRESS1" type="text" id="ADDRESS1" value="<#ADDRESS>"></td>
+    </tr>
+	<tr>
+	  <td>Address Cont: </td>
+	  <td><input name="ADDRESS2" type="text" id="ADDRESS2" value="<#ADDRESS2>"></td>
+    </tr>
+	<tr>
+	  <td>City:</td>
+	  <td><input name="LOCATIONCITY" type="text" id="LOCATIONCITY" value="<#LOCATIONCITY>"></td>
+    </tr>
+	<tr>
+	  <td>State: </td>
+	  <td><input name="LOCATIONSTATECD" type="text" id="LOCATIONSTATECD" value="<#LOCATIONSTATECD>"></td>
+    </tr>
+	<tr>
+	  <td>Zip: </td>
+	  <td><input name="ZIP" type="text" id="ZIP" value="<#ZIP>"></td>
+    </tr>
+	<tr>
+	  <td>Country:</td>
+	  <td><input name="COUNTRY" type="text" id="COUNTRY" value="<#COUNTRY>"></td>
+    </tr>
+	
+	
+	<tr>
+	  <td colspan="2" class="highlight">Attendance Information: </td>
+    </tr>
+	<tr>
+	  <td>Min Attendees:</td>
+	  <td><input name="ATTENDEEMINQTY" type="text" id="ATTENDEEMINQTY" value="<#ATTENDEEMINQTY>"></td>
+    </tr>
+	<tr>
+	  <td>Max Attendees: </td>
+	  <td><input name="ATTENDEEMAXQTY" type="text" id="ATTENDEEMAXQTY" value="<#ATTENDEEMAXQTY>"></td>
+    </tr>
+	<tr>
+	  <td><div align="left">Full Description:</div></td>
+	  <td><textarea rows="12" name="HTMLNOTE" cols="42"><#HTMLNOTE></textarea></td>
+    </tr>
+	<tr>
+    <td colspan="2" class="highlight">Pricing Information</td>
+  </tr>
+  <tr>
+    <td colspan="2"><#PRICELIST></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <a href="priceinfo?itemaltcd=<#SESSIONALTCD>">Add a New Price</a> | <a href="pricelist?sessionaltcd=<#SESSIONALTCD>">Edit Price</a> </a>
+    </td>
+  </tr>
+  
+	<tr>
+	  <td colspan="2">&nbsp;</td>
+    </tr>
+	<tr>
+		<td colspan="2">
+          <div align="left">
+            <input name="Button" type="submit"  value="Update Event">
+          </div></td>
+	</tr>
+</table>
+
+  <p>&nbsp;</p>
+
+<input type="hidden" name="SESSIONCD" value="<#SESSIONCD>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="PROGRAMALTCD" value="General">
+<input type="hidden" name="RESPONSEPAGE" value="Update_Confirm.htm">
+<input type="hidden" name="LETTERCD" value="<#LETTERCD>">
+<input type="hidden" name="CANCELLETTERCD" value="<#CANCELLETTERCD>">
+
+
+</form>
+<script>
+Reset();
+</script>

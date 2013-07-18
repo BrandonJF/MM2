@@ -1,0 +1,45 @@
+<li>
+  <img width='100px' src="../cvImage.dll/view?ENTITY=PROD&ENTITYCD=<#PRODUCTCD>" class="image product_image preload" alt="" />
+      <h2><a href="../msascartdll.dll/ProductInfo?productcd=<#productcd>" title="<#PRODUCTNAME>" data-ajax="false"><#PRODUCTNAME></a></h2>
+      <p><#SHORTDES></p>
+        <div class="textarea">
+        <a href="../msascartdll.dll/ProductInfo?productcd=<#productcd>" title="Read member reviews" data-ajax="false"><div class="rating_bar"><#RATING></div></a>
+        <br />
+        <script>
+                //displays correct prices for member or non-member
+                //if no member price, displays member price
+                //if no non-member price, price is $0
+                document.write("Member: ");
+                if('<#UDEF2AMT>' == ''){
+                    if('<#UNITPRICE>' == ''){
+                        document.write('$0.00 USD');
+                    }else{
+                        document.write('<#UNITPRICE FORMAT="$0.00"> USD<br>');
+                    }
+                }else{
+                    document.write('<#UDEF2AMT FORMAT="$0.00"> USD<br>');
+                }
+                
+                document.write("Non-Member: ");
+                if('<#UNITPRICE>' == ''){
+                    document.write('$0.00 USD <br>');
+                }else{
+                    document.write('<#UNITPRICE FORMAT="$0.00"> USD <br>');
+                }
+        </script>
+    
+        <div data-role="fieldcontain">
+        <label>Add to Cartzs <input type="checkbox" name="PRODUCTSELECTION" value="<#PRODUCTCD>" onclick="checkValues(document.order);"/></label>
+        </div>
+        
+        <div data-role="fieldcontain">
+          <label for="ProductQty">Quantity</label> 
+         <input type="text"  name="PRODUCTQTY" id="ProductQty" value='0' onchange="checkBoxes(document.order);" >
+        </div>
+         
+      </div>
+        
+    
+    <!-- <div class="clear"></div> -->
+ 
+</li>

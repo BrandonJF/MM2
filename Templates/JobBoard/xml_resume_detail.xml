@@ -1,0 +1,65 @@
+<details>
+<firstName>
+	<#FIRSTNAME>
+</firstName>
+<middleInitial>
+	<#MIDDLEINITIAL>
+</middleInitial>
+<lastName>
+	<#LASTNAME>
+</lastName>
+<requiredSkills>
+	<#JOBREQUIREDSKILLSDSC>
+</requiredSkills>
+<preferredSkills>
+	<#JOBPREFERREDSKILLSDSC>
+</preferredSkills>
+<Address1>
+	<#ADDRESS1>
+</Address1>
+<Address2>
+	<#ADDRESS2>
+</Address2>
+<city>
+	<#CITY>
+</city>
+<state>
+	<#STATECD>
+</state>
+<zipCode>
+	<#ZIP>
+</zipCode>
+<country>
+	<#COUNTRY>
+</country>
+<workPhone>
+	<#WORKPHONE>
+</workPhone>
+<fax>
+	<#FAXPHONE>
+</fax>
+<email>
+	<#EMAIL>
+</email>
+<startNowFlag>
+	<#IMMEDIATESTARTFLG>
+</startNowFlag>
+<employedFlag>
+	<#EMPLOYEDFLG>
+</employedFlag>
+<jobStartDate>
+	<#JOBSTARTDATE>
+</jobStartDate>
+<minimumSalary>
+	<#MINSALARYAMT>
+</minimumSalary>
+<educationDegree>
+	<#EDUCATIONDEGREE>
+</educationDegree>
+<gpa>
+	<#EDUCATIONGPAAMT>
+</gpa>
+<DOCUMENTNUM>
+	<#RESUME_DOCNUM>
+</DOCUMENTNUM>
+</details>

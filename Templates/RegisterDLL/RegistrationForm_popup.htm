@@ -1,0 +1,88 @@
+<SCRIPT LANGUAGE="JavaScript1.2" TYPE="text/javascript">
+var isFunctions = false;
+
+function formValidate() 
+{
+	$("#processing").show();
+	if ((priceTest(document.event)) && (getFunctions(document.event)))
+	{
+		eventReg_addToCart_noProfile(document.event, "");
+		return true; 
+	}
+	else
+	{
+		$("#processing").hide();
+	}
+}   
+-->
+</script>
+<form name="event" method="POST" action="../Registerdll.dll/Customer" >
+<fieldset>
+    <legend>Price Selection</legend>
+    <ul>
+        <li>
+            <label>Price List</label>
+            <select size="1" name="PRICETYPESTT" onchange="priceChanged(document.event)" id="selPrice"><#PRICELIST SORT="pricedes" ONLYOPTIONS=Y></select>
+        </li>
+    </ul>
+</fieldset>
+<fieldset>
+    <legend>Function Selection</legend>
+    <table class="gutters">
+        <tr>
+            <th>&nbsp;</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <#FUNCTIONGROUPS>
+     </table>
+</fieldset>
+<fieldset>
+    <legend>Promotional Code</legend>
+    <ul>
+        <li><label for="PROMOCODE">Promo Code</label><input type="text" name="PROMOCODE" id="PROMOCODE" value="<#PROMOCODE>">
+         <li>
+            <label>&nbsp;</label><a href="#" onclick="checkPromoCode()">Apply</a>
+         </li>   
+            <script>
+            function checkPromoCode() {
+                var usernameExistsUrl = "../utilities.dll/customlist?SQLNAME=APPEALCHECK&wbp=promo.htm&whp=none&WMT=none&wnr=none&&code=" +$("#PROMOCODE").val() ;
+	$.ajax({url:usernameExistsUrl, type:"get",
+		success:function(content){
+			if (content.length > 2){
+				$(".correct").show().attr("tabindex",-1).focus();
+                $(".error").hide();
+			}else{
+                $(".correct").hide();
+                $(".error").show().attr("tabindex",-1).focus();
+                $("#PROMOCODE").val('');
+            }  
+		}
+	});
+	}
+</script>
+            </li>
+            <li style="display:none;" class="correct">
+            Your promo code has been applied.
+        </li>
+            <li style="display:none;" class="error">
+            Your promo code is invalid. Please try again.
+        </li>
+    </ul>
+</fieldset>
+<div class="buttons">
+    <span id="processing" style="display:none"><img src="../../images/loading.gif"></span> 
+    <input type="button" value="Add to Cart" id="addFuncsToCartButton" onClick='formValidate();' data-theme="a">
+</div>
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="FPRICEAMT" value="">
+<input type="hidden" name="FPRICETYPESTT" value="">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="FUNCTIONSQTY" value="">
+<input type="hidden" name="PAYEETYPECD" value="I">
+<input type="hidden" name="REGSTATUSCD" value="<#REGSTATUSCD>">
+<input type="hidden" name="COUNTQTY" value="1">
+</form>

@@ -1,0 +1,13 @@
+<h2>Payment confirmed.</h2>
+<p>RECEIPT - PLEASE PRINT FOR YOUR RECORDS</p>
+<SCRIPT> 
+if (window.print) { document.write('<input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()">'); }</script>
+<p>
+  You have paid invoice number: <strong><#INVOICENUM></strong><br />
+  Your payment identification number is: <strong><#PAYMENTNUM></strong><br />
+  Total amount paid in this transaction is: <strong><#TOTALAMT FORMAT="$0.00"></strong><br />
+  Payee name: <strong><#PAYEENAME></strong>
+</p>
+<p>
+  Thank you for your payment.
+</p>

@@ -1,0 +1,397 @@
+<script src='../../js/scriptsAjax.js'></script>
+
+<form name='abc'>
+	<div id='groupsDiv' style='display:none;'></div>
+	<h2>Review Abstracts</h2>
+    <div class="formIntro">
+        <p>The review process will be configured to only be available for members of certain committees.</p>
+    </div>
+	<fieldset>
+		<ul>
+			<li>
+				<label for="GROUPFILTER">Filter By Group</label>
+				<select name='GROUPFILTER' onChange='writeList()'><option value='NA'></option><#RTVABSTRACTGROUPFLTONWEBFLGFLVY></select>
+			</li>
+			<li>
+				<label for="TOPICFILTER">Filter By Topic</label>
+				<select name='TOPICFILTER' onChange='writeList()'>
+					<option value='NA'></option>
+					<#RTVABSTRACTTOPICREFFLD1ABSTRACTTOPICFLD2ABSTRACTTOPIC>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+	<br />
+	<script>
+	$(function() {
+		$( "#tabs" ).tabs({
+		fx: { height: 'toggle', opacity: 'toggle' }
+		}
+		);
+		
+	
+	});
+	</script>
+<div id="tabs">	 
+					
+					<ul class="tabnav">
+						<li class="active" title="toReview_section">
+							<a href="#toReview_section"><span>Abstracts to Review</span></a>
+						</li>
+						<li title="reviewed_section">
+							<a href="#reviewed_section"><span>Abstracts Reviewed</span></a>
+						</li>											
+					</ul>
+
+					<div class="clear"></div>
+							
+					<div class="tabcontent">
+								
+								<div id="toReview_section" class="tabdiv ui-tabs-hide">
+									<h4>Abstracts to Review</h4>
+									<div id="div1"></div>
+								</div>
+
+
+
+								<div id="reviewed_section" class="tabdiv">	
+								<h4>Abstracts Reviewed</h4>
+								<div id="div2"></div>	
+								</div>
+								
+
+
+
+									
+									<div class="clear"></div>
+									</div>
+
+					
+				</div>
+</form>
+
+<div id='votedDiv' style='display:none;'></div>
+
+<script>
+
+
+//=============================================================================================================
+//=============================================================================================================
+//function to create Group filter dropdown and to only display groups which they have access to instead of all groups
+function writeGroup(){
+	//alert('writeList!');
+
+	//get groups to display based on security criteria
+	var groupsURL = '../memberdll.dll/customlist?sqlname=abstractReviewList&wnr=noResults.htm&whp=abstractGroup_header.htm&wbp=abstractGroup_list.htm&wmt=none';
+	doAjaxFill(groupsURL, "groupsDiv");
+	
+	
+	//seperate and process groups to determine which group/topic documents should be displayed
+	var groupsList = document.getElementById("groupsDiv").innerHTML;
+	//alert(groupsList);
+	var groupsArray = groupsList.split('|');	
+	var groupInfoArray = '';
+	var groupCD = '';
+	var groupAllMembers = '';
+	var groupCommittee = '';
+
+	var groupsToShow = []; // THIS IS THE FINAL LIST OF GROUPS TO DISPLAY ON THE LISTS!!
+	var topicsToShow = []; //THIS IS THE FINAL LIST OF TOPICS TO DISPLAY IN THE LIST
+	var groupsToShow_selection = [];
+	var topicsToShow_selection = []
+
+	//get user's committees
+	var committeeList = GetCookieValue('committees');
+	//alert('users committees: '+committeeList);
+	var committeeArray = committeeList.split(',');
+
+	var tempGroup='';
+	var tempCommittee='';
+
+
+	for(var i=1;i<groupsArray.length;i++){
+		//alert('**'+groupsArray[i]+'**');
+	
+		groupInfoArray = groupsArray[i].split(',');
+	
+		//check ALLMEMBERSFLG
+		//alert(GetCookieValue('ismember'));
+		if(GetCookieValue('ismember') == 'Y'){
+			if(groupInfoArray[2] == 'Y'){
+					groupsToShow.push(groupInfoArray[0]);			
+			}
+		}
+	
+
+		//get user committees
+		for(var j=0;j<committeeArray.length;j++){	
+			committeeArray[j] = committeeArray[j].replace('"','');
+			var tempGroup = groupInfoArray[3].replace(/^\s*|\s*$/g,'');
+			var tempCommittee = committeeArray[j];
+			//alert('**'+tempGroup +'**==**'+ tempCommittee+'**');
+			
+			//if the user has the correct committees, add to list 
+			if(tempGroup == tempCommittee){
+				if(tempCommittee != ''){
+						groupsToShow.push(groupInfoArray[0]);	
+				}	
+			}
+			
+			
+		}	// END commiteees check for loop
+		
+		
+	} //END groups cycle for loop
+	
+
+	var addWhere_group = '';
+	/*for(var k=0;k<groupsToShow.length;k++){
+		//alert(groupsToShow[k]);
+		if(k == (groupsToShow.length - 1)){
+			addWhere_group = addWhere_group + '(groupcd = \''+groupsToShow[k]+'\')';
+		}else{
+			addWhere_group = addWhere_group + '(groupcd = \''+groupsToShow[k]+'\') or ';
+		}
+	}
+
+	if(addWhere_group == ''){
+		addWhere_group='groupcd=\'nothing\'';
+	}*/
+	
+	var groupURL = '../memberdll.dll/customlist?sqlname=groupList&wmt=none&wnr=noGroups.htm&whp=groupHeader.htm&wbp=groupList.htm&onwebflg=y&addwhere='+addWhere_group;
+	//alert('toReviewURL: '+toReviewURL);
+	//alert('groupURL: '+groupURL);
+
+
+	//write lists
+	doAjaxFill(groupURL, 'groupList');	
+}	
+
+
+
+
+
+//=============================================================================================================
+//=============================================================================================================
+//function to create topics filter list based upon group filter
+function writeTopic(){
+	var topicURL = '../memberdll.dll/customlist?sqlname=topicList&wnr=noTopics.htm&wmt=none&whp=topicHeader.htm&wbp=topicList.htm&addwhere=';
+	var addWhere='';
+	if(document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value != 'NA'){
+		topicURL = '../memberdll.dll/customlist?sqlname=topicList&wnr=noTopics.htm&wmt=none&whp=topicsHeader.htm&wbp=topicsList.htm&groupcd='+document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value;
+	}else{
+		topicURL = '../memberdll.dll/customlist?sqlname=topicList_ref&wnr=noTopics.htm&wmt=none&whp=topicsHeader.htm&wbp=topicsList.htm';
+	}
+	
+	//alert('topic list url: '+topicURL);
+	
+	doAjaxFill(topicURL, 'topicList');
+	
+}
+
+
+
+//=============================================================================================================
+//=============================================================================================================
+//Function to Write main lists of documents
+function writeList(){
+
+	//alert('writeList!');
+
+	//get groups to display based on security criteria
+	/*var groupsURL = '../memberdll.dll/customlist?sqlname=abstractReviewList&wnr=noResults.htm&whp=abstractGroup_header.htm&wbp=abstractGroup_list.htm&wmt=none';
+	doAjaxFill(groupsURL, "groupsDiv");
+	
+	
+	//seperate and process groups to determine which group/topic documents should be displayed
+	var groupsList = document.getElementById("groupsDiv").innerHTML;
+	var groupsArray = groupsList.split('|');	
+	var groupInfoArray = '';
+	var groupCD = '';
+	var groupAllMembers = '';
+	var groupCommittee = '';
+
+	var groupsToShow = []; // THIS IS THE FINAL LIST OF GROUPS TO DISPLAY ON THE LISTS!!
+	var topicsToShow = []; //THIS IS THE FINAL LIST OF TOPICS TO DISPLAY IN THE LIST
+	var groupsToShow_selection = [];
+	var topicsToShow_selection = []
+
+	//get user's committees
+	var committeeList = GetCookieValue('committees');
+	//alert('users committees: '+committeeList);
+	var committeeArray = committeeList.split(',');
+
+	var tempGroup='';
+	var tempCommittee='';
+
+
+	for(var i=1;i<groupsArray.length;i++){
+		//alert('**'+groupsArray[i]+'**');
+	
+		groupInfoArray = groupsArray[i].split(',');
+	
+		//check ALLMEMBERSFLG
+		//alert(GetCookieValue('ismember'));
+		if(GetCookieValue('ismember') == 'Y'){
+			if(groupInfoArray[2] == 'Y'){
+				//this if statement takes into account the filter options
+				if( ((document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value == 'NA') || 
+				(groupInfoArray[0] == document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value)) &&
+				((document.abc.TOPICFILTER[document.abc.TOPICFILTER.selectedIndex].value == 'NA') ||
+				(groupInfoArray[1] == document.abc.TOPICFILTER[document.abc.TOPICFILTER.selectedIndex].value)) ){
+					//alert('added do to ALLMEMBERflg');
+					groupsToShow.push(groupInfoArray[0]);
+					topicsToShow.push(groupInfoArray[1]);
+				}
+			}
+		}
+	
+
+		//get user committees
+		for(var j=0;j<committeeArray.length;j++){	
+			committeeArray[j] = committeeArray[j].replace('"','');
+			var tempGroup = groupInfoArray[3].replace(/^\s*|\s*$/g,'');
+			var tempCommittee = committeeArray[j];
+			//alert('**'+tempGroup +'**==**'+ tempCommittee+'**');
+			
+			//if the user has the correct committees, add to list 
+			if(tempGroup == tempCommittee){
+				if(tempCommittee != ''){
+					if( ((document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value == 'NA') || 
+					(groupInfoArray[0] == document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value)) &&
+					((document.abc.TOPICFILTER[document.abc.TOPICFILTER.selectedIndex].value == 'NA') ||
+					(groupInfoArray[1] == document.abc.TOPICFILTER[document.abc.TOPICFILTER.selectedIndex].value)) ){
+						//alert('**'+tempGroup+'**==**'+tempCommittee+'**');
+						groupsToShow.push(groupInfoArray[0]);
+						topicsToShow.push(groupInfoArray[1]);
+					}
+				}	
+			}
+			
+			
+		}	// END commiteees check for loop
+		
+		
+	} //END groups cycle for loop
+	
+
+
+	//now, create URL for a new list of documents with that are in the group
+	var toReviewURL = '../documentdll.dll/list?sort=parentGroupCD&wnr=noDocuments.htm&whp=reviewHeader.htm&wbp=reviewList.htm&wmt=none&addwhere=';
+	var reviewedURL = '../documentdll.dll/list?sort=parentGroupCD&wnr=noDocuments.htm&whp=reviewedHeader.htm&wbp=reviewedList.htm&wmt=none&addwhere=';
+	//posible method for not showing duplicates
+	//var toReviewURL = 'http://localhost''/memberdll.dll/customlist?sqlname=reviewDisplay&whp=reviewHeader.htm&wbp=reviewList.htm&wmt=none&addwhere=';
+
+	var addWhere = '';
+	alert(groupsToShow.length);
+	for(var k=0;k<groupsToShow.length;k++){
+		//alert(groupsToShow[k]);
+		if(k == (groupsToShow.length - 1)){
+			addWhere = addWhere + '(groupcd=\''+groupsToShow[k]+'\' and abstracttopic=\''+topicsToShow[k]+'\')';
+		}else{
+			addWhere = addWhere + '(groupcd=\''+groupsToShow[k]+'\' and abstracttopic=\''+topicsToShow[k]+'\') or ';
+		}
+	}
+	if(addWhere == ''){
+		addWhere='groupcd=\'nothing\'';
+	} */
+	
+
+	var addWhere = "groupcd=";
+	if (document.abc.GROUPFILTER.selectedIndex!=0) 
+	{
+		addWhere = 'groupcd='+document.abc.GROUPFILTER[document.abc.GROUPFILTER.selectedIndex].value;
+	}
+	
+	if (document.abc.TOPICFILTER.selectedIndex!=0) 
+	{
+		addWhere = addWhere+'&abstracttopic='+document.abc.TOPICFILTER[document.abc.TOPICFILTER.selectedIndex].value;
+	}
+	
+	var toReviewURL = '../documentdll.dll/list?sort=parentGroupCD&wnr=noDocuments.htm&whp=reviewHeader.htm&wbp=reviewList.htm&wmt=none&documentnum=>0&doctype=ABSTRACT&';
+	var reviewedURL = '../documentdll.dll/list?sort=parentGroupCD&wnr=noDocuments.htm&whp=reviewedHeader.htm&wbp=reviewedList.htm&wmt=none&documentnum=>0&doctype=ABSTRACT&';
+	
+	toReviewURL = toReviewURL + addWhere;
+	reviewedURL = reviewedURL + addWhere;
+
+
+	doAjaxFill(toReviewURL, "div1");
+	doAjaxFill(reviewedURL, "div2");
+
+	var votedURL = '../memberdll.dll/customlist?sqlname=votedList&wmt=none&wnr=noVotes.htm&whp=votedHeader.htm&wbp=votedList.htm&customercd='+GetCookieValue('customercd');
+	//alert('votedURL: '+votedURL);
+	
+	doAjaxFill(votedURL, 'votedDiv');
+
+
+	//TO REVIEW LIST
+	//ADDED - Remove links already voted upon from list
+	var oldPGCD='';
+
+	//alert('**'+document.getElementById('div1').innerHTML+'**');
+    if(document.getElementById('div1').innerHTML != 'No abstracts found. '){
+	
+		for(var p=0;p<document.abc.PARENTGROUPCD.length;p++){
+			
+			if(oldPGCD == document.abc.PARENTGROUPCD[p].value){
+                
+				document.getElementById(document.abc.DOCUMENTNUM[p].value).style.display = 'none';
+			}
+			
+			
+			//hide from toReview list if already voted upon
+			//alert('length = '+document.votedForm.VOTED_PARENTGROUPCD.length);
+			for(var q=0;q<document.votedForm.VOTED_PARENTGROUPCD.length;q++){
+				//alert('if **'+document.votedForm.VOTED_PARENTGROUPCD[q].value+'**=**'+document.abc.PARENTGROUPCD[p].value+'**');
+				if(document.votedForm.VOTED_PARENTGROUPCD[q].value == document.abc.PARENTGROUPCD[p].value){
+                    
+					document.getElementById(document.abc.DOCUMENTNUM[p].value).style.display = 'none';
+				}
+			}
+							
+			oldPGCD = document.abc.PARENTGROUPCD[p].value;
+		}
+	
+	}	
+	
+	oldPGCD='';	
+	
+	//ALREADY REVIEWED LIST
+	if(document.getElementById('div2').innerHTML != 'No abstracts found. '){
+        
+		for(p=0;p<document.abc.PARENTGROUPCD_2.length;p++){
+			
+			//determine which list to put it in: toReview or Reviewed
+			for(q=0;q<document.votedForm.VOTED_PARENTGROUPCD.length;q++){
+				if(document.votedForm.VOTED_PARENTGROUPCD[q].value == document.abc.PARENTGROUPCD_2[p].value){
+	
+						document.getElementById(document.abc.DOCUMENTNUM_2[p].value+'_2').style.display = 'table-row';
+                        
+				}
+			}
+			if(oldPGCD == document.abc.PARENTGROUPCD_2[p].value){
+				document.getElementById(document.abc.DOCUMENTNUM_2[p].value+'_2').style.display = 'none';
+			}
+            oldPGCD = document.abc.PARENTGROUPCD_2[p].value;
+			
+		}
+	}
+	
+
+
+}//END WRITELIST
+
+
+//calling writeList()
+//writeGroup();
+//writeTopic();
+writeList();
+
+
+
+
+</script>
+        
+        
+   
+           

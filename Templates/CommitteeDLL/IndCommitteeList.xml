@@ -1,0 +1,7 @@
+   <member>
+        <memberid><#CUSTOMERCD></memberid>
+        <membername><#FULLNAME></membername>
+        <membercity><#CITY></membercity>
+        <memberstate><#STATECD></memberstate>
+        <position><#CPOSITION></position>
+   </member>

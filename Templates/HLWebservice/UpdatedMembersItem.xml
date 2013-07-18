@@ -1,0 +1,4 @@
+<ChangedMember>
+          <MemberKey><#CUSTOMERCD ENCRYPT=N></MemberKey>
+          <LastUpdated><#UPDATETMS FORMAT="yyyy-MM-dd HH:mm:ss"></LastUpdated>
+</ChangedMember>

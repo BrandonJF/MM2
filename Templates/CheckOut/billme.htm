@@ -1,0 +1,88 @@
+<script>
+ isInvoices= false;
+</script>
+
+<h2>Order Invoice</h2>
+<p>Thank you for your order. Please print out this invoice and send it to us, along with your payment, to complete this order.</p>
+<SCRIPT> 
+if (window.print) { document.write('<input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()">'); }</script>
+<dl class="profile">
+ <dt>Order Number</dt>
+ <dd><#INVOICENUM></dd>
+ <dt>Bill To Address</dt>
+ <dd><#ADDRESS1><br />
+  <#ADDRESS2 RIGHTLABEL="<BR />">
+  <#CITY>, <#STATECD>, <#ZIP></dd>
+ <dt>Ship To Address:</dt>
+ <dd><#SHIPADDRESS1><br />
+  <#SHIPADDRESS2 RIGHTLABEL="<BR />">
+  <#SHIPCITY>, <#SHIPSTATECD>, <#SHIPZIP></dd>
+ <p class="clear"></p>
+</dl>
+
+
+<h4>Individual Orders</h4>
+  <table class='gutters'>
+  <tr>
+	<th>Type</th>
+    <th>Item</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Total</th> 
+    </tr>
+	<#INDDATA>
+  </table>
+<br />
+<div id="invoiceSection" style="display:none;">
+    <h4>Other Invoices</h4>
+    <table class="gutters">
+    <tr>
+        <th>Invoice Number</th>
+        <th>Member Name</th>
+        <th>Invoice Total</th>
+    </tr>
+    <#INVOICELIST>
+    </table>
+    <br />
+</div>
+
+<dl class="invoice">
+ <dt>Cart Total:</dt>
+ <dd><#PRICEAMT ALIAS="I" FORMAT='$0.00'></dd>
+ <dt>Shipping:</dt>
+ <dd><#FREIGHTAMT FORMAT='$0.00' EMPTY="$0.00" ALIAS="I"></dd>
+ <dt>Tax:</dt>
+ <dd><#TAXAMT FORMAT='$0.00'></dd>
+ <dt>Other Invoices:</dt>
+ <dd><#ADDINVTOTALAMT></dd>
+ <dt>Total Amount Paid:</dt>
+ <dd><#PAIDAMT ALIAS="M" FORMAT="$0.00"></dd>
+ <dt>Balance Due:</dt>
+ <dd><#BALANCEDUE FORMAT='$0.00'></dd>
+ <p class="clear"></p>
+</dl>
+<h4>Payment Options</h4>
+<dl class="profile">
+    <dt>Check</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Credit Card</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <p class="clear"></p>
+</dl>
+<h4>Credit Card Information</h4>
+<dl class="profile">
+    <dt>Visa</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Master Card</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>American Express</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Discover</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Card Number</dt><dd>__________________________________________</dd>
+    <dt>Exp Date</dt><dd>________/_________</dd>
+    <dt>Total Payment</dt><dd>$ __________________________________________</dd>
+     <dt>Signature</dt><dd>__________________________________________</dd>
+    <p class="clear"></p>
+</dl>
+
+
+<script>
+if(isInvoices){
+		$("#invoiceSection").show();
+	}
+</script>

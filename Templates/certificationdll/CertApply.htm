@@ -1,0 +1,286 @@
+
+<script language="javascript">
+    $(function() {
+		$( ".datePick" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<h2>Certification Enrollment Form</h2>
+<div class="formIntro">
+    <p>Please select the type of certification you would like to enroll in. You can either pay for the certification enrollment now, or add it to your cart.</p>
+</div>
+<form name="order" method="post" action="UpdateMasterPay" id="fullPageForm">
+<fieldset>
+    <legend>Certification Selection</legend>
+    <ul>
+        <#INCLUDE DLL="certificationdll.dll" ACT="list" WBP="CertificationList.htm" PARAMS="MASTERFLG=Y,ONWEBFLG=Y">
+    </ul>
+</fieldset>
+<fieldset>
+<legend><#MLGLBL TEXT="Basic Information"></legend>
+<ul><li>
+		<label for="PREFIX"><#MLGLBL TEXT="Prefix"></label>
+		<select name="PREFIX" id="Prefix">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="SALUTATIONREF" FLD1="SALUTATION" FLD2="SALUTATION" SCV="PREFIX" MLG="Y">
+		</select>
+	</li>
+
+	<li>
+		<label for="FIRSTNAME" class="required"><#MLGLBL TEXT="First Name"></label>
+		<input type="text" name="FIRSTNAME" id="FirstName" value="<#FIRSTNAME>" class='reqField' >
+	</li>
+
+	<li>
+		<label for="MIDDLENAME"><#MLGLBL TEXT="Middle Name"></label>
+		<input name="MIDDLENAME" id="MiddleName" value="<#MIDDLENAME>" type="text" >
+	</li>
+
+	<li>
+		<label for="LASTNAME" class="required"><#MLGLBL TEXT="Last Name"></label>
+		<input type="text" name="LASTNAME" id="LastName" value="<#LASTNAME>" class='reqField' >
+	</li>
+
+	<li><label for="SUFFIX"><#MLGLBL TEXT="Suffix"></label>
+		<select name='SUFFIX' id='suffixField'>
+			<option value=''>Select One...</option>
+			<#CBXSUFFIX>
+		</select>
+		<script>$('#suffixField').val("<#SUFFIX>");</script>
+	</li>
+	<li>
+		<label for="JOBTITLE" class="required"><#MLGLBL TEXT="Job Title"></label>
+		<input name="JOBTITLE" id="JobTitle" type="text" value="<#JOBTITLE>" class='reqField' >
+	</li>
+
+	<li>
+		<label for="ORGNAME" class="required"><#MLGLBL TEXT="Organization"></label>
+		<input id="ORGNAME" name="ORGNAME"  value='<#ORGNAME>' class='reqField' size="50" onblur="clearOrg();">
+        <input id="ORGCD" name="ORGCD"  value='<#ORGCD>' type="hidden">
+		<a href="#" id="orgSearch" title="Organization Searcg Results">Search</a>
+<script type="text/javascript">
+//opens org search results in a jquery dialog
+
+
+
+		$(document).ready(function () {
+            $('a#<#DOCUMENTNUM>').live('click', function (e) {
+                e.preventDefault();
+				var newSearch = document.order.ORGNAME.value;
+				var page = '../organizationdll.dll/List?ORGNAME='+newSearch+'~&SORT=ORGNAME&WMT=../main_template_none.htm&WHP=addOrg_header.htm&WBP=addOrg_list.htm&WNR=addOrg_noRec.htm&RANGE=1/25';
+				var pagetitle = $(this).attr("title");
+                return parent.uiPopUp(page);
+			});
+        });
+
+function clearOrg(){
+    if (document.order.ORGNAME.value == ""){
+        document.order.ORGCD.value = "";
+        ORGCD = "";
+    }
+}
+</script>
+
+	</li>
+</ul>
+</fieldset>
+<fieldset>
+<legend><#MLGLBL TEXT="Primary Contact Information"></legend>
+<ul>
+	<li>
+		<label for="ADDRESSTYPE"><#MLGLBL TEXT="Address Type"></label>
+		<select name="ADDRESSTYPE">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="ADDRTYPEREF" SCV="ADDRESSTYPE" FLD2="ADDRESSTYPE" FLQ="ONWEBFLG=Y" MLG="Y">
+        </select>
+	</li>
+	<li>
+		<label for="ADDRESS1" class="required"><#MLGLBL TEXT="Mailing Address"></label>
+		<input type="text" name="ADDRESS1" id="MailingAddress" value="<#ADDRESS1>" class='reqField'>
+	</li>
+	<li>
+		<label for="ADDRESS2"><#MLGLBL TEXT="Mailing Address Cont."></label>
+		<input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+	</li>
+	<li>
+		<label for="CITY" class="required"><#MLGLBL TEXT="City"></label>
+		<input type="text"  name="CITY" id="City" value="<#CITY>" class='reqField'>
+	</li>
+	<li>
+		<label for="STATECD" class="required"><#MLGLBL TEXT="State/Province"></label>
+		<select name="STATECD" id="State" onchange="updateCertTotals();" class='reqField'>
+			<option value='' >Select One...</option>
+			<#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD">
+        </select>
+	</li>
+
+	<li>
+		<label for="ZIP" class="required"><#MLGLBL TEXT="Zip/Postal Code"></label>
+		<input type="text" name="ZIP" id="Zip" value="<#ZIP>" class='reqField'></td>
+	</li>
+	<li>
+		<label for="COUNTRY"><#MLGLBL TEXT="Country"></label>
+        <select size="1" name="COUNTRY" id="Country" onChange="checkCountryMask(this.value);">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">
+        </select>
+        <script>
+			checkCountryMask("<#COUNTRY>"); //set correct phone mask on load
+		</script>
+	</li>
+	<li>
+		<label for="WORKPHONE" class="required"><#MLGLBL TEXT="Work Phone"></label>
+		<input name="WORKPHONE" id="WorkPhone" value="<#WORKPHONE>" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="WORKPHONEEXT" ><#MLGLBL TEXT="Work Extension"></label>
+		<input name="WORKPHONEEXT" value="<#WORKPHONEEXT>" >
+	</li>
+	<li>
+		<label for="FAXPHONE" ><#MLGLBL TEXT="Fax"></label>
+		<input name="FAXPHONE" value="<#FAXPHONE>" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="MOBILEPHONE" ><#MLGLBL TEXT="Cell Phone"></label>
+		<input name='MOBILEPHONE' value='<#MOBILEPHONE>'  onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="HOMEPHONE" ><#MLGLBL TEXT="Home Phone"></label>
+		<input name='HOMEPHONE' value='<#HOMEPHONE>' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="EMAIL" class="required"><#MLGLBL TEXT="Email Address"></label>
+		<input type="text" name="EMAIL" value="<#EMAIL>" id="Email" class='reqField'>
+	</li>
+	<li>
+		<label for="WWWADDRESS"><#MLGLBL TEXT="Website"></label>
+		<input type="text" name="WWWADDRESS" value="<#WWWADDRESS>" id="Website">
+	</li>
+</ul>
+
+</fieldset>
+<fieldset>
+    <legend>Totals</legend>
+    <ul>
+		<li><label for="UDEF5AMT">Application Fee:</label>
+		$<span id="certTotal">0.00</span>
+		</li>
+        <li><label for="TAXAMT">Taxes:</label>
+		$0.00
+		</li>
+		<li><label for="ADDEDAMT">Total:</label>
+		$<span id="totalAmt">0.00</span>
+		</li>
+	 </ul>
+</fieldset>
+<div class="buttons" id="selectPayment">
+			<input type="button" value="Add to Cart" onClick='$("#cartPayment").remove();cert_addToCart(document.order)';>
+			<input type="button" data-theme="g" value="Pay Now" onClick='$("#selectPayment").hide();$("#cartPayment").show()'>
+		</div>
+<div class="buttons" id="noFee" style="display: none">
+    <input type="submit" name="SubmitBtn" value="Submit" >
+</div>
+<div id="cartPayment" class="cartPayment" style='display:none;'>
+    <input type="hidden" name="RESPONSEPAGE" value="">
+<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="SECTIONS=membership-subscription-donation-taxes">
+<div class="buttons">
+				<input type="button" value="Submit Payment" onClick="cert_payNow(document.order)">
+			</div>
+		</div>
+<div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+<input type="hidden" name="CUSTOMERTYPE" value="APP">
+<input type="hidden" name="CR_STATUSSTT" value="A_Pending">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="MASTERID" value="<#MASTERID>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="Certification Enrollment Confirmation">
+<input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="EMAILREPLYFORM" value="updatemasterconf_email.htm">
+
+</form>
+<script type="text/javascript">
+function updateCertTotals(){
+	var tempTotal = 0.00;
+	var certTotal = 0.00;
+	$('.certItem').each(function(){
+		if(this.checked){
+            var emailExistsUrl = "../utilities.dll/customlist?SQLNAME=CERTCHECK&wbp=productcd.htm&whp=none&WMT=none&wnr=none&code=" + this.value;
+            $.ajax({url:emailExistsUrl, type:"get",success:function(content){
+                if (content.length > 3){
+                    $("#selectPayment").show();
+                    $("#noFee").hide();
+                    certArray = content.split('|');
+                    priceNM = certArray[1];
+                    priceM = certArray[2];
+                    if("<#ISMEMBERFLG>"=="Y"){
+                        certTotal = parseFloat(priceM);
+                    }else{
+                        certTotal = parseFloat(priceNM);
+                    }
+                }else{
+                    $("#noFee").show();
+                    $("#selectPayment").hide();
+                }
+            }});
+                taxTotal = getCertTax($(this).attr("id"), $("#State").val());
+                tempTotal = parseFloat(certTotal) + parseFloat(taxTotal);
+		}
+
+	});
+
+	$('#certTotal').html(parseFloat(certTotal).toFixed(2));
+	$('#totalAmt').html(parseFloat(tempTotal).toFixed(2));
+}
+function getCertTax(certItem, shipStateCd) {
+	var taxAmt = 0.00;
+	var estimateUrl = '../orderdll.dll/estimatetotals?wrp=taxAndCartTotal.htm&wmt=none&CARTITEMS='+certItem+'&SHIPSTATECD=' + shipStateCd;
+	$.ajax({url:estimateUrl, type:'GET', async:false,
+		success: function(response){
+			var tempArray = response.split("|");
+			taxAmt = tempArray[0];
+		}
+	});
+	return parseFloat(taxAmt);
+
+}
+function cert_addToCart(formName){
+	if(validateAll(formName,false)){
+		var customercd='';
+		$.ajax({url:'../memberdll.dll/updateInfo', type:"GET", async:false, data:$('#fullPageForm').serialize(),
+			success:function(response){
+					customercd = removeNL(response);
+			}
+		});
+
+		var addURL = '../msascartdll.dll/showcart?';
+		$('.certItem').each(function(){
+            if(this.checked == true){
+					addURL += 'ADD=ORDERTYPE=M,ITEMCD='+this.value+',SUBITEMCD='+this.value+',ITEMQTY=1&';
+				}
+		});
+		$.ajax({url:addURL, type:"GET", async:false});
+		window.location = '../msascartdll.dll/showcart';
+	}
+}
+function cert_payNow(formName){
+	  if ($('#BILLME').attr('checked')=='checked'){
+            formName.ISSUEBILLFLG.value = 'Y';
+			formName.RESPONSEPAGE.value = 'updatemasterconf_bm.htm';
+			if(validateAll(formName,false)){
+			formName.submit();
+		}
+    }
+        else {
+            if(validateAll(formName,true)){
+			formName.RESPONSEPAGE.value = 'updatemasterconf.htm';
+			formName.submit();
+		}}
+}
+</script>

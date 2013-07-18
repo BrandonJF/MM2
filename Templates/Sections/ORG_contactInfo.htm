@@ -1,0 +1,51 @@
+<fieldset>
+	<legend>Organization Contact Information</legend>
+<ul>
+	<li>
+		<label for="ADDRESS1" class="required">Mailing Address</label>
+		<input type="text" name="ADDRESS1" value="<#ADDRESS1>" id="MailingAddress" class='reqField'>
+	</li>
+	<li>
+		<label for="ADDRESS2">Mailing Address Cont.</label>
+		<input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+	</li>
+	<li>
+		<label for="CITY" class="required">City</label>
+		<input name="CITY" value="<#CITY>" id="City" class='reqField' type="text">
+	</li>
+	<li>
+		<label for="STATECD" class="required">State/Province</label>
+		<select size="1" name="STATECD" id="State" onchange="updateTotals();" class='reqField' >
+        <option value='' >Select One...</option>
+        <#RTVSTATEREFSRTFSTATENAMESCVSTATECD>        
+        </select>
+	</li>
+	<li>
+		<label for="ZIP" class="required">Zip/Postal Code</label>
+		<input name="ZIP" value="<#ZIP>" id="Zip" class='reqField'>
+	</li>
+	<li>
+		<label for="COUNTRY">Country</label>
+		<select size="1" name="COUNTRY" onChange="checkCountryMask(this.value);">
+        <option value=''>Select One...</option>
+        <#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAMESCVCOUNTRY>        
+        </select>       
+        <script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+		</script>
+	</li>
+	<li>
+		<label for="WORKPHONE" class="required">Phone Number</label>
+		<input name="HOMEPHONE" value="<#HOMEPHONE>" id="PhoneNumber" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="FAXPHONE">Fax Number</label>
+		<input name="FAXPHONE" value="<#FAXPHONE>" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+	<li>
+		<label for="EMAIL" class="required">Email Address</label>
+		<input name="EMAIL" value="<#EMAIL>" id="Email" class='reqField' type="text">
+	</li>
+</ul>
+</fieldset>

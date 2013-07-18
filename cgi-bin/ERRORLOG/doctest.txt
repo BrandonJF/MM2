@@ -1,0 +1,290 @@
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 0
+ParseFields
+received file
+call isDataEmpty
+FileCount=0
+NoFiles=True
+NoData=False
+result=True
+start
+Req created - parsing
+start parsing
+BytesToRead = 229963
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 14400
+ActualBytesRead = 1984
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 587
+ParseFields
+received file
+call isDataEmpty
+FileCount=1
+NoFiles=False
+NoData=False
+result=False
+start
+Req created - parsing
+start parsing
+BytesToRead = 547356
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 15456
+ActualBytesRead = 16384
+ActualBytesRead = 13856
+ActualBytesRead = 15840
+ActualBytesRead = 14400
+ActualBytesRead = 15840
+ActualBytesRead = 16384
+ActualBytesRead = 10112
+ActualBytesRead = 1440
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 11872
+ActualBytesRead = 15872
+ActualBytesRead = 16384
+ActualBytesRead = 15264
+ActualBytesRead = 15840
+ActualBytesRead = 14400
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 15648
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 13216
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 15264
+ActualBytesRead = 15356
+ParseFields
+received file
+call isDataEmpty
+FileCount=1
+NoFiles=False
+NoData=False
+result=False
+start
+Req created - parsing
+start parsing
+BytesToRead = 727670
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 13056
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 3328
+ActualBytesRead = 1440
+ActualBytesRead = 7200
+ActualBytesRead = 16384
+ActualBytesRead = 14144
+ActualBytesRead = 16384
+ActualBytesRead = 9984
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 13632
+ActualBytesRead = 15840
+ActualBytesRead = 14400
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 12054
+ParseFields
+received file
+call isDataEmpty
+FileCount=1
+NoFiles=False
+NoData=False
+result=False
+start
+Req created - parsing
+start parsing
+BytesToRead = 732793
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 14144
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 13312
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 6368
+ActualBytesRead = 15328
+ActualBytesRead = 6944
+ActualBytesRead = 9440
+ActualBytesRead = 6944
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 14208
+ActualBytesRead = 15840
+ActualBytesRead = 7200
+ActualBytesRead = 16384
+ActualBytesRead = 6656
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 16384
+ActualBytesRead = 12896
+ActualBytesRead = 13689
+ParseFields
+received file
+call isDataEmpty
+FileCount=1
+NoFiles=False
+NoData=False
+result=False
+start
+Req created - parsing
+start parsing
+regular parsing
+received file
+start
+Req created - parsing
+start parsing
+regular parsing
+received file

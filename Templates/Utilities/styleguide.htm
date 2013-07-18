@@ -1,0 +1,139 @@
+<h2><#MLGLBL "TEXT=Style Guide"></h2>
+<div class="formIntro">
+    <p>This is a quick documentation of the major style components of the new baseline.</p>
+    <ul>
+        <li>This is a list item in the .formIntro div</li>
+        <li>The p tag inside the .formintro div has a lightbulb icon preceding it.</li>
+    </ul>
+</div>
+<form name="searchform" method="post" id="searchform">
+	<fieldset>
+        <legend>The Fieldset</legend>
+        <p>Form elements are stored in these. The input names are stored in label tags so that they will align nicely with the input fields. Leave the required field empty to see the validation in action.</p>
+		<ul>
+			<li>
+				<label for="ORGNAME_field" class="required"><#MLGLBL TEXT="Required Field"></label>
+				<input type="text" name="ORGNAME_field"  class="reqField">
+			</li>
+
+			<li>
+				<label for="EMAIL_field" ><#MLGLBL TEXT="Optional Field"></label>
+				<input type="text" name="EMAIL_field" >
+			</li>
+			
+			<li>
+				<label for="ORGTYPE"><#MLGLBL TEXT="Dropdown"></label>
+				 <select name="ORGTYPE">
+					<option value="">(ALL)</option>
+					<#REFTABLEVALS TABLENAME="ORGTYPEREF" SCV="ORGTYPE">
+				</select> 
+			</li>
+ 
+		</ul>
+		
+	</fieldset>
+    <!-- If the form includes a pay now option, use the following include to call the payment form. This makes it much easier to update the payment options :) -->
+	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm" >
+	<div class="buttons">
+        <!-- Buttons should be placed inside the .buttons div so that they will align to the right -->
+		<input type="submit" value="Search"> 
+		<input type="reset" value="Reset" > 
+	</div>
+    <div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+</form>
+<script>
+     $("#searchform").validity(function() {
+            $(".reqField").require("#{field} is required.");
+            
+		});
+</script>
+ <h4>Displaying Non Tabular Data</h4>	
+ <dl class="profile">
+    <dt>Item Name 1</dt>
+    <dd>Details 2</d>
+
+        <dt>Item Name 2</dt>
+        <dd>Details 2</dd>
+
+        <dt>Item Name 3</dt>
+        <dd>Details 3</dd>
+	<p class="clear"></p>
+    <!-- remember to clear the float before closing the dl tag, or else the rest of the content won't align properly-->
+ </dl>
+<h4>Displaying Tabular Data</h4>
+<!-- to make the table sortable it must have id=myTable, <thead>, and <tbody> tags -->
+<table class="gutters" id="myTable">
+    <thead>
+        <tr>
+            <th>Header1</th>
+            <th>Header2</th>
+            <th>Header3</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td class="price">$1.00</td>
+            <!-- you can use the price class to have the price right align, this just makes it so that it's easier to read -->
+        </tr>
+        <tr>
+            <td>item</td>
+            <td>item</td>
+            <td>item</td>
+            <td class="price">$10.00</td>
+        </tr>
+        <tr>
+            <td>item</td>
+            <td>item</td>
+            <td>item</td>
+            <td class="price">$100.00</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <!-- if you have a totals section at the end of a sortable table, put it in the <tfoot> tag. You can also use the subtotal class, which makes everything bold, so the totals stand out.-->
+        <tr class="subtotal">
+            <td></td>
+            <td></td>
+            <td class="text">Total</td>
+            <td class="price">$111.00</td>
+        </tr>
+    </tfoot>
+</table>
+<table class="nobg">
+    <!--This is another table class you can use -->
+    <tr>
+        <th>Header1</th>
+        <th>Header2</th>
+        <th>Header3</th>
+    </tr>
+    <tr>
+        <td>item</td>
+        <td>item</td>
+        <td>item</td>
+    </tr>
+    <tr>
+        <td>item</td>
+        <td>item</td>
+        <td>item</td>
+    </tr>
+</table>
+<h4>New Popups</h4>
+<!-- turn any link into buttons with the classes 'button', 'buttonnobg' (which removes the arrow), or 'buttonReversed' (which shows the left arrow)-->
+<p><a href="#" id="popUp" data-role="button" data-mini="true">Click Me</a></p>
+<!-- most standard popups, such as org search and member search in event registrations have already been converted to this new format -->
+<script>
+//opens popup in a jquery dialog
+		
+		$(document).ready(function () {
+            $('a#popUp').live('click', function (e) {
+                e.preventDefault();
+				var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/utilities.dll/openpage?wrp=styleguide.htm&WMT=../main_template_none.htm'
+                return parent.uiPopUp(page);
+			});
+		});
+</script>

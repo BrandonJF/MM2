@@ -1,0 +1,113 @@
+<script language="javascript">
+function fillOrgName(obj){
+	if (obj.selectedIndex == 1)
+	{alert ('Please Enter the Name of the Organization');
+	document.getElementById('orgnameDiv').style.display = "block"; 	
+	}
+	else {
+	document.getElementById('orgnameDiv').style.display = "none";
+	}
+}
+
+
+
+function formValidate(){ //perfoms validation on all fields where class="reqField"
+var selind = document.certification.CR_CERTIFICATIONCD.selectedIndex;
+	//check to make sure that an organization is selected
+	//var selind = document.certification.IGNORE_ORGCD.selectedIndex;
+	//var orgname = document.certification.IGNORE_ORGNAME.value;
+	/*if (selind == 0)	{
+		alert('You must specify an Accrediting Organization');
+		return;
+	 }
+	else if (selind ==1) {
+		if (orgname=="") {
+	  		alert('You must specify an organization name');
+			return;
+			}
+		else {
+		 document.certification.CR_UDEF3TXT.value = orgname;		
+		}
+		
+	}
+	else if (selind > 1)	{
+	   document.certification.CR_UDEF3QTY.value = document.certification.IGNORE_ORGCD.options[selind].value;
+	   document.certification.CR_UDEF3TXT.value = document.certification.IGNORE_ORGCD.options[selind].text;
+	   document.certification.CR_STATUSSTT.value = 'A';
+
+	}*/
+	
+	
+
+
+	 document.certification.CR_STATUSSTT.value = 'A';
+	 //document.certification.CR_UDEF3TXT.value = orgname;		
+
+	if(validateAll(document.certification))
+	{
+		if (document.certification.CR_CERTIFICATIONCD.options[selind].value == 'AUTHORSHIP')	
+		{ document.certification.CR_CEU1QTY.value = document.certification.pointsEarned.value; }
+		if (document.certification.CR_CERTIFICATIONCD.options[selind].value == 'EMP_VER')	
+		{ document.certification.CR_CEU2QTY.value = document.certification.pointsEarned.value; }
+		if (document.certification.CR_CERTIFICATIONCD.options[selind].value == 'FORMAL_EDU')	
+		{ document.certification.CR_CEU3QTY.value = document.certification.pointsEarned.value; }
+		if (document.certification.CR_CERTIFICATIONCD.options[selind].value == 'INSTR_PRES')	
+		{ document.certification.CR_CEU4QTY.value = document.certification.pointsEarned.value; }
+		if (document.certification.CR_CERTIFICATIONCD.options[selind].value == 'ORG_PARTIC')	
+		{ document.certification.CR_CEU5QTY.value = document.certification.pointsEarned.value; }
+		if (document.certification.CR_CERTIFICATIONCD.options[selind].value == 'PROF_EDU')	
+		{ document.certification.CR_CEU6QTY.value = document.certification.pointsEarned.value; }
+		
+		/*alert(document.certification.CR_CERTIFICATIONCD.options[selind].text);
+		alert(document.certification.pointsEarned.value);
+		alert(document.certification.CR_CEU2QTY.value)*/
+		document.certification.submit();
+	}
+}
+
+-->
+</script>
+<div class="button" onclick="window.location.href='../certificationdll.dll/MasterList?customercd=<#CUSTOMERCD>&CR.CERTIFICATIONCD=<>~_APPL&CR.CERTIFICATIONCD=<>~_EXAM';">Back to My Certifications</div>
+<h2>Enter CCP Detail</h2>
+<form name="certification" method="post" action="updatecert">
+
+<fieldset>
+	<ul>
+		<li>
+			<label for="CR_CERTIFICATIONCD" class="required">Activity Type</label>
+			<select style="width:90%" name="CR_CERTIFICATIONCD" class="reqField">
+    <option value="">Select One</option>
+	  <#REFTABLEVALS TABLENAME="VW_CERTIFICATION_RELATION_WITHTITLE" SVC="CERTIFICATIONCD" FLQ="MASTERCD=RMA">
+    </select>
+		</li>
+		<li>
+			<label for="CR_CERTIFICATIONDATE" class="required">Date Earned On (##/##/####)</label>
+			 <input  name="CR_CERTIFICATIONDATE" type="text" id="CR_CERTIFICATIONDATE" value="<#CERTIFICATIONDATE>" class='reqField' onkeypress="autoformatWithPool(this, event, '##/##/####',1)">
+		</li>
+		<li>
+			<label for="pointsEarned" class="required">Points Earned (#.##)</label>
+			<input name="pointsEarned" type="text" id="pointsEarned" value="" class='reqField'>
+		</li>
+		<li>
+			<label for="CR_TESTCOMMENT">Comments</label>
+			 <textarea name="CR_TESTCOMMENT" id="CR_TESTCOMMENT" cols="45" rows="3"><#TESTCOMMENT></textarea>
+		</li>
+	</ul>
+</fieldset>
+<div class="buttons"><input type="button" name="BTNSUBMIT" id="BTNSUBMIT" onClick="formValidate()" value="Submit CCP"></div>
+
+  <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+  <input type="hidden" name="TRANSACTIONNUM" value="<#TRANSACTIONNUM>">
+  <input type="hidden" name="CR_UDEF3QTY" value="<#CR_UDEF3QTY>">
+  <input type="hidden" name="CR_UDEF3TXT" value="<#CR_UDEF3TXT>">
+  <input type="hidden" name="CR_CEU1QTY" value="">
+    <input type="hidden" name="CR_CEU2QTY" value="">
+    <input type="hidden" name="CR_CEU3QTY" value="">
+    <input type="hidden" name="CR_CEU4QTY" value="">
+    <input type="hidden" name="CR_CEU5QTY" value="">
+    <input type="hidden" name="CR_CEU6QTY" value="">
+  <input type="hidden" name="CR_STATUSSTT" value="P">
+  <input type="hidden" name="WRP" value="CertUpdateConfirm.htm">
+
+</form>
+

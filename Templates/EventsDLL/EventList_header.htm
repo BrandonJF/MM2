@@ -1,0 +1,25 @@
+<h2 class="title"><#MLGLBL TEXT="Events"> - <#RECORDCOUNT> </h2>
+<!-- <div id="divMyEventSearch"></div> -->
+
+<!-- <table class="gutters" id="myTable">
+  <thead>
+  <tr>
+    <th><#MLGLBL TEXT="Event Title"></th>
+    <th><#MLGLBL TEXT="Dates"></th>
+    <th><#MLGLBL TEXT="Registration"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <#CONTENT>
+  </tbody>
+</table>
+<p><#PREVNAV> <#NEXTNAV></p> -->
+
+<script>
+	loadEventSearch('#divMyEventSearch');
+  $('#divMyEventSearch').trigger("create");
+</script>
+
+<ul data-role="listview" data-inset="true" data-filter="true"  data-filter-placeholder="Filter Events...">
+  <#CONTENT>
+  </ul>

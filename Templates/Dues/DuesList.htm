@@ -1,0 +1,39 @@
+<script>
+	numDues++;
+</script>
+
+<!-- <div class="buttons" id="selectPayment">
+    <input type="button" value="Pay Now" data-theme="g" data-mini="true" onclick='window.location="../dues.dll/PaymentForm?INVOICENUM=<#INVOICENUM>"'>&nbsp;&nbsp;&nbsp;
+
+</div> -->
+<div data-role="collapsible" data-collapsed="true" data-theme="a" data-content-theme="a" data-inset="false" data-collapsed-icon="arrow-d">
+    <h2>Invoice #<#INVOICENUM></h2>
+
+<ul class="profile"  data-role="listview" data-inset="true">
+     <li data-role="list-divider" data-theme="a">Invoice #<#INVOICENUM></li>
+    <li><h2>Issue Date:</h2>
+    <p><#INVOICEDATE></p></li>
+
+    <li><h2>Due Date: </h2>
+    <p><#DUEDATE></p></li>
+
+    <li><h2>Total Invoice Amount:</h2>
+    <p><#TOTALAMT FORMAT="$0.00"></p></li>
+
+    <li><h2>Amount Paid:</h2>
+    <p><#TOTALAMT FORMAT="$0.00"></p></li>
+
+    <li><h2>Balance Due:</h2>
+    <p><#BALANCEDUE FORMAT="$0.00"> </p></li>
+    <li><input type="button" value="Pay This Invoice Now" data-theme="g" data-mini="true" onclick='window.location="../dues.dll/PaymentForm?INVOICENUM=<#INVOICENUM>"'>
+    <input type="button" value="Add This Invoice to Cart" data-mini="true" onclick='window.location="../msascartdll.dll/showcart?INVOICENUM=<#INVOICENUM>"'></li>
+
+
+
+ </ul>
+ </div>
+ <!-- <div class="buttons" id="selectPayment">
+    <input type="button" value="Pay Now" data-theme="g" data-mini="true" onclick='window.location="../dues.dll/PaymentForm?INVOICENUM=<#INVOICENUM>"'>&nbsp;&nbsp;&nbsp;
+    <input type="button" value="Add to Cart" data-mini="true" onclick='window.location="../msascartdll.dll/showcart?INVOICENUM=<#INVOICENUM>"'>
+</div> -->
+

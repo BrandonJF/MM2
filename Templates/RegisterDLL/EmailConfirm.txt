@@ -1,0 +1,28 @@
+PLEASE PRINT THIS FORM AS A CONFIRMATION LETTER!
+
+You have have successfully registered for <#SESSIONNAME>.  Thank you for registering online and we look forward to seeing you in <#LOCATIONCITY>, <#LOCATIONSTATECD>.
+
+Time & Date Information: 
+Start Date: <#SESSIONBEGDATE>
+End Date: <#SESSIONENDDATE>
+Start Time: <#SESSIONSTARTTM>
+
+
+Location Information: 
+<#LOCATIONNAME>
+<#ADDRESS1>  <#ADDRESS2>
+<#LOCATIONCITY>, <#LOCATIONSTATECD> <#ZIP>
+<#LOCATIONPHONE>
+
+
+Please Call <#LOCATIONNAME> for room rates.
+
+You have registered to attend the following functions:
+<#FUNCTIONNAMES>
+
+--------------------------------------------------------------------------------
+Invoice Number: <#INVOICENUM>
+
+Total Price Paid: $<#TOTALAMOUNT> 
+
+

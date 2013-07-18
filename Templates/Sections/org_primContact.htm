@@ -1,0 +1,66 @@
+<fieldset>
+<legend><#MLGLBL TEXT="Primary Contact Information"></legend>
+<ul>
+    <li>
+        <input type="checkbox" name="copyInfo" onclick="copyOrgInfo(document.order)">
+				Copy the adress from your Organization Contact Information.
+    </li>
+	<li>
+		<label for="ADDRESSTYPE"><#MLGLBL TEXT="Address Type"> </label>
+		<select name="ADDRESSTYPE">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="ADDRTYPEREF" SCF="ADDRESSTYPE" FLD2="ADDRESSTYPE" FLQ="ONWEBFLG=Y" MLG="Y">
+		</select>
+	</li> 
+    <li>
+		<label for="ADDRESS1" class="required"><#MLGLBL TEXT="Mailing Address">*</label>
+		<input type="text" name="ADDRESS1" id="MailingAddress" value="" class='reqField'> 
+	</li> 
+    <li>
+		<label for="ADDRESS2" ><#MLGLBL TEXT="Mailing Address Cont"></label> 
+		<input type="text" name="ADDRESS2" value=""> 
+	</li> 
+  	<li>
+		<label for="CITY" class="required"><#MLGLBL TEXT="City"></label>
+		<input type="text" name="CITY" id="City" value="" class='reqField'> 
+	</li> 
+   	<li>
+		<label for="STATECD" class="required"><#MLGLBL TEXT="State/Province*"></label> 
+		<select name="STATECD" id="State" onchange="updateTotals();" class='reqField'>
+			<option value='' >Select One...</option>
+			<#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD" MLG="Y">
+        </select>
+	</li> 
+    <li>
+		<label for="ZIP" class="required"><#MLGLBL TEXT="Postal Code"></label>
+		<input type="text" name="ZIP" id="Zip" value="" class='reqField'> 
+	</li> 
+    <li>
+		<label for="COUNTRY"><#MLGLBL TEXT="Country"></label>
+		<select name="COUNTRY" id="Country" onChange="checkCountryMask(this.value);international();">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+        <script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+		</script> 
+	</li> 
+    <li>
+		<label for="WORKPHONE" class="required"><#MLGLBL TEXT="Work Phone"></label>
+		<input type="text" name="WORKPHONE" id="WorkPhone" value="" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li> 
+    <li>
+		<label for="WORKPHONEEXT"><#MLGLBL TEXT="Work Extension"></label> 
+		<input type="text" s name="WORKPHONEEXT" value="" > 
+	</li> 
+    <li>
+		<label for="FAXPHONE"><#MLGLBL TEXT="Fax"> </label>
+		<input type="text" name="FAXPHONE" value="" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">		
+	</li> 
+    <li>
+		<label for="EMAIL" class="required"><#MLGLBL TEXT="Email Address"></label>
+		<input type="text" name="EMAIL" value="" id="Email">
+	</li> 
+</ul>
+</fieldset>

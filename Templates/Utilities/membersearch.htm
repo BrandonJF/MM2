@@ -1,0 +1,229 @@
+<script>setTitle();</script>
+<h2 class="title"><#MLGLBL "TEXT=Member Search"></h2>
+<form name="order" method="post" action="../memberdll.dll/List" data-ajax="false">
+	<div data-role="fieldcontain">
+		<label for="Lastname_field" ><#MLGLBL TEXT="Last Name"></label>
+		<input type="text" name="LASTNAME_field" id="Lastname_field" tabindex="0">
+	</div>
+
+
+	<div data-role="fieldcontain">
+		<label for="Firstname_field"><#MLGLBL TEXT="First Name"></label>
+		<input type="text" name="FIRSTNAME_field" id="Firstname_field" >
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="Email_field" ><#MLGLBL TEXT="Email"></label>
+		<input type="text" name="EMAIL_field" id="Email_field" >
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="Orgname_field"><#MLGLBL TEXT="Organization"></label>
+		<input size="50" name="ORGNAME_field" id="Orgname_field">
+
+
+
+		<!-- <ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find an organization..." data-filter-theme="a"></ul> -->
+
+		<script>$( document ).on( "pageinit", "#mainpage", function() {
+			$( "#autocomplete" ).on( "listviewbeforefilter", function ( e, data ) {
+				var $ul = $( this ),
+				$input = $( data.input ),
+				value = $input.val(),
+				html = "";
+				$ul.html( "" );
+				if ( value && value.length > 2 ) {
+					$ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+					$ul.listview( "refresh" );
+					$.ajax({
+						url: "../organizationdll.dll/List?CITY=&CITY_field=&COUNTRY=&EMAIL=&EMAIL_field=&NOWEBFLG=<>Y&ORGTYPE=&RANGE=1%2F25&SHOWSQL=N&SORT=ORGNAME&STATECD=&ZIP=&WLN=organi >> lolocalhost/cvmm2/cgi-bin/organizationdll.dll/List?CITY=&CITY_field=&COUNTRY=&EMAIL=&EMAIL_field=&NOWEBFLG=<>Y&ORGTYPE=&RANGE=1/25&SHOWSQL=N&SORT=ORGNAME&STATECD=&ZIP=&WHP=organizationHeader_JSON.htm&WBP=organizationList_JSON.htm&WMT=none",
+						dataType: "json",
+						crossDomain: true,
+						data: {
+							ORGNAME: $input.val()+"~",
+							ORGNAME_field: $input.val()
+
+						}
+					})
+					.then( function ( response ) {
+						responseObject = response.organizations;
+						console.log(responseObject);
+
+						$.each( responseObject, function ( i, val ) {
+							console.log(val);
+							html += "<li class='orgACItem'><a href='#'>" + val.orgname + "</a></li>";
+						});
+						$ul.html( html );
+						$ul.listview( "refresh" );
+						$ul.trigger( "updatelayout");
+					});
+				}
+			});
+
+$('ul#autocomplete').on("click", "li", function(event){console.log( $(this).text() );
+	orgACVar = $(this).text()
+	$('#autocomplete').text(orgACVar);
+
+})
+
+});</script>
+
+
+<!-- <div >Please type in at least the first-two letters of the organization and then click on <a href="#popupBasic" data-rel="popup" data-position-to="window" class="org_link">Organization Search</a>. A pop-up window will appear and then select your organization from the list by selecting the Organization Number and close the window.</div> -->
+
+
+
+
+
+
+
+
+
+</div>
+<div data-role="fieldcontain">
+	<label for="ChapterId"><#MLGLBL TEXT="Region"></label>
+	<select size="1" name="CHAPTERID" id="ChapterId">
+		<option value=1>Region 1</option>
+		<option value=2>Region 2</option>
+		<option value=3>Region 3</option>
+		<option value=4>Region 4</option>
+		<option value=5>Region 5</option>
+		<option value=6>Region 6</option>
+		<option value=7>Region 7</option>
+		<option selected>(ALL)</option>
+	</select>
+</div>
+
+<div data-role="fieldcontain">
+	<label for="CustomerType"><#MLGLBL TEXT="Member Type"></label>
+	<select name="CUSTOMERTYPE" id="CustomerType">
+		<option value="">(ALL)</option>
+		<#RTVCUSTOMERTYPEREF>
+	</select>
+</div>
+
+
+
+<div data-role="fieldcontain">
+	<label for="City_field"><#MLGLBL TEXT="City"></label>
+	<input type="text" name="CITY_field" id="City_field" >
+</div>
+
+<div data-role="fieldcontain">
+	<label for="State"><#MLGLBL TEXT="State"></label>
+	<select name="STATECD" id="State">
+		<option selected value="">(All)</option>
+		<#RTVSTATEREF>
+	</select>
+</div>
+
+<div data-role="fieldcontain">
+	<label for="Zip"><#MLGLBL TEXT="Zip"></label>
+	<input type="text" name="ZIP" id="Zip">
+</div>
+
+<div data-role="fieldcontain">
+	<label for="Country"><#MLGLBL TEXT="Country"></label>
+	<select name="COUNTRY" id="Country">
+		<option selected value="">(All)</option>
+		<option value="USA">USA</option>
+		<#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAME>
+	</select>
+</div>
+
+<div data-role="fieldcontain">
+	<label for="Sort"><#MLGLBL TEXT="Sort By"></label>
+	<select size="1" name="SORT" id="Sort">
+		<option selected value="LASTNAME, FIRSTNAME">Last Name</option>
+		<option value='ORGNAME'>Organization</option>
+	</select>
+</div>
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup" >
+		<legend>Filter:</legend>
+		<label><input type='checkbox' name='ISMEMBERFLG_field' value="Y"> <#MLGLBL TEXT="Members Only"></label>
+	</fieldset>
+</div>
+
+
+
+
+<input type="submit" value="Search" onClick="memberSearchValidater(order);" data-inline="false" data-theme="g" data-icon="search">
+<input type="reset" value="Reset" data-inline="false"  data-theme="c" data-icon="refresh">
+
+
+<input type="hidden" name="ISMEMBERFLG" value="">
+<input type="hidden" name="FIRSTNAME" />
+<input type="hidden" name="LASTNAME" />
+<input type="hidden" name="EMAIL" />
+<input type="hidden" name="ORGNAME" />
+<input type="hidden" name="CITY" />
+<input type="hidden" name="RANGE" value="1/25">
+<input type="hidden" name="NOWEBFLG" value="<>Y">
+<input type="hidden" name="SHOWSQL" value="N">
+</form>
+<script>
+//opens org search results in a jquery dialog
+
+$('.org_link').bind('click', function() {
+	var newSearch = document.order.ORGNAME_field.value;
+	var page = '../organizationdll.dll/List?ORGNAME='+newSearch+'~&SORT=ORGNAME&WMT=../main_template_none.htm&WHP=addOrg_header.htm&WBP=addOrg_list.htm&WNR=addOrg_noRec.htm&RANGE=1/25';
+
+
+
+	$('#frame').attr('src', page);
+
+	$( "#popupBasic iframe" )
+	.attr( "width", 0 )
+	.attr( "height", 0 );
+
+	$( "#popupBasic" ).on({
+		popupbeforeposition: function() {
+			var size = scale( 900, 800, 15, 1 ),
+			w = size.width,
+			h = size.height;
+
+			$( "#popupBasic iframe" )
+			.attr( "width", w )
+			.attr( "height", h );
+		},
+		popupafterclose: function() {
+			$( "#popupBasic iframe" )
+			.attr( "width", 0 )
+			.attr( "height", 0 );
+		}
+	});
+});
+
+
+
+function scale( width, height, padding, border ) {
+	var scrWidth = $( window ).width() - 30,
+	scrHeight = $( window ).height() - 30,
+	ifrPadding = 2 * padding,
+	ifrBorder = 2 * border,
+	ifrWidth = width + ifrPadding + ifrBorder,
+	ifrHeight = height + ifrPadding + ifrBorder,
+	h, w;
+
+	if ( ifrWidth < scrWidth && ifrHeight < scrHeight ) {
+		w = ifrWidth;
+		h = ifrHeight;
+	} else if ( ( ifrWidth / scrWidth ) > ( ifrHeight / scrHeight ) ) {
+		w = scrWidth;
+		h = ( scrWidth / ifrWidth ) * ifrHeight;
+	} else {
+		h = scrHeight;
+		w = ( scrHeight / ifrHeight ) * ifrWidth;
+	}
+
+	return {
+		'width': w - ( ifrPadding + ifrBorder ),
+		'height': h - ( ifrPadding + ifrBorder )
+	};
+};
+
+
+
+</script>
+

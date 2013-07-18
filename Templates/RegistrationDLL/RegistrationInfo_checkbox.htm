@@ -1,0 +1,148 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Registration Info</title>
+
+<link href="/CSTI/CssFiles/CSTILayout.css" rel="stylesheet" type="text/css">
+<script language="javascript">
+function formValidate() {
+     if  (getFunction() )
+	 {
+		alert(document.addFunc.FUNCTIONSADDED.value);  
+	  document.addFunc.submit();
+	  return true;
+	  }
+	  
+}   
+
+function getFunction(){
+var tmpint ="";
+var pos="";
+var size="";
+for (var i=0; i<document.addFunc.length; i++) 
+    {
+	   if (document.addFunc.elements[i].type =='checkbox') 
+	   {
+	        if (document.addFunc.elements[i].checked==true) 
+			   {
+	        		tmpint = tmpint + ',' + document.addFunc.elements[i].name;
+	           } //make sure auto registration price is checked
+		}
+	}  
+
+pos = tmpint.indexOf(',');
+pos = pos +1;
+size = tmpint.length;
+var finalstr = tmpint.substring(pos,size);
+document.addFunc.FUNCTIONSADDED.value=finalstr;
+return true;
+}
+
+	
+</script>
+</head>
+
+<body>
+<center>
+  <table border="0" cellpadding="0" cellspacing="0" width="460" height="661" class="body" id="table1">
+    <form name="addFunc" method="POST" action="ConfirmChange">
+	<tr>
+      <td height="26" colspan="2" class="CSTIHead"><div align="left">Registration Info</div></td>
+    </tr>
+
+    <tr>
+      <td height="26">&nbsp;</td>
+      <td height="26">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="165" height="26"><div align="left">Confirmation ID:</div></td>
+      <td width="295" height="26">        <div align="left"><#ASSIGNEDSESSIONCD></div></td>
+    </tr>
+    <tr>
+      <td width="165" height="23"><div align="left">Customer ID:</div></td>
+      <td width="295" height="23">        <div align="left"><#CUSTOMERCD></div></td>
+    </tr>
+    <tr>
+      <td width="165" height="28"><div align="left">Customer Name:</div></td>
+      <td width="295" height="28">        <div align="left"><#CUSTOMERNAME> </div></td>
+    </tr>
+    <tr>
+      <td height="28"><div align="left">Session Name: </div></td>
+      <td height="28"><div align="left"><#SESSIONNAME></div></td>
+    </tr>
+    <tr>
+      <td width="165" height="28"><div align="left">Session ID:</div></td>
+      <td width="295" height="28">        <div align="left"><#SESSIONALTCD> </div></td>
+    </tr>
+    <tr>
+      <td height="28">Registration Status: </td>
+      <td height="28"><#STATUSSTT></td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2" class="CSTIHead"><div align="left">Location Detail</div></td>
+    </tr>
+    <tr>
+      <td height="28"><div align="left">Location Name: </div></td>
+      <td height="28"><div align="left"><#LOCATIONNAME></div></td>
+    </tr>
+    <tr>
+      <td height="28"><div align="left">City:</div></td>
+      <td height="28"><div align="left"><#LOCATIONCITY></div></td>
+    </tr>
+    <tr>
+      <td height="28"><div align="left">State:</div></td>
+      <td height="28"><div align="left"><#LOCATIONSTATECD></div></td>
+    </tr>
+    <tr>
+      <td height="28"><div align="left">Lodging Detail: </div></td>
+      <td height="28"><div align="left"><#BLOCKLOCATIONS></div></td>
+    </tr>
+    <tr>
+      <td height="28"><div align="left">StateCD: </div></td>
+      <td height="28"><SELECT NAME=STATECD size="1"><#CBXSTATECD></SELECT></td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2"><span class="style2">Enrolled functions </span></td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2"><#ENROLLEDFUNCTIONS></td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2"><span class="style2">Available Functions</span> </td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2"><#AVAILABLEFUNCTIONS HIDEENROLLED=Y></td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2">Reg. Amount: $<#PRICEAMT> </td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2">Functions: $<#UDEF1AMT> </td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2">
+        
+            <input type="button" value="Continue" onclick="formValidate()"> 
+			<input type="hidden" name="ASSIGNEDSESSIONCD" value="<#ASSIGNEDSESSIONCD>">    
+			<input type="hidden" name="FUNCTIONSADDED" value="">  
+		    </form>   
+		</td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="28" colspan="2">&nbsp;</td>
+    </tr>
+  </table>
+</center>
+</body>
+
+</html>

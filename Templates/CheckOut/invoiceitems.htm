@@ -1,0 +1,19 @@
+<tr>
+        <td>
+		
+		<script>
+			if('<#ITEMSOURCE>' == 'P'){
+				document.write('Product');
+			}else if('<#ITEMSOURCE>' == 'S'){
+				document.write('Event');
+			}else if('<#ITEMSOURCE>' == 'D'){
+				document.write('Donation');
+			}
+		</script>
+       
+		</td>
+        <td><#ITEMDES></td>
+        <td><#PRICEAMT FORMAT='$0.00'></td>
+        <td><#ITEMQTY></td>
+        <td class="prices"><#TOTALAMT FORMAT='$0.00'></td>     
+</tr>

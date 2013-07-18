@@ -1,0 +1,203 @@
+<script src="../../js/nicEdit.js" type="text/javascript"></script>
+<h2>My Resume</h2>
+ <form method="POST" name="order" id="order" action="ApplyJob" enctype="multipart/form-data">
+
+ <div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="info" data-expanded-icon="arrow-d" data-inset="true">
+ <h2>Basic Information</h2>
+ 
+	<div data-role="fieldcontain">
+		<label for="FirstName">First Name<sup class="req_star">*</sup></label>
+		<input  type="text" name="FIRSTNAME" value="<#FIRSTNAME>" id="FirstName" class='reqField'/>
+	</div>
+ 
+	<div data-role="fieldcontain">
+		<label for="MiddleInit">Middle Name</label>
+		<input  type="text" name="MIDDLEINIT" id="MiddleInit" value="<#MIDDLEINITIAL>"/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="LastName">Last Name<sup class="req_star">*</sup></label>
+		<input  type="text" name="LASTNAME" value="<#LASTNAME>" id="LastName" class='reqField'/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="Address">Address<sup class="req_star">*</sup></label>
+		<input  type="text" name="ADDRESS1" value="<#ADDRESS1>" id="Address" class='reqField'/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="Address2">Suite/Apt</label>
+		<input  type="text" name="ADDRESS2" id="Address2" value="<#ADDRESS2>"/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="City">City<sup class="req_star">*</sup></label>
+		<input  type="text" name="CITY" value="<#CITY>" id="City" class='reqField'/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="StateCD">State<sup class="req_star">*</sup></label>
+		<select size="1" name="STATECD" id="StateCD">
+			<option><#RTVSTATEREFSCVSTATECD></option>
+		</select>
+	</div>	
+	
+	<div data-role="fieldcontain">
+		<label for="Zip">Zip<sup class="req_star">*</sup></label>
+		<input  type="text" name="ZIP" value="<#ZIP>" id="Zip" class='reqField'/>
+	</div>
+	
+	<div data-role="fieldcontain">
+		<label for="Country">Country<sup class="req_star">*</sup></label>
+		<select size="1" name="COUNTRY" id="Country" class='reqField' onChange="checkCountryMask(this.value);">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+		<script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+			$(function() {
+				$( "#JobStartDate" ).datepicker({
+					changeMonth: true,
+					changeYear: true
+				});
+			});
+		</script>
+	</div>
+   
+	<div data-role="fieldcontain">
+		<label for="Phone">Phone<sup class="req_star">*</sup></label>
+		<input  type="text" name="CONTACTPHONE" value="<#WORKPHONE>" id="Phone" class='reqField'/>
+	</div>
+   
+	<div data-role="fieldcontain">
+		<label for="Fax">Fax</label>
+		<input  type="text" name="FAXPHONE" id="Fax" value="<#FAXPHONE>"/>
+	</div>
+   
+	<div data-role="fieldcontain">
+		<label for="Email">Email<sup class="req_star">*</sup></label>
+		<input  type="text" name="EMAIL" value="<#EMAIL>" id="Email" class='reqField'/>
+	</div>
+</div>
+
+
+<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="info" data-expanded-icon="arrow-d" data-inset="true">  
+	<h2>Career Information</h2>
+
+	<div data-role="fieldcontain">
+		<label for="JobStartDate">Availability<sup class="req_star">*</sup></label>
+		<input name="JOBSTARTDATE" type="text" id="JobStartDate" value="<#JOBSTARTDATE>" class='reqField'>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="MinSalarlyamt">Min. Salary</label>
+		<input  type="text" name="MINSALARLYAMT" id="MinSalarlyamt" value="<#MINSALARLYAMT>"/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="HigestDegree">Highest Degree<sup class="req_star">*</sup></label>
+		<select size="1" name="EDUCATIONDEGREE" id="HigestDegree" class='reqField'>
+			<option><#RTVEDUCATIONLEVELREFSCVEDUCATIONDEGREEFLTTYPECDFLVEDUC></option>
+		</select>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="EducationGpaAmt">GPA</label>
+		<input  type="text" name="EDUCATIONGPAAMT" id="EducationGpaAmt" value="<#EDUCATIONGPAAMT>"/>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="Resume_Text">Resume<sup class="req_star">*</sup></label>
+		<textarea name="RESUMETEXT" id="Resume_Text" cols="60" rows="50" class='resume'><#RESUMETEXT></textarea>
+	</div>
+
+	<div data-role="fieldcontain">
+		<label for="Resume_File">Attach Resume:   </label>
+		<input type="file" name="resumefile" id="Resume_File" class="resume" />
+	</div>
+</div>
+
+
+	<input type="button" name="BTNSUBMIT" id="BTNSUBMIT" value="Submit Resume" data-inline="true" data-icon="check" onclick="formValidate(document.order);">
+	<input type="reset" value="Reset" name="RESET" data-inline="true" data-theme="c" data-icon="refresh">  
+	
+	
+		             
+   <input type="hidden" name="JOBAPPNUM" value="<#JOBAPPNUM>">
+    <input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">
+    <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+    <input type="hidden" name="RESUMETYPE" value="TEXT">
+    <input type="hidden" name="PROPERCASEOFF" value="Y">
+    <input type="hidden" name="RESPONSEPAGE" value="Resume_Confirm.htm" />
+    <input type="hidden" name="OWNERNAME" value="<#LASTNAME>, <#FIRSTNAME>">
+    <input type="hidden" name="DOCSUBJECT" value="Resume">
+    <input type="hidden" name="OWNERTYPECD" value="I">
+    <input type="hidden" name="DOCTYPE" value="Resume">
+    <input type="hidden" name="TITLETXT" value="Resume">
+    <input type="hidden" name="FILETYPE" value="O">
+    <input type="hidden" name="DOCDES" value="Resume">
+    <input type="hidden" name="ADDDOC" value="Y">
+    
+
+</form>
+
+<script type="text/javascript">
+    //bkLib.onDomLoaded(nicEditors.allTextAreas);
+function formValidate(formName){
+    // nicEditors.findEditor('Resume_Text').saveContent();
+	//			var abstractText = $("#Resume_Text").val();
+	//	abstractText = abstractText.replace("%", "");
+	//	$("#Resume_Text").val(abstractText);
+       formName.submit();
+    
+}
+	
+	function checkForNum(element){
+		
+		var text=element.value;
+		var check=0;
+		for(i=0; i<text.length; i++){
+			if((text.charCodeAt(i)>64&&text.charCodeAt(i)<96)||(text.charCodeAt(i)>96&&text.charCodeAt(i)<123)||text.charCodeAt(i)==39||text.charCodeAt(i)==45){
+				check=check;
+			}else{
+				check++;
+				break;
+			}
+		}
+		if(check > 0){
+			return false;
+		}else{
+			return true;
+		}
+			
+	};
+	
+	function checkResUL(){
+		setAddDoc('#Resume_File');
+		if ($.trim($('#Resume_File').val()).length > 0 || $.trim($('#Resume_Text').val()).length > 0)
+		{ return true;}
+		else
+		{
+			return false;
+		}
+	};
+
+    // Select all of the forms on the page (in this case the only one)
+    // and call 'validity' on the result.
+    $(function() { 
+        $("#order").validity(function() {
+            $(".reqField").require("#{field} is required.");
+			$("#FirstName").require("#{field} is required.").assert(checkForNum,"The #{field} field only accepts letters.\n\nPlease re-enter.");
+			$("#LastName").require("#{field} is required.").assert(checkForNum,"The #{field} field only accepts letters.\n\nPlease re-enter.");
+			$(".resume").assert(
+				checkResUL, 
+				"Please paste or upload your resume"
+			);
+			$("#Email").require().match("email","Please enter your email address in the correct format. XXX@XXX.XXX");
+			
+			
+		
+        });
+    });
+</script>

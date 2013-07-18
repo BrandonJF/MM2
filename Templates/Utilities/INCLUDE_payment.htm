@@ -1,0 +1,194 @@
+<script type="text/javascript" src="../../js/jQuery.tooltip.min.js"></script>
+ <div data-role="collapsible" data-theme="a" data-content-theme="a" data-expanded-icon="arrow-d" data-inset="true">
+	<h2>Billing Information</h2>
+	<ul data-role="listview" data-inset="true" class='donitems'>
+	<li data-role="fieldcontain">
+			<label><input type="checkbox" name="copyInfo" onclick="copyBillingInfo(document.order)">
+				Copy billing information from your user profile.</label>
+		</li>
+		<li data-role="fieldcontain">
+			<label for='CREDITFIRSTNAME'>First Name<sup class="req_star">*</sup></label>
+			<input name="CREDITFIRSTNAME" title="First Name" value="<#FIRSTNAME>" type="text" class='reqField' id="CREDITFIRSTNAME">
+		</li>
+		<li data-role="fieldcontain">
+			<label for='CREDITLASTNAME'>Last Name<sup class="req_star">*</sup></label>
+			<input name="CREDITLASTNAME" title="Last Name" id="CREDITLASTNAME" value="<#LASTNAME>" class='reqField' type="text">
+		</li>
+		<li data-role="fieldcontain">
+			<label for='CREDITADDRESS1'>Billing Address<sup class="req_star">*</sup></label>
+			<input name="CREDITADDRESS1" title="Billing Address" id="CREDITADDRESS1" value="<#ADDRESS1>" class='reqField' type="text">
+		</li>
+	<!--	<li data-role="fieldcontain">
+			<label for='CREDITADDRESS2'>Billing Address Cont.</label>
+			<input name="CREDITADDRESS2" id="CREDITADDRESS2" value="<#ADDRESS2>" type="text">
+		</li>-->
+		<li data-role="fieldcontain">
+			<label for='CREDITCITY'>City<sup class="req_star">*</sup></label>
+			<input name="CREDITCITY" title="Billing City" id="CREDITCITY" value="<#CITY>" class='reqField' type="text">
+		</li>
+		<li data-role="fieldcontain">
+			<label for='CREDITSTATECD'>State<sup class="req_star">*</sup></label>
+			<select name="CREDITSTATECD" title="Billing State" id="CREDITSTATECD" class='reqField'>
+                <option value="">Select One...</option>
+    			<#RTVSTATEREF>
+            </select>
+		</li>
+		<li data-role="fieldcontain">
+			<label for='CREDITZIP'>Zip<sup class="req_star">*</sup></label>
+			<input name="CREDITZIP" title="Billing Zip Code" id="CREDITZIP" value="<#ZIP>" class='reqField' type="text" onBlur="BillZipToState($(this).val())">
+		</li>
+		<li data-role="fieldcontain">
+			<label for='CREDITCOUNTRY'>Country<sup class="req_star">*</sup></label>
+			<select name="CREDITCOUNTRY" title="Billing Country" id="CREDITCOUNTRY" class='reqField' >
+                    <option value=''>Select One...</option>
+				<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">
+			</select>
+		</li>
+</ul>
+</div>
+
+
+
+
+ <div data-role="collapsible" data-theme="a" data-content-theme="a" data-expanded-icon="arrow-d" data-inset="true">
+	<h2><#MLGLBL TEXT="Payment Options"></h2>
+<ul data-role="listview" data-inset="true" class='donitems'>
+<li data-role="fieldcontain">
+
+	<fieldset data-role="controlgroup" >
+    <legend><#MLGLBL TEXT="Payment Type:"></legend>
+		<input type='radio' name='PAYMENTTYPECD' value='VISA' class='reqField' id="visa" onclick="billMeCheck()">
+		<label for="visa"><!-- <IMG SRC="../../images/card_visa.png" align=top width="32" height="32"> -->Visa</label>
+
+		<input type='radio' name='PAYMENTTYPECD' value='MC' class='reqField' id="mc" onclick="billMeCheck()">
+		<label for="mc"><!-- <IMG SRC="../../images/card_mastercard.png" align=top width="32" height="32"> --> MasterCard</label>
+
+		<input type='radio' name='PAYMENTTYPECD' value='AMEX' class='reqField' id="amex" onclick="billMeCheck()">
+		<label for="amex"><!-- <IMG SRC="../../images/card_amex.png" align=top width="32" height="32"> -->Amex</label>
+	</fieldset>
+	</li>
+
+
+		<li data-role="fieldcontain">
+			<label for="PAYMENTREFNUM"><#MLGLBL TEXT="Card Number:"></label>
+			<input type="text" name="PAYMENTREFNUM" title="Card Number" value="" class='reqField' id="PAYMENTREFNUM"/>
+		</li>
+		<li data-role="list-divider" data-theme="a">Expiration Date</li>
+		<li data-role="fieldcontain">
+
+
+		<!-- <legend><#MLGLBL TEXT="Expiration Date:"></legend> -->
+
+			<label for="EXPIREMONTH"><#MLGLBL TEXT="Month:"></label>
+			<select name="EXPIREMONTH" id="EXPIREMONTH" title="Expiration Month" class='reqField'>
+                <option value="01">01 - January</option>
+                <option value="02">02 - February</option>
+                <option value="03">03 - March</option>
+                <option value="04">04 - April</option>
+                <option value="05">05 - May</option>
+                <option value="06">06 - June</option>
+                <option value="07">07 - July</option>
+                <option value="08">08 - August</option>
+                <option value="09">09 - September</option>
+                <option value="10">10 - October</option>
+                <option value="11">11 - November</option>
+                <option value="12">12 - December</option>
+            </select>
+
+
+		</li>
+		<li data-role="fieldcontain">
+<label for="ExpireYear"><#MLGLBL TEXT="Year:"></label>
+            <select name="EXPIREYEAR" title="Expiration Year" id="ExpireYear" class='reqField'>
+                <script>
+                $(function() {
+                	// moved inside of this dom ready because method was not defined. -BJF
+                	writeYear("NOW",2020);
+
+                });
+
+                </script>
+            </select>
+        </li>
+
+		<li data-role="fieldcontain">
+			<label for="CSC">CCV:</label>
+			<input type="text" name="CSC" id="CSC" title="CCV"  class='reqField' maxlength="3"/>
+			<!-- <a href="#" class="help" id="ccv">[?]</a> -->
+		</li>
+
+
+    <li class="ccdate" id="etfinfo" style="display: none">
+        <div data-role="fieldcontain">
+			<label>Bank Account Type</label>
+            <input type="text" name="BANKACCTYPE" title="Bank Account Type" value=""  id="BANKACCTYPE"/>
+		</div>
+		<div data-role="fieldcontain">
+			<label>Bank Routing Number</label>
+			<input type="text" name="BANKABACODE" title="ABA Code" value=""  id="BANKABACODE"/> <a href="#" class="help" id="bank1">[?]</a>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label>Bank Account Number </label>
+			<input type="text" name="BANKACCOUNT" id="BANKACCOUNT" title="Bank Account Number"  /> <a href="#" class="help" id="bank2">[?]</a>
+		</div>
+	</div>
+	<!-- <p>By submitting this form you are authorizing your credit card to be charged for the indicated amount. There are no refunds available. Please see our full terms and conditions page for further details. If you have any questions, please contact Mike Smith at (555) 555-5555 or by email at <a href='mailto:info@domain.org'>info@domain.org</a>. Thank you for choosing this Association.</p> -->
+
+
+</ul>
+</div>
+<script>
+	var nonBM = document.order.RESPONSEPAGE.value
+    function billMeCheck(){
+       if ($('#BILLME').attr('checked')=='checked'){
+				document.order.ISSUEBILLFLG.value='Y';
+				document.order.RESPONSEPAGE.value='billme.htm';
+            $('#billingInfo input').removeClass('reqField');
+            $('#billingInfo select').removeClass('reqField');
+            $('#paymentOp input').removeClass('reqField');
+            $('#paymentOp select').removeClass('reqField');
+            $('#ccinfo').hide();
+            $('#etfinfo').hide();
+        }else if ($('#EFT').attr('checked')=='checked'){
+				document.order.ISSUEBILLFLG.value='N';
+				document.order.RESPONSEPAGE.value=nonBM;
+            $('#billingInfo input').addClass('reqField');
+            $('#billingInfo select').addClass('reqField');
+            $('#ccinfo input').removeClass('reqField');
+            $('#ccinfo select').removeClass('reqField');
+            $('#ccinfo').hide();
+            $('#etfinfo').show();
+            $('#etfinfo input').addClass('reqField');
+            $('#etfinfo select').addClass('reqField');
+        }
+        else{
+            document.order.ISSUEBILLFLG.value='N';
+			document.order.RESPONSEPAGE.value=nonBM;
+            $('#billingInfo input').addClass('reqField');
+            $('#billingInfo select').addClass('reqField');
+            $('#ccinfo input').addClass('reqField');
+            $('#ccinfo select').addClass('reqField');
+            $('#etfinfo input').removeClass('reqField');
+            $('#etfinfo select').removeClass('reqField');
+            $('#ccinfo').show();
+            $('#etfinfo').hide();
+        }
+    }
+    $(function(){
+        $("#bank1, #bank2").tooltip({
+    delay: 0,
+    showURL: false,
+    bodyHandler: function() {
+        return $("<img>").attr("src", "../../images/bank_check.gif");
+    }
+});
+    $("#ccv").tooltip({
+    delay: 0,
+    showURL: false,
+    bodyHandler: function() {
+        return $("<img>").attr("src", "../../images/cvv_general.gif");
+    }
+});
+    });
+</script>

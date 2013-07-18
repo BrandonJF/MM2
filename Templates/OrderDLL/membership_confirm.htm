@@ -1,0 +1,19 @@
+<script language="javascript">
+	function getOrgInfo(){
+		var orgid = '';
+		var orgname = '';
+			orgid = document.abc.orgDropdown.options[document.abc.orgDropdown.selectedIndex].value;
+			orgname = document.abc.orgDropdown.options[document.abc.orgDropdown.selectedIndex].innerHTML;	
+			document.abc.ORGNAME.value = orgname;
+			document.abc.ORGCD.value = orgid;
+	}		
+</script>
+
+<h2>Your Inquiry has been received.</h2>
+
+<p> Thank you for your interest. Our membership department will contact you shortly.
+</p>
+
+<#SECTION NAME="basicInfo_confirm.htm">
+<#SECTION NAME="primContact_confirm.htm">
+<#SECTION NAME="altContact_confirm.htm">

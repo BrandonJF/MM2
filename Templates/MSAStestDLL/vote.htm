@@ -1,0 +1,92 @@
+<script language="javascript" SRC="../../js/CheckBoxGroup.js"></script>
+<script language="javascript">
+<#CLEARVANTAGECHECKFUNCTIONS>
+</script>
+<script language = "javascript">
+<!--
+//<#CLEARVANTAGEFUNCTIONS> //Do not remove this line
+
+function chkRequired()
+{
+	return true;
+}
+
+function validate() {
+   //need validation code here'
+	if  (chkRequired()) {
+
+		var thisURL = this.location+'';
+		var urlArray = thisURL.split('&');
+        var pgA = urlArray[1];
+        var pgB = pgA.split('=');
+		var parentGroupCD = pgB[1];
+		document.response.LINKCD.value = parentGroupCD;
+		document.response.RGROUPNUM.value = document.response.CUSTOMERCD.value+'_'+parentGroupCD;
+		//alert(document.response.RGROUPNUM.value);
+		//alert(document.response.LINKCD.value);
+		
+		document.response.action = "../../cgi-bin/msastestdll.dll/PostResults"
+		document.response.submit();
+	  	return true;
+	}
+}	
+
+function clearForm() {
+	//sets customercd
+	if(getURLValue('cd') != ''){
+		document.response.CUSTOMERCD.value = getURLValue('cd');
+		document.response.CUSTOMERCODE.value = getURLValue('cd');
+	}else if("<#CUSTOMERCD>" != ''){
+		document.response.CUSTOMERCD.value = "<#CUSTOMERCD>";
+		document.response.CUSTOMERCODE.value=document.response.CUSTOMERCD.value;
+	}else if(CUSTOMERCD != ''){
+		document.response.CUSTOMERCD.value = CUSTOMERCD;
+		document.response.CUSTOMERCODE.value=document.response.CUSTOMERCD.value;
+	}else{
+		alert("Error: No customer code found.");
+		$("submitButton").disabled = true;
+	}
+	//alert("customer code is: "+document.response.CUSTOMERCD.value);
+}
+
+
+//doesn't let you change the Memberid.
+function PredefMemberid()
+{
+alert("\nThe MemberID field is a pre-defined field.")
+document.response.Q01.focus();
+}
+
+function goNextAnchor(where) {
+	window.location.hash = where
+}
+
+-->
+</script>
+<h2><#TESTTITLE></h2>
+<script>
+	if("<#DESCRIPTION>" != ""){
+		document.write("<div class='formIntro'><p><#DESCRIPTION></p></div>")
+	}
+</script>
+<form method="POST" action="PostResults" name="response">
+<input type="hidden" name="CUSTOMERCODE" size="20" value="<#CUSTOMERCD>" disabled>
+<table class="gutters">
+	<#TESTQUESTIONS>
+</table>
+
+<input type="hidden" name="TESTCD" value="<#TESTCD>">
+<input type="hidden" name="LINKCD" value="">
+    <input type="hidden" name="CUSTOMERCD" value="">
+    <input type="hidden" name="ALLOWMULTISUBMISSIONS" value="Y">
+        <input type="hidden" name="RGROUPNUM" value="">
+    <input type="hidden" name="WRP" value="vote_confirm.htm">
+        <input type="hidden" name="UDC" value="dupe.htm">
+    <input type="hidden" name="WMT" value="../main_template_none.htm">
+ <div class="buttons">
+	<input name="button" type="button" onClick="validate()" value="Submit">
+ </div>
+</form>
+<script>
+	clearForm();
+</script>

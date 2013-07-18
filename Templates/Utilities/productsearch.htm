@@ -1,0 +1,49 @@
+<h2 class="title">Product Search</h2>
+<!-- <div class="buttons">
+
+<p><a href="#" data-role="button" data-inline="true" onClick="createPOST('../msascartdll.dll/productlist',{'ONWEBFLG':'Y','RANGE':'1/5','SORT':'UDEF1QTY'}); return false">View all Products</a>&nbsp;&nbsp;
+<a href="../msascartdll.dll/GetCart" data-role="button"  data-inline="true">View Cart</a></p>
+</div> -->
+<form method="POST" action="../msascartdll.dll/ProductList" target="_self" onsubmit="this.PRODUCTNAME.value = '~' + this.PRODUCTNAME2.value + '~';">
+
+
+	<div data-role="fieldcontain">
+	  <label for="Productname2">Product Name</label>
+	  <input type="text" name="PRODUCTNAME2" id="Productname2"><input type="hidden" name="PRODUCTNAME">
+	</div>
+	<div data-role="fieldcontain">
+	  <label for="ProductCd">Product ID</label>
+	  <input type="text" name="PRODUCTCD" id="ProductCd">
+	</div>
+	<div data-role="fieldcontain">
+	  <label for="ProductType">Type</label>
+		<select size="1" name="PRODUCTTYPE" id="ProductType">
+			<option selected>(All)</option>
+			<#RTVPRODUCTTYPEREF>
+		</select>
+	</div>
+	<div data-role="fieldcontain">
+	  <label for="UnitPrice">Price Range</label>
+	  <select size="1" name="UNITPRICE" id="UnitPrice">
+			<option>(All)</option>
+			<option value="<10">less than $10</option>
+			<option value="BETWEEN 10 AND 19.99">between $10 - $20</option>
+			<option value="BETWEEN 20 AND 29.99">between $20 - $30</option>
+			<option value="BETWEEN 30 and 39.99">between $30 - $40</option>
+			<option value="BETWEEN 40 AND 49.99">between $40 - $50</option>
+			<option value=">50">Over $50</option>
+		</select>
+	</div>
+
+	<input name="submit" type="submit" value="Search" data-inline="true" data-theme="g"data-icon="search">
+	<input name="reset" type="reset" value="Reset" data-inline="true" data-theme="c" data-icon="refresh">
+
+
+
+		  <input type="hidden" name="RANGE" value="1/5">
+          <input type="hidden" name="ONWEBFLG" value="Y" />
+          <input type="hidden" name="SORT" value="UDEF1QTY" />
+           <input type="hidden" name="WMT" value="../main_template_mobile.htm" />
+
+		  </form>
+

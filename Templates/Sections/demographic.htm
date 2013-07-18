@@ -1,0 +1,32 @@
+	
+	
+	<h2>Demographic Information</h2>
+	<legend>Demographic Information</legend>
+	<fieldset data-role="controlgroup">
+		
+	<ul>
+		<li>
+			<label for="GENDER">Gender</label>
+			<input type='radio' name='GENDER' value='Male' />Male <input type='radio' name='GENDER' value='Female' />Female
+		</li>
+		<li>
+			<label for="ETHNICITY">Ethnicity</label>
+			<select name='ETHNICITY'> 
+				<option value=''>Select One...</option>
+				<#RTVETHNICITYREFFLD1DESCRIPTIONFLD2DESCRIPTIONSCVETHNICITY> 
+			</select>
+		</li>
+		<li>
+			<label for="BIRTHDATE">Birth Date</label>
+			<input name='BIRTHDATE' id='BIRTHDATE' value='<#BIRTHDATE FORMAT="mm/dd/yyyy">' Maxlength="10" >
+		</li>
+	</ul>
+	<script>
+			$(function() {
+		$( "#BIRTHDATE" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+		</script>
+	</fieldset>

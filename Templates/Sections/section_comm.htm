@@ -1,0 +1,12 @@
+<li class="checkbox" id="COMMITTEE">
+    <div>
+    <label for="COMMITTEE">
+    <a href='javascript:committeeWindow("<#CUSTOMERCD>")'>Click Here</a> to edit your committees.
+    </label>
+    </div>
+</li>
+<script>
+    if("<#CUSTOMERCD>" == ""){
+        $("#COMMITTEE").hide();
+    }
+</script>

@@ -1,0 +1,7 @@
+<ResumeDetail>
+<Firstname><#FIRSTNAME></Firstname>
+<MiddleInit><#MIDDLEINIT></MiddleInit>
+<LastName><#LASTNAME></LastName>
+<JobAppNum><#JOBAPPNUM></JobAppNum>
+<JobRequiredSkills><#JOBREQUIREDSKILLSDSC></JobRequiredSkills>
+</ResumeDetail>

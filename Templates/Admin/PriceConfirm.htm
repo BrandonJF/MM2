@@ -1,0 +1,34 @@
+
+<h2>Pricing Information</h2>
+<table class="profileForm">
+  <tr>
+    <td colspan="2">The following pricing information has been updated for <#ITEMALTCD></td>
+  </tr>
+  <tr>
+    <td colspan="2">Price Type:&nbsp;<#PRICENAME>&nbsp;</td>
+  </tr>
+   <tr>
+    <td colspan="2">Price Description:&nbsp;<#PRICEDES>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">Amount:&nbsp;$<#PRICE></td>
+  </tr>
+  <tr>
+    <td colspan="2"><hr></td>
+  </tr>
+  <tr>
+    <td colspan="2">Available on Web? -- <#ISWEBFLG></td>
+  </tr>
+  <tr>
+    <td>Member Price?<script>if('<#FORMEMBERFLG>' == ''){document.write(' -- N/A')}else{document.write(' -- <#FORMEMBERFLG>')}</script> </td>
+    <td>Standard Price?<script>if('<#STANDARDFLG>' == ''){document.write(' -- N/A')}else{document.write(' -- <#STANDARDFLG>')}</script> </td>
+  </tr>
+  <tr>
+    <td>Early Price?<script>if('<#EARLYFLG>' == ''){document.write(' -- N/A')}else{document.write(' -- <#EARLYFLG>')}</script></td>
+    <td>Late Price?<script>if('<#LATEFLG>' == ''){document.write(' -- N/A')}else{document.write(' -- <#LATEFLG>')}</script> </td>
+  </tr>
+  <tr>
+    <td><a href="priceinfo?itemaltcd=<#itemaltcd>">Add a New Price</a> | <a href="pricelist?sessionaltcd=<#itemaltcd>">View Price List</a>  | <a href="../../cgi-bin/admin.dll/eventview?sessionaltcd=<#ITEMALTCD>&RESPONSEPAGE=EventInfo_Update.htm">Edit Event</a></td>
+  </tr>
+</table>
+

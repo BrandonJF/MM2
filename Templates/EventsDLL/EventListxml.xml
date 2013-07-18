@@ -1,0 +1,10 @@
+<EventItem EVENTCD="<#SESSIONALTCD>">
+  <eventcode><#SESSIONALTCD></eventcode>
+  <eventname><#SESSIONNAME></eventname>
+  <description><#SESSIONDES></description>
+  <eventstartdate><#SESSIONBEGDATE FORMAT="mmm dd, yyyy"></eventstartdate>
+  <eventenddate><#SESSIONENDDATE  FORMAT="mmm dd, yyyy"></eventenddate>
+  <earlyregisterby><#EARLYREGISTERDATE></earlyregisterby>
+  <city><#LOCATIONCITY></city>
+  <state><#LOCATIONSTATECD></state>
+</EventItem>

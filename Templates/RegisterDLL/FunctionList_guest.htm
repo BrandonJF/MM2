@@ -1,0 +1,20 @@
+  <li><input type="checkbox" name="<#FUNCTIONCD>" id="<#FUNCTIONCD>" title="<#TITLE>" size="2" value="1" onBlur="checkAllFunctions(<#ATTENDEEREGQTY>, <#ATTENDEECANCELQTY>, <#ATENDEEMAXQTY>, this.value, '<#FUNCTIONCD>', this.name, this.value);" class="collectThisFunc"> <#TITLE>
+  <script>
+		if("<#STARTTMS>" != ""){
+			document.write("(<#STARTTMS> -");
+		}
+		if("<#ENDTMS>" != ""){
+			document.write("<#ENDTMS>)");
+		}
+	</script> - <#DISPLAYPRICE FORMAT='$0.00'>
+    		</li>
+    <input type="hidden" name="D_<#FUNCTIONCD>" value="<#STARTDATE>">
+    <input type="hidden" name="T_<#FUNCTIONCD>" value="<#STARTTMS>">
+    <input type="hidden" name="TITLE_<#FUNCTIONCD>" value="<#TITLE>">
+    <script>
+		if (<#FUNCTIONSTATUSCD>==1) document.event["<#FUNCTIONCD>"].disabled=true;
+	</script>
+
+<script>
+	isFunctions = true;
+</script>

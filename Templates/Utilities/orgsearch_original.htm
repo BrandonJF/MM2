@@ -1,0 +1,70 @@
+
+<h2><#MLGLBL "TEXT=Organization Search"></h2>
+<form name="searchform" method="post" action="../organizationdll.dll/List">
+	<fieldset>
+		<ul>
+			<li>
+				<label for="ORGNAME_field" ><#MLGLBL TEXT="Organization Name"></label>
+				<input type="text" name="ORGNAME_field"  tabindex="0">
+			</li>
+
+			<li>
+				<label for="EMAIL_field" ><#MLGLBL TEXT="Contact Email"></label>
+				<input type="text" name="EMAIL_field" >
+			</li>
+
+			<li>
+				<label for="ORGTYPE" ><#MLGLBL TEXT="Organization Type"></label>
+				 <select name="ORGTYPE">
+					<option value="">(ALL)</option>
+					<#REFTABLEVALS TABLENAME="ORGTYPEREF" SCV="ORGTYPE">
+				</select>
+			</li>
+
+			<li>
+				<label for="CITY_field" ><#MLGLBL TEXT="City"></label>
+				 <input type="text" name="CITY_field" >
+			</li>
+
+			<li>
+				<label for="STATECD" ><#MLGLBL TEXT="State"></label>
+				<select name="STATECD">
+					<option selected value="">(All)</option>
+					<#RTVSTATEREF>
+				</select>
+			</li>
+
+			<li>
+				<label for="ZIP" ><#MLGLBL TEXT="Zip"></label>
+				<input type="text" name="ZIP" >
+			</li>
+
+			<li>
+				<label for="COUNTRY" ><#MLGLBL TEXT="Country"></label>
+				<select name="COUNTRY">
+					<option selected value="">(All)</option>
+					<option value="USA">USA</option>
+					<#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAME>
+				</select>
+			</li>
+
+		</ul>
+
+	</fieldset>
+
+	<div class="buttons">
+		<input type="button" value="Search" onClick="orgSearchValidater(searchform);">
+		<input type="reset" value="Reset" >
+	</div>
+
+
+<input type="hidden" name="EMAIL" />
+<input type="hidden" name="ORGNAME" />
+<input type="hidden" name="CITY" />
+<input type="hidden" name="RANGE" value="1/25">
+<input type="hidden" name="NOWEBFLG" value="<>Y">
+<input type="hidden" name="SHOWSQL" value="N">
+<input type="hidden" name="SORT" value="ORGNAME">
+</form>
+
+

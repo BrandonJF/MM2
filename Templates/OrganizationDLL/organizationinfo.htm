@@ -1,0 +1,29 @@
+<h2 class="title"><#ORGNAME></h2>
+
+<script>
+	$(document).ready(function() { //add photo to profile if user has uploaded one - JW 08.13.12
+		var photoUrl = '../documentdll.dll/list?ownercd=<#ORGCD>&wbp=justphotos.htm&whp=none&wmt=none&DOCTYPE=Logo&range=1/1&sort=DOCDATE DESC';
+		$.ajax({url:photoUrl, type:'GET', async:false,
+			success: function(response){
+				if(!isNaN(response)){
+					$("#profilePhoto").append("<img src='../documentdll.dll/view?DOCUMENTNUM="+response+"' width='150' height='150'>");
+				}else{
+					//$("#profilePhoto").append("<img src='../../images/Photo-NotAvail.jpg' width='100' height='125'>");
+				}
+			},
+			error: function(){alert('An AJAX error has occured. Please ensure that you have Javascript-enabled browser and re-load the page to try again.');}
+		});
+});
+</script>
+<ul data-role="listview" data-inset="true">
+<#SECTION NAME="ORG_basicInfo_confirm.htm" >
+<#SECTION NAME="ORG_contactInfo_confirm.htm" >
+</ul>
+<div id="profilePhoto"></div>
+
+<div data-role="collapsible" data-collapsed="true" data-theme="a" data-content-theme="d">
+	 <h2>Member Listing...</h2>
+<ul data-role="listview" data-inset="false" data-filter="true" data-autodividers="true" data-filter-placeholder="Filter Members...">
+<#INCLUDE DLL="memberdll.dll" ACT="List" WHP=none WBP="CustomerList_org.htm" PARAMS="ORGCD={ORGCD},SORT=LASTNAME,NOWEBFLG=<>Y">
+</ul>
+</div>

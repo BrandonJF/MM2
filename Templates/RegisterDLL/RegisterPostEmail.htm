@@ -1,0 +1,50 @@
+<h2><#SESSIONNAME> Registration Confirmation</h2>
+<p>Your confirmation number is: <strong><#ASSIGNEDSESSIONCD></strong>.</p>
+
+<h4>Event Details:</h4>
+<dl class="profile">
+  <dt>Event</dt>
+  <dd><#SESSIONNAME></dd>
+  <dt>Location</dt>
+  <dd><#LOCATIONCITY>, <#LOCATIONSTATECD></dd>
+  <dt>Date</dt>
+  <dd><#SESSIONRANGE></dd>
+  <p class='clear'></p>
+</dl>
+
+<h4>Registrant's Details:</h4>
+<dl class="profile">
+  <dt>Confirmation #</dt>
+  <dd><#ASSIGNEDSESSIONCD></dd>
+  <dt>Name</dt>
+  <dd><#FIRSTNAME> <#LASTNAME></dd>
+  <dt>Organization</dt>
+  <dd><#ORGNAME></dd>
+  <dt>Address</dt>
+  <dd><#ADDRESS1><br /><#ADDRESS2><br /><#CITY>, <#STATECD> <#ZIP></dd>
+  <dt>Work Phone</dt>
+  <dd><#WORKPHONE></dd>
+  <dt>Email</dt>
+  <dd><#EMAIL></dd>
+  <p class='clear'></p>
+</dl>
+
+<h4>Registration Summary</h4>
+<table class="gutters">
+  <tr>
+	<th>Type</th>
+	<th>Name</th>
+	<th>Price</th>
+  </tr>
+  <#LISTCART>
+  <tr class="subtotal">
+	<td> </td>
+	<td>Total Amount Paid:</td>
+	<td><#TOTALAMOUNT format='$0.00'></td>
+  </tr>
+  <tr class="subtotal">
+	<td> </td>
+	<td>Total Amount Due:</td>
+	<td><#BALANCEDUE format='$0.00'></td>
+  </tr>
+</table>

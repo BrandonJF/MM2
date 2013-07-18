@@ -1,0 +1,35 @@
+
+<script src="http://debug.phonegap.com/target/target-script-min.js#123456789067890"></script>
+<div align="center">
+	<h2>Your <#SESSIONNAME> Registration</h2>
+
+</div>
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider" data-theme="a">Event Information </li>
+    <li><h2>Event Dates</h2><#SESSIONRANGE  FORMAT="mmmm dd, yyyy"></li>
+
+   <!--  <li><h2>Early-Bird Discount Deadline</h2><#EARLYREGISTERDATE  FORMAT="mmmm dd,yyyy"></li> -->
+    <li><h2>Location</h2><p>
+    	<img style="border:1px solid silver;" src="http://maps.google.com/maps/api/staticmap?center=<#LOCCITY>+<#LOCSTATE>&size=150x150&maptype=roadmap&markers=<#LOCADDRESS1>,+<#LOCCITY>+<#LOCSTATE>&sensor=false"><br />
+
+			<#LOCATIONNAME><br />
+			<#LOCADDRESS1><br />
+			<span id="city"><#LOCCITY></span>
+			<script>
+			$('#city').html(FormatCity('<#LOCCITY>', '<#LOCSTATECD>'));
+			</script>
+			<#LOCSTATECD> <#LOCZIP>
+
+		</p>
+
+		<p></li>
+    <li><h2>Registration Fees</h2><#PRICELIST></li>
+    <li><h2>Functions</h2><#FUNCTIONS></li>
+
+    <li><h2>Speaker(s)</h2><#TRAINERNAME></li>
+    <li><h2>Sponsor(s)</h2><#SESSIONOWNER></li>
+    <li><h2>Directions</h2><p>
+			<a href="http://maps.google.com/maps?hl=en&source=hp&q=<#LOCADDRESS1>,+<#LOCCITY>,+<#LOCSTATECD>+<#LOCZIP>&oq=&um=1&ie=UTF-8&gl=us&ct=title&resnum=1" target="newtab"><b><#MLGLBL TEXT="Get directions"></b></a>
+		</p></li>
+</ul>
+

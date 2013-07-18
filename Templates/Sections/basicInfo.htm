@@ -1,0 +1,64 @@
+<fieldset>
+<legend><#MLGLBL TEXT="Basic Information"></legend>
+<ul>
+
+	<zzzSECTION NAME="username.htm" COOKIEHIDE=CUSTOMERCD=| PARAMS="CUSTOMERCD">
+	<zzzSECTION NAME="password.htm" COOKIEHIDE=CUSTOMERCD=| PARAMS="CUSTOMERCD">
+
+	<!--<li>
+		<label for="PREFIX"><#MLGLBL TEXT="Prefix"></label>
+		<select name="PREFIX" id="Prefix">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="SALUTATIONREF" FLD1="SALUTATION" FLD2="SALUTATION" SCV="PREFIX" MLG="Y">
+		</select>
+	</li>-->
+
+	<li>
+		<label for="FIRSTNAME" class="required"><#MLGLBL TEXT="First Name"></label>
+		<input type="text" name="FIRSTNAME" id="FirstName" value="<#FIRSTNAME>" class='reqField' >
+	</li>
+
+	<li>
+		<label for="MIDDLENAME"><#MLGLBL TEXT="Middle Name"></label>
+		<input name="MIDDLENAME" id="MiddleName" value="<#MIDDLENAME>" type="text" >
+	</li>
+
+	<li>
+		<label for="LASTNAME" class="required"><#MLGLBL TEXT="Last Name"></label>
+		<input type="text" name="LASTNAME" id="LastName" value="<#LASTNAME>" class='reqField' >
+	</li>
+	<!--
+	<li><label for="SUFFIX"><#MLGLBL TEXT="Suffix"></label>
+		<select name='SUFFIX' id='suffixField'>
+			<option value=''>Select One...</option>
+			<#CBXSUFFIX>
+		</select>
+		<script>$('#suffixField').val("<#SUFFIX>");</script>
+	</li>-->
+	<li>
+		<label for="JOBTITLE" class="required"><#MLGLBL TEXT="Title"></label>
+		<input name="JOBTITLE" id="JobTitle" type="text" value="<#JOBTITLE>" class='reqField' >
+	</li>
+
+	<li>
+		<label for="ORGNAME" class="required"><#MLGLBL TEXT="Organization"></label>
+		<input id="ORGNAME" name="ORGNAME"  value='<#ORGNAME>' class='reqField' type="text">
+    </li>
+    <li><label>&nbsp;</label>
+		<a href="#" id="orgSearch">Organization Search</a>
+<script>
+//opens org search results in a jquery dialog
+     $(document).ready(function () {
+            $('a#orgSearch').live('click', function (e) {
+                e.preventDefault();
+				var newSearch = document.order.ORGNAME.value;
+                var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/organizationdll.dll/List?ORGNAME='+newSearch+'~&SORT=ORGNAME&WMT=../main_template_none.htm&WHP=addOrg_header.htm&WBP=addOrg_list.htm&WNR=addOrg_noRec.htm&RANGE=1/25';
+                var pagetitle = $(this).attr("title");
+                return parent.uiPopUp(page);
+        });
+	});
+</script>
+	<div style="padding-left: 170px; padding-bottom:10px; float:right;">Please type in at least the first-two letters of the organization and then click on <a href="#" id="orgSearch">Organization Search</a>. A pop-up window will appear and then select your organization from the list by selecting the Organization Number and close the window.</div>
+	</li>
+</ul>
+</fieldset>

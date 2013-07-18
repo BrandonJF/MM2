@@ -1,0 +1,110 @@
+[DEFAULT]
+MULTILANGUAGE=Y
+MULTILANGUAGEAUTOTRANSLATE=Y
+DATADIR=C:\inetpub\wwwroot\CVMM2\cgi-bin\ERRORLOG\
+ONLINEPAYMENTTYPE=PAYPAL
+LOGINURL=http://localhost/mm_mod/cgi-bin/utilities.dll/openpage?wrp=mainlogin.htm
+RESTRICTALLDLL=PU
+FORCETEMPLATELOAD=Y
+UNDERCONSTRUCTION=N
+POSTONLY=N
+MIXEDCOOKIE=Y
+ENCRYPTCUSTOMERPWD=N
+SSLCERTIFICATE=N
+ALLOWEDFILEEXTENSIONS=pdf,jpg,doc,docx,txt,xls,xlsx,rtf,ppt,pptx,wpd,wps,png,gif,bmp
+ALLOWPARTIALPAYMENT=Y
+AUTOENCRYPTCUSTOMERCD=N
+COMMITTEEOFFICERSFILTER=Advisory,Chair,Co-Chair,Complimentary,Executive Council Member,Member,President,Secretary,Staff,Staff Liaison,Treasurer,Vice President
+COOKIETIME=1
+CURRENCYDEFAULTFORMAT=$0.00
+CURRENCYFORMAT=Y
+DATEDEFAULTFORMAT=M/D/YYYY
+DUPCHECKLIST=FIRSTNAME,LASTNAME,EMAIL
+ENCRYPTFIELDSPWD=we were born to be princes of the universe
+EVENTSHOWEARLYPRICE=Y
+FILENAMEPATTERN=#CUSTOMERCD_#FILENAME#FILEEXT
+FILESTORAGELOCATION=C:\inetpub\wwwroot\CVMM2\cgi-bin\documents\
+FORGETPWDREQUIREDFIELDS=EMAIL,WEBUSERID
+ITEMCOLOR=#EEEEDD
+MULTIDAYEVENTVIEW=Y
+NAVIGATEBYPOST=N
+NEWCUSTOMERKEYFIELDS=firstname,lastname,email
+NOIMAGE=C:\inetpub\wwwroot\cvMM2\images\product.png
+NOPRODUCTIMAGE=C:\inetpub\wwwroot\CVMM2\images\product.png
+NODOCUMENTIMAGE=C:\inetpub\wwwroot\CVMM2\images\nodoc.png
+NOMEMBERIMAGE=C:\inetpub\wwwroot\CVMM2\images\Photo-NotAvail.jpg
+PAYEENAME=WEBUSER
+SECURECOOKIE=N
+SHOWEMPTYINFOFORM=Y
+SKIPZEROAMT=Y
+
+[GOOGLETRANSLATE]
+Key=AIzaSyBmUfVy8ZbRCbhYBscHQn9Q4uQ5AsV4wYM
+URL=https://www.googleapis.com/language/translate/v2
+
+
+[CONNECTION]
+DATABASENAME=EUCLID_TESTDRIVE
+SERVERNAME=ET-WEB-01
+PROVIDER=AUTO
+ENCRYPT=N
+DISCONNECTEDMODE=Y
+LOCALFAILOVER=Y
+POOLING=Y
+POOLINGVALIDATE=Y
+MAXPOOLSIZE=100
+POOLCONNECTIONLIFETIME=0
+
+[PPSERVICESETTING]
+CLIENTID=0EFC2070-1502-E011-83AE-0019B9CA3696
+CVUSER=CVWEB_ET
+SERVER=et-web-01
+PORT=9003
+
+[EMAIL]
+EMAILDIR=C:\inetpub\wwwroot\CVMM2\cgi-bin\EMAILLOG\
+FROMNAME=Euclid Technology
+FROMADDRESS=support@euclidtechnology.com
+USESMTP=Y
+
+[SQLS]
+USERNAMECHECK=select CUSTOMERCD from CUSTOMER where WEBUSERID = :code
+EMAILCHECK=select CUSTOMERCD from CUSTOMER where EMAIL = :code
+CAMPAIGNS=SELECT CAMPAIGNCD, CAMPAIGNNAME, STARTDATE, ENDDATE, CAMPAIGNTYPE, TARGET FROM CAMPAIGN
+SURVEYS=SELECT * FROM TEST_MASTER
+PRODUCTS=SELECT * FROM INVOICE WHERE payeetypecd='O'
+WHOKNOWSWHO=select * from WHOKNOWSWHO
+CEO=select C.* from customer C join whoknowswho W on C.customercd = W.kmembercd where W.relationship='Primary Contact'
+COMMITTEE=select c.typecd, c.committeecd, c.statustt, c.name from committee c
+JOINED=select * from indcommittee
+RELATEDPRODUCTS=select * from productrelation
+COMMITTEEOFF=select I.*, C.CUSTOMERCD,C.FIRSTNAME, C.LASTNAME, C.ORGNAME, C.WORKPHONE,C.FAXPHONE, C.CITY,C.STATECD FROM INDCOMMITTEE I JOIN CUSTOMER C ON C.CUSTOMERCD=I.CUSTOMERCD WHERE CPOSITION IN ('CHAIR','VCHAIR','SECTRE','SECY')
+AUTHORS=SELECT * FROM PROJECT_TEAMMEMBERS
+abstractListTG1=select * from abstracttopicref a join abstracttopics b on b.abstracttopic = a.abstracttopic where b.groupcd = 'tg1'
+abstractReviewList=select at.groupcd, at.allmembersflg, at.reviewcommitteecd, at.abstracttopic, at.selectioncommitteecd, at.leadreviewercd from abstracttopics at join abstractgroup ag on ag.groupcd=at.groupcd and ag.onwebflg='Y' and ag.finalreviewdate>getdate() where (at.allmembersflg='Y' or at.reviewcommitteecd is not null or at.selectioncommitteecd is not null or at.leadreviewercd is not null)
+abstractReviewList2=select at.groupcd, at.allmembersflg, at.reviewcommitteecd, at.abstracttopic, at.selectioncommitteecd, at.leadreviewercd from abstracttopics at join abstractgroup ag on ag.groupcd=at.groupcd and ag.onwebflg='Y' and ag.finalreviewdate>getdate() where (at.allmembersflg='Y' or at.reviewcommitteecd is not null or at.selectioncommitteecd is not null or at.leadreviewercd is not null)
+abstractSelectList=select at.groupcd, allmembersflg, selectioncommitteecd from abstracttopics at join abstractgroup ag on ag.groupcd=at.groupcd and ag.onwebflg='Y' and ag.finalreviewdate>getdate() where at.selectioncommitteecd is not null
+getSurvey=select * from abstracttopics
+getSurvey2=select * from abstracttopics
+surveyResponses=select * from test_customer_response
+votedList=select * from test_customer_response
+groupList=select * from abstractgroup
+topicList=select * from abstracttopics
+topicList_ref=select * from abstracttopicref
+EVENTTRAINER=select C.FIRSTNAME, C.LASTNAME, C.CUSTOMERCD, C.JOBTITLE, C.ORGNAME, ET.* from eventtrainer ET join CUSTOMER C ON ET.CUSTOMERCD = C.CUSTOMERCD
+
+
+[REGFORMLOGIN]
+WAITLISTMESSAGE=This event is full.  You will be placed on a waiting list.
+regmsg1=Discount Rate - $525
+regmsg2=Online Rate - $575
+memprice=525
+stdprice=575
+NonMemberPriceMessage=Join Now to become a member and save on this event registration!!
+memmsg=You are logged in and receiving the discounted price.
+stdmsg=Please Login by clicking on the Login link next to the price.
+link1=../../templates/QuickLogin.htm
+link2=../../templates/ID-PW Request.html
+
+[FCOMMENTS]
+MEAL=Please enter any special dietary requirements.

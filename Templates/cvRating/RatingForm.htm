@@ -1,0 +1,23 @@
+<form name="form1" method="post" action="add">
+  <p>
+    Select Product Rating: <select name="USERRATING">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>   </p>
+	Add your comments: 
+  <p>
+    <textarea name="USERCOMMENT" cols="90" rows="10"></textarea>
+</p>
+  <p>
+    <input type="hidden" name="ENTITYCD" value="">
+    <input type="hidden" name="ENTITYTYPECD" value="P">
+    <input type="submit" name="button" id="button" value="Submit">
+  </p>
+</form>
+<script>
+var entityCode = getURLValue('ENTITYCD');
+document.form1.ENTITYCD.value = entityCode;
+</script>

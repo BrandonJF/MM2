@@ -1,0 +1,16 @@
+<tr>
+    <td>
+        <input type="checkbox" name="<#FUNCTIONCD>" title="<#TITLE>" id="<#FUNCTIONCD>" size="2" value="1" onBlur="checkAllFunctions('<#ATTENDEEREGQTY>', '<#ATTENDEECANCELQTY>', '<#ATENDEEMAXQTY>', this.value, '<#FUNCTIONCD>', this.name, this.value);" class="collectThisFunc">
+    </td>
+    <td><#FCOMMENTDESC> <#FCOMMENT></td>
+    <td >
+       
+        <input type="hidden" name="D_<#FUNCTIONCD>" value="<#STARTDATE>">
+        <input type="hidden" name="T_<#FUNCTIONCD>" value="<#STARTTMS>">
+        <input type="hidden" name="TITLE_<#FUNCTIONCD>" value="<#TITLE>">
+<script>
+                isFunctions = true;
+</script>
+
+    </td>
+</tr>

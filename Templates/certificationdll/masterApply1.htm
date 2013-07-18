@@ -1,0 +1,462 @@
+
+<script language="javascript">
+	function isEmpty( theField, displayName ) {
+		for ( i=0; i<theField.value.length; i++ )
+			if ( theField.value.charAt(i) != " " )
+				break;
+			if ( i == theField.value.length ) {
+				alert ( "Please enter your " + displayName +".");
+				theField.focus();
+				return true;
+			}
+		return false;
+	}
+
+	function validate(currForm)
+	{
+		if (currForm.ethics_agreement[0].checked == false)
+		{
+			alert("Please agree with our Standards of Conduct Agreement before proceeding.");
+			return false;
+		}
+		//first name is required
+		if ( isEmpty( currForm.FIRSTNAME, "First Name" ) )
+			return false
+		//last name is required
+		if ( isEmpty( currForm.LASTNAME, "Last Name" ) )
+			return false
+		
+		
+		//address type
+		var addrTypeChecked = false;
+		for (i=0; i<currForm.ADDRESSTYPE.length; i++)
+		{
+			if (currForm.ADDRESSTYPE[i].checked == true)
+				addrTypeChecked = true;
+		}
+		if (addrTypeChecked == false)
+		{
+			alert("Please choose your Address Type.");
+			currForm.ADDRESSTYPE[0].focus();
+			return false;
+		}
+		// address1 is required
+		if ( isEmpty ( currForm.ADDRESS1, "Street Address" ) )
+			return false
+		
+		// city is required
+		if ( isEmpty ( currForm.CITY, "City" ) )
+			return false
+		
+		// state is required; may also be province, which is why there's not a lookup
+		if ( isEmpty ( currForm.STATECD, "State" ) )
+			return false
+		// zip can also be a postal code, so just check that it's there
+		if ( isEmpty ( currForm.ZIP, "Zip Code" ) )
+			return false
+		
+		// phone is required and may have an extension which is why we don't do fancier validation
+		if ( isEmpty ( currForm.WORKPHONE, "Work Phone" ) )
+			return false 
+		// cc number is required
+		if ( isEmpty ( currForm.PAYMENTREFNUM, "Credit Card Number"))
+			return false
+
+		return true;
+	}
+	
+	function toggleSubmitBtn(currForm)
+	{
+		if (currForm.ethics_agreement[0].checked == false)
+			currForm.SubmitBtn.disabled = true;
+		else
+			currForm.SubmitBtn.disabled = false;
+	}
+</script>
+<style type="text/css">
+<!--
+.style1 {
+	font-size: xx-small;
+	font-style: italic;
+}
+-->
+</style>
+
+<form name="event" method="post" action="UpdateMasterPay" onSubmit="return validate(this);">
+  <table width="100%" border="0"  cellspacing="0" class="tableBorder">
+<tr>
+	<td colspan="2" class="subtitle"><h2><strong>2010 Application for the Comprehensive Registry Examination of Polysomnographic Technologists </strong></h2></td>
+</tr>
+<tr>
+	<td colspan="2"><p><strong>Members, please <a href="../../MainLogin.shtml">login</a> to pay the member rate for certification enrollment.</strong></p>
+	  <h3><strong>Eligibility Status * </strong></h3>
+	  <p>
+	    <input name="CERTIFICATIONCD" type="radio" value="RPSGT-APPL" />
+	    I am a <em>NEW APPLICANT </em> for the RPSGT Examination for Polysomnographic Technologists </p>
+	  <p>
+	    <input name="CERTIFICATIONCD" type="radio" value="RPSGT-RECE" />
+	    I am<em> RETESTING </em>for the RPSGT Examination for Polysomnographic Technologists. </p>
+	  <p>Date of last exam taken:</p>
+	  <h3><strong>Basic Cardiac Life Support Certification (BCLS)</strong> * </h3>
+	  <p><strong>Are you currently certified in BCLS or it's equivalent?</strong></p>
+	  <p><strong>
+	    <input name="radiobutton" type="radio" value="radiobutton" />
+	  </strong>Yes. I am mailing proof of current certification. (Applications will be approved for one year or to the date of expiration on the BCLS/CPR card submitted, whichever is soonest.) </p>
+	  <p><strong>
+	    <input name="radiobutton" type="radio" value="radiobutton" />
+	  </strong> No. If you do not have current certification that will remain valid through the end of the examination window for why you are applying <strong>stop here.</strong> You are <strong>NOT </strong> eligible to take the RPSGT Exam  </p>
+	  <h3><strong>Verification of Clinical and/or Educational Experience: </strong></h3>
+	  <p>All applicants must print this form and have ONLY the Medical Director, Administrative Director, Human Resources Representative, Immediate Supervisor, A-STEP or CAAHEP Program Director complete this section of the application.</p>
+	  <p>This form MUST be mailed to the BRPT in order to complete your online application. </p>
+	  <center>
+	    <p><a tabindex="-1" href="http://www.amg-inc.com/brptnewapplicant_verification_form.pdf" target="_blank"><strong>Click here to print form.</strong> </a>	      </p>
+	    <p align="left">
+	      <input type="checkbox" name="checkbox" value="checkbox" />
+	      Yes. I understand that I must print this Verification of Clinical Experience   Form and have it completed only by those listed in the instructions, then mailed   to the BRPT by the application deadline in order to complete my online   application.	    </p>
+	  </center>	  
+	  <p>*=Required Fields <br>
+	      <br>	
+      </p></td>
+</tr>
+<tr>
+	<td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+	<td colspan="2" class="subtitle">Contact Information</td>
+</tr>
+<tr>
+	<td width="25%" align="right">First Name:</td>
+	<td><input type="text" name="FIRSTNAME" size="27" value="<#FIRSTNAME>"></td>
+</tr>
+<tr>
+  <td align="right">Middle Initial: </td>
+  <td><input type="text" name="MIDDLEINITIAL" size="10" value="<#MIDDLEINITIAL>" /></td>
+</tr>
+<tr>
+	<td align="right">Last Name:</td>
+	<td><input type="text" name="LASTNAME" size="50" value="<#LASTNAME>"></td>
+</tr>
+<tr>
+  <td align="right">Suffix: </td>
+  <td><select name="SUFFIX" size="1">
+    <#CBXSUFFIX>
+  </select>  </td>
+</tr>
+<tr>
+  <td align="right">Former Name:<br />
+    <span class="style1">if applicable </span></td>
+  <td><input type="text" name="SPOUSENAME" size="50" value="<#SPOUSENAME>" /></td>
+</tr>
+<tr>
+  <td align="right">Email: </td>
+  <td><input type="text" name="EMAIL" size="50" value="<#EMAIL>" /></td>
+</tr>
+<tr>
+  <td align="right">Daytime Phone: </td>
+  <td><input type="text" name="WORKPHONE" size="50" value="<#WORKPHONE>" /> 
+    Ext.
+    <input type="text" name="WORKPHONEEXT" size="15" value="<#WORKPHONEEXT>" /></td>
+</tr>
+<tr>
+  <td align="right">Evening Phone: </td>
+  <td><input type="text" name="HOMEPHONE" size="50" value="<#HOMEPHONE>" />
+     Ext.   <input type="text" name="UDEF1TXT" size="15" value="<#UDEF1TXT>" /></td>
+</tr>
+<tr>
+  <td align="right">Birth Date: </td>
+  <td><input type="text" name="BIRTHDATE" size="30" value="<#BIRTHDATE>" /></td>
+</tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+  <td colspan="2" class="subtitle">Home Address </td>
+</tr>
+<tr>
+  <td align="right">Street Address:</td>
+  <td><input type="text" name="ADDRESS2" size="50" value="<#ADDRESS2>" /></td>
+  </tr>
+<tr>
+  <td align="right">Extra Address: </td>
+  <td><input type="text" name="ADDRESS1" size="50" value="<#ADDRESS1>" /></td>
+</tr>
+<tr>
+  <td align="right">City:</td>
+  <td><input type="text" name="CITY" size="50" value="<#CITY>" /></td>
+  </tr>
+<tr>
+  <td align="right">State:</td>
+  <td><select name="STATECD"  size="1">
+      <option><#RTVSTATEREFSCVSTATECD></option>
+    </select>  </td>
+  </tr>
+<tr>
+  <td align="right">Zip:</td>
+  <td><input type="text" name="ZIP" size="50" value="<#ZIP>" /></td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="center">Below, please enter your country code. </div></td>
+  </tr>
+<tr>
+  <td align="right"> Country: </td>
+  <td><select name="COUNTRY" id="COUNTRY">
+    <option><#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESCVCOUNTRY></option>
+    </select>  </td>
+  </tr>
+<tr>
+	<td colspan="2" class="subtitle">Business Address </td>
+</tr>
+<tr>
+  <td align="right">Employer or School: </td>
+  <td><input type="text" name="ORGNAME" size="50" value="<#ORGNAME>" /></td>
+</tr>
+<tr>
+  <td align="right">Street Address:</td>
+  <td><input type="text" name="ALTADDRESS2" size="50" value="<#ALTADDRESS2>" /></td>
+  </tr>
+<tr>
+	<td align="right">Extra Address:</td>
+	<td><input type="text" name="ALTADDRESS1" size="50" value="<#ALTADDRESS1>"></td>
+</tr>
+<tr>
+	<td align="right">City:</td>
+	<td><input type="text" name="ALTCITY" size="50" value="<#ALTCITY>" /></td>
+</tr>
+<tr>
+	<td align="right">State:</td>
+	<td>
+		<SELECT NAME="ALTSTATE" size="1">
+		<option><#RTVSTATEREFSCVALTSTATE></option>
+		</SELECT>	</td>
+</tr>
+<tr>
+  <td align="right">Zip:</td>
+  <td><input type="text" name="ALTZIP" size="50" value="<#ALTZIP>" /></td>
+  </tr>
+<tr>
+  <td align="right" valign="top">Country: </td>
+  <td><select name="ALTCOUNTRY" id="select">
+    <option><#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESCVALTCOUNTRY></option>
+  </select></td>
+</tr>
+<tr>
+  <td align="right">Phone: </td>
+  <td><input type="text" name="ALTPHONE" size="50" value="<#ALTPHONE>" />
+    Ext.
+    <input type="text" name="ALTPHONEEXT" size="15" value="<#ALTPHONEEXT>" /></td>
+	</tr>
+<tr>
+	<td align="right">Web Site:</td>
+	<td><input type="text" name="WWWADDRESS" size="50" value="<#WWWADDRESS>"></td>
+</tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+  <td colspan="2" class="subtitle">Testing Information </td>
+</tr>
+<tr>
+  <td align="right">Test Date: </td>
+  <td><input type="text" name="SYSTEMDATE2" size="30" value="<#SYSTEMDATE2>" /></td>
+</tr>
+<tr>
+  <td align="right">Test Center: </td>
+  <td>Need Field </td>
+</tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+  <td colspan="2" class="subtitle">International Candidates </td>
+</tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">Candidates who reside in countries other than the United States should complete this section. This information is requested to ensure that BRPT is able to provide direct communication with you regarding your application, test center reporting address, etc. Please contact BRPT at (703)610-9020 or 9703)610-9005 (fax) or by e-mail at info@brpt.org if you any special concerns. </div></td>
+  </tr>
+<tr>
+  <td align="right">Fax No: </td>
+  <td><input type="text" name="UDEF4TXT" size="50" value="<#UDEF4TXT>" /></td>
+</tr>
+<tr>
+  <td align="right">Contact Email: </td>
+  <td><input type="text" name="UDEF3TXT" size="50" value="<#UDEF3TXT>" /></td>
+</tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+  <td colspan="2" class="subtitle">ADA Accommodation Request *</td>
+</tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">
+    <p>If you are requesting ADA accommodations, you MUST print the two ADA Forms, have them properly completed and mail to the BRPT by the application deadline.</p>
+    <p>
+      <input name="ISTRAINERFLG" type="radio" value="N" />
+      No. I do not require special accommodations. 
+      <br />
+	  <input name="ISTRAINERFLG" type="radio" value="Y" /> 
+	  Yes. I do require special accommodations.  I understand that I must complete the ADA forms and send them to BRPT.</p>
+  </div></td>
+  </tr>
+<tr>
+  <td align="right">&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+   <td colspan="2" class="subtitle">Background Check Information*</td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">
+    <p>The RPSGT provides care that includes therapeutic contact with a variety of patients, including children and the elderly. This care may be on an intimate physical nature, and performed in settings which are isolated and under minimal supervision. The RPSGT is placed in a position of public trust. In order to protect the public, the BRPT may perform a criminal history background check and/or deny an application based on the commission of certain serious offenses.</p>
+    <p><strong>Answers to the following questions are mandatory. Failure to provide accurate true and correct information shall constitute grounds for rejection of your application, or revocation of the RPSGT credential.</strong></p>
+    <ul>
+      <li>Have you ever been convicted or, or entered a plea of guilty, nolo contendere, or no contest to, a crime in any jurisdiction other than a minor traffic offense? Please include all misdemeanors and felonies, even if the court withheld adjudication so the you would not have a record of conviction. For the purposes of this question, driving under the influence and driving while impaired are not considered minor traffic offenses.</li>
+      <li>Ar you now or have you ever been a defendant in a civil litigation in which the basis of the complaint against you was alleged negligence, malpractice, lack of profession competence, or sexual misconduct?</li>
+      <li>Has licensing, certifying, professional or disciplinary authority refused to issue a license or certification or ever revoked, annulled, cancelled, suspended, placed on probation or refused to renew a professional license or certificate held by you now or previously, or ever fined, censured, reprimanded or otherwise disciplined you?</li>
+      <li>Have you ever voluntarily surrendered a license or certificate in order to avoid disciplinary action by a licensing or certification authority?</li>
+      <li>Is there currently pending against you, in any state or jurisdiction, or with any licensing, certification agency or professional society, a complaint against your professional conduct or competence? </li>
+    </ul>
+  </div></td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">
+    <p>If you answered &quot;Yes&quot; to any of the above questions, you must submit the following before your application will be considered complete:</p>
+    <ul>
+      <li>A complete written explanation of the circumstances surrounding the proceedings, including a narrative describing:</li>
+      <li>Where the incident occurred</li>
+      <li>The date the incident occurred</li>
+      <li>The outcome of the proceedings </li>
+      <li>Any penalty/sentence associated with the incident</li>
+      <li>Copies of court and other official documents. If the documents are not available, indicate the jurisdiction in which the proceedings occurred and why the documents are not available.</li>
+      </ul>
+    <p><strong>Please check here to verify that you have read this and that your answers are correct. </strong></p>
+  </div></td>
+  </tr>
+<tr>
+  <td align="right">&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+   <td colspan="2" class="subtitle">Standards of Conduct</td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">
+    <p>I hereby certify that I have read the <strong>BRPT Standards of Conduct</strong> and understand that adherence to these standards is a required qualification of the RPSGT credential. Violation of the BRPT Standards of Conduct may result in disciplinary action in accordance with BRPT policy that may include suspension or revocation of the RPSGT credential.</p>
+    <p align="center">
+      <input name="radiobutton" type="radio" value="radiobutton" /> 
+      No
+      <input name="radiobutton" type="radio" value="radiobutton" />
+      Yes    </p>
+  </div></td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+   <td colspan="2" class="subtitle">Examination Fees *</td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">
+    <p>Please not that this application will not be processed unless accompanied by a valid credit card payment (payment information will be entered on the next page). The fee will be $350.00.</p>
+    <p align="center">
+      <input name="radiobutton" type="radio" value="radiobutton" />
+No
+<input name="radiobutton" type="radio" value="radiobutton" />
+Yes </p>
+  </div></td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><hr /></td>
+  </tr>
+<tr>
+   <td colspan="2" class="subtitle">Submission</td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">
+    <p><strong>Supplemental information, including but not limited to, information relating to experience and education, may be required of the applicant prior to or after the examination date.</strong></p>
+    <p>By submitting this application, I authorize the BRPT to obtain background information necessary to verify the accuracy and completeness of my responses to all questions contained herein. Further, I grant my permission to and direct any employer or educational institution to provide the BRPT with any information in their possession related to my employment, education or both.</p>
+    <p>I understand that the BRPT may audit candidate applications to verify experience, education or criminal history either prior to or after an examination is taken, or after the results are announced. I agree to cooperate with such audit and further understand that providing false information for verification of experience or education or having others do so is a violation of the BRPT Standards of Conduct and may result in judiciary sanctions. </p>
+    <p>I hereby certify that I have read all portions of the application and believe myself to be in compliance with all admission policies related to the RPSGT examination. The information I submit on this application and any documents I will submit will be complete, true an correct to the best of my knowledge and belief. I agree to immediately inform the BRPT of all changes to the information included in this application while i am and applicant, and for as long as I am certified by the BRPT. I understand that if the information I have submitted is found to be incomplete or inaccurate, I may be subject to disciplinary action, including but not limited by, rejection of my examination, loss of application frees, judiciary sanctions, and/or suspension or revocation for my RPSGT credential.</p>
+    <p>I hereby attest that I am taking this examination solely for the purpose of RPSGT certification. I further understand that I am prohibited from transmitting information regarding examination questions  or content in any form to any person or entity, and understand that failure to comply with this prohibition may result in my certification being revoked and/or legal action being taken against me.</p>
+    <p>I agree to be bound by policies and procedures and Standards of Conduct promulgated by the BRPT. I understand and agree that my failure to abide by the BRPT's policies and procedures and Standards of Practice shall constitute grounds for reject of my application or denial or revocation of my certification. By executing the application, I give the BRPT and its employees, agents and contractors permission to contact me by US mail, electronic mail, facsimile or through other media on matters which the BRPT believes may be of interest to me. </p>
+    <p align="center">
+	<INPUT type="radio" value="agree" name="ethics_agreement" 
+					onClick="toggleSubmitBtn(this.form)"> Agree			
+    
+
+<INPUT type="radio" CHECKED value="disagree" name="ethics_agreement" 
+					onClick="toggleSubmitBtn(this.form)"> Disagree
+</p>
+  </div></td>
+  </tr>
+<tr>
+  <td colspan="2" align="right"><div align="left">* = Required Fields </div></td>
+  </tr>
+<tr>
+  <td align="right">&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+	<td colspan="2"><b>Credit Card Information  *:</b></td>
+</tr>
+<tr>
+	<td colspan="2">
+		<table width="400" border="0" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<input type=radio name=PAYMENTTYPECD value=VISA checked>
+				<img src=../../images/visa.gif align=top> Visa			</td>
+			<td>
+				<input type=radio name=PAYMENTTYPECD value=MC>
+				<img src=../../images/mastercard.gif align=top> Master Card			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type=radio name=PAYMENTTYPECD value=AMEX>
+				<img src=../../images/amx.gif align=top> American Express			</td>
+			<td><input type=radio name=PAYMENTTYPECD value=DISC class='reqField'> 
+			<IMG SRC="../../images/discover.gif" align=top width="37" height="24"> Discover </td>
+		</tr>
+		</table>	</td>
+</tr>
+<tr>
+	<td align="right"><strong>Card Number*:</strong></td>
+	<td><input type=text name="PAYMENTREFNUM" value="" size=20></td>
+</tr>
+<tr>
+	<td align="right"><strong>Exp. Date*:</strong></td>
+	<td>
+	<select name=expiremonth size="1">
+	<option value="">Choose...</option>
+	<option value=01>Jan
+	<option value=02>Feb
+	<option value=03>Mar
+	<option value=04>Apr
+	<option value=05>May
+	<option value=06>Jun
+	<option value=07>Jul
+	<option value=08>Aug
+	<option value=09>Sep
+	<option value=10>Oct
+	<option value=11>Nov
+	<option value=12>Dec
+	</select>
+	/
+	<input type=text name="expireyear" value="" size=5 maxlength=2> (YY)	</td>
+</tr>
+<tr>
+	<td colspan="2" align="center"><input type="submit" name="SubmitBtn" value="Submit" disabled></td>
+</tr>
+<tr>
+	<td colspan="2" valign="top">&nbsp;</td>
+</tr>
+</table>
+
+<input type="hidden" name="CUSTOMERTYPE" value="APP">
+<input type="hidden" name="STATUSSTT" value="PROSPECT" />
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="MASTERID" value="<#MASTERID>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+</form>

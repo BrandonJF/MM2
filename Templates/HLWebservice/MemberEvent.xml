@@ -1,0 +1,5 @@
+          <MemberEvent>
+            <EventKey><#SESSIONALTCD></EventKey>
+            <EventTitle><#SESSIONNAME></EventTitle>
+            <RegistrationDate><#PAIDDATE></RegistrationDate>
+          </MemberEvent>

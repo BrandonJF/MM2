@@ -1,0 +1,83 @@
+<script>
+function setvalues(){}
+</script>
+
+<h2>Organization Membership Application</h2>
+
+<div id="primContact">
+	<div class="formIntro">
+    <p>Please enter the information requested below to create your organization profile. If you're already logged in, you can choose to skip step 2.</p>
+	<ul>
+		<li> All fields marked * are required.</li>
+		<li>For users from the USA, please enter all phone numbers in the format (302)392-3929</li>
+	</ul>
+</div>
+    
+
+
+<form method="post" name="order" action='../organizationdll.dll/UpdateInfo' id="org_profile">
+	<div id="step1">
+        <div class="breadcrumbs">
+        <span class="current">1. Create Organization Profile</span> &raquo; <span>2. Create Primary Contact</span> &raquo; <span>3. Select Membership/Payment</span>
+    </div>
+	<#SECTION NAME="ORG_basicInfo.htm" >
+	<#SECTION NAME="ORG_contactInfo.htm" >
+    <div class="buttons"><input type="submit" name="submit" value="Continue" id="nLogin" /> <input type="button" name="submitb" value="Continue" id="Login" onclick="primContactAdd(document.order);"/></div>
+    <div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+</div>
+
+	
+<input type="hidden" name="CONTACTNAME" value="<#FIRSTNAME> <#LASTNAME>">
+<input type="hidden" name="CUSTOMERCDLINK" value="<#CUSTOMERCD>">
+<input type="hidden" name="CUSTOMERCD" id="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="AUTOORGCD" value="Y">
+<input type="hidden" name="WRP" value="org_membershipapp.htm">
+<input type="hidden" name="WMT" value="../main_template_css.htm" />
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+
+</form>
+</div>
+<script>
+	updateTotals();
+$(function() { 
+        $("#org_profile").validity(function() {
+            $(".reqField").require();
+			$("#ORGNAME").require("Organization Name is required.");
+			$("#Email").require().match("email");
+			$("#Website").match("url", "Please use correct format http://xxxxxxx.xxx");
+            
+        });
+    });
+if("<#CUSTOMERCD>" ==""){
+    $("#Login").hide();
+}else{
+    $("#nLogin").val("Create a primary contact account").after("<br><br>");
+    $("#Login").val("Continue to membership selection and payment");
+    function ajaxValidity(){
+	 $.validity.start();
+	$("#org_profile .reqField").require();
+			$("#Email").require().match("email");
+            
+			var result = $.validity.end();
+			return result.valid;
+    }
+function primContactAdd(formName){
+    var orgcd='';
+    var orgname='';
+	if(ajaxValidity()){
+		$.ajax({url:'../organizationdll.dll/updateInfo', type:"GET", async:false, data:$('#org_profile').serialize(),
+			success:function(response){
+                orgcd = $(response).find('#ORGID').val();
+                orgname = $(response).find('#ORGNAME').val();
+                $.ajax({url:'../memberdll.dll/updateInfo?customercd='+CUSTOMERCD+'&orgcd='+orgcd+'&orgname='+orgname, type:"GET", async:false, success:function(data){
+                window.location = '../memberdll.dll/info?wrp=org_membershipapp2.htm';			
+				
+			}
+		});  
+			}
+		});}
+}}
+
+</script>

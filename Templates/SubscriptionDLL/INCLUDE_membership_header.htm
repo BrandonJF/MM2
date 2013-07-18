@@ -1,0 +1,13 @@
+<fieldset>
+<legend><#MLGLBL TEXT="Membership Category"></legend>
+<!--<p>Please select one of the below membership dues:</p>-->
+<ul>
+   <!-- <li>
+        <input type="checkbox" name="hasappeal" onchange="$('#appealCode').toggle()"> <strong>I have an appeal code!</strong>
+    </li>-->
+    <li id="appealCode" style="display: none">
+        <label>Appeal Code</label> <input type="text" name="PROMOCODE" id="PROMOCODE" value="<#PROMOCODE>">
+    </li>
+	<#CONTENT>
+</ul>
+</fieldset>

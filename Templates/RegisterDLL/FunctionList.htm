@@ -1,0 +1,36 @@
+<!-- <tr>
+	  <td> -->
+
+	<!--   </td>
+	  <td> -->
+
+	<!--   </td> -->
+	  <!-- <td class="price"> -->
+
+			<input type="hidden" name="D_<#FUNCTIONCD>" value="<#STARTDATE>">
+        <input type="hidden" name="T_<#FUNCTIONCD>" value="<#STARTTMS>">
+        <input type="hidden" name="TITLE_<#FUNCTIONCD>" value="<#TITLE>">
+
+          <li><a href="#" style="padding-top: 0px;padding-bottom: 0px;padding-right: 0px;padding-left: 0px;" >
+                        <label style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;" data-corners="false" >
+                            <!-- <fieldset data-role="controlgroup" >                                                       -->
+
+                                <input type="checkbox" name="<#FUNCTIONCD>" title="<#TITLE>" id="<#FUNCTIONCD>" data-theme="c" size="2" value="1" onBlur="checkAllFunctions('<#ATTENDEEREGQTY>', '<#ATTENDEECANCELQTY>', '<#ATENDEEMAXQTY>', this.value, '<#FUNCTIONCD>', this.name, this.value);" class="collectThisFunc"/>
+                                <label for="<#FUNCTIONCD>" style="border-top-width: 0px;margin-top: 0px;border-bottom-width: 0px;margin-bottom: 0px;border-left-width: 0px;border-right-width: 0px;">
+                                    <label >
+                                        <h3><#TITLE> </h3>
+                                        <p><#STARTTMS> <#ENDTMS LABEL="- "></p>
+                                        <p><#DISPLAYPRICE FORMAT='$0.00'> </p>
+
+                                    </label>
+                                </label>
+                            <!-- </fieldset>     -->
+                        </label>
+                        </a>
+                    </li>
+<script>
+	   if ("<#FUNCTIONSTATUSCD>"=="1") document.event["<#FUNCTIONCD>"].disabled=true;
+	isFunctions = true;
+</script>
+	  <!-- </td> -->
+<!-- </tr> -->

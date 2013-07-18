@@ -1,0 +1,229 @@
+<head>
+<script language="javascript">
+<!--
+function formValidate() 
+{
+//        if ( (isFirstname()) && (isLastname()) && (isPhone()) && (isAddress())  && (isCity()) && (isState()) && (isZip()) && (isEmail()) &&  
+//         formatAllPhoneNum())
+//		{ 
+	  	  document.abc.action = "SetPayment";
+	  	  document.abc.submit();
+	  	  return true;
+//		}
+//		else return false;
+}
+
+function RunSearch(num) {	
+var tmpsearch = eval('document.abc.LASTNAME_CI'+num+'.value');
+if (tmpsearch.length < 2) {
+   alert('Please enter the first two characters (or more) of the organization name');
+   eval('document.abc.LASTNAME_CI'+num+'.focus()');
+   return false;
+ }  
+else 
+{
+ tmpsearch = tmpsearch;   
+  switch (num)
+ {
+	case 1:
+	  window.open("/DEMO3/cgi-bin/memberdll.dll/List?ORGCD=<#ORGCD>&NAMEFIND="+tmpsearch+"&RANGE=1/25&WHP=searchHeader1.htm&WBP=CustomerSearch.htm","","fullscreen=no,location=yes,toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=480");
+          break;
+	case 2:
+	  window.open("/DEMO3/cgi-bin/memberdll.dll/List?ORGCD=<#ORGCD>&NAMEFIND="+tmpsearch+"&RANGE=1/25&WHP=searchHeader2.htm&WBP=CustomerSearch.htm","","fullscreen=no,location=yes,toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=480");
+          break
+	case 3:
+	  window.open("/DEMO3/cgi-bin/memberdll.dll/List?ORGCD=<#ORGCD>&NAMEFIND="+tmpsearch+"&RANGE=1/25&WHP=searchHeader3.htm&WBP=CustomerSearch.htm","","fullscreen=no,location=yes,toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=480");
+          break
+	case 4:
+	  window.open("/DEMO3/cgi-bin/memberdll.dll/List?ORGCD=<#ORGCD>&NAMEFIND="+tmpsearch+"&RANGE=1/25&WHP=searchHeader4.htm&WBP=CustomerSearch.htm","","fullscreen=no,location=yes,toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=480");
+          break
+	case 5:
+	  window.open("/DEMO3/cgi-bin/memberdll.dll/List?ORGCD=<#ORGCD>&NAMEFIND="+tmpsearch+"&RANGE=1/25&WHP=searchHeader5.htm&WBP=CustomerSearch.htm","","fullscreen=no,location=yes,toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=480");
+          break
+  }
+  return true;
+}
+}   
+
+-->
+</script>
+</head>
+
+
+   <center>
+     <form method="POST" name="abc">
+  <table id="wrap1">	<tr>
+		<td bgcolor='#333399' colspan='2'><font color='white'>&nbsp;<b>Attendee 
+		1</b></font></td>
+	</tr>
+<tr><td width="88">
+  <!--<table border="0" cellpadding="0" cellspacing="1">-->
+    <tr>
+	  <td align="left"> <b>First Name:</b></td>
+      <td width="246" align="left"><input type="text" size="20" name="FIRSTNAME_CI1" value=""> </td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Last Name:</b></td>
+      <td align="left"><input type="text" size="20" name="LASTNAME_CI1" value=""> <a href="#" onClick="RunSearch(1)">search</a></td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Title:</b></td>
+      <td align="left"><input type="text" size="45" name="JOBTITLE_CI1" value=""></td>
+    </tr>
+    <tr>
+      <td align="left"><b>Badge:</b></td>
+      <td align="left"><input type="text" size="45" name="APPEALCD_CI1" value=""> </td>
+    </tr>
+    
+	<tr><td align='left' colspan='2' id='td1'></tr>
+	 <tr>
+		<td bgcolor='#333399' colspan='2'><font color='white'>&nbsp;<b>Attendee 
+		2</b></font></td>
+	</tr>
+	<tr>
+		<td>
+  <!--<table border="0" cellpadding="0" cellspacing="1">-->
+    </tr>
+	<tr>
+	  <td align="left"> <b>First Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="FIRSTNAME_CI2" value=""> </td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Last Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="LASTNAME_CI2" value=""> <a href="#" onClick="RunSearch(2)">search</a></td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Title:</b></td>
+      <td align="left">
+		<input type="text" size="44" name="JOBTITLE_CI2" value=""></td>
+    </tr>
+	<tr>
+      <td align="left"><b>Badge:</b></td>
+      <td align="left">
+		<input type="text" size="44" name="APPEALCD_CI2" value=""> </td>
+    </tr>
+    
+	<tr><td align='left' colspan='2' id='td1'></tr>
+	 <tr>
+		<td bgcolor='#333399' colspan='2'><font color='white'>&nbsp;<b>Attendee 
+		3</b></font></td>
+	</tr>
+	<tr>
+		<td>
+  <!--<table border="0" cellpadding="0" cellspacing="1">-->
+    </tr>
+	<tr>
+	  <td align="left"> <b>First Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="FIRSTNAME_CI3" value=""> </td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Last Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="LASTNAME_CI3" value=""> <a href="#" onClick="RunSearch(3)">search</a></td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Title:</b></td>
+      <td align="left">
+		<input type="text" size="43" name="JOBTITLE_CI3" value=""></td>
+    </tr>
+	<tr>
+      <td align="left"><b>Badge:</b></td>
+      <td align="left">
+		<input type="text" size="43" name="APPEALCD_CI3" value=""> </td>
+    </tr>
+    
+	<tr><td align='left' colspan='2' id='td1'></tr>
+	 <tr>
+		<td bgcolor='#333399' colspan='2'><font color='white'>&nbsp;<b>Attendee 
+		4</b></font></td>
+	</tr>
+	<tr>
+		<td>
+  <!--<table border="0" cellpadding="0" cellspacing="1">-->
+    </tr>
+	<tr>
+	  <td align="left"> <b>First Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="FIRSTNAME_CI4" value=""> </td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Last Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="LASTNAME_CI4" value=""> <a href="#" onClick="RunSearch(4)">search</a></td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Title:</b></td>
+      <td align="left">
+		<input type="text" size="44" name="JOBTITLE_CI4" value=""></td>
+    </tr>
+	<tr>
+      <td align="left"><b>Badge:</b></td>
+      <td align="left">
+		<input type="text" size="44" name="APPEALCD_CI4" value=""> </td>
+    </tr>
+    
+	<tr><td align='left' colspan='2' id='td1'></tr>
+	 <tr>
+		<td bgcolor='#333399' colspan='2'><font color='white'>&nbsp;<b>Attendee 
+		5</b></font></td>
+	</tr>
+	<tr>
+		<td>
+  <!--<table border="0" cellpadding="0" cellspacing="1">-->
+    </tr>
+	<tr>
+	  <td align="left"> <b>First Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="FIRSTNAME_CI5" value=""> </td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Last Name:</b></td>
+      <td align="left">
+		<input type="text" size="20" name="LASTNAME_CI5" value=""> <a href="#" onClick="RunSearch(5)">search</a></td>
+    </tr>
+	<tr>
+	  <td align="left"> <b>Title:</b></td>
+      <td align="left">
+		<input type="text" size="44" name="JOBTITLE_CI5" value=""></td>
+    </tr>
+	<tr>
+      <td align="left"><b>Badge:</b></td>
+      <td align="left">
+		<input type="text" size="44" name="APPEALCD_CI5" value=""> </td>
+    </tr>
+    
+	<tr><td align='left' colspan='2' id='td1'><center>
+			<br>
+			
+
+		<input name="Button" type="button" onClick="formValidate()" value="Next to Payment">
+		</center>
+	 </tr>
+	 <tr>
+	 <td id="td1" colspan='2' align='left'>&nbsp;</td>
+	 </tr>
+</table>
+
+<input type="hidden" name="CUSTOMERCD_CI1" value="">
+<input type="hidden" name="CUSTOMERCD_CI2" value="">
+<input type="hidden" name="CUSTOMERCD_CI3" value="">
+<input type="hidden" name="CUSTOMERCD_CI4" value="">
+<input type="hidden" name="CUSTOMERCD_CI5" value="">
+<input type="hidden" name="BOOTHINFO" value="<#BOOTHINFO>">
+<input type="hidden" name="ORGINFO" value="<#ORGINFO>">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="BOOTHNUMLIST" value="<#BOOTHNUMLIST>">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+
+</form>
+
+
+
+		
+
+</body>
+</html>
+

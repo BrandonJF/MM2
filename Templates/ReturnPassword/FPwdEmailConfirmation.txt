@@ -1,0 +1,10 @@
+Please use the following user name and password to login to the 
+Members Only Section.
+
+
+User Name: <#WEBUSERID>
+Password: <#WEBUSERPASSWORD>
+
+Thank you.
+
+

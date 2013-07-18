@@ -1,0 +1,49 @@
+<div id="joinedDiv" style='display:none;'></div>
+
+<script language="javascript">
+	var url = window.location + ''; //get customercd frmo URL
+	var arr = url.split('customercd=');
+	var temp = arr[1];
+	var temp2 = temp.split('&');
+	var customercd = temp2[0];
+	function optout (comm,cust,value) {
+		var flg = "Inactive";
+		var mail = "Y";
+		if (value) { flg = "Active"; mail="N"}
+		var poststr = "../committeedll.dll/JoinCommittee?COMMITTEECD=" + comm + "&CUSTOMERCD=" + customercd + "&COMMITTEESTATUSSTT=" + flg + "&NOEMAILFLG=" + mail;
+		$.ajax({url:poststr, type:"GET"});
+	}
+	function checkJoined(){
+		var joinedURL = '../memberdll.dll/customlist?sqlname=joined&customercd='+customercd+'&committeestatusstt=active&wmt=none&wnr=none&whp=joined_header.htm&wbp=joined_list.htm';
+		$.ajax({url:joinedURL, type:"GET",
+			success:function(response){
+				var commArray = jQuery.makeArray(response.split('|'));
+				commArray.each(function(){
+					var tempID = this.replace(/^\s*|\s*$/g,'');
+					$("#" + tempID).attr("checked", "checked");
+				});
+			}
+		});	
+	}
+	var groupTracker = "";
+</script>
+
+<h2>Join Active Committees</h2>
+<div class="formIntro">
+	<p>To sign up for a Committee, place a check mark in the box next to the Committee  name. </p>
+</div>
+<form name='submitForm' action='../memberdll.dll/openpage' method='POST'>
+<fieldset>
+  <ul>
+	<#CONTENT>
+  </ul>
+</fieldset>
+<div class="buttons">
+	<input type='Submit' value='Submit'>
+</div>
+<input type="hidden" name="WRP" value="joinComm_confirm.htm" />
+<input type="hidden" name="WMT" value="main_template_none.htm" />
+</form>
+<script>
+	checkJoined(); //pre-select committees that the user has already joined
+</script>

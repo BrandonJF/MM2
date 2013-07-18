@@ -1,0 +1,40 @@
+<script>
+function AddtoList()
+{
+	document.SearchForm.submit();
+}
+</script>
+<style type="text/css">
+ul {list-style-type:none;background:#fff;}
+li, li a {padding-left:0;margin:0;}
+</style>
+</head>
+
+<body>
+<div id="divWrapFSearch">
+<form action="../utilities.dll/FastSearch" method="get" name="SearchForm">
+	<p>
+	<SCRIPT>
+	$(function() {
+		var availableTags = [<#INCLUDE DLL=utilities.dll ACT=SearchTags PARAMS=TAX_TYPE_ID=1>];
+		$( "#tags" ).autocomplete({
+			source: availableTags,
+			select: function(event, ui){event.preventDefault(); $(this).val(ui.item.label); $(this).data("hiddenValue", ui.item.value); document.SearchForm.Tax_Term_ID.value=ui.item.value}  
+		});
+	});
+	</SCRIPT>
+
+	<DIV class="ui-widget" style="text-align:center;">Taxonomy Search: <INPUT id="tags"></DIV>
+	</p>
+  
+	<input type="hidden" name="Tax_Term_ID" value=""/>
+	<input type="hidden" name="S_ONWEBFLG" value="Y"/>
+	<input type="hidden" name="R_ONWEBFLG" value="Y"/>
+	<input type="hidden" name="S_STATUSSTT" value="Open"/>
+	<input type="hidden" name="R_INACTIVEFLG" value="<>Y"/>
+	<input type="hidden" name="TAX_TYPE_ID" value="1"/>
+    <p style="text-align:center;"><input type="button" name="button"  value="Search" onclick="AddtoList()" /></p>
+
+</form>
+</div>
+

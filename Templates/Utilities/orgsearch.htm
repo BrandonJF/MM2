@@ -1,0 +1,75 @@
+<h2 class="title"><#MLGLBL "TEXT=Organization Search"></h2>
+<form id="searchform" name="searchform" method="post" action="../organizationdll.dll/List"
+data-ajax="false">
+<div data-role="fieldcontain">
+	<label for="ORGNAME_field">
+		<#MLGLBL TEXT="Organization Name">
+	</label>
+	<input type="text" id="ORGNAME_field" name="ORGNAME_field" tabindex="0">
+</div>
+<!-- <div data-role="fieldcontain">
+	<label for="EMAIL_field">
+		<#MLGLBL TEXT="Contact Email">
+	</label>
+	<input type="text" id="EMAIL_field" name="EMAIL_field">
+</div> -->
+<div data-role="fieldcontain">
+	<label for="ORGTYPE">
+		<#MLGLBL TEXT="Organization Type">
+	</label>
+	<select id="ORGTYPE" name="ORGTYPE">
+		<option value="">
+			(ALL)
+		</option>
+		<#REFTABLEVALS id="ORGTYPEREF" NAME="ORGTYPEREF" SCV="ORGTYPE">
+	</select>
+</div>
+<div data-role="fieldcontain">
+	<label for="CITY_field">
+		<#MLGLBL TEXT="City">
+	</label>
+	<input type="text" id="CITY_field" name="CITY_field">
+</div>
+<div data-role="fieldcontain">
+	<label for="STATECD">
+		<#MLGLBL TEXT="State">
+	</label>
+	<select id="STATECD" name="STATECD">
+		<option selected value="">
+			(All)
+		</option>
+		<#RTVSTATEREF>
+	</select>
+</div>
+<div data-role="fieldcontain">
+	<label for="ZIP">
+		<#MLGLBL TEXT="Zip">
+	</label>
+	<input type="text" id="ZIP" name="ZIP">
+</div>
+<div data-role="fieldcontain">
+	<label for="COUNTRY">
+		<#MLGLBL TEXT="Country">
+	</label>
+	<select id="COUNTRY" name="COUNTRY">
+		<option selected value="">
+			(All)
+		</option>
+		<option value="USA">
+			USA
+		</option>
+		<#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAME>
+	</select>
+</div>
+<div class="buttons">
+	<input type="submit" value="Search" onClick="orgSearchValidater(searchform);" data-theme="g" data-icon="search">
+	<input type="reset" value="Reset">
+</div>
+<input type="hidden" id="EMAIL" name="EMAIL" />
+<input type="hidden" id="ORGNAME" name="ORGNAME" />
+<input type="hidden" id="CITY" name="CITY" />
+<input type="hidden" id="RANGE" name="RANGE" value="1/25">
+<input type="hidden" id="NOWEBFLG" name="NOWEBFLG" value="<>Y">
+<input type="hidden" id="SHOWSQL" name="SHOWSQL" value="N">
+<input type="hidden" id="SORT" name="SORT" value="ORGNAME">
+</form>

@@ -1,0 +1,25 @@
+<h2>Package Registration Confirmation</h2>
+<p><SCRIPT> 
+if (window.print) { document.write('<input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()">'); }</script>
+</p>
+<dl class="profile">
+    <dt>Name</dt><dd><#FIRSTNAME> <#LASTNAME></dd>
+    <dt>Organization</dt><dd><#ORGNAME></dd>
+    <dt>Address</dt><dd><#ADDRESS1><br /><#ADDRESS2><br /><#CITY>, <#STATECD> <#ZIP></dd>
+    <dt>Work Phone</dt><dd><#WORKPHONE></dd>
+    <dt>Email</dt><dd><#EMAIL></dd>
+    <dt>Total Amount Paid</dt><dd><#TOTALAMOUNT></dd>
+    <p class="clear"></p>
+</dl>
+
+<h4>Registration Summary</h4>
+<table class="gutters">
+    <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <#LISTCART>
+    </tr>
+</table>

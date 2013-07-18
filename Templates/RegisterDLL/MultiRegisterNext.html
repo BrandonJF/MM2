@@ -1,0 +1,155 @@
+<script language="JavaScript1.2">
+<!--
+
+function formValidate() {
+
+
+
+		var fObj = document.order;
+		
+		var oRequiredCC = new Object();
+		oRequiredCC.PAYMENTTYPECD = ['', 'PAY', '', '', "\nYou must choose a Card Type."];
+		oRequiredCC.expireyear = ['Y', 'PAY', '', '', "\nPlease enter the correct expiration year."];
+		oRequiredCC.expiremonth = ['', 'PAY', '', '', "\nYou must select the correct expiration month from the dropdown box."];
+		
+		if (fObj.PAYMENTTYPECD[0].checked) {
+			fObj.ISSUEBILLFLG.value='Y';
+			fObj.RESPONSEPAGE.value='MultiRegisterPost_BM.htm';
+			fObj.EMAILREPLYFORM.value='MultiRegisterPost_BM.htm';
+			//fObj.action = "../orderdll.dll/OrderP";
+			fObj.submit();			  
+		} else {
+			if ( (isFormValidated(fObj, oRequiredCC, false)) && (CCNumValidate(fObj, "PAY", false, "\nCredit Card number is invalid.")) ) {
+				fObj.ISSUEBILLFLG.value='N';
+				//fObj.action = "../orderdll.dll/OrderP";
+				fObj.EMAILREPLYFORM.value='MultiRegisterPost.htm';
+				fObj.submit();
+			}
+		}
+		
+		
+  
+} 
+
+function getSubItems()
+{
+	return true;
+}
+
+--> 		
+</script>
+
+<form name=order method="POST" action="MPost"> 
+
+ <p><h3>Event Registration (Continued)</h3></p>
+ <p><h1>Event Total Price: <#TOTALREGPRICE></h1></p>
+ <p>To complete your registration, please choose a payment option below.</p>
+  <table cellpadding="4" width="80%">
+  <tr>
+	<td class="highlight"><b>Payment Options</b></td>
+  </tr>
+  <tr>
+	<td>			
+	  <table cellspacing="6" width="100%">			
+		<tr>
+		  <td colspan="2">Choose your payment option below.</td>
+		</tr>
+ 
+                                                                                                <tr>
+                      <td><input type=radio name=PAYMENTTYPECD value='BILLME'> Bill Me</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+		<tr>
+	    
+		<tr>
+		  <td><input type=radio name=PAYMENTTYPECD value=VISA> <IMG SRC="../../images/visa.gif" align=top width="37" height="24"> Visa</td>
+		  <td><input type=radio name=PAYMENTTYPECD value=MC> <IMG SRC="../../images/mastercard.gif" align=top width="37" height="24"> MasterCard </td>
+		</tr>
+		<tr>
+		  <td><input type=radio name=PAYMENTTYPECD value=AMEX> <IMG SRC="../../images/amx.gif" align=top width="36" height="24"> American Exp. </td>
+		  <td><input type=radio name=PAYMENTTYPECD value=DI> <IMG SRC="../../images/discover.gif" align=top width="37" height="24"> Discover </td>
+		</tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <td></td>
+		</tr>		
+		<tr>
+		  <td colspan="2">Card Number <input type=text name="PAYMENTREFNUM" value="" size=30></td>
+		</tr>
+		<tr>
+		  <td colspan="2">Expiration Date
+			<SELECT NAME="expiremonth" size="1">
+			  <OPTION VALUE="">Choose...</option>
+			  <OPTION VALUE=01>1 - Jan</option>
+			  <OPTION VALUE=02>2 - Feb</option>
+			  <OPTION VALUE=03>3 - Mar</option>
+			  <OPTION VALUE=04>4 - Apr</option>
+			  <OPTION VALUE=05>5 - May</option>
+			  <OPTION VALUE=06>6 - Jun</option>
+			  <OPTION VALUE=07>7 - Jul</option>
+			  <OPTION VALUE=08>8 - Aug</option>
+			  <OPTION VALUE=09>9 - Sep</option>
+			  <OPTION VALUE=10>10 - Oct</option>
+			  <OPTION VALUE=11>11 - Nov</option>
+			  <OPTION VALUE=12>12 - Dec</option>
+			</SELECT>
+			<input type=text name="expireyear" value="" size=5 maxlength=2> (YY)</td>
+		</tr>
+	  </table>
+	</td>
+  <tr>
+	<td><input name="button" type="button" onClick="formValidate()" value="Finish My Registration"></td>
+  </tr>
+  </table>
+
+
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="SHIPTOCD" value="O">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="Event Registration - <#FIRSTNAME> <#LASTNAME>">
+<input type="hidden" name="ENTERUSERCD" value="WEBUSER">
+<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+<input type="hidden" name="EMAILCCADDRESS" value="">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="RESPONSEPAGE" value="">
+<input type="hidden" name="WER" value="MultiRegisterPost.htm">
+<input type="hidden" name="WSI" value="none">
+<input type="hidden" name="POSTSUBSCRIPTIONPRICE" value="">
+<input type="hidden" name="POSTSUBSCRIPTIONNAME" value="">
+<input type="hidden" name="POSTCREDITCARDTYPE" value="">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONS" value="<#FUNCTIONS>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="MULTICUSTOMERLIST" value="<#MULTICUSTOMERLIST>">
+<input type="hidden" name="MULTIFUNCTIONLIST" value="<#MULTIFUNCTIONLIST>">
+<input type="hidden" name="TOTALREGPRICE" value="<#TOTALREGPRICE>">
+<input type="hidden" name="PAYMENTTYPECD" value="<#PAYMENTTYPECD>">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="Event Registration">
+<input type='hidden' name='EMAILREPLYFORM' value='' />
+</form>

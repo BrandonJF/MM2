@@ -1,0 +1,316 @@
+
+<SCRIPT LANGUAGE="Javascript">
+<!--
+
+function formValidate() {
+      { 
+		  getSkills();	
+    	  document.abc.action = "UpdateInfo";
+	  	  document.abc.submit();
+	  	  return true;
+		}
+	
+	}
+
+function setSkills()
+{
+
+	var skillslist='<#SKILLCDLST>';
+	var skills_array = skillslist.split(",");
+ 
+	for (var loop=0; loop < skills_array.length; loop++)
+	{
+	  for (var i=0; i<document.abc.length; i++) 
+	  {
+    	 if ((document.abc.elements[i].type == "checkbox") && (document.abc.elements[i].name=='LSTSKILLS') 
+		      && (document.abc.elements[i].value==skills_array[loop])) 
+    
+	      {
+    	     document.abc.elements[i].checked=true;
+	      }
+	  } 
+    }
+}
+
+function getSkills()
+{
+	var tmpint ="";
+	var pos="";
+	var size="";
+	for (var i=0; i<document.abc.length; i++) 
+	{
+	   if (document.abc.elements[i].type =='checkbox') 
+	   {
+	        if (document.abc.elements[i].checked==true)
+			{
+	        		tmpint = tmpint + ',' + document.abc.elements[i].value;
+	        }
+	    }  
+	
+	}
+	pos = tmpint.indexOf(',');
+	pos = pos +1;
+	size = tmpint.length;
+	var skillcodelst = tmpint.substring(pos,size);
+	document.abc.SKILLCDLST.value=skillcodelst;
+}
+
+ 
+-->
+</SCRIPT>
+
+
+
+<p align="center">
+Responsibilities, Expertise and Interests (please check all that apply)
+</p>
+
+<form name="abc" method="post">
+	 
+<table id="form" align="center">
+	<tr>
+		<th>Category</th>
+		<th>Responsibility</th>
+		<th>Expertise</th>
+		<th>Interest</th>
+	</tr>
+	<tr>
+		<td>Animal Subject Compliance</th>
+		<td><input type="checkbox" name="LSTSKILLS" value="ASCR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="ASCE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="ASCI"></td>
+	</tr>
+	<tr>
+		<td>Audit</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="AR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="AE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="AI"></td>
+	</tr>
+	<tr>
+		<td>Award Negotiation and Acceptance</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="ANNAR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="ANAAE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="ANNAI"></td>
+	</tr>
+	<tr>
+		<td>Biosafety Compliance</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="BSCR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="BSCE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="BSCI"></td>
+	</tr>
+	<tr>
+		<td>Clinical Trials</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="CTR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="CTE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="CTI"></td>
+	</tr>
+	<tr>
+		<td>Conflict of Interest</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="COIR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="COIE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="COII"></td>
+	</tr>
+	<tr>
+		<td>Departmental/Center Administration</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="DCAR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="DCAE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="DCAI"></td>
+	</tr>
+	<tr>
+		<td>Education and Training</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="TR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="TE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="TI"></td>
+	</tr>
+	<tr>
+		<td>Export Controls</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="EXPR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="EXPE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="EXPI"></td>
+	</tr>
+	<tr>
+		<td>Financial Compliance</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="FCR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="FCE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="FCI"></td>
+	</tr>
+	<tr>
+		<td>Funding Opportunities</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="FOR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="FOE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="FOI"></td>
+	</tr>
+	<tr>
+		<td>Government Relations</td>
+		<td><input type="checkbox" name="LSTSKILLS" value="GRR"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="GRE"></td>
+		<td><input type="checkbox" name="LSTSKILLS" value="GRI"></td>
+	</tr>
+
+	<tr>
+	<td>Human Subject Compliance</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="HSCR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="HSCE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="HSCI"></td>
+	</tr>
+	
+	<tr>
+	<td>Industry Negotiations</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="INR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="INE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="INI"></td>
+	</tr>
+	
+	<tr>
+	<td>International Agreements</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="IAR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="IAE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="IAI"></td>
+	</tr>
+	
+	<tr>
+	<td>Medical School/Teaching Hospital Research Administration</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MAR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MAE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MAI"></td>
+	</tr>
+
+	
+	<tr>
+	<td>Material Transfer Agreements</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MTAR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MTAE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MTAI"></td>
+	</tr>
+
+	<tr>
+	<td>Non-Disclosure Agreements</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="NDAR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="NDAE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="NDAI"></td>
+	</tr>
+
+	<tr>
+	<td>Policy Development</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PDR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PDE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PDI"></td>
+	</tr>
+	
+	<tr>
+	<td>Post-Award Administration</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PAR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PAE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PAI"></td>
+	</tr>
+	
+	<tr>
+	<td>Programming/Database</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PRDRB"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PRDEX"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PRDIN"></td>
+	</tr>
+	
+	<tr>
+	<td>Property/Space</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSI"></td>
+	</tr>
+	
+	<tr>
+	<td>Proposal Submission - Federal Contracts</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSFCR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSFCE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSFCI"></td>
+	</tr>
+	
+	<tr>
+	<td>Proposal Submission - Federal Grants</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSFGR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSFGE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSFGI"></td>
+	</tr>
+	
+	<tr>
+	<td>Proposal Submission - Non-Federal</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSNFR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSNFE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PSNFI"></td>
+	</tr>
+	
+	<tr>
+	<td>Proposal Writing</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PWR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PWE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="PWI"></td>
+	</tr>
+	
+	<tr>
+	<td>Rate Negotiations</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="RNR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="RNE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="RNI"></td>
+	</tr>
+	
+	<tr>
+	<td>Scientific Misconduct</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SMR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SME"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SMI"></td>
+	</tr>
+	
+	<tr>
+	<td>Senior Level Management</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="ME"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="MI"></td>
+	</tr>
+	
+	<tr>
+	<td>Subawards/Subcontracting</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SBR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SBEX"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SBI"></td>
+	</tr>
+
+	<tr>
+	<td>Supervision</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SPR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SPEX"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="SPIN"></td>
+	</tr>
+	
+	<tr>
+	<td>Technology Transfer</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="TR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="TE"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="TI"></td>
+	</tr>
+	
+	<tr>
+	<td>Web Management</td>
+	<td><input type="checkbox" name="LSTSKILLS" value="WMR"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="WME"></td>
+	<td><input type="checkbox" name="LSTSKILLS" value="WMI"></td>
+	</tr>
+
+	<tr>
+		<td align="center" class="inputSubmit" align="center" colspan="4">
+		  <input name="Button" type="button" onClick="formValidate()" value="Update Your Interests">		
+          <input type="reset" name="Submit2" value="Reset Form">
+		</td>
+	</tr>
+</table>
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RESPONSEPAGE" value="changes_saved.htm">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="SKILLCDLST" value="">
+
+</form>
+
+<script language="javascript">
+setSkills();
+</script>
+

@@ -1,0 +1,133 @@
+
+
+<h2 class="title">Membership Dues Renewal Payment</h2>
+<form method="post" ACTION="Post" name="order" id="order">
+               <input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+                        <input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+                        <input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+                        <input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+                        <input type="hidden" name="CITY" value="<#CITY>">
+                        <input type="hidden" name="STATECD" value="<#STATECD>">
+                        <input type="hidden" name="ZIP" value="<#ZIP>">
+                        <input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+                        <input type="hidden" name="PAYMENTREFEXPDATE" value="">
+                        <input type="hidden" name="INVOICENUM" value="<#INVOICENUM>">
+                        <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+                        <input type="hidden" name="OCCUPATIONCD" value="<#OCCUPATIONCD>">
+                        <input type="hidden" name="SUBITEMS" value="">
+                        <input type="hidden" name="DONITEMS" value="">
+                        <input type="hidden" name="ORIGINALAMOUNTDUE" value="<#STATEMENTBALANCE FORMAT=0.00>">
+                        <input type="hidden" name="CONSOLIDATE" value="<#CONSOLIDATE>">
+                        <input type="hidden" name="PROCESSONLINECREDIT" value="N">
+                        <input type="hidden" name="ISSUEBILLFLG" value="N">
+                        <input type="hidden" name="WMT" value="">
+                        <input type="hidden" name="SENDEMAIL" id="SENDEMAIL" value="Y" />
+                        <input type="hidden" name="EMAILREPLYFORM" value="DPaymentConfirmEmail.htm">
+                        <input type="hidden" name="EMAILCCADDRESS" value="admin@domain.org">
+                        <input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+                        <input type="hidden" name="EMAILFORMAT" value="HTML">
+                        <input type="hidden" name="EMAILSUBJECT" value="Membership Renewal Confirmation">
+    <ul class="profile" data-role="listview" data-inset="true">
+        <li><h2>Invoice Number</h2>
+            <#INVOICENUM></li>
+            <!-- <li><h2>Customer Number</h2>
+                <#CUSTOMERCD></li>
+                <li><h2>Customer Name</h2>
+                    <#FIRSTNAME> <#LASTNAME></li> -->
+                   <!--  <li><h2>Member Type</h2>
+                        <#CUSTOMERTYPE></li> -->
+
+                    </ul>
+
+
+                    <ul class="profile" data-role="listview" data-inset="true">
+                        <li data-role="list-divider" data-theme="a">Outstanding Membership Dues</li>
+                        <#CONTENT>
+                    </ul>
+                   <!--  <table class="gutters">
+
+
+                        <tr class="subtotal">
+                            <td>&nbsp;</td>
+                            <td class="text">Total:</td>
+                            <td class="price"><#STATEMENTTOTAL FORMAT="$0.00"></td>
+                        </tr>
+                        <tr class="subtotal">
+                            <td>&nbsp;</td>
+                            <td class="text">Paid to Date:</td>
+                            <td class="price"><#STATEMENTPAID FORMAT="$0.00"></td>
+                        </tr>
+                        <tr class="subtotal">
+                            <td>&nbsp;</td>
+                            <td class="text">Balance Due:</td>
+                            <td class="price"><#STATEMENTBALANCE FORMAT="$0.00"></td>
+                        </tr>
+                    </table> -->
+
+                    <fieldset id='subscriptions_div'></fieldset>
+                    <fieldset id='donations_div'></fieldset>
+
+                    <div class='totalContainer'>
+                        <!-- <fieldset> -->
+                        <!-- <legend><#MLGLBL TEXT="Totals"></legend> -->
+                        <div class='cartTotals'>
+                            <ul data-role="listview" data-count-theme="c" data-inset="true">
+                                <li data-role="list-divider" data-theme="b"><#MLGLBL TEXT="Totals">  </li>
+                                <li>
+                                    <label for="balanceTotal"><#MLGLBL TEXT="Balance Due:"></label>
+                                    <span class="ui-li-count" id='balanceTotal'>$<#STATEMENTBALANCE FORMAT=0.00></span>
+                                </li>
+                                    <li>
+                                        <label for="subsTotal"><#MLGLBL TEXT="Optional Subscriptions:"></label>
+                                        <span class="ui-li-count" id='subsTotal'>$0.00</span>
+                                    </li>
+                                    <li>
+                                        <label for="donsTotal"><#MLGLBL TEXT="Optional Donations:"></label>
+                                        <span class="ui-li-count" id='donsTotal'>$0.00</span>
+                                    </li>
+                                    <li class='finalTotal'>
+                                        <label for="BALANCEDUE"><#MLGLBL TEXT="Total Payment:"></label>
+                                        <span class="ui-li-count" id='totalAmt'><#STATEMENTBALANCE></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- </fieldset> -->
+                            <div class='cartPayment'>
+                                <input type="hidden" name="RESPONSEPAGE" value="DPaymentConfirm.htm">
+                            <#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="CUSTOMERCD">
+                                <div class="buttons" id="selectPayment">
+                                    <input type="submit" id="submit" value="Pay Now"  class='searchButton'  data-theme="g"/>
+                                </div>
+                                <div class="missing" style="display: none;">
+                                    <p>Required fields are missing. Please fill those in before continuing.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <script>
+    // BJF - temp disabled until function calls can be traced
+    //dues_showSubs(document.order);
+    $(function(){
+        //displays optional donations
+function dues_showRenewDons(){
+
+    var donsURL = '../subscriptiondll.dll/subitems?udef1txt=donation&wmt=none&sort=subscriptiondes&inactiveflg=n&onwebflg=y&whp=donItems_header.htm&wbp=donItems_list.htm&wnr=norec_ajax.htm';
+    $("#donations_div").load(donsURL, function(){
+        $('#donations_div').trigger('create');
+    });
+}
+            dues_showRenewDons();
+    })
+
+
+
+
+    $("#order").validity(function() {
+        $(".reqField").require("#{field} is required.");
+
+    });
+
+
+    </script>

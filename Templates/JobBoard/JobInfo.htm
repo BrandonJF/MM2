@@ -1,0 +1,73 @@
+    
+<h2 class="title">Job Description</h2>
+<div class="buttons">
+		<a class="button" href="#" onclick="appCheck()">Apply Here</a></div>
+<dl class="profile">
+    <dt>Job ID</dt>
+    <dd><#CONTRACTNUM></dd>
+    <dt>Job Title</dt>
+    <dd><#JOBTITLE_AC></dd>
+    <dt>Start Date</dt>
+    <dd><#JOBSTARTONTXT></dd>
+    <dt>Application Deadline</dt>
+    <dd><#ADVENDDATE></dd>
+    <dt>Salary Min</dt>
+    <dd><#JOBSALARLYMINAMT></dd>
+    <dt>Salary Max</dt>
+    <dd><#JOBSALARYMAXAMT></dd>
+    <dt>Min. Education</dt>
+    <dd><#RTDEDUCATIONLEVELREFSCFJOBEDUCATIONMINDEGREE></dd>
+    <dt>Min. GPA</dt>
+    <dd><#JOBGPAMINAMT FORMAT=0.0></dd>
+    <dt>Min. Years of Experience</dt>
+    <dd><#JOBYEARSMINEXPERIENCEAMT FORMAT=0.0></dd>
+    <dt>Required Skills</dt>
+    <dd><#JOBREQUIREDSKILLSLST></dd>
+    <dt>Preferred Skills</dt>
+    <dd><#RTDSKILLREFSCFJOBPREFERREDSKILLSLST></dd>
+    <dt>Job Major Category</dt>
+    <dd><#RTDLOOKUPSFLD1CODEFLD2DESCRIPTIONSCFJOBMAJORCAT></dd>
+    <dt>Job Location</dt>
+    <dd><#JOBCITY>, <#JOBSTATE></dd>
+    <dt>Website</dt>
+    <dd><a href="http://<#JOBCONTACTWWWADDRESS>" target="_blank"><#JOBCONTACTWWWADDRESS></a></dd>
+    <dt>Contact Name</dt>
+    <dd><#JOBCONTACTNAME></dd>
+    <dt>Contact Phone</dt>
+    <dd><#JOBCONTACTPHONE></dd>
+    <dt>Contact Email</dt>
+    <dd><#JOBCONTACTEMAIL></dd>
+    <dt>Best Method of Contact</dt>
+    <dd><#JOBCONTACTMETHOD></dd>
+    <p class="clear"></p>
+</dl>
+<div class="buttons">
+		<a class="button" href="#" onclick="appCheck()">Apply Here</a>
+</div>
+<div id="divConfirm" style="display: none">
+		Our records indicate that you have already applied for this job.
+	</div>
+<script>
+function appCheck(){ //checks for duplicate job applications
+    var registeredUrl = "../utilities.dll/customlist?SQLNAME=JOBCHECK&wbp=customercd.htm&whp=none&WMT=none&wnr=none&code=<#CONTRACTNUM>";
+        $.ajax({url:registeredUrl, type:"get", success:function(content){
+			if (content.match('<#CUSTOMERCD>')){
+				$(function() {
+                    $("#divConfirm").dialog({
+                        autoOpen:false,
+                        modal:true,
+                        closeOnEscape: false,
+						buttons: {
+                            Ok: function() {
+                                $( this ).dialog( "close" );
+                            }           
+                        }
+                    })
+                    $("#divConfirm").dialog('open');
+                });
+			}else{
+               location.href =  "../JobBoard.dll/Info?CONTRACTNUM=<#CONTRACTNUM>&WRP=AppInfo.htm";
+            }  
+		}});
+}
+</script>

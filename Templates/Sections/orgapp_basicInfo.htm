@@ -1,0 +1,43 @@
+<fieldset>
+<legend><#MLGLBL TEXT="Basic Information"></legend>
+<ul>
+	
+	<#SECTION NAME="username.htm" COOKIEHIDE=CUSTOMERCD=| PARAMS="CUSTOMERCD">
+	<#SECTION NAME="password.htm" COOKIEHIDE=CUSTOMERCD=| PARAMS="CUSTOMERCD">
+
+	<li>
+		<label for="PREFIX"><#MLGLBL TEXT="Prefix"></label>
+		<select name="PREFIX" id="Prefix">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="SALUTATIONREF" FLD1="SALUTATION" FLD2="SALUTATION" SCV="PREFIX" MLG="Y">
+		</select>
+	</li>
+
+	<li>
+		<label for="FIRSTNAME" class="required"><#MLGLBL TEXT="First Name"></label>
+		<input type="text" name="FIRSTNAME" id="FirstName" value="<#FIRSTNAME>" class='reqField' >
+	</li>
+	
+	<li>
+		<label for="MIDDLENAME"><#MLGLBL TEXT="Middle Name"></label>
+		<input name="MIDDLENAME" id="MiddleName" value="<#MIDDLENAME>" type="text" >
+	</li>
+	
+	<li>
+		<label for="LASTNAME" class="required"><#MLGLBL TEXT="Last Name"></label>
+		<input type="text" name="LASTNAME" id="LastName" value="<#LASTNAME>" class='reqField' >
+	</li>
+	
+	<li><label for="SUFFIX"><#MLGLBL TEXT="Suffix"></label>
+		<select name='SUFFIX' id='suffixField'>
+			<option value=''>Select One...</option>
+			<#CBXSUFFIX>
+		</select>        
+		<script>$('#suffixField').val("<#SUFFIX>");</script>
+	</li>
+	<li>
+		<label for="JOBTITLE" class="required"><#MLGLBL TEXT="Job Title"></label>
+		<input name="JOBTITLE" id="JobTitle" type="text" value="<#JOBTITLE>" class='reqField' >
+	</li>
+</ul>
+</fieldset>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Header></SOAP-ENV:Header>
+<SOAP-ENV:Body>
+<Response>
+<EventInformation EVENTCD="<#SESSIONALTCD>">
+<eventname>
+<#SESSIONNAME>
+</eventname>
+<description>
+<#SESSIONDES>
+</description>
+<eventstartdate>
+<#SESSIONBEGDATE>
+</eventstartdate>
+<eventenddate>
+<#SESSIONENDDATE>
+</eventenddate>
+<earlyregisterby>
+<#EARLYREGISTERDATE>
+</earlyregisterby>
+<city>
+<#LOCATIONCITY>
+</city>
+<state>
+<#LOCATIONSTATECD>
+</state>
+<htmldescription>
+<#HTMLNOTE>
+</htmldescription>
+</EventInformation>
+</Response>
+</SOAP-ENV:Body></SOAP-ENV:Envelope>

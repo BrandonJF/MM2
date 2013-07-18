@@ -1,0 +1,134 @@
+
+<h2>Submit a Resume for <#JOBTITLE></h2>
+<script>
+  $(function() {
+		$( "#JOBSTARTDATE" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<form method="POST"  name="order" action="../jobboard.dll/submitjob" onSubmit="" >
+   <fieldset>
+	<legend>Personal Information</legend>
+	<ul>
+	  <li>
+		<label for="FIRSTNAME">First Name</label>
+		<input type="text" name="FIRSTNAME" value="<#FIRSTNAME>">
+	  </li>
+	  <li>
+		<label for="MIDDLEINIT">Middle Name</label>
+		<input type="text" name="MIDDLEINIT" value="<#MIDDLEINITIAL>">
+	  </li>
+	  <li>
+		<label for="LASTNAME">Last Name</label>
+		<input type="text" name="LASTNAME" value="<#LASTNAME>">
+	  </li>
+	  <li>
+		<label for="ADDRESS1">Address</label>
+		<input type="text" name="ADDRESS1" value='<#ADDRESS1>'>
+	  </li>
+	  <li>
+		<label for="ADDRESS2">Suite/Apt</label>
+		<input type="text" name="ADDRESS2" value='<#ADDRESS2>'>
+	  </li>
+	  <li>
+		<label for="CITY">City</label>
+		<input type="text" name="CITY" value='<#CITY>'>
+	  </li>
+	  <li>
+		<label for="CITY">State</label>
+		<select size="1" name="STATECD">
+		<#CBXSTATECD>
+        </select>
+	  </li>
+	  <li>
+		<label for="ZIP">Zip</label>
+		<input type="text" name="ZIP" value='<#ZIP>'>
+	  </li>
+	  <li>
+		<label for="COUNTRY">Country</label>
+		<select size="1" name="COUNTRY">
+	<#CBXCOUNTRY>
+        </select>
+	  </li>
+	  <li>
+		<label for="CONTACTPHONE">Phone</label>
+		<input type="text" name="CONTACTPHONE" value='<#WORKPHONE>'>
+	  </li>
+	  <li>
+		<label for="CONTACTPHONE">Fax</label>
+		<input type="text" name="FAXPHONE" value='<#FAXPHONE>'>
+	  </li>
+	  <li>
+		<label for="EMAIL">Email</label>
+		<input type="text" name="EMAIL" value='<#EMAIL>'>
+	  </li>
+	</ul>
+   </fieldset>
+   <fieldset>
+   <legend>Job Information</legend>
+   <ul>
+	  <li>
+		<label for="IMMEDIATESTARTFLG">Start Now?</label>
+		<input type="radio" value="Y" name="IMMEDIATESTARTFLG" checked>Yes
+          <input type="radio" name="IMMEDIATESTARTFLG" value="N">No
+	  </li>
+	  <li>
+		<label for="EMPLOYEDFLG">Employed?</label>
+		<input type="radio" value="Y" name="EMPLOYEDFLG" checked>Yes
+          <input type="radio" name="EMPLOYEDFLG" value="N">No
+	  </li>
+	  <li>
+		<label for="JOBSTARTDATE">Availability</label>
+		<input type="text" name="JOBSTARTDATE" id="JOBSTARTDATE">
+	  </li>
+	  <li>
+		<label for="MINSALARLYAMT">Min. Salary</label>
+		<input type="text" name="MINSALARLYAMT">
+	  </li>
+	  <li>
+		<label for="MINSALARLYAMT">Max. Salary</label>
+		<input type="text" name="MAXSALARYAMT">
+	  </li>
+	  <li>
+		<label for="EDUCATIONDEGREE">Highest Degree</label>
+		<select size="1" name="EDUCATIONDEGREE"><#CBXDEGREE>
+        </select>
+	  </li>
+	  <li>
+		<label for="EDUCATIONGPAAMT">GPA</label>
+		<input type="text" name="EDUCATIONGPAAMT" size="13">
+	  </li>
+	  <li>
+		<label for="JOBREQUIREDSKILLSLST">Skills</label>
+		<select size="5" name="JOBREQUIREDSKILLSLST" multiple>
+<#CBXREQSkillRef>
+      </select>
+	  </li>
+	  <li>
+		<label for="RESUMETEXT">Resume</label>
+		<textarea rows="10" name="RESUMETEXT" cols="45"><#RESUMETEXT></textarea>
+	  </li>
+	  <li>
+		<label for="COVERLETTERTEXT">Cover Letter</label>
+		 <textarea rows="10" name="COVERLETTERTEXT" cols="45"></textarea>
+	  </li>
+	</ul>
+   </fieldset>     
+<div class="buttons">
+  <input type="button" value="Submit" onclick="formValidate()">
+</div>
+
+    <input type="hidden" name="JOBALTCD" value="<#JOBALTCD>">
+    <input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">
+    <input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+    <input type="hidden" name="EMAILSUBJECT" value="Application Received">
+    <input type="hidden" name="EMAILTOADVERTISER" value="<#EMAILTOADVERTISER>">
+    <input type="hidden" name="EMAILTOADVERTISERFORM" value="JobEMailtoAdvertiser.txt">
+    <input type="hidden" name="ADVERTISERNAME" value="<#ADVERTISERNAME>">
+    <input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+    <input type="hidden" name="JOBTITLE" value="<#JOBTITLE>">
+    <input type="hidden" name="RESUMETYPE" value="TEXT">
+
+</form>

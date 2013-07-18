@@ -1,0 +1,58 @@
+<form name="order" method="POST">
+<h2 class="title">Online Store </h2>
+<!-- <div class="formIntro" data-role="fieldcontain" style="font-size: 12px;">
+ <div>MEMBERS:  Please log in to receive your member discount. </div> -->
+  <!-- <div class="buttons"> -->
+
+ <!-- <div align="center" data-type="horizontal">
+ 	  <a href="../msascartdll.dll/showcart" data-role="button" data-mini="true" data-inline="true">View Cart</a> </div> -->
+
+  <!-- </div> -->
+
+
+
+<!-- <div style="font-size: 12px; text-align: center;">
+	<strong>Number of Records Found:(<#RECORDCOUNT>)</strong>
+</div> -->
+
+
+
+
+
+
+<div class="cartnav">
+		<!-- <div class="nav1">&nbsp;</div> -->
+		<div class="nav2" align="center"><#PREVNAV><#LISTNAV><#NEXTNAV></div>
+
+		<!-- <div class="nav3">&nbsp;</div> -->
+
+	</div>
+
+
+<!-- <input type="button" name="button" value="Add Items To Cart" onClick="addToCart_newCart(document.order);" data-icon="plus" /> -->
+
+<ul data-role="listview" data-inset="true">
+<#CONTENT>
+</ul>
+<input type="hidden" name="ADD" />
+<input type="hidden" name="PRODUCTSELECTION">
+<input type="hidden" name="PRODUCTQTY">
+  <br>
+
+  <!-- <input type="button" name="button" value="Add Items To Cart" onClick="addToCart_newCart(document.order);" data-icon="plus" /> -->
+  <!-- <div class="cartnav">
+		<div class="nav1">&nbsp;<#PREVNAV></div>
+		<div class="nav2"><#LISTNAV></div>
+		<div class="nav3"><#NEXTNAV>&nbsp;</div>
+		<div class="clear"></div>
+	</div> -->
+
+	<div class="cartnav">
+		<!-- <div class="nav1">&nbsp;</div> -->
+		<div class="nav2" align="center"><#PREVNAV><#LISTNAV><#NEXTNAV></div>
+
+		<!-- <div class="nav3">&nbsp;</div> -->
+
+	</div>
+</form>
+<#SECTION NAME="norton.htm">

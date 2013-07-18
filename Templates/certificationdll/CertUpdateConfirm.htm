@@ -1,0 +1,44 @@
+
+
+<h3>Education Credit Submitted</h3>
+
+<dl class="profile">
+    <dt>Status</dt>
+    <dd><script>
+if ("<#STATUSSTT ALIAS="CR_">" == "P")
+{
+document.write("Pending");
+}
+else if ("<#STATUSSTT ALIAS="CR_">" == "A")
+{
+document.write("Approved");
+}
+</script></dd>
+    <dt>Course/Credit Type</dt>
+    <dd><#CERTIFICATIONTITLE></dd>
+    <dt>Accrediting Organization </dt>
+    <dd><#UDEF3TXT ALIAS="CR"></dd>
+    <dt>Course Title</dt>
+    <dd><#UDEF4TXT ALIAS="CR"></dd>
+    <dt>Course ID</dt>
+    <dd><#UDEF5TXT ALIAS="CR"></dd>
+    <dt>Earned On</dt>
+    <dd><#CERTIFICATIONDATE></dd>
+    <dt>Hours Earned</dt>
+    <dd><#CEU1QTY FORMAT="0.00"></dd>
+    <dt>Comments</dt>
+    <dd><#TESTCOMMENT></dd>
+    <dt>Reference Number</dt>
+    <dd><#TRANSACTIONNUM></dd>
+    <p class="clear"></p>
+</dl>
+<div class="buttons">
+    <a class="button" href="../certificationdll.dll/CertInfo?TRANSACTIONNUM=-1&CUSTOMERCD=<#CUSTOMERCD>&WRP=CertUpdate.htm">
+Add More Education Credits 
+</a> &nbsp;
+<a class="button" href="../certificationdll.dll/masterlist?customercd=<#CUSTOMERCD>">
+Return to Certifications 
+</a> &nbsp; <a class="button" href="../certificationdll.dll/certlist?customercd=<#CUSTOMERCD>">
+Return to CEU Transcript 
+</a>
+</div>

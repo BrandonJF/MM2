@@ -1,0 +1,61 @@
+<script>
+	function validate(){
+		document.abc.action="view?documentnum=<#DOCUMENTNUM>";
+		document.acb.submit();
+	}
+</script>
+
+<h3>Document Information</h3>
+
+<form name="abc" method=post action="../../cgi-bin/documentdll.dll/updateInfo" enctype="multipart/form-data">
+	<fieldset id="table2">
+		<ul>
+			<li>
+				<label for="FIRSTNAME">First Name</label>
+				<input type="text" name="FIRSTNAME" value="<#FIRSTNAME>" />
+			</li>
+			<li>
+				<label for="LASTNAME">Last Name</label>
+				<input type="text" name="LASTNAME" value="<#LASTNAME>" />
+			</li>
+			<li>
+				<label for="TITLETXT">Document Title</label>
+				<input type="text" name="TITLETXT" value="<#TITLETXT>">
+			</li>
+			<li>
+				<label for="DOCDES">Document Title</label>
+				<textarea name="DOCDES" cols="35" rows="6"><#DOCDES></textarea>
+			</li>
+			<li>
+				<label for="DOCDES">Document Title</label>
+				<select name="DOCTYPE">
+					<option value="">Select One</option><
+					#RTVDOCTYPEREF>
+				</select>
+			</li>
+			<li>
+				<label for="DOCDATE">Document Date</label>
+				<input name="DOCDATE" type="text" id="DOCDATE" onkeypress="autoformat(this, event, '##/##/####')" />
+			</li>
+			<li>
+				<label for="UPDATEUSERCD">Updated By</label> <#UPDATEUSERCD>
+			</li>
+			<li>
+				<label for="UPDATETMS">Updated On</label> <#UPDATETMS>
+			</li>
+			<li>
+				<label for="file">Attach Document</label> <input type="file" name="file" />
+			</li>
+		</ul>
+	</fieldset>
+	<div class="buttons">
+		<input type="submit" name="Submit" value="Update Document" />
+	</div>
+	<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+	<input type="hidden" name="OWNERCD" value="<#CUSTOMERCD>">
+	<input type="hidden" name="INDATABASEFLG" value="Y">
+	<input type="hidden" name="FILETYPE" value="O">
+	<input type="hidden" name="DOCCLASS" value="Administrative">
+	<input type="hidden" name="DOCUMENTNUM" value="">
+	<input type="hidden" name="WRP" value="Document_confirm.htm">
+</form>

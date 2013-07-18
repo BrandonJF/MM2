@@ -1,0 +1,83 @@
+        <div align="left">
+          <table border="0" cellpadding="0" cellspacing="0" width="453" height="41" class="body" id="table1">
+            <tr>
+              <td width="453" height="174" valign="top">
+<!----------------------------------start of body ------------------------------------------>
+              
+<p>Dear <#FIRSTNAME>:</p>
+<p>Your order is complete.&nbsp; Your Order Number is <#INVOICENUM> and your Customer
+      ID is <#CUSTOMERCD>.&nbsp; You can track your order with the Order Number
+or Customer ID.&nbsp;&nbsp;You will receive your order in 3-5 business
+days.&nbsp;<br>
+&nbsp;
+</p>
+<p><b>Bill To Address</b>
+      </p>
+      <p><font face="Arial"><#BILLTOADDRESS></font></p>
+      <p><b>Ship To Address</b></p>
+      <p><font face="Arial"><#SHIPTOADDRESS><br>
+      &nbsp;</font><table align="center" border="0" cellpadding="0" cellspacing="1" width="450" class="body" id="table4">
+  <tr>
+    <td width="519" colspan="5" bgcolor="#CCFFFF">
+      <p align="center"><b>Items Ordered</b></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="202" bgcolor="#99CCFF"><b>Product ID</b></td>
+    <td width="270" bgcolor="#99CCFF"><b>Name</b></td>
+    <td width="135" bgcolor="#99CCFF"><b>Quantity</b></td>
+    <td width="150" bgcolor="#99CCFF"><b>Unit Price</b></td>
+    <td width="153" bgcolor="#99CCFF"><b>Subtotal</b></td>
+  </tr>
+  <tr>
+    <td width="202"><#SUBCART></td>
+    <td width="270"></td>
+    <td width="135"></td>
+    <td width="150"></td>
+    <td width="153"></td>
+  </tr>
+  <tr>
+    <td width="202"><#SHOPPINGCART></td>
+    <td width="270"></td>
+    <td width="135"></td>
+    <td width="150"></td>
+    <td width="153"></td>
+  </tr>
+  <tr>
+    <td width="202"></td>
+    <td width="270"></td>
+    <td width="135"></td>
+    <td width="150" bgcolor="#FFFFCC">
+      <b>Shipping &amp; Handling:</b>
+    </td>
+    <td width="153" bgcolor="#FFFFCC" align="right">
+      <#SHIPTOTAL>
+    </td>
+  </tr>
+  <tr>
+    <td width="202"></td>
+    <td width="270"></td>
+    <td width="135"></td>
+    <td width="150" bgcolor="#FFFF66">
+      Tax:
+    </td>
+    <td width="153" bgcolor="#FFFF66" align="right">
+      <#TAXTOTAL>
+    </td>
+  </tr>
+  <tr>
+    <td width="202"></td>
+    <td width="270"></td>
+    <td width="135"></td>
+    <td width="150" bgcolor="#FFFF66">
+      <p align="left"><b>Total:</b></p>
+    </td>
+    <td width="153" bgcolor="#FFFF66" align="right">
+      <p align="right"><#CARTTOTAL></p>
+    </td>
+  </tr>
+</table>
+<p align="center">Thank you again for shopping!&nbsp; Please come again!</td>
+            </tr>
+            </table>
+        </div>

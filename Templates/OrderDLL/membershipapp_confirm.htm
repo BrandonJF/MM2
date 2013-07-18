@@ -1,0 +1,41 @@
+<h2><#MLGLBL TEXT="Membership Application Confirmation"></h2>
+<div class="formIntro">
+    <p>Thank you for applying. Your membership number is <#CUSTOMERCD>. Please check your email for a  confirmation letter. </p>
+</div>
+
+<h4><#MLGLBL TEXT="Items Ordered"></h4>
+<table class='gutters'>
+	<tr>
+		<th>Item</th>
+		<th>Item Price</th>
+		<th>Quantity</th>
+		<th>Subtotal</th>
+	</tr>
+	<#INVOICEITEMS>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="text">Shipping &amp; Handling: </td>
+		<td class="price"><#SHIPTOTAL FORMAT="$0.00"></td>
+	</tr>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="text">Tax: </td>
+		<td class="price"><#TAXTOTAL FORMAT="$0.00"></td>
+	</tr>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="text">Final Total: </td>
+		<td class="price"><#TOTALAMT FORMAT="$0.00"></td>  
+	</tr>
+</table>
+
+<#SECTION NAME="basicInfo_confirm.htm">
+<#SECTION NAME="primContact_confirm.htm">
+<#SECTION NAME="altContact_confirm.htm">
+
+
+   
+ 

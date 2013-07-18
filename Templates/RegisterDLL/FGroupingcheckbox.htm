@@ -1,0 +1,78 @@
+<!-- <tr id="tr_<#FUNCTIONCD>">
+    <td>
+    <input type="checkbox" name="<#FUNCTIONCD>" title="<#DISPLAYPRICE FORMAT=0.00>" alt="<#STARTDATE FORMAT=DDD>|<#STARTTMS>" id="<#TITLE>" size="2" value="1" class="collectThisFunc" onclick="checkFunctionTime(document.event,'<#STARTDATE FORMAT=DDD>','<#STARTTMS>','<#FUNCTIONCD>');">
+    </td>
+    <td>
+    <span id="overMsgStar_<#FUNCTIONCD>" class="warning" style="display:none;">*</span><#TITLE>
+      <span id="overMsg_<#FUNCTIONCD>" class="warning" style="display:none;"><br><#OVERLIMITMSG></span>
+      <p class="normalize" id="<#FUNCTIONCD>_comments"><#FCOMMENTDESC> <#FCOMMENT></p>
+    </td>
+    <td class="price">
+        <#DISPLAYPRICE>
+        <script>
+	isFunctions = true;
+	if ('<#FUNCTIONSTATUSCD>'=='1') {$('#overMsg_<#FUNCTIONCD>').show();$('#overMsgStar_<#FUNCTIONCD>').show();$('#<#FUNCTIONCD>').hide();$('#<#FUNCTIONCD>_comments').hide();}
+    if ('<#FCOMMENTDESC>' == ''){$('#<#FUNCTIONCD>_comments').hide()}
+</script>
+    </td>
+</tr>
+ -->
+<div class="functionContainer grid_12 alpha omega" >
+   <div class="functionDetailsContainer grid_7"><#TITLE></div>
+    <div class="functionTimeContainer grid_3"><#STARTTMS><br><#ENDTMS></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$('.functionContainer').click(function(){
+
+var func = $(this);
+func.animate({ backgroundColor: "olive" }, { duration: 500, queue: false });
+func.css({textShadow:"none"});
+func.animate({ color: "#e1e1e1" }, { duration: 200, queue: false });
+func.animate({ marginRight: "20px" }, { duration: 200, queue: false });
+
+});
+
+$('.functionDateHeader').click(function(){
+
+var func = $(this);
+func.animate({ backgroundColor: "maroon" }, { duration: 500, queue: false });
+func.css({textShadow:"none"});
+window.func = func;
+console.log( func.data("collapsed")) ;
+func.nextUntil(".functionDateHeader").slideUp();
+
+func.animate({ color: "#e1e1e1" }, { duration: 200, queue: false });
+func.animate({ marginRight: "20px" }, { duration: 200, queue: false });
+
+});
+
+
+</script>

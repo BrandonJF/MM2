@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  <head> -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <!--<title>Google Maps JavaScript API Example</title> -->
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAhTiDSvTR9uQc2h0Tx02B9RTWdoGGWuob8F7SLU16bQTUBuwHLhR8t2qd2hwAEYpBfQ8fTPBu6SK-cw"
+      type="text/javascript"></script>
+    <script type="text/javascript">
+    <#MARKERS>
+	 var map = null;
+    //<![CDATA[
+	function load() {
+      if (GBrowserIsCompatible()) {
+        map = new GMap2(document.getElementById("map"));
+//        map.setCenter(new GLatLng(41, -98), 4);	
+        map.setCenter(new GLatLng(<#CENTERPOINT>), <#ZOOMLEVEL>);	
+		map.addControl(new GLargeMapControl());	
+		var tmpArr = new Array();	
+		//"34.9727305,-105.0323635,'NM','NM','','','364','member count','green'"
+		for (var i = 0; i < Markers.length; ++i) 
+		{
+    	    tmpArr = Markers[i].split('|');		
+ 		 	var point = new GLatLng(tmpArr[0],tmpArr[1]);
+			var marker = createMarker(point, tmpArr[2], tmpArr[4]+' '+tmpArr[7]+' '+tmpArr[6], tmpArr[8]); 
+		    map.addOverlay(marker);
+		 }	
+      }
+    }
+	
+	function createMarker(latlng, Address, Desc, IconColor) {
+  	  if (IconColor!='')
+	  {
+		  var Icon = new GIcon(G_DEFAULT_ICON);
+		  Icon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/"+IconColor+"-dot.png";
+		  markerOptions = { icon:Icon };
+	  }
+	  else
+	  {
+	  	   markerOptions = { };
+	  }	  
+	  var marker = new GMarker(latlng, markerOptions);
+      GEvent.addListener(marker,"click", function() {
+        var myHtml = "Address: "+Address+"<br>"+Desc;
+        map.openInfoWindowHtml(latlng, myHtml);
+      });
+      return marker;
+	}
+	
+    //]]>
+    </script>
+<!--  </head> -->
+<!--  <body onunload="GUnload()"> -->
+    <b><#LISTTITLE></b><br />
+    <div id="map" style="width:600px;height:400px" ></div>
+<!--  </body> -->
+  <script>
+  	load();
+  </script>
+<!-- </html>-->

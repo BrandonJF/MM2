@@ -1,0 +1,46 @@
+<script language="javascript" src="../../JS/phnfrmt.js"></script>
+
+<h2><#MLGLBL "TEXT=Create an Account"></h2>
+<!-- <div class="formIntro">
+	<ul>
+		<li><#MLGLBL TEXT="All fields marked * are required."></li>
+		<li><#MLGLBL TEXT="Phone numbers must be in the format of"> (302)392-3929</li>
+	</ul>
+</div> -->
+
+<form method="POST" name="order" action='../memberdll.dll/updateInfo' id="fullPageForm">
+		<#SECTION NAME="basicInfo_update.htm">
+
+		<#SECTION NAME="primContact.htm">
+
+
+	<input type="submit" class="button" value="Submit" data-icon="check">
+    <div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+	<input type="hidden" name="CUSTOMERCD" value="">
+	<input type="hidden" name="RESPONSEPAGE" value="Customer_new_Confirm.htm">
+	<input type="hidden" name="AUTOCUSTOMERCD" value="N">
+	<input type="hidden" name="CHECKUSERDUP" value="Y">
+	<input type="hidden" name="DUPCHECKLIST" value="EMAIL">
+	<input type="hidden" name="UDC" value="duplicateUser.htm" />
+    <input type="hidden" name="SENDEMAIL" id="SENDEMAIL" value="Y" />
+	<input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org" />
+	<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML" />
+	<input type="hidden" name="EMAILSUBJECT" value="Membership Confirmation"/>
+    <input type="hidden" name="EMAILREPLYFORM" value="Customer_new_email.htm">
+
+</form>
+
+<script type="text/javascript">
+    $(function() {
+        $("#fullPageForm").validity(function() {
+            $(".reqField").require();
+			$(".password").require().equal("Passwords do not match.");
+			$("#ORGNAME").require("Organization Name is required.");
+			$("#Email").require().match("email");
+			$("#Website").match("url", "Please use correct format http://xxxxxxx.xxx");
+            });
+    });
+    var isOrgapp = false;
+</script>

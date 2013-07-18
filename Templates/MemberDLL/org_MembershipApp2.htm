@@ -1,0 +1,98 @@
+<script>
+function setvalues(){}
+</script>
+
+<h2>Organization Membership Application</h2>
+
+	<div class="formIntro">
+	<p>Please select a membership type for your organization.</p>
+	<ul>
+		<li> All fields marked * are required.</li>
+		<li>When you've selected your membership type, you can choose to either pay now or add this item to the cart and continue shopping.</li>
+	</ul>
+</div>
+    <div class="breadcrumbs">
+        <span>1. Create Organization Profile</span> &raquo; <span>2. Create Primary Contact</span> &raquo; <span class="current">3. Select Membership/Payment</span>
+    </div>
+<form method="post" name="order" action='../organizationdll.dll/UpdateInfo' id="org_profile">
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_membership_Header.htm" WBP="INCLUDE_membership_list.htm" PARAMS="UDEF1TXT=membership,SUBSRIPTIONNAME=|IN|ORGANIZATION|MEMBERTRUSTAFFILIATE">
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_subItems_Header.htm" WBP="INCLUDE_subItems_list.htm" PARAMS="UDEF1TXT=subscription,ONWEBFLG=Y">
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_donItems_Header.htm" WBP="INCLUDE_donItems_list.htm" PARAMS="UDEF1TXT=donation,ONWEBFLG=Y">
+	<div class='totalContainer'>
+		<fieldset>
+			<legend><#MLGLBL TEXT="Totals"></legend>
+			<div class='cartTotals'>
+				<ul>
+					<li class='section' id='balance'>
+						<label for="balanceTotal"><#MLGLBL TEXT="Balance Due:"></label>
+						$<span id='balanceTotal'>0.00</span>
+					</li>
+					<li class='section' id='membership'>
+						<label for="membershipTotal"><#MLGLBL TEXT="Membership Dues:"></label>
+						$<span id='membershipTotal'>0.00</span>
+					</li>
+					<li class='section' id='subscription'>
+						<label for="subsTotal"><#MLGLBL TEXT="Optional Subscriptions:"></label>
+						$<span id='subsTotal'>0.00</span>
+					</li>
+					<li class='section' id='donation'>
+						<label for="donsTotal"><#MLGLBL TEXT="Optional Donations:"></label>
+						$<span id='donsTotal'>0.00</span>
+					</li>
+					<li class='section' id='taxes'>
+						<label for="taxTotal"><#MLGLBL TEXT="Taxes:"></label>
+						$<span id='taxTotal'>0.00</span>
+					</li>
+					<li class='finalTotal'>
+						<label for="totalAmt"><#MLGLBL TEXT="Total Payment:"></label>
+						$<span id='totalAmt'>0.00</span>
+					</li>
+				</ul>
+			</div>
+		</fieldset>
+
+		<div class="buttons" id="selectPayment">
+			<input type="button" value="Add to Cart" onClick='orgmembershipApp_addToCart(document.order)';>
+			<input type="button" data-theme="g" value="Pay Now" onClick='$("#cartPayment").show();$("#selectPayment").hide();'>
+		</div>
+
+		<div id="cartPayment" class="cartPayment" style='display:none;'>
+             <input type="hidden" name="RESPONSEPAGE" value="membershipapp_confirm.htm">
+			<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="SECTIONS=membership-subscription-donation-taxes">
+			<div class="buttons">
+				<input type="button" value="Submit Payment" onClick="orgmembershipApp_payNow(document.order)">
+			</div>
+		</div>
+	</div>
+
+<!-- hidden parameters -->
+<input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+  <input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+    <input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+    <input type="hidden" name="CITY" value="<#CITY>">
+    <input type="hidden" name="STATECD" value="<#STATECD>">
+    <input type="hidden" name="ZIP" value="<#ZIP>">
+    <input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+    <input type="hidden" name="CONTACTNAME" value="<#FIRSTNAME> <#LASTNAME>">
+    <input type="hidden" name="CUSTOMERCDLINK" value="<#CUSTOMERCD>">
+    <input type="hidden" name="WMT" value="../main_template_css.htm" />
+    <input type="hidden" name="ORGCD" value="<#ORGCD>" />
+    <input type="hidden" name="SUBITEMS" id="SUBITEMS" value="">
+    <input type="hidden" name="CARTITEMS" id="CARTITEMS" value="">
+    <input type="hidden" name="PROCESSONLINECREDIT" value="N" >
+    <input type="hidden" name="CUSTOMERTYPE" value="O">
+    <input type="hidden" name="PAYEETYPECD" value="O">
+    <input type="hidden" name="ISORGORDER" value="Y">
+    <input type="hidden" name="PAYEECD" value="<#ORGCD>">
+    <input type="hidden" name="CUSTOMERCD" id="CUSTOMERCD" value="<#CUSTOMERCD>">
+    <input type="hidden" name="SENDEMAIL" id="SENDEMAIL" value="Y" />
+    <input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org" />
+    <input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML" />
+    <input type="hidden" name="EMAILSUBJECT" value="Organization Membership Confirmation"/>
+    <input type="hidden" name="EMAILREPLYFORM" value="NewOrgWelcomeEmail.htm">
+    <input type='Hidden' name='ISSUEBILLFLG' value='N'>
+</form>
+<script>
+	updateTotals();
+</script>

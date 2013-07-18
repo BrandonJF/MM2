@@ -1,0 +1,79 @@
+<script language="javascript">
+<!--
+function formValidate(formName){
+
+if( (validateAll(formName)) ) 
+	{
+		
+		formName.submit();
+	}
+}
+
+-->
+</script>
+
+<h1>Location Information</h2>
+<form name="locInfo" method="post" action="LocationSave">
+<table>
+
+    <tr>
+        <td>Location Name*</td>
+        <td><input type="text" size="50" name="LOCATIONNAME" value="" class='reqField'></td>
+    </tr>
+    <tr>
+        <td>Contact Name</td>
+        <td><input type="text" size="50" name="CONTACTNAME" value=""></td>
+    </tr>
+    <tr>
+        <td>Position</td>
+        <td><input type="text" size="50" name="JOBTITLE" value=""></td>
+    </tr>
+	
+       <tr>
+        <td>Location Phone</td>
+        <td><input type="text" size="50" name="CONTACTPHONE" id="CONTACTPHONE" value="" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)"></td>
+    </tr>
+    <tr>
+        <td>Fax Phone</td>
+        <td><input type="text" size="50" name="CONTACTFAXPHONE" id="CONTACTFAXPHONE" value=""  onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)"></td>
+    </tr>
+		<tr>
+        <td>Email</td>
+        <td><input type="text" size="50" name="EMAIL" value=""></td>
+    </tr>
+    
+     <tr>
+        <td>Address</td>
+        <td> <input type="text" size="50" name="ADDRESS1" value=""></td>
+    </tr>
+   
+	 <tr>
+        <td>Suite/Apt</td>
+        <td><input type="text" size="50" name="ADDRESS2" value=""> </td>
+    </tr>
+	 <tr>
+	   <td>City*</td>
+	   <td><input type="text" size="50" name="CITY" value="" class='reqField'></td>
+  </tr>
+	 <tr>
+	   <td>State*</td>
+	   <td><select size="1" name="STATECD" style="width:175px;" class='reqField'>
+        <option value='' >Select One...</option>
+        <#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD">
+        </select>       </td>
+  </tr>
+	 <tr>
+	   <td>Zip</td>
+	   <td><input name="ZIP" id="ZIP" type="text" value="" size="10"></td>
+  </tr>
+	 <tr>
+	   <td>&nbsp;</td>
+	   <td>&nbsp;</td>
+  </tr>
+  
+	</table>
+	<input name="Button" type="button" onClick="formValidate(document.locInfo);" value="Save Location Information">
+        <input type="hidden" name="LOCATIONCD" value="<#LOCATIONCD>">   
+		<input type="hidden" name="COUNTRY" value="United States">   		
+	</form>
+	

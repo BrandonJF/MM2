@@ -1,0 +1,23 @@
+<div data-role="fieldcontain">
+		<label for="UserId"><#MLGLBL TEXT="Username"><sup class="req_star">*</sup></label>
+		<input name="WEBUSERID" id="UserId" value="<#WEBUSERID>" class='reqField' size="40" onblur="checkUsernameExists()" type="text">
+        <span id="usernameAvailable" style="display: none" class="correct">Username available.</span>
+        <span id="usernameExists" style="display: none" class="error">Username already in use.</span>
+        <script>
+            
+            function checkUsernameExists() {
+                var usernameExistsUrl = "../utilities.dll/customlist?SQLNAME=USERNAMECHECK&wbp=customercd.htm&whp=none&WMT=none&wnr=none&showsql=y&code=" + document.getElementById("UserId").value;
+	$.ajax({url:usernameExistsUrl, type:"get",
+		success:function(content){
+			if (content.length > 2){
+				$("#usernameExists").show();
+                $("#usernameAvailable").hide();
+			}else{
+                $("#usernameExists").hide();
+                $("#usernameAvailable").show();
+            }  
+		}
+	});
+	}
+</script>
+	</div>

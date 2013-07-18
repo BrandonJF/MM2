@@ -1,0 +1,24 @@
+<h2><#MLGLBL TEXT="Update Password Form"> </h2>
+
+<div class="formIntro">
+<p>To update your password, please fill all forms in the space below.</p>
+</div>
+<form name="form" method="post" action="../../cgi-bin/ReturnPassword.dll/changePwd">
+<fieldset><ul>
+	<li>
+		<label for="WEBUSERID"><#MLGLBL TEXT="Username"></label>
+		<input name="WEBUSERID" type="text" value="" id="WEBUSERID" class='reqField'>
+	</li><li>
+		<label for="NEWPWD"><#MLGLBL TEXT="New Password"></label>
+		<input name="NEWPWD" type="password" value="" id="NEWPWD" class='reqField'>
+	</li><li>
+		<label for="NEWPWDCONF"><#MLGLBL TEXT="New Password (confirm)"></label>
+		<input name="NEWPWDCONF" type="password" value="" id="NEWPWDCONF" class='reqField'>
+	</li>
+	</ul>
+	</fieldset>
+	<div class="buttons">
+		<input name="submit" type="submit" value="Send Login Information">
+	</div>	
+<input type="hidden" name="ONETIMEPWD" size="27" value="<#ONETIMEPWD>">
+</form>

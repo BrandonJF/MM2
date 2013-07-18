@@ -1,0 +1,30 @@
+<script language="javascript" SRC="../../js/CheckBoxGroup.js"></script>
+
+<script language = "javascript">
+<#CLEARVANTAGECHECKFUNCTIONS>
+
+function clearForm() {
+	document.response.CUSTOMERCD.value=GetCookieValue('memberid');
+	document.response.CUSTOMERCODE.value=document.response.CUSTOMERCD.value
+	}	
+
+</script>
+<h2><#TESTTITLE></h2>
+<form method="POST" action="PostResults" name="response">
+<table class="gutters">
+    <#TESTQUESTIONS>
+</table>
+  
+    <input type="hidden" name="CUSTOMERCODE" value="<#CUSTOMERCD>" >  
+    <input type="hidden" name="TESTCD" value="<#TESTCD>">
+    <input type="hidden" name="CUSTOMERCD" value="">
+    <input type="hidden" name="LINKTYPE" value="M">
+    <input type="hidden" name="LINKCD" value="">
+    <input type="hidden" name="RGROUPNUM" value="">
+</form>
+
+<script>
+	clearForm();
+</script>
+
+

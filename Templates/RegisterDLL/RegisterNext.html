@@ -1,0 +1,100 @@
+
+<p><h3>Event Registration (Continued)</h3></p>
+<p><a href="javascript:printpage()"><img src="../../images/print_button.gif" alt="Print Button" width="48" height="17" border="0" /></a></p>
+<p>Please confirm that the following information is correct before moving on to the next step.</p>
+
+<h3>Event</h3>
+<!--<#SESSIONNAME>-->
+<#LISTCART>
+
+<h3>Personal Information</h3>
+<strong>Seminar Attendee:</strong> <#PREFIX> <#FIRSTNAME> <#LASTNAME><br />
+<strong>Birth day/month:</strong> <#BIRTHDATE>
+
+<h3>Occupation Information</h3>
+<strong>Title:</strong> <#JOBTITLE><br />
+<strong>Company/Organization</strong>: <#ORGNAME><br />
+
+<h3>Address</h3>
+<#ADDRESS1><br /><#ADDRESS2><br /><#CITY>, <#STATECD> <#ZIP><br /><#COUNTRY><br/ >
+
+<h3>Contact Information</h3>
+<strong>Phone</strong>:<#WORKPHONE><br />
+<strong>Fax: </strong><#FAXPHONE><br />
+<strong>Email:</strong> <#EMAIL><br />
+<strong>Alternate Email:</strong> <#ALTEMAIL><br />
+
+<p>
+If all of the information above is correct, press &quot;Continue Registration&quot;.<br />
+To change your information, press &quot;Go Back&quot;. 
+
+<form name=abc method="POST" action="../../cgi-bin/Registerdll.dll/NextForm">
+
+<input name="button" type="submit" value="Continue Registration">
+<input name="butto2" type="button" onclick="javascript:history.go(-1)" value="Go Back">
+
+<input type="hidden" name="RESPONSEPAGE" value="RegisterNextPayment.htm">   
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+<input type="hidden" name="PREFIX" value="<#PREFIX>">
+<input type="hidden" name="MIDDLEINITIAL" value="<#MIDDLEINITIAL>">
+<input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+<input type="hidden" name="SUFFIX" value="<#SUFFIX>">
+<input type="hidden" name="PREFNAME" value="<#PREFNAME>">
+<input type="hidden" name="BIRTHDATE" value="<#BIRTHDATE>">
+<input type="hidden" name="JOBTITLE" value="<#JOBTITLE>">
+<input type="hidden" name="ORGNAME" value="<#ORGNAME>">
+<input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+<input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+<input type="hidden" name="CITY" value="<#CITY>">
+<input type="hidden" name="STATECD" value="<#STATECD>">
+<input type="hidden" name="ZIP" value="<#ZIP>">
+<input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+<input type="hidden" name="WORKPHONE" value="<#WORKPHONE>">
+<input type="hidden" name="WORKPHONEEXT" value="<#WORKPHONEEXT>">
+<input type="hidden" name="FAXPHONE" value="<#FAXPHONE>">
+<input type="hidden" name="EMAIL" value="<#EMAIL>">
+<input type="hidden" name="ALTEMAIL" value="<#ALTEMAIL>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="SHIPTOCD" value="O">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="ENTERUSERCD" value="WEBUSER">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="Event Registration - <#FIRSTNAME> <#LASTNAME>">
+<input type="hidden" name="EMAILFROMADDRESS" value=" info@domain.org">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="POSTSUBSCRIPTIONPRICE" value="">
+<input type="hidden" name="POSTSUBSCRIPTIONNAME" value="">
+<input type="hidden" name="POSTCREDITCARDTYPE" value="">
+<input type="hidden" name="FPRICEAMT" value="<#FPRICEAMT>">
+<input type="hidden" name="FPRICETYPESTT" value="<#FPRICETYPESTT>">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONS" value="<#FUNCTIONS>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="LISTCART" value="<#LISTCART>">
+<input type="hidden" name="LISTTOTAL" value="<#LISTTOTAL>">
+<input type="hidden" name="CHECKDUPLICATE" value="N">
+<input type="hidden" name="LASTCANCELDATE" value="<#LASTCANCELDATE>">
+<input type="hidden" name="CANCELFEEAMT" value="<#CANCELFEEAMT>">
+<input type="hidden" name="LASTCANCELDATE2" value="<#LASTCANCELDATE2>">
+</form>

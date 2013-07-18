@@ -1,0 +1,49 @@
+ <h2>Subscription Search</h2>
+<div class="formIntro">
+   <p>
+	<a href="../subscriptiondll.dll/subitems?RANGE=1/10&amp;onwebflg=Y&amp;UDEF1TXT=Subscription&amp;range=1/10">View all Subscriptions</a><a href="#" onclick="createPOST('../msascartdll.dll/productlist',{'ONWEEBFLG':'Y','INSTOCKSTT':'Y','RANGE':'1/10','COLUMNS':2}); return false"></a> | <a href="../msascartdll.dll/GetCart">[?] View Cart</a>
+   </p> 
+</div>
+<form method="POST" action="../subscriptiondll.dll/subitems" target="_self" onsubmit="this.SUBSCRIPTIONDES.value = '~' + this.SUBSCRIPTIONDES2.value + '~';">
+<fieldset>
+  <ul>
+	<li>
+	  <label for="SUBSCRIPTIONDES2">Subscription Name</label>
+	  <input type="text" name="SUBSCRIPTIONDES2"><input name="SUBSCRIPTIONDES" type="hidden">
+	</li>
+	<li>
+	  <label for="SUBSRIPTIONNAME">Subscription Name</label>
+	  <input type="text" name="SUBSRIPTIONNAME">
+	</li>
+	<li>
+	  <label for="MAJORCAT">Category</label>
+	  <select size="1" name="MAJORCAT">
+					<option selected>(All)</option>
+					<#RTVPMAJORCATREF>
+				</select>
+	</li>
+	<li>
+	  <label for="PRICEAMT">Price Range</label>
+	  <select size="1" name="PRICEAMT">
+					<option>(All)</option>
+					<option value="<10">less than $10</option>
+					<option value="BETWEEN 10 AND 19.99">between $10 - $20</option>
+					<option value="BETWEEN 20 AND 29.99">between $20 - $30</option>
+					<option value="BETWEEN 30 and 39.99">between $30 - $40</option>
+					<option value="BETWEEN 40 AND 49.99">between $40 - $50</option>
+					<option value=">50">Over $50</option>
+				</select>
+	</li>
+  </ul>
+</fieldset>
+<div class="buttons">
+  <input name="submit" type="submit" value="Search">
+					<input name="reset" type="reset" value="Reset">	
+</div>
+
+
+		  <input type="hidden" name="RANGE" value="1/10">
+          <input type="hidden" name="UDEF1TXT" value="Subscription">
+          <input type="hidden" name="ONWEBFLG" value="Y" />
+		  </form>
+

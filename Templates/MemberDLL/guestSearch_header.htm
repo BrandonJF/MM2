@@ -1,0 +1,21 @@
+<form name="resultlist">
+<div style="display: none;" id="loadingSection"><p><img src="../../images/loading.gif">  Loading search results...</p></div>
+   
+	<table class="gutters" id="searchResultsTable">
+		<tr>
+			<th>Add</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Institution</th>
+		</tr>
+		<#CONTENT>    
+	</table>
+<div id="loadMoreContainer">
+   <div align="center" style="display:none" id="loadingMoreSection">
+    <p><img src="../../images/loading.gif"><br> Loading search results...</div></p>
+  <p align="center"><a style="cursor:pointer" onclick="searchGuests_ajax_loadMore(document.searchForm)">Load More</a></p>
+  </div>
+<p align="center" style="display:none" id="noMoreResults">
+	<strong>There are no more search results.</strong>
+  </p>
+</form>

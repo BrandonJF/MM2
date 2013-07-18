@@ -1,0 +1,42 @@
+<a href="#panel_left"  class="showMenuBtn"  data-iconshadow="false"> <i class="icon-reorder"></i>  </a>
+<!-- Taken out because the logo needs to have a trans bg -BJF -->
+  <!-- <img border="0" src="http://www.euclidtechnology.com/Portals/0/euclid-logo.gif" alt="Logo, Facebook" style="float:left;display:inline"/> -->
+                 <h1>
+                    Mobile Member
+                 </h1>
+
+
+
+
+
+
+
+<script>
+//populate cart summary:
+// $(function(){
+// 	var cartHeaderURL = '../msascartdll.dll/revieworder?WMT=none&WRP=cartSum.htm';
+// 	//debug(URL);
+// 	$.ajax({url:cartHeaderURL, type:'GET',
+// 		success:function(response){
+// 			if(response.match('Your cart is empty') || response.match('No Cart Items')){
+// 				var emptyString = 	'<p><a href="../msascartdll.dll/showcart">0 Item(s) In Cart</a>  Total: $0.00</p>';
+// 				$('#cartHeaderSummary').html(emptyString);
+// 			}else{
+// 				$('#cartHeaderSummary').html(response);
+// 				$('#cartHeaderSummary').trigger('create');
+// 			}
+// 		}
+// 	});
+// });
+</script>
+
+<script>
+	if(CUSTOMERCD != ''){
+		$("#logoff").show();
+		$("#login").hide();
+
+	}else{
+		$("#logoff").hide();
+		$("#login").show();
+	}
+</script>

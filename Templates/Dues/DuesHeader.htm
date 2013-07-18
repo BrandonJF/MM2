@@ -1,0 +1,21 @@
+<script>
+//counts the number of dues
+var numDues = 0;
+</script>
+
+<h2 class="title">Renew Dues</h2>
+   <!-- <p>Your oustanding dues invoices are listed below. Click "pay dues" to pay these dues by credit card or to print an invoice to mail with a check.</p> -->
+
+
+   <input type="button"  href="#" value="Pay All Outstanding Invoices" data-mini="true" data-theme="g" onclick="window.location='../dues.dll/paymentform?Consolidate=Y'">
+
+<#CONTENT>
+
+
+<script>
+//hides "pay all" link of only 1 dues
+if(numDues < 2){
+	$('#payallLink').hide();
+}
+</script>
+

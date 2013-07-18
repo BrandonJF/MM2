@@ -1,0 +1,31 @@
+<script language="javascript">
+	var orgnamevar = "";
+	var orgcdvar = "";
+	var parentcdvar = "";
+	var orgname = '';
+</script>
+
+
+<h3>Register Guests from <span id='orgname'>Organization</span></h3>
+<div class="formIntro">
+	<p>Use the list below to select users from your Organization to register as guests for this event. Check the box of each user you'd like to add, then click "Add Guests".</p>
+	<p>If you'd like to add a guest who is not a member of your Organization, please <a href="javascript:window.location='../memberdll.dll/list?email=3929093jjoijjji&whp=guestSearch_header.htm&wbp=guestSearch_list.htm&wnr=guestSearch_noRec.htm&wmt=../main_Template_none.htm';">click here</a>.</p>
+</div>
+	<form name="resultlist">
+		<table class="gutters">
+			<tr>
+				<th>Add</th>
+				<th>Name</th>
+				<th>Job Title</th>
+				<th>Email</th>
+			</tr>  	
+			<#CONTENT>  
+		</table>
+	<div class="buttons"><input type="button" value="Add Guests" onClick="addGuestsOrg(document.resultlist);" /></div>
+</form>
+  
+<script>
+	if(orgname != ''){
+		document.getElementById('orgname').innerHTML = orgname;
+	}
+</script>

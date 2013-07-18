@@ -1,0 +1,185 @@
+<script>
+function formValidate() {
+       // if ($('#BILLME').attr('checked') == 'checked'){
+		//		document.order.ISSUEBILLFLG.value='Y';
+		//		document.order.RESPONSEPAGE.value='dPaymentconfirm_bm.htm';
+         //       document.order.submit();
+      //  }
+		//else
+        if ( validateAll(document.order )) {
+				document.order.submit();
+				return false;
+		}
+
+}
+</script>
+<h2>Invoice Information</h2>
+<form name="order" method="POST" action="../billpayment.dll/payment">
+
+
+
+<table class="nobg">
+  <tr>
+    <th>Invoice Number</th>
+    <th>Customer ID</th>
+    <th>Customer Name</th>
+    <th>Order Status</th>
+  </tr>
+  <tr>
+	<td><#INVOICENUM></td>
+	<td><#PAYEECD></td>
+	<td><#PAYEENAME></td>
+	<td><#INVOICESTT></td>
+  </tr>
+  <tr>
+    <th>Invoice Date</th>
+    <th>Pmt. Due Date</th>
+    <th>Invoice Amt.</th>
+    <th>Balance Amt.</th>
+  </tr>
+  <tr>
+		<td><#INVOICEDATE></td>
+		<td><#DUEDATE></td>
+		<td><#TOTALAMT FORMAT='$0.00'></td>
+		<td><#BALANCEDUE FORMAT='$0.00'></td>
+  </tr>
+<!--  <tr>
+    <th>Payment Terms</th>
+    <th>Cancelled</th>
+    <th>Order Status</th>
+    <th>Shipping Code Ref.</th>
+  </tr>
+    <tr>
+		<td><#PAYMENTDATE></td>
+		<td><#CANCELLEDFLG></td>
+		<td><#STATUSSTT></td>
+		<td><#SHIIPCD></td>
+  </tr>
+  <tr>
+    <th>Ship Date</th>
+    <th>Invoice Note</th>
+    <th>Notified By</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr>
+    <td><#SHIPDATE></td>
+    <td><#NOTE></td>
+    <td><#NOTIFIEDBYSTT></td>
+    <td>&nbsp;</td>
+  </tr>-->
+</table><br />
+<table class="nobg">
+		<tr>
+				<th>Bill To</th>
+				<th>Ship To</th>
+		</tr>
+		<tr>
+				<td><#FIRSTNAME> <#LASTNAME><br>
+                <#ADDRESS1><br>
+				<script>
+						if("<#ADDRESS2>" != ""){
+								document.write('<#ADDRESS2><br>');
+						}
+				</script>
+				<#CITY>, <#STATECD> <#ZIP>
+				</td>
+				<td><#SHIPCONTACT><br>
+				<#SHIPADDRESS1><br>
+				<script>
+						if("<#SHIPADDRESS2>" != ""){
+								document.write('<#SHIPADDRESS2><br>');
+						}
+				</script>
+				<#SHIPCITY>, <#SHIPSTATECD> <#SHIPZIP>
+				</td>
+		</tr>
+</table>
+
+<br /><br /><br />
+<#INVOICEITEM>
+<br /><br /><br />
+<div class='totalContainer'>
+<fieldset>
+<legend><#MLGLBL TEXT="Totals"></legend>
+<div class='cartTotals'>
+<ul class="prices right">
+	<li>
+		<label for="PRICEAMT"><#MLGLBL TEXT="Price"></label>
+		<#PRICEAMT FORMAT="$0.00">
+	</li>
+	<li>
+		<label for="TAXAMT"><#MLGLBL TEXT="Tax"></label>
+		<#TAXAMT FORMAT='$0.00'>
+	</li>
+	<li>
+		<label for="Shipping"><#MLGLBL TEXT="Shipping"></label>
+		$0.00
+	</li>
+	<li>
+		<label for="TOTALAMT"><#MLGLBL TEXT="Invoice Total"></label>
+		<#TOTALAMT FORMAT="$0.00">
+	</li>
+	<li>
+		<label for="PAIDAMT"><#MLGLBL TEXT="Amount Paid"></label>
+		<#PAIDAMT FORMAT="$0.00">
+	</li>
+	<li class='finalTotal'>
+		<label for="BALANCEDUE"><#MLGLBL TEXT="Balance Due"></label>
+		<#BALANCEDUE FORMAT="$0.00">
+	</li>
+</ul>
+</div>
+</fieldset>
+
+<div class="buttons" id="selectPayment">
+	<input type="button" value="Add to Cart" onClick='window.location="../msascartdll.dll/ShowCart?INVOICENUM=<#INVOICENUM>"';>
+	<input type="button" data-theme="g" value="Pay Now" onClick='$("#enterPayment").show();$("#selectPayment").hide();'>
+</div>
+ <script type="text/javascript">
+		if("<#BALANCEDUE FORMAT='$0.00'>"=="$0.00"){
+				document.getElementById("selectPayment").setAttribute("style","display:none");
+		}
+</script>
+  <div id="enterPayment" class="cartPayment" style='display:none;'>
+    <input type="hidden" name="RESPONSEPAGE" value="receipt.htm">
+	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
+	<div class="buttons" id="selectPayment">
+		<input type="button" value="Process Payment" id='paymentButton' onClick="formValidate(); return false;">
+	</div>
+</div>
+<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+	<input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+	<input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+	<input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+	<input type="hidden" name="CITY" value="<#CITY>">
+	<input type="hidden" name="STATECD" value="<#STATECD>">
+	<input type="hidden" name="ZIP" value="<#ZIP>">
+	<input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+<input type="hidden" name="au_lid" value="0">
+<input type="hidden" name="sourceid" value="">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RPAYMENTREFNUM" value="<#PAYMENTREFNUM>">
+<input type="hidden" name="RPAYMENTREFEXPDATE" value="<#PAYMENTREFEXPDATE>">
+<input type="hidden" name="INVOICENUM" value="<#INVOICENUM>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N" />
+<input type="hidden" name="SENDEMAIL" value="Y" />
+<input type="hidden" name="EMAILSUBJECT" value="Payment Received for Invoice <#INVOICENUM>"/>
+<input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org"/>
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML" />
+<input type="hidden" name="ISSUEBILLFLG" value="N" />
+</form>
+
+
+<script>
+//hide payment section
+if('<#BALANCEDUE FORMAT=0.00>' == '0.00'){
+	$('.cartPayment').hide();
+	$('#paymentButton').hide();
+}
+$('#enterPayment .billOption').hide();
+isBillMe = false;
+if(!isBillMe){
+    $('.billOption').detach();
+}
+</script>

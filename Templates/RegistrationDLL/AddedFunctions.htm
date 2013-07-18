@@ -1,0 +1,16 @@
+<tr id="<#FUNCTIONCD>" title="<#FUNCTIONCD>">
+<td><#TITLE> <span id="<#FUNCTIONCD>_Comment"></span>
+<script>
+    $(document).ready(function(){
+        var fComments = $('#FCOMMENTS').val();
+        var tempArray = fComments.split("=");
+		var	fComment = tempArray[1];
+        var fCD= tempArray[0];
+        if(fCD == $('#<#FUNCTIONCD>').attr('title')){
+        $('#<#FUNCTIONCD>_Comment').append('- '+ fComment);
+			}
+    });
+</script></td>
+<td><#DISPLAYPRICE FORMAT="$0.00"></td>
+<td class="price"><#TOTAL FORMAT="$0.00"></td>
+</tr>

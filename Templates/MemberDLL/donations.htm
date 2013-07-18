@@ -1,0 +1,128 @@
+<script>
+function formValidate(){ //form validation
+	var donItem = $(".subItem:checked").attr("id");	//populate SUBITEMS
+	if(donItem == ''){
+		alert("Please select a donation fund.");
+		return false;
+	}else if(parseFloat(document.order.donationAmt.value) > 0){
+		document.order.SUBITEMS.value = donItem + '=' + document.abc.donationAmt.value; //alert(document.abc.SUBITEMS.value);
+		if(validateAll(document.order)){
+			document.order.submit();
+		}
+	}else{
+		alert("Please enter a donation amount which is greater than $0.00");
+		return false;
+	}
+}
+</script>
+
+
+<h2>Make a Donation</h2>
+<div class="formIntro">
+	<p>Please enter the information requested below to purchase membership. </p>
+	<ul>
+		<li> All fields marked * are required.</li>
+		<li>For users from the USA, please enter all phone numbers in the format (302) 392-3929</li>
+		<li>Please enter all dates in the format MM/DD/YYYY</li>
+		<li>When you've completed filling out the application, you can choose to   either pay now or add this item to the cart and continue shopping.</li>
+	</ul>
+</div>
+<form name="order" method="POST" action="../orderdll.dll/orderp">
+    <fieldset>
+        <legend>Donation Funds</legend>
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_donRadio_Header_donationpage.htm" WBP="INCLUDE_donRadio_list.htm" PARAMS="UDEF1TXT=donation,ONWEBFLG=Y"> 
+	<li>
+		<label for='donationAmt'>Donation Amount</label>
+		$<input type="text" name="donationAmt" value="0.00">
+	</li>
+	<li>
+		<label for='SS_UDEF5TXT'>In Memory Of</label>
+		<input type="text" size="50" name="SS_UDEF5TXT">
+	</li>
+	<li>
+		<label for='SS_DONATIONNOTE'>Donation Note</label>
+		<textarea name="SS_DONATIONNOTE"></textarea>
+	</li>
+</fieldset>
+<fieldset>
+	<legend>Donor Information</legend>
+	<ul>
+		<li>
+			<label for="FIRSTNAME" class="required">First Name</label>
+			<input type="text" name="FIRSTNAME" value="<#FIRSTNAME>" class='reqField'>
+		</li>
+		<li>
+			<label for="MIDDLEINITIAL">Middle Initial</label>
+			<input type="text" name="MIDDLEINITIAL" value="<#MIDDLEINITIAL>">
+		</li>
+		<li>
+			<label for="LASTNAME" class="required">Last Name</label>
+			<input type="text" name="LASTNAME" value="<#LASTNAME>" class='reqField'>
+		</li>
+		<li>
+			<label for="ORGNAME">Organization</label>
+			<input type="text" name="ORGNAME" value="<#ORGNAME>">
+		</li>
+		<li>
+			<label for="JOBTITLE">Title</label>
+			<input type="text" name="JOBTITLE" value="<#JOBTITLE>">
+		</li>
+		<li>
+			<label for="WORKPHONE" class="required">Work Phone</label>
+			<input type="text" name="WORKPHONE" value="<#WORKPHONE>" class='reqField'>
+		</li>
+		<li>
+			<label for="FAXPHONE">Fax</label>
+			<input type="text" name="FAXPHONE" value="<#FAXPHONE>">
+		</li>
+		<li>
+			<label for="EMAIL" class="required">Email Address</label>
+			<input type="text" name="EMAIL" value="<#EMAIL>" class='reqField'>
+		</li>
+		<li>
+			<label for="ADDRESS1" class="required">Address</label>
+			<input type="text" name="ADDRESS1" value="<#ADDRESS1>" class='reqField'>
+		</li>
+		<li>
+			<label for="ADDRESS2">Address Continued</label>
+			<input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+		</li>
+		<li>
+			<label for="CITY" class="required">City</label>
+			<input type="text" name="CITY" value="<#CITY>" class='reqField'>
+		</li>
+		<li>
+			<label for="CITY" class="required">State</label>
+			<select size="1" name="STATECD" class='reqField'>
+				<option value='' >Select One...</option>
+				<#RTVSTATEREFSRTFSTATENAMESCVSTATECD>        
+			</select>
+		</li>
+		<li>
+			<label for="ZIP" class="required">Zip</label>
+			<input type="text" name="ZIP" value="<#ZIP>" class='reqField'>
+		</li>
+		<li>
+			<label for="COUNTRY" class="required">Country</label>
+			<select size="1" name="COUNTRY">
+				<option value=''>Select One...</option>
+				<#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAMESCVCOUNTRY>        
+			</select>
+		</li>
+	</ul>
+</fieldset>
+<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="CUSTOMERCD">
+<div class="buttons">
+	<input name="Button" type="button" onClick="formValidate()" value="Submit">
+        <input type="button" value="Add To Cart" onclick="submitDonationToCart()">
+</div>
+
+<input type="hidden" name="SUBITEMS" value="">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+<input type="hidden" name="EMAILSUBJECT" value="Thank you for your Donation">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N"> 
+
+</form>

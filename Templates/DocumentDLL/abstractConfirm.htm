@@ -1,0 +1,29 @@
+
+<h3>Abstract Submission Confirmation</h3>
+<p>Your abstract has been submitted! Your <strong>control Number</strong> is <strong><#PARENTGROUPCD></strong>.</p>
+
+              <table class="gutters">
+              	<tr>
+                	<th>Document #</th>
+                	<th>File Name</th>
+                	<th>&nbsp;</th>
+                </tr>
+                <#FILELIST>
+        </table>        
+     <p> </p>          
+<div class="buttons">
+	 <a class="button" href='../memberdll.dll/info?wrp=mainloginwelcome.htm'>Return to my Home Page</a> 
+</div>
+
+<script> 
+if(<#TOTALAMT> != 0){
+var firstname = GetCookieValue('firstname');
+var lastname = GetCookieValue('lastname');
+
+document.write("<h3 class='highlight'>Payment Info:</h3>");
+document.write("<strong>Cardholder Name:</strong> "+firstname+" "+lastname+"<BR><strong>Card Type:</strong> <#PAYMENTTYPECD><BR><strong>Credit Card Number:</strong> <#PAYMENTREFNUM><br>");
+document.write('<strong>Expiration Date:</strong> <#PAYMENTREFEXPDATE><BR>');
+document.write("<strong>Invoice Number:</strong> <#INVOICENUM><Br /><strong>Total Cost:</strong> $<#TOTALAMT><br />");
+}
+</script>
+

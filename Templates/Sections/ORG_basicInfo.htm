@@ -1,0 +1,24 @@
+<fieldset>
+	<legend>Organization Basic Information</legend>
+<ul>
+	<li>
+		<label for="ORGNAME" class="required">Organization Name</label>
+		<input name="ORGNAME" value="<#ORGNAME>" class="reqField" id="OrganizationName" type="text">
+	</li>
+	<li>
+		<label for="ORGLEGALNAME">Legal Name</label>
+		<input name="ORGLEGALNAME" value="<#ORGLEGALNAME>" type="text">
+	</li>
+	<li>
+		<label for="ORGTYPE" class="required">Type</label>
+		<select name="ORGTYPE" id="Type" class='reqField'>
+    	<option value="">Select One...</option>
+        <#REFTABLEVALS TABLENAME="ORGTYPEREF" SCV="ORGTYPE">
+    </select>
+	</li>
+	<li>
+		<label for="WWWADDRESS">Web Address</label>
+		<input name="WWWADDRESS" value="<#WWWADDRESS>" type="text">
+	</li>
+</ul>
+</fieldset>

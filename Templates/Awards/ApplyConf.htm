@@ -1,0 +1,23 @@
+<h2>Award Application - Confirmation</h2>
+<dl class="profile">
+    <dt>Total Amount Paid</dt><dd><#TOTALAMT></dd>
+    <dt>Award Name</dt><dd><#AWARDNAME></dd>
+    <dt>Application #</dt><dd><#AWARDCD></dd>
+    <dt>Applicant</dt><dd><#FIRSTNAME> <#LASTNAME></dd>
+    <dt>Company/Organzation</dt>
+    <dd><#ORGNAME><br>
+    <#ADDRESS1> <#ADDRESS2><br>
+     <#CITY>, <#STATECD> <#ZIP>
+    </dd>
+    <dt>Work Phone</dt><dd><#WORKPHONE></dd>
+    <dt>Email</dt><dd><#EMAIL></dd>
+    <dt>&nbsp;</dt><dd id="awardDoc"><a href="../Documentdll.dll/view?DOCUMENTNUM=<#DOCUMENTNUM>">View Document</a></dd>
+    <p class="clear"></p>
+</dl>
+<script>
+    if("<#DOCUMENTNUM>" == ""){
+        $("#awardDoc").hide();
+    }
+</script>
+
+

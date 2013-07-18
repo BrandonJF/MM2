@@ -1,0 +1,274 @@
+
+<script language="javascript">
+function GetJobCode(){
+      
+  if ( (isJobTitle()) && (isJobStarts()) && (isJobCity()) && (isJobState())   && (isJobCountry()))
+  { 
+      document.postjob.submit()
+  
+  }
+
+}
+ 
+
+function isJobTitle()  {
+   if (document.postjob.JOBTITLE.value == "") 
+      {
+       alert("\nThe Job Title field is blank.\n\nPlease enter Job Title.")
+       document.postjob.JOBTITLE.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+function isJobCat()  {
+  var mystate=document.postjob.JOBMAJORCAT.selectedIndex;
+   if (mystate==0) {
+	alert("\nYou must select Major Category from the dropdown box.");
+	document.postjob.JOBMAJORCAT.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+function isJobStarts()  {
+   if (document.postjob.JOBSTARTONTXT.value == "") 
+      {
+       alert("\nThe Job Starts field is blank.\n\nPlease enter Job Starts.")
+       document.postjob.JOBSTARTONTXT.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+function isJobMinEdu()  {
+  var mystate=document.postjob.JOBEDUCATIONMINDEGREE.selectedIndex;
+   if (mystate==0) {
+	alert("\nYou must select Min. Education from the dropdown box.");
+	document.postjob.JOBEDUCATIONMINDEGREE.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+function isJobExper()  {
+   if (document.postjob.JOBYEARSMINEXPERIENCEAMT.value == "") 
+      {
+       alert("\nThe Job Min. Years of Exp.field is blank.\n\nPlease enter Job Min. Years of Exp.")
+       document.postjob.JOBYEARSMINEXPERIENCEAMT.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+// Checks the Country field.
+function isJobCountry()
+   {
+	var mycountry=document.postjob.JOBCOUNTRY.selectedIndex;
+	if (mycountry==0) {
+	alert("\nYou must select your Country from the dropdown box.");
+	document.postjob.JOBCOUNTRY.focus();
+   	return false; 
+      }
+   	else  {
+      return true;
+ 		  }	     
+}
+
+
+function isDesc()  {
+   if (document.postjob.ADVCOPYTEXT.value == "") 
+      {
+       alert("\nThe Description field is blank.\n\nPlease enter the job description.")
+       document.postjob.ADVCOPYTEXT.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+
+// Checks the City field.
+function isJobCity()  {
+   // Return false if City field is blank.
+   if (document.postjob.JOBCITY.value == "") 
+      {
+       alert("\nThe City field is blank.\n\nPlease enter your City.")
+       document.postjob.JOBCITY.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+}
+
+// Checks the State field.
+function isJobState()
+   {
+	var mystate=document.postjob.JOBSTATE.selectedIndex;
+	if (mystate==0) {
+	alert("\nYou must select your State from the dropdown box.");
+	document.postjob.JOBSTATE.focus();
+   	return false; 
+      }
+   	else  {
+      return true;
+ 		  }	     
+}
+
+function ShowAlert()
+   {
+  alert("ffffffffff");
+}
+$(function() {
+		$( "#JOBSTARTONTXT" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<h2>Update Job Posting</h2>
+<form method="POST" name="postjob" action="PostJob?WMT=none" onSubmit=""  enctype="multipart/form-data">
+  <fieldset>
+	<legend>Job Information</legend>
+	<ul>
+		<li>
+			<label for="JOBTITLE_AC">Job Title</label>
+			<input type="text" name="JOBTITLE_AC" value="<#JOBTITLE_AC>"> 
+		</li>
+		<li>
+			<label for="JOBTITLE_AC">Job Starts</label>
+			<input type="text" name="JOBSTARTONTXT" id="JOBSTARTONTXT" value="<#JOBSTARTONTXT>"> 
+		</li>
+		<li>
+			<label for="JOBSALARLYMINAMT">Salary Min.</label>
+			<input type="text" name="JOBSALARLYMINAMT"  value="<#JOBSALARLYMINAMT>">
+		</li>
+		<li>
+			<label for="JOBSALARYMAXAMT">Salary Max.</label>
+			<input type="text" name="JOBSALARYMAXAMT" value="<#JOBSALARYMAXAMT>">
+		</li>
+		<li>
+			<label for="JOBEDUCATIONMINDEGREE">Min. Education</label>
+			<select size="1" name="JOBEDUCATIONMINDEGREE">
+                <option value="">...Select One</option>
+                <#RTVEDUCATIONLEVELREFFLTTYPECDFLVEDUC>
+              </select>
+		</li>
+		<li>
+			<label for="JOBGPAMINAMT">Min. GPA</label>
+			<input type="text" name="JOBGPAMINAMT" value="<#JOBGPAMINAMT>">
+		</li>
+		<li>
+			<label for="JOBGPAMINAMT">Min. Years of Exp.</label>
+			<input type="text" name="JOBYEARSMINEXPERIENCEAMT" size="12" value="<#JOBYEARSMINEXPERIENCEAMT>">
+		</li>
+		<li>
+			<label for="JOBREQUIREDSKILLS">Required Skills</label>
+			<select size="4" name="JOBREQUIREDSKILLS" multiple>
+          <#CBXREQSkillRef>
+              </select>
+		</li>
+		<li>
+			<label for="JOBPREFERREDSKILLS">Preferred Skills</label>
+			<select size="4" name="JOBPREFERREDSKILLS" multiple>
+          <#CBXPREFSkillRef>
+              </select>
+		</li>
+		<li>
+			<label for="JOBMAJORCAT">Job Major Cat.</label>
+			<select size="1" name="JOBMAJORCAT">
+<#CBXJOBMAJORCAT>
+              </select>
+		</li>
+		<li>
+			<label for="JOBCITY">Job City</label>
+			<input type="text" name="JOBCITY" value="<#JOBCITY>">
+		</li>
+		<li>
+			<label for="JOBSTATE">Job State</label>
+			<select size="1" name="JOBSTATE">
+<option>	<#RTVSTATEREFSRTFSTATENAME></option>
+              </select>
+		</li>
+		<li>
+			<label for="JOBCOUNTRY">Job Country</label>
+			<select size="1" name="JOBCOUNTRY">
+<option><#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAME></option>
+              </select>
+		</li>
+		<li>
+			<label for="JOBSTATE">Job Description</label>
+			<textarea name="ADVCOPYTEXT" cols="40" rows="10" id="ADVCOPYTEXT"><#ADVCOPYTEXT></textarea>
+		</li>
+		<li>
+			<label for="totalAmt">Posting Total Cost</label> <span id="totalAmt">150.00</span>
+		</li>
+		<li>
+			<label for="totalAmt">Web Site</label>
+			<input type="text" name="JOBCONTACTWWWADDRESS" value="<#JOBCONTACTWWWADDRESS>">
+		</li>
+		<li>
+			<label for="file">Company Logo</label>
+			 <input type="file" name="file" />
+		</li>
+	</ul>
+</fieldset>       
+<fieldset>
+	<legend>Contact Information</legend> 
+	<ul>
+		<li>
+			<label for="JOBCONTACTNAME">Contact Name</label>
+			<input type="text" name="JOBCONTACTNAME" value="<#LASTNAME>, <#FIRSTNAME>">
+		</li>
+		<li>
+			<label for="JOBTITLE">Job Title</label>
+			<input type="text" name="JOBTITLE" value="<#JOBTITLE>" size="30">
+		</li>
+		<li>
+			<label for="JOBCONTACTADDRESS">Address</label>
+			<input type="text" name="JOBCONTACTADDRESS" value="<#ADDRESS1> <#ADDRESS2> <#CITY>, <#STATECD>, <#ZIP>, <#COUNTRY>">
+		</li>
+		<li>
+			<label for="JOBCONTACTADDRESS">Contact Phone</label>
+			<input type="text" name="JOBCONTACTPHONE" value="<#WORKPHONE>">
+		</li>
+		<li>
+			<label for="JOBCONTACTFAX">Contact Fax</label>
+			<input type="text" name="JOBCONTACTFAX" value="<#FAXPHONE>" size="24">
+		</li>
+		<li>
+			<label for="JOBCONTACTFAX">Contact Email</label>
+			<input type="text" name="JOBCONTACTEMAIL" value="<#EMAIL>" size="24">
+		</li>
+		<li>
+			<label for="JOBCONTACTMETHOD">Preferred Notification Mode</label>
+			<select size="1" name="JOBCONTACTMETHOD">
+<#CBXJOBCONTACTMETHOD>
+              </select>
+		</li>
+	</ul>
+</fieldset>
+        <input type="hidden" name="WMT" value="none">
+<div class="buttons">
+  <input type="button" value="Submit Job" name="SUBMIT" onClick="GetJobCode()">	 			  
+				  <input type="reset" value="RESET" name="RESET">
+</div> 
+        
+	<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+	<input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">
+	<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+		
+		
+      </form>

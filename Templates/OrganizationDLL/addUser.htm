@@ -1,0 +1,280 @@
+<script language="javascript">
+function formValidate(){
+	if(validateAll(document.abc)){
+		document.abc.submit();
+	}
+}
+</script>
+
+
+<h1>Add a User to <#ORGNAME></h1>
+
+<p>Please enter the information requested below to create a User Account record.<br />
+<ul>
+<li> All fields marked * are required.</li>
+<li>For users from the USA, please enter all phone numbers in the format (302)392-3929</li>
+</ul>
+</p>
+
+  <form method="POST" name="abc" action='../memberdll.dll/updateInfo'>
+   <table class='profileForm'>
+       <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+   
+    <tr>
+      <td colspan="2" class="highlight"><b>Basic Information</b></td>
+    </tr>
+
+    <tr>
+      <td>User Name*</td>
+      <td><input name="WEBUSERID" type="text" id="WEBUSERID" value="" size="50" class='reqField'></td>
+    </tr>
+    <tr>
+      <td>Account Password*</td>
+      <td><input name="WEBUSERPASSWORD" type="text" id="WEBUSERPASSWORD" value="" size="50"  class='reqField'></td>
+    </tr>
+    <tr>
+	  <td>&nbsp;</td>
+      <td width="400">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>Prefix</td>
+      <td><select name='PREFIX'><option value=''>Select One...</option><#RTVSALUTATIONREFFLD1SALUTATIONFLD2SALUTATIONSCVPREFIX></select></td>
+    </tr>
+	<tr>
+	  <td>First Name*</td>
+      <td><input type="text" size="50" name="FIRSTNAME" value=""  class='reqField'></td>
+    </tr>
+	<tr>
+	  <td>Last Name*</td>
+	  <td><input type="text" size="50" name="LASTNAME" value=""  class='reqField'></td>
+	  </tr>
+	<tr>
+	  <td>Suffix</td>
+	  <td><select name='SUFFIX'><option value=''>Select One...</option><#CBXSUFFIX></select></td>
+	  </tr>
+	<tr>
+	  <td>Degrees (hold CTRL to select multiple)</td>
+	  <td><select name='_MULTIPLE_DESIGNATIONLST' size='5' multiple><#RTVDESIGNATIONREFFLD1DESIGNATIONCDFLD2DESIGNATIONCD></select></td>
+     </tr>
+	<!--<tr>
+	  <td>Middle Initial</td>
+	  <td ><input type="text" name="MIDDLEINITIAL" value="<#MIDDLEINITIAL>" size="50"></td>
+	</tr>-->
+	<tr>
+	  <td>Job Title 1</td>
+      <td><input name="JOBTITLE" type="text" id="JOBTITLE" value="" size="50"></td>
+    </tr>
+	<tr>
+	  <td>Job Title 2</td>
+	  <td><input name='UDEF1TXT' value='' size="50"></td>
+	  </tr>
+	<tr>
+	  <td>Job Title 3</td>
+	  <td><input name='UDEF2TXT' value='' size='50'></td>
+     </tr>
+	<!--<tr>
+	  <td>Company</td>
+	  <td><select name='orgDropdown' onChange='getOrgInfo()' style="width:330px;">
+      <option value=''>Select One...</option>
+      <#RTVVW_NONTHEORGNAMEFLD1ORGCDFLD2ORGNAMESRTFshortOrgName>
+      </select>      </td>
+	  </tr>-->
+
+ 
+
+	<tr><td colspan="2">&nbsp;</td></tr>
+    <tr>
+      <td colspan="2" class="highlight"><b>Preferred Contact Information</b></td>
+    </tr>
+	
+	<!--<tr>
+	  <td>Address Type</td>
+	  <td><select size="1" name="ADDRESSTYPE" style="width:330px;">
+        <#CBXADDRESSTYPE>
+      </select></td>
+	  </tr>-->
+	<tr>
+	  <td> Mailing Address*</td>
+	  <td><input type="text" size="50" name="ADDRESS1" value="<#ADDRESS1>"  class='reqField'></td>
+	  </tr>
+	<tr>
+	  <td>Mailing Address Cont.</td>
+	  <td><input type="text" size="50" name="ADDRESS2" value="<#ADDRESS2>"></td>
+	  </tr>
+	<tr>
+	  <td>City*</td>
+	  <td><input type="text" size="50" name="CITY" value="<#CITY>"  class='reqField'></td>
+	  </tr>
+	<tr>
+	  <td>State/Province*</td>
+	  <td>   
+      <select size="1" name="STATECD" style="width:330px;"  class='reqField'>
+       <option value='' >Select One...</option><#RTVSTATEREFSRTFSTATENAMESCVSTATECD>        
+       </select></td>
+	  </tr>
+	<tr>
+	  <td>Zip/Postal Code*</td>
+	  <td><input type="text" size="50" name="ZIP" value="<#ZIP>"  class='reqField'></td>
+	  </tr>
+	<tr>
+	  <td>Country</td>
+	  <td>                           <select size="1" name="COUNTRY" style="width:330px;">
+      						<option value=''>Select One...</option>
+                            <#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAMESCVCOUNTRY>
+                            &nbsp;&nbsp;
+        </select>    </td>
+	  </tr>
+	<tr>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+     </tr>
+    <tr>
+      <td>Work Phone*</td>
+      <td><input type="text" size="50" name="WORKPHONE" value=""  class='reqField'> 
+     <tr>
+     <td> Work Extension</td> 
+       <td> <input type="text" size="10" name="WORKPHONEEXT" value=""></td>
+      </tr>
+	
+	<tr>
+	  <td>Fax</td>
+	  <td><input type="text" size="50" name="FAXPHONE" value="<#FAXPHONE>"></td>
+      </tr>
+	<tr>
+	  <td>Cell Phone</td>
+	  <td><input name='MOBILEPHONE' value='' size='50'></td>
+	  </tr>
+	
+	<tr>
+	  <td>Email Address*</td>
+	  <td><input type="text" size="50" name="EMAIL" value=""  class='reqField'></td>
+	  </tr>
+	<tr>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+	  </tr>
+	
+    <!--<tr>
+	  <td>Date of Birth</td>
+	  <td><input type="text" size="50" name="BIRTHDATE" value="<#BIRTHDATE>"></td>
+	  </tr>
+
+	<tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+      <td colspan="2" class="highlight"><b>Assistant Contact Information</b></td>
+    </tr>
+     <tr>
+   	  <td>Admin Name</td>
+	  <td><input type="text" size="50" name="UDEF1TXT" value="<#UDEF1TXT>"></td>
+	</tr>
+         <tr>
+   	  <td>Admin Email</td>
+	  <td><input type="text" size="50" name="ALTEMAIL" value="<#ALTEMAIL>"></td>
+	</tr>
+         <tr>
+   	  <td>Admin Phone</td>
+	  <td><input type="text" size="50" name="ALTPHONE" value="<#ALTPHONE>"> </td>
+      </tr>
+      <tr>
+      <td>Admin Phone Ext.</td>
+      <td> <input type="text" name="ALTPHONEEXT" size="10" value="<#ALTPHONEEXT>"></td>
+	</tr>
+         <tr>
+   	  <td>Admin Fax</td>
+	  <td><input type="text" size="50" name="ALTFAXPHONE" value="<#ALTFAXPHONE>"></td>
+	</tr>
+    	<tr><td colspan="2">&nbsp;</td></tr>
+    <tr>
+      <td colspan="2" class="highlight"><b>Alternate Contact Information</b></td>
+    </tr>
+
+	<tr>
+	  <td align='left'>Alternate Address Type</td>
+	  <td align='left'><select size="1" name="ALTADDRESSTYPE" style="width:330px;">
+        <#CBXADDRESSTYPE>
+      </select></td>
+	  </tr>
+	<tr>
+	  <td align='left'>Alternate Mailing Address</td>
+	  <td align='left'><input type="text" size="50" name="ALTADDRESS1" value="<#ALTADDRESS1>"></td>
+	  </tr>
+	<tr>
+	  <td align='left'>Alternate Mailing Address 2</td>
+	  <td align='left'><input type="text" size="50" name="ALTADDRESS2" value="<#ALTADDRESS2>"></td>
+	  </tr>
+	<tr>
+	  <td align='left'>Alternate City</td>
+	  <td align='left'><input type="text" size="50" name="ALTCITY" value="<#ALTCITY>"></td>
+	  </tr>
+	<tr>
+	  <td align='left'>Alternate State</td>
+	  <td align='left'><SELECT NAME="ALTSTATE" size="1" style="width:330px;">
+      	<option value=''>Select One...</option>
+        <#RTVSTATEREFSCVALTSTATE>
+      </SELECT></td>
+	  </tr>
+	<tr>
+	  <td align='left'>Aternate Zip</td>
+	  <td align='left'><input type="text" size="50" name="ALTZIP" value="<#ALTZIP>"></td>
+	  </tr>
+	<tr><td colspan="2">&nbsp;</td></tr>-->
+    
+    
+	<tr>
+	  <td></td>
+	  <td><input name="Button" type="button" onClick="formValidate()" value="Create New Account"> </td>
+	</tr>	    	
+   </table>
+
+   <input type="hidden" name="CUSTOMERCD" value="-1">
+   <input type="hidden" name="RESPONSEPAGE" value="Customer_new_Confirm.htm">
+   <input type="hidden" name="ORGCD" value="<#ORGCD>">
+   <input type="hidden" name="ORGNAME" value="<#ORGNAME>">
+
+  </form>
+   
+ 
+
+<script>
+/*
+//populate addresstype
+if('<#ADDRESSTYPE>' == 'HOME'){
+	document.abc.ADDRESSTYPE.selectedIndex = 1;
+}else if('<#ADDRESSTYPE>' == 'WORK'){
+	document.abc.ADDRESSTYPE.selectedIndex = 2;
+}
+
+if('<#ALTADDRESSTYPE>' == 'HOME'){
+	document.abc.ALTADDRESSTYPE.selectedIndex = 1;
+}else if('<#ALTADDRESSTYPE>' == 'WORK'){
+	document.abc.ALTADDRESSTYPE.selectedIndex = 2;
+}
+
+//populate radios
+if('<#ISTRAINERFLG>' == 'Y'){
+	document.abc.ISTRAINERFLG[0].checked= true;
+}else{
+	document.abc.ISTRAINERFLG[1].checked= true;
+}
+
+if('<#NOWEBFLG>' == 'N'){
+	document.abc.NOWEBFLG[0].checked= true;
+}else{
+	document.abc.NOWEBFLG[1].checked = true;
+}
+
+//prepopulate org
+if('<#ORGCD>' != ''){
+	for(var i=0;i<document.abc.orgDropdown.length;i++){
+		if(document.abc.orgDropdown[i].value == '<#ORGCD>'){
+			document.abc.orgDropdown[i].selected = true;
+		}
+	}
+}
+*/
+
+</script>
+

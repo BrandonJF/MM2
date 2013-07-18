@@ -1,0 +1,193 @@
+<script language="javascript">
+<!-- 
+function formValidate(){
+	if(validateAll(document.abc)){
+		document.abc.submit();
+	}
+}
+
+--> 		
+</script>
+
+
+<form name="abc" method="POST" action="../Registerdll.dll/NextForm">
+<h1><#SESSIONNAME></h1>
+<h2>Confirm / Update Registrant Information</h2>
+<p>
+<ul>
+<li> All fields marked * are required.</li>
+<li>For users from the USA, please enter all phone numbers in the format (302)392-3929</li>
+<li>Please enter all dates in the format MM/DD/YYYY</li>
+</ul>
+</p>
+
+
+<br />
+
+  <table class='profileForm'>
+  
+  <tr>
+	<td class="highlight" colspan='2'><b>Personal Information</b></td>
+  </tr>
+
+  <tr>
+    <td colspan='2'>&nbsp;</td>
+  </tr>
+		<tr>
+		  <td width="40%">Prefix</td>
+		  <td><select name='PREFIX'><option value=''>Select One...</option><#RTVSALUTATIONREFFLD1SALUTATIONFLD2SALUTATIONSCVPREFIX></select></td>
+		</tr>
+		<tr>
+		  <td>First Name*</td>
+		  <td><input type=text name="FIRSTNAME" value="<#FIRSTNAME>" size="50" class='reqField' ></td>
+		</tr>
+		<tr>
+		  <td>Last Name*</td>
+		  <td><input type=text name="LASTNAME" value="<#LASTNAME>" size="50" class='reqField'></td>
+		</tr>
+		<tr>
+		  <td>Suffix</td>
+		  <td><select name='SUFFIX' id='suffixField'><option value=''>Select One...</option><#CBXSUFFIX></select></td>
+		</tr>
+			<tr>
+	  <td>Degrees (hold CTRL to select multiple)</td>
+	  <td><select name='_MULTIPLE_DESIGNATIONLST' id='degreesField' size='5' multiple>
+	    <#RTVDESIGNATIONREFFLD1DESIGNATIONCDFLD2DESIGNATIONCDSCVDESIGNATIONLST>
+	    </select>	  </td>
+     </tr>
+		<tr>
+		  <td>Badge Name</td>
+		  <td><input type=text name="BADGENAME" value="<#FIRSTNAME> <#LASTNAME>" size="50"></td>
+		</tr>
+		<!--<tr>
+		  <td>Date of Birth</td>
+		  <td><input type=text name="BIRTHDATE" value="<#BIRTHDATE>" size="50"> <span class="note">MM/DD/YYYY</a></td>
+		</tr>-->
+		<tr>
+		  <td>&nbsp;</td>
+		  <td>&nbsp;</td>
+    </tr>																								 
+
+	 
+	<tr>
+	  <td>Job Title </td>
+      <td><input name="JOBTITLE" type="text" id="JOBTITLE" value="<#JOBTITLE>" size="50"></td>
+    </tr>
+	    <tr>
+        <td>Organization</td>
+        <td><input name='ORGNAME' id='ORGNAME' value='<#ORGNAME>' size='50'> <a href="#" onClick="RunOrgSearch(document.abc);" >Search</a></td>
+    </tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <td>&nbsp;</td>
+    </tr>
+      <tr>
+	<td class="highlight" colspan='2'>Primary Address</td>
+  </tr>
+    
+    
+		<tr>
+		  <td>Mailing Address*</td>
+		  <td><input type=text name="ADDRESS1" value="<#ADDRESS1>" size="50" class='reqField'></td>
+		</tr>
+		<tr>
+		  <td>Mailing Address Cont.</td>
+		  <td><input type=text name="ADDRESS2" value="<#ADDRESS2>" size="50"></td>
+		</tr>
+		<tr>
+		  <td>City*</td>
+		  <td><input type=text name="CITY" value="<#CITY>" size="50" class='reqField'></td>
+		</tr>
+		<tr>
+		  <td>State*</td>
+		  <td> <select name=STATECD size="1" class='reqField'><option value=''>Select One...</option><#RTVSTATEREFSCVSTATECD></select></td>
+		</tr>
+		<tr>
+		  <td>Zip*</td>
+		  <td><input type=text name="ZIP" value="<#ZIP>" size=15 class='reqField'></td>
+		</tr>
+		<tr>
+		  <td>Country</td>
+		  <td><select name=COUNTRY size="1"><option value=''>Select One...</option><#RTVCOUNTRYREFSCVCOUNTRY></select></td>
+		</tr>
+		<tr>
+		  <td>&nbsp;</td>
+		  <td>&nbsp;</td>
+    </tr>																								          
+
+  <tr>
+	<td class="highlight" colspan='2'><b>Contact Information</b></td>
+  </tr>
+		<tr>
+		  <td width="40%">Work Phone*</td>
+		  <td><input type=text name="WORKPHONE" value="<#WORKPHONE>" size="50" class='reqField'><br/><span class="note">(222) 222-2222</a></td>
+		</tr>
+		<tr>
+		  <td>Extension</td>
+		  <td><input type="text" name="WORKPHONEEXT" size="15" value="<#WORKPHONEEXT>"></td>
+		</tr>
+		<tr>
+		  <td>Fax</td>
+		  <td><input type=text name="FAXPHONE" value="<#FAXPHONE>" size="50"></td>
+		</tr>
+		<tr>
+		  <td>Email*</td>
+		  <td><input type=text name="EMAIL" value="<#EMAIL>" size="50" class='reqField'></td>
+		</tr>
+		<tr>
+		  <td>Alternate Email</td>
+		  <td><input type=text name="ALTEMAIL" value="<#ALTEMAIL>" size="50"></td>
+		</tr>
+        <tr>
+           <td  colspan="2">&nbsp;</td>
+        </tr>
+</table>
+<br /><br />
+<div align='center'>
+ <input name="button" type="button" onClick="formValidate();" value="Continue Registration">
+ </div>
+
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="ENTERUSERCD" value="WEBUSER">	 
+<input type="hidden" name="FPRICEAMT" value="<#FPRICEAMT>">
+<input type="hidden" name="FPRICETYPESTT" value="<#FPRICETYPESTT>">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONS" value="<#FUNCTIONS>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="LISTCART" value="<#LISTCART>">
+<input type="hidden" name="LISTTOTAL" value="<#LISTTOTAL>">
+<input type="hidden" name="LASTCANCELDATE" value="<#LASTCANCELDATE>">
+<input type="hidden" name="CANCELFEEAMT" value="<#CANCELFEEAMT>">
+<input type="hidden" name="LASTCANCELDATE2" value="<#LASTCANCELDATE2>">
+<input type="hidden" name="RESPONSEPAGE" value="registerNextPayment.htm" />
+
+</form>
+
+<script>
+//populate suffix
+$('#suffixField').val("<#SUFFIX>");
+//popul degreesField
+$('#degreesField').val('<#DESIGNATIONLST>');
+
+</script>

@@ -1,0 +1,30 @@
+<!-- <tr>
+  <td></td>
+  <td><#PAYEENAME></td>
+  <td><#INVOICEDATE></td>
+  <td><#TOTALAMT FORMAT="$0.00"></td>
+  <td><#PAIDAMT FORMAT="$0.00"></td>
+
+</tr> -->
+
+<li id="<#INVOICENUM>">
+  <a href="Info?invoicenum=<#INVOICENUM>" data-transition="slide" data-ajax="false">
+    <h3>Invoice #<#INVOICENUM></h3>
+    <!-- <p><#INVOICEDATE></p> -->
+
+    <p >Total: <#TOTALAMT FORMAT="$0.00"></p>
+
+<span class="ui-li-count invStat"><script>
+function outputText(textToOutput){
+    $("#<#INVOICENUM> span.invStat").html(textToOutput);
+}
+
+   if('<#BALANCEDUE>' !== '$0.00'){
+      outputText('<span style="color:#E02A2C"><#BALANCEDUE FORMAT="$0.00"></span>');
+  }else{
+    // outputText('<#BALANCEDUE FORMAT="$0.00">');
+    outputText('<span style="color:green">Paid</span>')
+  }
+  </script> </span>
+  </a>
+</li>

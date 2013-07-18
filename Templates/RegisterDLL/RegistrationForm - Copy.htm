@@ -1,0 +1,105 @@
+<SCRIPT>
+<!--
+//store whether or not there are functions in order to hide function section
+var isFunctions = false;
+
+function formValidate(addAnother) {
+     if (checkAttendee() && (priceTest(document.event)) && (getFunctions(document.event)))
+	  //document.event.submit();
+	  //return true; 
+	  eventReg_addToCart(document.event, addAnother);
+}   
+
+var custCdVal = "<#CUSTOMERCD ENCRYPT='N'>";
+
+function checkAutoFunctions() {
+ var functioncd = document.event.AUTOFUNCTIONCD.value;
+ for (var i=0; i<document.event.length; i++) {
+	   if (document.event.elements[i].type =='text') {
+	        //alert(document.event.elements[i].name + functioncd);
+	        if (document.event.elements[i].name==functioncd) {
+	        		document.event.elements[i].value=1;
+	        }
+	     }  
+    }
+ }
+
+</script>
+<h2><#SESSIONNAME> Registration</h2>
+<div class="formIntro">
+    <p>  When you have finished your registration click <strong>Go To Cart</strong>.</p>
+</div>
+<form name="event" method="POST" action="../Registerdll.dll/NextForm" >
+
+	 <legend>Who are you registering for this event?</legend>
+<fieldset data-role="controlgroup" data-type="horizontal">
+	 <input type="button" style="margin-left:8px;" name="regMe" id="regMe" value="Myself" onclick="fillSelfRegInfo('<#COOKIE_CUSTOMERCD>');" data-inline="false" data-theme="a" data-mini="true" data-type="horizontal"> 
+	 <a href="#popupBasic" data-rel="popup" data-position-to="window" id="guestSearch" data-inline="false" data-role="button" data-mini="true" data-type="horizontal" onClick="selectAttendeeActions();">Someone else</a>
+	</fieldset>
+
+
+			<div data-role="fieldcontain">
+			   <label for="spanRegName">Registrant:&nbsp;&nbsp;&nbsp;</label>
+			   <span id="spanRegName" style="font-weight:bold;"></span>
+			</div>
+
+			
+	 
+		  
+		  
+		  
+		 <!-- Uncomment to enable different attendee registration  -->
+		
+		
+		<div data-role="popup" id="popupBasic" data-overlay-theme="a" data-theme="a" data-tolerance="15,15" class="ui-content">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<iframe id="frame" width="497" height="298" seamless></iframe>
+		</div>
+
+
+<fieldset>
+	
+		 <!-- <legend>Registration Type</legend> -->
+			<div data-role="fieldcontain">
+				<label for="price_dropDown">Select Registration Type:</label>
+				<select size="1" name="PRICETYPESTT" id="price_dropDown" data-mini="true" onChange="priceChanged(document.event)">
+				<#PRICELIST SORT="pricedes" ONLYOPTIONS=Y>
+				</select>
+			</div>
+</fieldset>
+
+
+<fieldset id="functionSection" style="margin-top:25px; margin-bottom:25px;">
+	 <legend ><p>Select desired functions:</p></legend>
+     <ul data-role="listview" data-split-icon="gear" data-filter="false" data-theme="a">
+        
+         
+        <#FUNCTIONLIST>
+     </ul>
+</fieldset>
+
+    <input type='button' name='Add To Cart' value='Add Another Attendee' onClick='formValidate(true);' data-inline="true">
+    <input type='button' name='btnCheckout' value='Check out' onClick='formValidate(false);' data-inline="true" data-theme="g" data-icon="check">
+
+
+
+<input type="hidden" name="MAINCUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>" id="SESSIONALTCD">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="COUNTQTY" value="1">
+<input type="hidden" name="FPRICEAMT" value="<#FPRICEAMT>">
+<input type="hidden" name="FPRICETYPESTT" value="<#FPRICETYPESTT>">
+<input type="hidden" name="PAYEETYPECD" value="I">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="FUNCTIONSQTY" id="FUNCTIONSQTY" value="">
+<input type="hidden" name="FCOMMENTS" id="FCOMMENTS" value="<#FCOMMENTS>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="LISTCART" value="<#LISTCART>">
+<input type="hidden" name="LISTTOTAL" value="<#LISTTOTAL>">
+<input type="hidden" name="CHECKDUPLICATE" value="Y">
+
+
+</form>

@@ -1,0 +1,119 @@
+<h1><#SESSIONNAME></h1>
+<h3><#SESSIONRANGE> </h3>
+<script>
+	//only display registration links if REGONLINEFLG=Y
+	if('<#REGONLINEFLG>' == 'Y'){
+		document.write("<BR><a href=\"javascript:EventRegister('<#REGSTATUSCD>', '<#sessionaltcd>')\">Single Registration</a> | <a href=\"javascript:EventMultiRegister('<#REGSTATUSCD>', '<#sessionaltcd>')\">Multi Registration</a>");
+	}
+</script>
+
+  <!--<p><a href="javascript:mailpage()"><img src="../../images/email_button.gif" alt="Email Button" width="46" height="17" border="0" /></a> <a href="javascript:printpage()"><img src="../../images/print_button.gif" alt="Print Button" width="48" height="17" border="0" /></a></p>-->
+ 
+<script> 
+if('<#WEBPAGE>' != ''){
+  	document.write("<p><b>Additional Information:</b> <a href='http://<#WEBPAGE>'>Click Here</a></p>");
+}
+  
+ if('<#EARLYREGISTERDATE>' != ''){  
+document.write("<p><b>Early-Bird Discount Deadline:</b> <#EARLYREGISTERDATE></p>");
+}
+
+if("<#LOCATIONCITY>" != ''){
+	document.write("<p><b>Location:</b><BR><#LOCATIONNAME><BR> <#LOCATIONCITY>, <#LOCATIONSTATECD>");
+
+	if('<#LOCATIONZIP>' != ''){
+		document.write(', <#LOCATIONZIP>');
+	}
+	
+	document.write('</p>');
+}
+
+if("<#ROOMRATE>" != ""){
+document.write("<p><b>Hotel/Meal Package:</b> $<#ROOMRATE><br /><i>This charge is in addition to the tuition fee, and is paid directly to the hotel by the seminar member upon checkout.</i></p>");
+}
+
+
+if("<#SESSIONDES>" != ""){
+	document.write("<p><b>Event Description:</b><br /><#SESSIONDES></p>");
+}  
+  
+ if(('<#SESSIONSTARTTM>' != '') && ('<#SESSIONENDTIME>' != '')){
+	document.write('<p><B>Time: </b><#SESSIONSTARTTM> - <#SESSIONENDTIME></p>');
+} 
+</script>
+ 
+<p><b>Registration Fees:</b>
+<table><#PRICELIST></table></p>
+  
+<script>
+
+
+if('<#TRAINERNAME>' != ''){
+	document.write('<p><b>Speaker:</b> <#TRAINERNAME></p>');
+}
+
+/*
+if('<#CEU1QTY>' != ''){
+	document.write('<p><b>CEU1:</b> <#CEU1QTY></p>');
+}
+
+if('<#CEU2QTY>' != ''){
+	document.write('<p><b>CEU2:</b> <#CEU2QTY></p>');
+}
+
+if('<#CEU3QTY>' != ''){
+	document.write('<p><b>CEU3:</b> <#CEU3QTY></p>');
+}
+
+if('<#CEU4QTY>' != ''){
+	document.write('<p><b>CEU4:</b> <#CEU4QTY></p>');
+}
+*/
+if('<#SESSIONOWNER>' != ''){
+	document.write('<p><b>Sponsor:</b> <#SESSIONOWNER></p>');
+}
+</script>
+
+
+
+<p><div id='webprofile_div'><#HTMLNOTE></div></p>
+<!--<script>
+if('<#UDEF2TXT>' != ''){
+	document.write('<b>Related Link:</b><BR><a href="<#UDEF2TXT>"><#UDEF2TXT></a>');
+}
+</script>-->
+
+
+<p>
+<div id='certs_div'>
+</div>
+</p>
+
+
+<script>
+
+var webprofileInnerHtml = $("#webprofile_div").html();
+if ((webprofileInnerHtml.indexOf("<div>&nbsp;</div") < 0) && (webprofileInnerHtml != ''))
+	$("#webprofile_div").html('<b>Details:</b>'+$('#webprofile_div').html(););
+
+
+
+if('<#CONTACTNAME>' != ''){
+document.write(' <p><b>For more information on this seminar, please contact <#CONTACTNAME>');
+if('<#CONTACTEMAIL>' != ''){
+	document.write(' at <a href="mailto:<#CONTACTEMAIL>"><#CONTACTEMAIL></a>');
+	if('<#CONTACTPHONE>' != ''){
+		document.write(' or call <#CONTACTPHONE>');
+	 }
+}else if('<#CONTACTPHONE>' != ''){
+	document.write(' at <#CONTACTPHONE>');
+}
+document.write('.</b></p>');
+}
+
+
+//get certification info
+//var certsURL = '../memberdll.dll/customlist?sqlname=certification_detail&whp=certs_header.htm&wbp=certs_list.htm&wmt=none&wnr=none&sessionaltcd=<#SESSIONALTCD>'
+//doAjaxFill (certsURL, 'certs_div');
+
+</script>

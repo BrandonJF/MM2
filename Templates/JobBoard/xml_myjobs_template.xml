@@ -1,0 +1,18 @@
+<Job>
+<JobCode>	
+	<#JobCode>
+</JobCode>
+<postDate>
+	06/01/2009
+</postDate>
+<stopDate>
+	01/01/2010
+</stopDate>
+<jobTitle>
+	<#JOBTITLE_AC>
+</jobTitle>
+<activeStatus>
+	xxxx
+</activeStatus>
+</Job>
+

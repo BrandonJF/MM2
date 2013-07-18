@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Gold Prospectors Association of America</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<link href="/baseline/CSS/defaultStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/formStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/eventStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/listStyles.css" rel="stylesheet" type="text/css">
+<link href="/baseline/CSS/newStyles.css" rel="stylesheet" type="text/css"> 
+<link href="/baseline/CSS/jquery.validity.css" rel="stylesheet" type="text/css">
+
+<script language="javascript" src="/baseline/js/euclidScripts.js"></script>
+<script language="javascript" src="/baseline/js/VerificationLib.js"></script>
+<script language="javascript" src="/baseline/js/datetimepicker.js"></script>
+<script language="javascript" src="/baseline/js/eventScripts.js"></script>
+<script language="javascript" src="/baseline/js/customerScripts.js"></script>
+<script type="text/javascript" src="/baseline/js/overLib.js"></script>
+<script type="text/javascript" src="/baseline/js/overLibHideForm.js"></script>
+<script type="text/javascript" src="/baseline/js/jQuery.validity.min.js"></script>
+
+
+<script>
+//GLOBAL VARIABLES
+var LOGGEDIN = false;
+var CUSTOMERCD = '<#COOKIE_CUSTOMERCD>';
+var ISMEMBERFLG = '<#COOKIE_ISMEMBERFLG>';
+var MEMBERNAME = '<#COOKIE_MEMBERNAME>';
+var STATUSSTT = '<#COOKIE_STATUSSTT>';
+var CUSTOMERTYPE = '<#COOKIE_CUSTOMERTYPE>';
+var ORGCD = '<#COOKIE_ORGCD>';
+var DEBUG = false; //turns on or off debug alerts
+var NAME = '';
+</script>
+
+</head>
+
+
+<body style='background-color:white'>
+<table class='mainTable' align='left' style='background-color:white;'>
+<tr>
+<td class='mainCell'>
+	<table>
+    <tr>
+    <td colspan='2' id='header'>
+     <#PAGEHEADER>
+    </td>
+    </tr>
+    
+    <tr>
+    <td id='leftNav'>
+       	<#LEFTNAV>
+    </td> 
+ 	<td id='content'>
+    	<#CONTENT>
+    </td>
+	</tr>
+    
+    <tr>
+    <td colspan='2' id='footer'>
+    <#PAGEFOOTER>
+    </td>
+    </tr>
+    </table>
+</td>
+</table>
+
+</body>
+</html>

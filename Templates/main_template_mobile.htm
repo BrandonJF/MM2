@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+    <head>
+        <title>Euclid Mobile Member</title>
+     <meta charset="iso-8859-1" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="language" content="en" />
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+        <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" /> -->
+        <!-- <link href="../../CSS/default.css" rel="stylesheet" type="text/css"> -->
+
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+<script src="../../JS/jquery.color.js"></script>
+<script src="../../JS/jquery.validate.min.js"></script>
+<script type="text/javascript"> $( document ).bind( "mobileinit", function() {
+// $('.ui-header-fixed h1:first').text($('.ui-content h2:first').text());
+$.mobile.loader.prototype.options.text = "Loading";
+$.mobile.loader.prototype.options.textVisible = true;
+$.mobile.activeBtnClass = "unused";
+$.mobile.loader.prototype.options.theme = "b";
+$.mobile.loader.prototype.options.html = "<div align='center' style='width:'100%''><img src='../../images/ajax-loader.gif' /></div>";
+
+});</script>
+<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+<script src="../../JS/euclidMMBootstrap.js"></script>
+ <script language="text/javascript" src="../../js/cvConsole.js"></script>
+
+         <link rel="stylesheet" href="../../css/themes/EuclidCustomJQMCSS.css" />
+         <!-- <link rel="stylesheet" href="../../css/themes/old/EuclidCustomJQMCSS.css" /> -->
+         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile.structure-1.3.0.min.css" />
+         <link rel='stylesheet' id='camera-css'  href='../../css/camera.css' type='text/css' media='all'>
+         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster|Open+Sans:300,400,600,700|Open+Sans+Condensed:300,700">
+        <!-- <link href="../../CSS/jqm-icon-pac\k-2.1.2-fa.css" rel="stylesheet" type="text/css"> -->
+
+
+
+
+    </head>
+
+    <body  class="ui-icon-alt">
+            <script> //GLOBAL VARIABLES FOR LOGGED IN USER
+      // var CUSTOMERCD = $.cookie("customercd") ;// '<#COOKIE_CUSTOMERCD>';
+      // console.log( "This is right below the customercd decalaration!") ;
+
+      // var ISMEMBERFLG = $.cookie("ISMEMBERFLG "); //'<#COOKIE_ISMEMBERFLG>';
+      // var MEMBERNAME = $.cookie("MEMBERNAME "); //'<#COOKIE_MEMBERNAME>';
+      // var STATUSSTT = $.cookie("STATUSSTT "); //'<#COOKIE_STATUSSTT>';
+      // var CUSTOMERTYPE = $.cookie("CUSTOMERTYPE "); //'<#COOKIE_CUSTOMERTYPE>';
+      // var ORGCD = $.cookie("ORGCD "); //'<#COOKIE_ORGCD>';
+      // var ORGNAME = $.cookie("orgname"); //'<#ORGNAME>';
+      // var DEBUG = true; //turns on or off debug alerts
+      //       var isBillMe = true;
+      //       $( document ).on( "mobileinit", function() {
+      //
+        // <script> //GLOBAL VARIABLES FOR LOGGED IN USER
+        // console.log("working 1");
+      var CUSTOMERCD = '<#COOKIE_CUSTOMERCD>';
+      var ISMEMBERFLG = '<#COOKIE_ISMEMBERFLG>';
+      var MEMBERNAME = '<#COOKIE_MEMBERNAME>';
+      var STATUSSTT = '<#COOKIE_STATUSSTT>';
+      var CUSTOMERTYPE = '<#COOKIE_CUSTOMERTYPE>';
+      var ORGCD = '<#COOKIE_ORGCD>';
+      var ORGNAME = '<#ORGNAME>';
+      var DEBUG = true; //turns on or off debug alerts
+            var isBillMe = true;
+// console.log("working 2");
+
+
+    </script>
+
+        <div  data-role="page" data-theme="a" id="mainpage">
+
+ <script type="text/javascript"> $(document).bind( "pageinit", function( e, data ) {
+            //alert("pagebeforechange");
+            // setTitle();
+        });  </script>
+
+            <div id="panel_left" data-role="panel" data-position="left" data-display="reveal" class="ui-icon-alt">
+               <!--  <ul data-role="listview">
+                   <li data-role="list-divider" id=panelLeftHeader>
+                       <h3>Dan Antonoff (Euclid) </h3>
+                   </li>
+                   <li class="active">
+                       <a href="../memberdll.dll/info?wrp=mainloginwelcome.htm" class="contentLink">Home</a>
+                   </li>
+                   <li class="active">
+                       <a href="#home" class="contentLink">My Account</a>
+                   </li>
+                   <li>
+                       <a href="#home" class="contentLink">Events</a>
+                   </li>
+                   <li>
+                       <a href="#home" class="contentLink">Products</a>
+                   </li>
+                   <li>
+                       <a href="#home" class="contentLink">Contact</a>
+                   </li>
+               </ul> -->
+      <#LEFTNAV>
+
+
+            </div><!-- endmenupanel -->
+
+            <div data-role="header" data-position="fixed">
+            	<#PAGEHEADER>
+
+            </div> <!-- endheader -->
+            <div data-role="content" data-theme="a">
+
+                <!-- <div class="article"> uncomment to give more space to content when slid to a close-->
+                	<#CONTENT>
+
+
+                <!-- </div> -->
+                <!-- endarticle -->
+            </div>
+            <!-- endcontent -->
+        </div>
+        <!-- endpage -->
+
+
+
+<script language="javascript" src="../../js/gritter/jquery.gritter.min.js"></script>
+
+
+<script type='text/javascript' src='../../JS/jquery.easing.1.3.js'></script>
+     <script type='text/javascript' src='../../JS/camera.min.js'></script>
+        <link rel ="stylesheet" href="../../CSS/jquery-mobile-fluid960.css" />
+        <link rel="stylesheet" href="../../CSS/CVMMCSS.css" type="text/css">
+         <link rel="stylesheet" href="../../CSS/gritter/jquery.gritter.css" type="text/css">
+
+        <script src="../../JS/swipe.min.js"></script>
+        <script src="../../JS/euclidMMBootstrap.js"></script>
+
+
+        <script type="text/javascript" src="../../js/jquery.tablesorter.min.js"></script>
+
+       <script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
+    <script language="javascript" src="../../js/euclidScripts.js"></script>
+    <script language="javascript" src="../../js/eventScripts.js"></script>
+    <script language="javascript" src="../../js/customerScripts.js"></script>
+    <script language="javascript" src="../../js/duesScripts.js"></script>
+    <script language="javascript" src="../../js/cartScripts.js"></script>
+    <script type="text/javascript" src="../../js/jQuery.validity.js"></script>
+        <script language="javascript" src="../../js/VerificationLib.js"></script>
+
+        <script language="text/javascript" src="../../js/cvConsole.js"></script>
+
+
+
+
+
+
+
+
+    </body>
+
+</html>

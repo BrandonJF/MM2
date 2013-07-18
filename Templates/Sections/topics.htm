@@ -1,0 +1,351 @@
+
+<SCRIPT LANGUAGE="Javascript">
+<!--
+
+function formValidate() {
+      { 
+		  getSkills();	
+    	  document.def.action = "UpdateInfo";
+	  	  document.def.submit();
+	  	  return true;
+		}
+	
+	}
+
+function setSkills()
+{
+
+	var skillslist='<#SKILLCDLST>';
+	var skills_array = skillslist.split(",");
+ 
+	for (var loop=0; loop < skills_array.length; loop++)
+	{
+	  for (var i=0; i<document.def.length; i++) 
+	  {
+    	 if ((document.def.elements[i].type == "checkbox") && (document.def.elements[i].name=='LSTSKILLS') 
+		      && (document.def.elements[i].value==skills_array[loop])) 
+    
+	      {
+    	     document.def.elements[i].checked=true;
+	      }
+	  } 
+    }
+}
+
+function getSkills()
+{
+	var tmpint ="";
+	var pos="";
+	var size="";
+	for (var i=0; i<document.def.length; i++) 
+	{
+	   if (document.def.elements[i].type =='checkbox') 
+	   {
+	        if (document.def.elements[i].checked==true)
+			{
+	        		tmpint = tmpint + ',' + document.def.elements[i].value;
+	        }
+	    }  
+	
+	}
+	pos = tmpint.indexOf(',');
+	pos = pos +1;
+	size = tmpint.length;
+	var skillcodelst = tmpint.substring(pos,size);
+	document.def.SKILLCDLST.value=skillcodelst;
+}
+
+ 
+-->
+</SCRIPT>
+
+
+
+ 
+<h2><#MLGLBL TEXT="Responsibilities, Expertise and Interests (please check all that apply)"></h2>
+<form name="def" method="post">
+	
+			 
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Animal Subject Compliance:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="ASCR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="ASCE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="ASCI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Audit:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="AR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="AE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="AI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Award Negotiation and Acceptance:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="ANNAR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="ANAAE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="ANNAI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Biosafety Compliance:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="BSCR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="BSCE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="BSCI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Clinical Trials:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="CTR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="CTE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="CTI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Conflict of Interest:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="COIR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="COIE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="COII" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Departmental/Center Administration:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="DCAR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="DCAE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="DCAI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Education and Training:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="TR" /> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="TE" /> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="TI" /> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Export Controls:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="EXPR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="EXPE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="EXPI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Financial Compliance:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="FCR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="FCE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="FCI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Funding Opportunities:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="FOR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="FOE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="FOI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Government Relations:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="GRR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="GRE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="GRI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Human Subject Compliance:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="HSCR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="HSCE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="HSCI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Industry Negotiations:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="INR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="INE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="INI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>International Agreements:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="IAR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="IAE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="IAI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Medical School/Teaching Hospital Research Administration:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="MAR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="MAE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="MAI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Material Transfer Agreements:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="MTAR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="MTAE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="MTAI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Non-Disclosure Agreements:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="NDAR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="NDAE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="NDAI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Policy Development:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PDR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PDE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PDI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Post-Award Administration:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PAR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PAE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PAI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Programming/Database:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PRDRB"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PRDEX"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PRDIN"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Property/Space:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Proposal Submission - Federal Contracts:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSFCR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSFCE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSFCI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Proposal Submission - Federal Grants:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSFGR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSFGE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSFGI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Proposal Submission - Non-Federal:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSNFR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSNFE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PSNFI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Proposal Writing:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="PWR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PWE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="PWI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Rate Negotiations:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="RNR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="RNE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="RNI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Scientific Misconduct:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="SMR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="SME"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="SMI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Senior Level Management:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="MR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="ME"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="MI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Subawards/Subcontracting:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="SBR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="SBEX"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="SBI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Supervision:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="SPR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="SPEX"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="SPIN"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Technology Transfer:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="TR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="TE"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="TI"> Interest </label>
+			</fieldset>
+		</div>	
+		<div data-role="fieldcontain">	
+			<fieldset data-role="controlgroup" data-type="horizontal">
+				<legend>Web Management:</legend>
+				<label><input type="checkbox" name="LSTSKILLS" value="WMR"> Responsibility </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="WME"> Expertise </label>
+				<label><input type="checkbox" name="LSTSKILLS" value="WMI"> Interest </label>
+			</fieldset>
+		</div>
+			
+		
+
+	<input type="button" onClick="formValidate()" class="button" value="Update Your Interests" data-inline="true" data-icon="check">
+	<input type="reset" name="Submit2" value="Reset Form" data-inline="true" data-theme="c" data-icon="refresh">
+
+	
+	
+	<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+	<input type="hidden" name="RESPONSEPAGE" value="changes_saved.htm">
+	<input type="hidden" name="ORGCD" value="<#ORGCD>">
+	<input type="hidden" name="SKILLCDLST" value="">
+
+	</form>
+
+<script language="javascript">
+setSkills();
+</script>
+

@@ -1,0 +1,174 @@
+
+<form name="event" method="post" action="priceinfo">
+
+<table class='profileForm'>
+  <tr>
+    <td colspan="2"><strong>You have successfully added <#SESSIONNAME>. </strong></td>
+  </tr>
+  
+   <tr>
+    <td colspan="2">The next step is to enter pricing.</td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" align="center">
+      <input name="submit" type="submit"  value="Add Pricing Information">
+      <input type="hidden" name="ITEMALTCD"  value="<#SESSIONALTCD>">
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" class="highlight">Company/Chapter Information Information </td>
+  </tr>
+  <tr>
+    <td>Company Code: </td>
+    <td><#COMPANYCD></td>
+  </tr>
+  <tr>
+    <td>Chapter: </td>
+    <td><#CHAPTERCD></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="highlight">Location Information </td>
+  </tr>
+  <tr>
+    <td>Event Location: </td>
+    <td><#LOCATIONNAME></td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" class="highlight">Event Information:</td>
+  
+  </tr>
+  <tr>
+    <td>Title: </td>
+    <td><#SESSIONNAME></td>
+  </tr>
+  <tr>
+    <td>Event CD:</td>
+    <td><#SESSIONALTCD></td>
+  </tr>
+  <tr>
+    <td>Brief Description:</td>
+    <td><#SESSIONDES></td>
+  </tr>
+  <tr>
+    <td>Status:</td>
+    <td><#STATUSSTT></td>
+  </tr>
+   <tr>
+    <td>Begin Date: </td>
+    <td><#SESSIONBEGDATE></td>
+  </tr>
+  <tr>
+    <td>End Date:</td>
+    <td><#SESSIONENDDATE></td>
+  </tr>
+  <tr>
+    <td>Early Reg Deadline: </td>
+    <td><#EARLYREGISTERDATE></td>
+  </tr>
+  <tr>
+    <td>Last Day to Register:</td>
+    <td><#LASTREGISTERDATE></td>
+  </tr>
+   <tr>
+    <td>Can Cancel:</td>
+    <td><#CANCANCELFLG></td>
+  </tr>
+  <tr>
+    <td>Last Day to Cancel: </td>
+    <td><#LASTCANCELDATE></td>
+  </tr>
+  <tr>
+    <td>Cancellation Fee: </td>
+    <td><#CANCELFEEAMT FORMAT="$0.00"></td>
+  </tr>
+  <tr>
+    <td>Start Time:</td>
+    <td><#SESSIONSTARTTM></td>
+  </tr>
+  <tr>
+    <td>End Time: </td>
+    <td><#SESSIONENDTIME></td>
+  </tr>
+ <tr>
+    <td colspan="2" class="highlight">Contact Information</td>
+    </tr>
+  <tr>
+    <td>Contact:</td>
+    <td><#CONTACTNAME></td>
+  </tr>
+  <tr>
+    <td>Contact Phone:</td>
+    <td><#CONTACTPHONE></td>
+  </tr>
+  <tr>
+    <td>Contact Email:</td>
+    <td><#CONTACTEMAIL></td>
+  </tr>
+  <tr>
+	  <td>Address: </td>
+	  <td><#ADDRESS1></td>
+    </tr>
+	<tr>
+	  <td>Address Cont: </td>
+	  <td><#ADDRESS2></td>
+    </tr>
+	<tr>
+	  <td>City:</td>
+	  <td><#LOCATIONCITY></td>
+    </tr>
+	<tr>
+	  <td>State: </td>
+	  <td><#LOCATIONSTATECD></td>
+    </tr>
+	<tr>
+	  <td>Zip: </td>
+	  <td><#ZIP></td>
+    </tr>
+	<tr>
+	  <td>Country:</td>
+	  <td><#COUNTRY></td>
+    </tr>
+	
+	
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td colspan="2" class="highlight">Attendance Information</td>
+    </tr>
+  <tr>
+    <td>Min Attendees: </td>
+    <td><#ATTENDEEMINQTY></td>
+  </tr>
+  <tr>
+    <td>Max Attendees:</td>
+    <td><#ATTENDEEMAXQTY></td>
+  </tr>
+  <tr>
+    <td>Full Description:</td>
+    <td><#HTMLNOTE></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <!--<tr>
+    <td colspan="2" align="center"> <a href="../../cgi-bin/admin.dll/eventview?sessionaltcd=<#SESSIONALTCD>&RESPONSEPAGE=EventInfo_Update.htm"><strong>Modify Event Info</strong></a></td>
+  </tr>-->
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+</form>
+<form name="eventModify" method="post" action="eventview">
+      <input name="submit" type="submit"  value="Modify Event Info">
+      <input type="hidden" name="SESSIONALTCD"  value="<#SESSIONALTCD>">
+	  <input type="hidden" name="RESPONSEPAGE"  value="EventInfo_Update.htm">
+</form>

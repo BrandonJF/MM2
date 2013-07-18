@@ -1,0 +1,28 @@
+Dear <#FIRSTNAME>:
+
+Your order is complete.  Your Order Number is <#INVOICENUM> and your Customer ID is <#CUSTOMERCD>.  You can track your order with the Order Number or Customer ID. You will receive your order in 3-5 business days. 
+ 
+
+Bill To Address
+
+<#BILLTOADDRESS>
+
+Ship To Address
+
+<#SHIPTOADDRESS>
+ 
+
+Items Ordered
+Product ID 	Name 	Quantity 	Unit Price 	Subtotal
+<#SUBCART> 				
+<#SHOPPINGCART> 				
+			Shipping & Handling: 	<#SHIPTOTAL>
+			Tax: 	                <#TAXTOTAL>
+			
+
+Total:
+	
+
+<#CARTTOTAL>
+
+Thank you again for shopping!  Please come again!

@@ -1,0 +1,47 @@
+<script>
+//alert('hello!');
+var toWrite = '';
+
+function addFiles(){
+var fileString = '';
+if('<#FILEFIELD1>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD1" value="<#FILEFIELD1>">';
+}
+alert(fileString);
+document.getElementById('fileSection').innerHTML = fileString;
+}
+
+</script>
+
+<form name='order' Action="../documentdll.dll/UpdateInfo" Method="POST" enctype="multipart/form-data" >
+
+<input type='hidden' name='DOCCLASS' value='<#DOCCLASS>'>
+<input type='hidden' name='DOCTYPE' value='PICTURE'>
+<input type='hidden' name='DOCDES_N1' value='Profile Photo'>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="PARENTGROUPCD" value="<#PARENTGROUPCD>">
+<input type="hidden" name="OWNERCD" value="<#OWNERCD>">
+<input type="hidden" name="UPLOADONLY" value="Y">
+<input type="hidden" name="SAVETOFILE" value="N">
+<input type='hidden' name='FILETYPE' value='I'>
+<input type='hidden' name='FILENAMEPATTERN' value='#CUSTOMERCD_#FILENAME'>
+<input type='hidden' name='WRP' value='formConfirm.htm'>
+
+
+<h2>Individual Profile Photo Upload</h2>
+<fieldset>
+	<ul>
+		<li>
+			<label for="FILEFIELD1">Select your document</label>
+			<input type='file' name='FILEFIELD1' value='<#FILEFIELD1>'>
+		</li>
+		<li>
+			<label for="TITLETXT">Document Description</label>
+			<input type='text' name='TITLETXT' value='<#TITLETXT>'>
+		</li>
+	</ul>
+	<div class="buttons"><input type="submit" name="Submit" value="Submit"></div>
+</fieldset>
+<p></p>
+<#INCLUDE DLL="documentdll.dll" ACT="List" WHP="photos.htm" WBP="photoList.htm" PARAMS="ownercd={CUSTOMERCD},FILETYPE=I,OWNERTYPECD=I">
+</form>

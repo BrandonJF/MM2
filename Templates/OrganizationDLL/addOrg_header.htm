@@ -1,0 +1,23 @@
+<h3>Organization Search Results</h3>
+<div class='formIntro'>
+<p>Click on an Organization Name to link that Organization to your profile.
+To search again, type in the first letters of the Organization Name (minimum two) and click &quot;Search&quot;.</p>
+</div>
+
+  <form name="quicksearch" action="javascript:RunNewOrgSearch(document.quicksearch);">
+    <input name="ORGNAME" type="text" id="ORGNAME"> <input type="button" class="submit" onClick="RunNewOrgSearch(document.quicksearch);" value="Search">
+</form>
+
+<table class='gutters'>
+  <tr>
+    <th>Organization #</th>
+    <th>Organization Name</th>
+    <th>City</th>
+    <th>State</th>
+  </tr>
+  <form name="resultlist">
+  <#ORGLIST>
+  </form>
+</table>
+
+

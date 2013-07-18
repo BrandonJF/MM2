@@ -1,0 +1,44 @@
+<h2>Membership Order Invoice</h2>
+<p>Thank you for your order. Please print out this invoice and send it to us, along with your payment, to complete this order.</p>
+<p>Your Order Number is: <b><#INVOICENUM></b><br />Your Customer ID is: <b><#CUSTOMERCD></b></p>
+<p>You can track your order with the Order Number or Customer ID.<br />You will receive your order in 3-5 business days.</p>
+
+<p style="color:#FF0000;"><b>Please forward your payment to:</b><br />aca<br />
+</p>
+<p><b>Bill To Address:</b><br /><#BILLTOADDRESS></p>
+<p><b>Ship To Address:</b><br /><#SHIPTOADDRESS></p>
+
+
+<table>
+  <tr>
+    <td colspan="5">Items Ordered</td>
+  </tr>
+  <div class="info"><tr >
+    <td><b>Product ID</b></td>
+    <td><b>Name</b></td>
+    <td><b>Quantity</b></td>
+    <td><b>Unit Price</b></td>
+    <td><div align="right"><b>Subtotal</b></div></td>
+  </tr>
+  </div>
+  <tr>
+    <td><#SHOPPINGCART></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td colspan="4" align="right"><strong><b>Shipping &amp; Handling: </strong></td>
+    <td align="right" ><#SHIPTOTAL></td>
+  </tr>
+  <tr>
+    <td colspan="4" align="right"><strong><b>Tax: </strong></td>
+    <td align="right" ><#TAXTOTAL></td>
+  </tr>
+  <tr>
+    <td colspan="4" align="right"><strong><b>Total: </strong></td>
+    <td align="right"><#TOTALAMT></td>  
+  </tr>
+</table>
+<p>Thank you for shopping with us - Please come again!</p>

@@ -1,0 +1,22 @@
+<script src="../../js/mobiscroll.jqmobi.js" type="text/javascript"></script>
+    <script src="../../js/mobiscroll.core.js" type="text/javascript"></script>
+    <script src="../../js/mobiscroll.datetime.js" type="text/javascript"></script>
+      <script src="../../js/mobiscroll.jqm.js" type="text/javascript"></script>
+      <link href="../../css/mobiscroll.core.css" rel="stylesheet" type="text/css" />
+      <link href="../../css/mobiscroll.jqm.css" rel="stylesheet" type="text/css" />
+       <link href="../../css/mobiscroll.animation.css" rel="stylesheet" type="text/css" />
+       <script>$(function(){
+    $('.date').mobiscroll().date({
+        invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] },
+        theme: 'jqm',
+          // preset: 'date',
+        display: 'bubble',
+        mode: 'scroller',
+        animate: 'pop',
+        accent: 'green',
+             dateOrder: 'mmD ddyy',
+         //dateOrder: 'd Dmmyy',
+         dateFormat: 'mm/dd/yy'
+        //dateOrder: 'mmD ddyy'
+    });
+});</script>

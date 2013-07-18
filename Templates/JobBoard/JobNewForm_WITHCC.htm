@@ -1,0 +1,314 @@
+<script type="text/javascript">
+	function validateCCInfo() {
+	
+		var _ccNum = document.getElementById("PAYMENTREFNUM").value;
+		var _ccFirstName = document.getElementById("CREDITFIRSTNAME").value;
+		var _ccLastName = document.getElementById("CREDITLASTNAME").value;
+		var _ccAddress = document.getElementById("CREDITADDRESS1").value;
+		var _ccCity = document.getElementById("CREDITCITY").value;
+		var _ccState = document.getElementById("CREDITSTATECD").value;
+		var _ccZip = document.getElementById("CREDITZIP").value;
+		var _errorMsg = '';
+	
+		if (_ccNum == '') 
+			_errorMsg += 'Please enter a valid Card Number\n';	
+		if (_ccFirstName == '') 
+			_errorMsg += 'Please enter Card Holders First Name\n';
+		if (_ccLastName == '') 
+			_errorMsg += 'Please enter Card Holders Last Name\n';
+		if (_ccAddress == '') 
+			_errorMsg += 'Please enter Card Holders Address\n';
+		if (_ccCity == '') 
+			_errorMsg += 'Please enter Card Holders City\n';
+		if (_ccState == '') 
+			_errorMsg += 'Please enter Card Holders State\n';
+		if (_ccZip == '') 
+			_errorMsg += 'Please enter Card Holders Zip\n';
+		
+		if (_errorMsg != '') {
+		   alert("Please correct the following errors\n\n" + _errorMsg);	
+		} else {
+		   document.getElementById("postJobForm").submit();	
+		}
+
+	}
+</script>
+       
+      <form method="POST" name="postJobForm" id="postJobForm" action="PostJob" onSubmit="" >
+        
+          <table border="0" cellpadding="0" cellspacing="0" bordercolor="#C0C0C0" class="body" >
+    <tr>
+      <td colspan="3" width="462" height="17"> 
+    <b> <a href="productDetail?productcd=<#productcd>"><#PRODUCTNAME></a></b>      </td>
+    </tr>
+    <tr>
+      <td width="106" bgcolor="#FFFFFF" height="24">Product ID</td>
+      <td width="280" height="24"><#PRODUCTCD></td>
+      <td width="73" height="98" rowspan="4" align="center"><a href="AddCart?ADD=<#productcd>"></a></td>
+    </tr>
+    <tr>
+      <td width="106" bgcolor="#FFFFFF" height="25"><b>Member:</b></td>
+      <td width="280" height="25"><b>$<#UDEF2AMT></b></td>
+    </tr>
+    <tr>
+      <td width="106" bgcolor="#FFFFFF" height="25">NonMember:</td>
+      <td width="280" height="25">$<#UNITPRICE><font color="#FF0000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="106" bgcolor="#FFFFFF" height="24">Description:</td>
+      <td width="280" height="24"><#shortdes>&nbsp; <a href="productDetail?productcd=<#productcd>">More
+      Detail...</a></td>
+    </tr>
+    <tr>
+      <td bgcolor="#FFFFFF" height="21">Display Price </td>
+      <td height="21"><#DISPLAYPRICE></td>
+      <td height="21" align="center">&nbsp;</td>
+    </tr>
+  </table>
+		<table border="0" width="43%" height="980">
+          <tr>
+            <td width="97%" height="11" colspan="4" bgcolor="#008080">Cart
+              Information</td>
+          </tr>
+          <tr>
+            <td width="97%" height="1" colspan="4"><table border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+      <td ></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="highlight">Job
+              Information</td>
+          </tr>
+          <tr>
+            <td><b>Job Code:</b></td>
+            <td colspan="3"><input type="text" name="JOBALTCD" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Job Title:</b></td>
+            <td colspan="3"><input type="text" name="JOBTITLE_AC" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Job Starts:</b></td>
+            <td colspan="3"><input type="text" name="JOBSTARTONTXT" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Salary Mint.:</b></td>
+            <td><input type="text" name="JOBSALARLYMINAMT" size="12"></td>
+            <td><b>Salary Max.:</b></td>
+            <td><input type="text" name="JOBSALARYMAXAMT" size="12"></td>
+          </tr>
+          <tr>
+            <td><b>Min. Education:</b></td>
+            <td><select size="1" name="JOBEDUCATIONMINDEGREE">
+	<#CBXDEGREE>
+              </select></td>
+            <td><b>Min. GPA:</b></td>
+            <td><input type="text" name="JOBGPAMINAMT" size="12"></td>
+          </tr>
+          <tr>
+            <td><b>Min. Years of Exp.:</b></td>
+            <td colspan="3"><input type="text" name="JOBYEARSMINEXPERIENCEAMT" size="12"></td>
+          </tr>
+          <tr>
+            <td><b>Required Skills:</b></td>
+            <td colspan="3"><select size="4" name="JOBREQUIREDSKILLSLST" multiple>
+          <#CBXREQSkillRef>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>Preferred Skills.:</b></td>
+            <td colspan="3"><select size="4" name="JOBPREFERREDSKILLSLST" multiple>
+          <#CBXPREFSkillRef>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>Job Key Words:</b></td>
+            <td colspan="3"><input type="text" name="JOBKEYWORDS" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Job Major Cat.:</b></td>
+            <td colspan="3"><select size="1" name="JOBMAJORCAT">
+<#CBXMAJORCAT>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>Job Minor Cat.:</b></td>
+            <td colspan="3"><select size="1" name="JOBMINORCAT">
+	<#CBXMINORCAT>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>Job City:</b></td>
+            <td colspan="3"><input type="text" name="JOBCITY" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Job State:</b></td>
+            <td colspan="3"><select size="1" name="JOBSTATE">
+	<#CBXSTATECD>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>Job Country:</b></td>
+            <td colspan="3"><select size="1" name="JOBCOUNTRY">
+<#CBXCOUNTRY>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>Job Description</b></td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td colspan="4"><textarea rows="11" name="ADVCOPYTEXT" cols="55"></textarea></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="hightlight">Contact
+              Information</td>
+          </tr>
+          <tr>
+            <td><b>Contact Name:</b></td>
+            <td colspan="3"><input type="text" name="JOBCONTACTNAME" value="<#FIRSTNAME>" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Address:</b></td>
+            <td colspan="3"><input type="text" name="JOBCONTACTADDRESS" value="<#CUSTOMERADDRESS>" size="52"></td>
+          </tr>
+          <tr>
+            <td><b>Contact Phone:</b></td>
+            <td colspan="3"><input type="text" name="JOBCONTACTPHONE" value="<#WORKPHONE>" size="24"></td>
+          </tr>
+          <tr>
+            <td><b>Contact Fax:</b></td>
+            <td colspan="3"><input type="text" name="JOBCONTACTFAX" value="<#FAXPHONE>" size="24"></td>
+          </tr>
+          <tr>
+            <td><b>Contact Email:</b></td>
+            <td colspan="3"><input type="text" name="JOBCONTACTEMAIL" value="<#EMAIL>" size="24"></td>
+          </tr>
+          <tr>
+            <td height="24">&nbsp;</td>
+            <td height="24" colspan="3">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><b>Preferred Notification
+              Mode:</b></td>
+            <td colspan="3"><select size="1" name="JOBCONTACTMETHOD">
+<#CBXJOBCONTACTMETHOD>
+              </select></td>
+          </tr>
+          <tr>
+            <td><b>WEBSITE</b></td>
+            <td colspan="3">
+			<input type="text" name="JOBCONTACTWWWADDRESS" size="51"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="highlight">
+      Payment Information</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td><b>Payee</b></td>
+            <td><select size="1" name="PAYEETYPECD">
+			<option selected value="I">Individual</option>
+			<option value="O">Organization</option>
+			</select></td>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+                      <input type=radio name=PAYMENTTYPECD value=VISA>
+                      <IMG SRC=../../images/visa.gif align=top width="44" height="30">  Visa</td>
+            <td colspan="2">
+                      <input type=radio name=PAYMENTTYPECD value=MC>
+                      <IMG SRC=../../images/mastercard.gif align=top width="44" height="30">  MasterCard</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type=radio name=PAYMENTTYPECD value=AX checked>
+                      <IMG SRC=../../images/amx.gif align=top width="44" height="30">  American Express</td>
+            <td colspan="2"><font size="2"><input type=radio name=PAYMENTTYPECD value=DI>
+                      <IMG SRC=../../images/discover.gif align=top width="44" height="30">  Discover</td>
+          </tr>
+	
+          <!-- BEGIN NEW CC FIELDS -->	
+          <tr>
+            <td>Name on Card (first / Last)</td>
+            <td>
+		<input type="text" name="CREDITFIRSTNAME" id="CREDITFIRSTNAME" size=20>
+		&nbsp;&nbsp;
+		<input type="text" name="CREDITLASTNAME" id="CREDITLASTNAME" size=20>
+	    </td>
+          </tr>
+          <tr>
+            <td>Billing Address</td>
+            <td>
+		<input type="text" name="CREDITADDRESS1" id="CREDITADDRESS1" size=20>
+	    </td>
+          </tr>
+         <tr>
+            <td>Billing Address (cont'd)</td>
+            <td>
+		<input type="text" name="CREDITADDRESS2" id="CREDITADDRESS2" size=20>
+	    </td>
+          </tr>
+         <tr>
+            <td>Billing City / State / Zip</td>
+            <td>
+		<input type="text" name="CREDITCITY" id="CREDITCITY" size=20> / <input type="text" name="CREDITSTATECD" id="CREDITSTATECD" size="3" maxlength="2"> / <input type="text" name="CREDITZIP" id="CREDITZIP" size=10>
+ 	    </td>
+          </tr>
+          <!-- END NEW CC FIELDS -->
+
+
+          <tr>
+            <td></td>
+            <td>Credit Card Number:<input type="text" name="PAYMENTREFNUM" id="PAYMENTREFNUM" size=20>            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3">Expiration Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <SELECT NAME=expiremonth size="1">
+                  <OPTION VALUE=01>Jan 
+                  <OPTION VALUE=02>Feb 
+                  <OPTION VALUE=03>Mar 
+                  <OPTION VALUE=04>Apr 
+                  <OPTION VALUE=05>May 
+                  <OPTION VALUE=06>Jun 
+                  <OPTION VALUE=07>Jul 
+                  <OPTION VALUE=08>Aug 
+                  <OPTION VALUE=09>Sep 
+                  <OPTION VALUE=10>Oct 
+                  <OPTION VALUE=11>Nov 
+                  <OPTION VALUE=12>Dec 
+              </SELECT>
+                / 
+                <input type=text name="expireyear" value="" size=5 maxlength=2>(YY)</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="2"><input type="button" value="Process order" name="SUBMIT" onclick="validateCCInfo();"></td>
+            <td><input type="reset" value="RESET" name="RESET"></td>
+          </tr>
+        </table>
+        <p>&nbsp;</p>
+	<input type="hidden" name="PRIMARYPUBLICATIONCD" value="<#PRODUCTCD>">
+	<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+
+      </form>
+
+

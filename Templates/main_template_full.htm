@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ClearVantage Web - Baseline</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+
+<link href="../../CSS/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/reset.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/default.css" rel="stylesheet" type="text/css">
+<link href="../../CSS/jquery.validity.css" rel="stylesheet" type="text/css">
+<script>
+	//GLOBAL VARIABLES FOR LOGGED IN USER
+	var CUSTOMERCD = '<#COOKIE_CUSTOMERCD>';
+	var ISMEMBERFLG = '<#COOKIE_ISMEMBERFLG>';
+	var MEMBERNAME = '<#COOKIE_MEMBERNAME>';
+	var STATUSSTT = '<#COOKIE_STATUSSTT>';
+	var CUSTOMERTYPE = '<#COOKIE_CUSTOMERTYPE>';
+	var ORGCD = '<#COOKIE_ORGCD>';
+	
+	var DEBUG = false; //turns on or off debug alerts
+</script>
+<script type="text/javascript" src="../../js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-ui-1.8.16.custom.min.js"></script>
+
+<script type="text/javascript" src="../../js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="../../js/jquery.tools.min.js"></script>
+
+<script language="javascript" src="../../js/euclidScripts.js"></script>
+<script language="javascript" src="../../js/VerificationLib.js"></script>
+<script language="javascript" src="../../js/datetimepicker.js"></script>
+<script language="javascript" src="../../js/eventScripts.js"></script>
+<script language="javascript" src="../../js/customerScripts.js"></script>
+<script language="javascript" src="../../js/duesScripts.js"></script>
+<script language="javascript" src="../../js/cartScripts.js"></script>
+<script type="text/javascript" src="../../js/overLib.js"></script>
+<script type="text/javascript" src="../../js/overLibHideForm.js"></script>
+<script type="text/javascript" src="../../js/jQuery.validity.min.js"></script>
+
+<script>
+//populate cart summary:
+function loadHeadBar(){
+var cartHeaderURL = '../msascartdll.dll/showcart?WMT=none&WRP=cartSum.htm';
+	//debug(URL);
+	$.ajax({url:cartHeaderURL, type:'GET',
+		success:function(response){
+			if(response.match('Your cart is empty') || response.match('No Cart Items')){
+				var emptyString = 	'<a href="../msascartdll.dll/showcart">0 Item(s) In Cart</a> &nbsp;&nbsp;&nbsp; Total: $0.00&nbsp;&nbsp;';
+				$('#cartHeaderSummary').html(emptyString);
+			}else{
+				$('#cartHeaderSummary').html(response);
+			}
+		}
+	});
+}
+
+</script>
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+startList = function() {
+	if (document.all&&document.getElementById) {
+		navRoot = document.getElementById("nav");
+		for (i=0; i<navRoot.childNodes.length; i++) {
+			node = navRoot.childNodes[i];
+			if (node.nodeName=="LI") {
+				node.onmouseover=function() {
+					this.className+=" over";
+				}
+				node.onmouseout=function() {
+					this.className=this.className.replace(" over", "");
+				}
+			}
+		}
+	}
+}
+window.onload=startList;
+
+//--><!]]></script>
+<!--[if IE 6]>
+<link rel="stylesheet" type="text/css" href="/baseline/CSS/ie6.css" />
+<script type='text/javascript' src='/cvbaseline_jquery/js/dd_belated_png.js'></script>
+<script>DD_belatedPNG.fix('.png,#numbers a,.first_ul');</script>
+<![endif]-->
+
+</head>
+<body>
+<div id="container">
+<!-- header -->
+<div id="header">
+    <!-- logo -->
+           <a href="/index.htm" title=""><img src="/images/logo.gif" alt="" class="png" /></a>
+    <!-- /logo -->
+
+    <!-- header right -->
+           <#LEFTNAV>
+    <!-- /header right -->
+</div>
+<div id="cartHeaderSummary"></div>
+<br class="clearfloat" />
+<!-- /header -->
+
+
+<div id="container1">
+<div id="container2">
+<div id="container3">    
+    <div class="page_curv_top png"></div>
+    <div class="content_con png">
+	    <div class="sub_header">
+			    
+	    </div>
+	    
+	    <div class="content_con2">
+
+	    <!-- left side content -->
+			
+	    <div class="content productlist">
+	    
+	    	    
+	    
+		    <!-- box -->   
+			    <#CONTENT>
+		    <!-- /box -->
+	    
+		    
+		 
+             </div>
+            <!-- / left side content -->
+            
+            <!-- side bar -->
+            <div class="clear"></div>
+            <!-- / side bar -->            
+
+        </div>
+    
+    
+</div>
+</div>
+</div>                                          
+</div>
+<!-- footer -->
+	<div id="footer">
+            <div class="footer_con"> <div class="footer_con2">
+                <!-- copyright text -->
+                <div class="part1">Copyright &copy; 2011 Euclid Technology, LLC. </div>
+                <!-- social media icons -->
+                <div class="part2">
+                         <a href="#" title=""><img src="/images/social_media/twitter.png" alt="" /></a>
+                         <a href="#" title=""><img src="/images/social_media/facebook.png" alt="" /></a>
+                         <a href="#" title=""><img src="/images/social_media/rss.png" alt="" /></a>
+                </div>
+                <!-- / social media icons -->
+                             
+                <!-- links -->
+                <div class="part3">
+                         <a  href="#" title=""><#MLGLBL TEXT="Home"></a> | <a  href="#" title=""><#MLGLBL TEXT="Legal"></a> | <a  href="#" title=""><#MLGLBL TEXT="Privacy"></a> | <a  href="#" title=""><#MLGLBL TEXT="Contact"></a>
+                </div>
+           </div></div>
+	</div>
+<!-- /footer -->
+</div>
+ <script>
+var listURL = '../eventsdll.dll/EventList?ONWEBFLG=Y&REGONLINEFLG=Y&showtop=5&Range=1/10&SESSIONBEGDATE=>getdate()-1&SORT=SESSIONBEGDATE&WHP=featuredEventList_header.htm&WBP=featuredEventList.htm&WNR=noevents.htm&WMT=none';	
+$("#eventDiv").load(listURL);
+</script>
+</body>
+</html>

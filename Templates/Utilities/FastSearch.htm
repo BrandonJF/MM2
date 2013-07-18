@@ -1,0 +1,34 @@
+<h2><#TAX_TERM_DESC> Search Results</h2>
+ <div id="eventResults">
+  <h4>Matching Events</h4>
+<table class="gutters">
+    <tr>
+        <th>Event Name</th>
+        <th>Description</th>
+        <th>When</th>
+        <th>Where</th>
+    </tr>
+     <#EVENTS>
+</table>
+</div>
+    <p></p> <div id="productResults">
+    <h4>Matching Products</h4>
+<table class="gutters">
+    <tr>
+        <th>Product Name</th>
+        <th>Member Price</th>
+        <th>Non-Member Price</th>
+    </tr>
+     <#PRODUCTS> 
+</table>
+</div>
+<script>
+    if("<#EVENTS>" == ""){
+        $("#eventResults").hide();
+    }
+</script>
+<script>
+    if("<#PRODUCTS>" == ""){
+        $("#productResults").hide();
+    }
+</script>

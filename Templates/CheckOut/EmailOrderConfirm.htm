@@ -1,0 +1,79 @@
+<h1>Order Confirmed</h1>
+<p>Thank you! Your order is complete.</p>
+<p>
+  Your Order Number is <strong><#INVOICENUM></strong>. You can track your order with the Order Number. You will receive any products you have ordered in 5-7 business days.<br>
+  </p>
+<p><strong>Payment Number:</strong> <#PAYMENTNUM> <br>
+    <br>
+  
+    <strong>Bill To Address: </strong><br>
+  <#ADDRESS1><br />
+  <#ADDRESS2 RIGHTLABEL="<br />">
+  <#CITY>, <#STATECD>, <#ZIP>
+  <br>
+  <br>
+  
+  <strong>Ship To Address:</strong><br>
+  <#SHIPADDRESS1><br />
+  <#SHIPADDRESS2 RIGHTLABEL="<br />">
+  <#SHIPCITY>, <#SHIPSTATECD>, <#SHIPZIP>
+  <br>
+  <br>
+
+</p>
+
+<h1>Individual Orders</h1>
+  <table class='mainTable'>
+  <tr>
+	<th width='15%'>Type</th>
+    <th width='35%'>Item</th>
+    <th width='15%'>Price</th>
+    <th width='15%'>Qty</th>
+    <th width='20%'>Total</th> 
+    <tr class='spacer'><td colspan='6'>&nbsp;</td></tr>
+	<#INDDATA>
+  </table>
+<br />
+<div id="invoiceSection" style="display:none;">
+    <h1>Other Invoices</h1>
+    <table class="mainTable">
+    <tr>
+        <th>Invoice Number</th>
+        <th>Member Name</th>
+        <th>Invoice Total</th>
+    </tr>
+    <#INVOICELIST>
+    </table>
+    <br /><br />
+</div>
+
+<hr />
+
+  
+  <table class='finalTotals'>
+
+    <tr>
+  <td>Cart Total:</td>
+  <td><#PRICEAMT ALIAS="I" FORMAT='$0.00'></td>
+  </tr>
+  <tr>
+    <td>Tax:</td>
+    <td><#TAXAMT FORMAT='$0.00'></td>
+  </tr>
+  <tr id="invoiceTotals" style="display:none;">
+   	 <td>Other Invoices:</td>
+     <td><#ADDINVTOTALAMT></td>
+   </tr>
+
+  <tr class='finalFinal'>
+    <td>Total Amount Paid:  </td>
+    <td><#PAYMENTAMT ALIAS="M">   </td>
+  </tr>
+  <tr>
+    <td>Balance Due:</td>
+    <td ><#BALANCEDUE FORMAT='$0.00'></td>
+  </tr>
+</table>
+<p>
+<strong>Thank you for shopping with us, please come again!</strong><br />
+</p>

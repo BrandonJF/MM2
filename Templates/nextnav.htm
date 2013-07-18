@@ -1,0 +1,7 @@
+<a id="nextlnk" href="<#NAVLINK>" data-role="button" data-inline="true" data-icon="arrow-r" data-ajax="true" data-mini="true"  data-iconpos="notext" >Next</a>
+
+<script language="javascript">
+  temp = document.getElementById('nextlnk').href;
+  temp = temp.replace("%&", "%25&");
+  document.getElementById('nextlnk').href = temp;
+</script>

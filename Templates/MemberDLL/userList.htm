@@ -1,0 +1,18 @@
+<form name="abc_<#CUSTOMERID>" method="post" action="../../cgi-bin/memberdll.dll/UpdateInfo">
+<tr>
+    <td><#FIRSTNAME></td>
+    <td><#LASTNAME></td>
+    <td><#ORGNAME></td>
+    <td><#JOBTITLE></td>
+	<td><input type="submit" name="Submit" value="Request My User ID"></td>
+ </tr>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RESPONSEPAGE" value="userConfirm.htm">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="EMAILREPLYFORM" value="user_Email.htm">
+<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+<input type="hidden" name="EMAILSUBJECT" value="User Name Request">
+<input type="hidden" name="EMAILREPLYADDRESS" value="info@domain.org">
+</form>
+

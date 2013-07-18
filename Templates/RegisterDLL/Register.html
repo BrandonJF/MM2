@@ -1,0 +1,81 @@
+<script language="javascript">
+<!-- 
+function formValidate(){
+	if(validateAll(document.abc)){
+		document.abc.submit();
+	}
+}
+
+--> 		
+</script>
+
+
+<form name="abc" method="POST" action="../Registerdll.dll/NextForm">
+<h1><#SESSIONNAME></h1>
+<h2>Confirm / Update Registrant Information</h2>
+<p>
+<ul>
+<li> All fields marked * are required.</li>
+<li>For users from the USA, please enter all phone numbers in the format (302)392-3929</li>
+<li>Please enter all dates in the format MM/DD/YYYY</li>
+</ul>
+</p>
+
+
+
+
+<br />
+
+<table class='profileForm'>
+
+<#SECTION NAME="basicInfo.htm">
+
+<#SECTION NAME="primContact.htm">
+
+</table>
+<br /><br />
+<div align='center'>
+ <input name="button" type="button" onClick="formValidate();" value="Continue Registration">
+ </div>
+
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="ENTERUSERCD" value="WEBUSER">	 
+<input type="hidden" name="FPRICEAMT" value="<#FPRICEAMT>">
+<input type="hidden" name="FPRICETYPESTT" value="<#FPRICETYPESTT>">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONS" value="<#FUNCTIONS>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="LISTCART" value="<#LISTCART>">
+<input type="hidden" name="LISTTOTAL" value="<#LISTTOTAL>">
+<input type="hidden" name="LASTCANCELDATE" value="<#LASTCANCELDATE>">
+<input type="hidden" name="CANCELFEEAMT" value="<#CANCELFEEAMT>">
+<input type="hidden" name="LASTCANCELDATE2" value="<#LASTCANCELDATE2>">
+<input type="hidden" name="RESPONSEPAGE" value="registerNextPayment.htm" />
+
+</form>
+
+<script>
+//populate suffix
+$("#suffixField").val('<#SUFFIX>');
+</script>

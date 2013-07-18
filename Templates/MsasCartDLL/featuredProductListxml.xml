@@ -1,0 +1,15 @@
+<ProductItem PRODUCTCD="<#PRODUCTCD>">
+  <productcode><#PRODUCTCD></productcode>
+  <productname><#PRODUCTNAME></productname>
+  <description><#SHORTDES></description>
+  <memberprice><#UDEF2AMT></memberprice>
+  <nonmemberprice><#UNITPRICE></nonmemberprice>
+  <minorcategory><#MINORCAT></minorcategory>
+  </ProductItem>
+
+
+
+
+
+
+

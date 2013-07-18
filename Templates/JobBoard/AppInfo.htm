@@ -1,0 +1,140 @@
+<script src="../../js/nicEdit.js" type="text/javascript"></script>
+<script>
+function formValidate() {
+    if(nicEditors.findEditor('RESUMETEXT')){
+        nicEditors.findEditor('RESUMETEXT').saveContent();
+	var abstractText = $("#RESUMETEXT").val();
+	abstractText = abstractText.replace("%", "");
+	$("#RESUMETEXT").val(abstractText);
+    }
+    if (validateAll(document.appJob,false)){
+        if($('#existing').attr('checked')=='checked' || $('#enter').attr('checked')=='checked'){
+               document.appJob.ADDDOC.value = 'N'; 
+            }
+            document.appJob.submit();
+    }
+	} 		  			
+$(function() {
+		$( "#JobStartDate" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+bkLib.onDomLoaded(nicEditors.allTextAreas);
+</script>
+
+<h2>Position: <#JOBTITLE_AC></h2>
+<form method="POST" name="appJob" action="ApplyJob" enctype="multipart/form-data" >
+<fieldset>
+		<legend>Basic Information</legend>
+		<ul>
+				 <ul>
+  <li><label for="FIRSTNAME" class="required">First Name</label>
+   <input  type="text" name="FIRSTNAME" value="<#FIRSTNAME>" id="FirstName" class='reqField'/>
+       
+  </li>
+  <li><label for="MIDDLEINIT">Middle Name</label>
+   <input  type="text" name="MIDDLEINIT" value="<#MIDDLEINITIAL>"/>
+  </li>
+  <li><label for="LASTNAME" class="required">Last Name</label>
+   <input  type="text" name="LASTNAME" value="<#LASTNAME>" id="LastName" class='reqField'/>
+  </li>
+  <li><label for="ADDRESS1" class="required">Address</label>
+   <input  type="text" name="ADDRESS1" value="<#ADDRESS1>" id="Address" class='reqField'/>
+  </li>
+   <li><label for="ADDRESS2">Suite/Apt</label>
+   <input  type="text" name="ADDRESS2" value="<#ADDRESS2>"/>
+  </li>
+   <li><label for="CITY" class="required">City</label>
+   <input  type="text" name="CITY" value="<#CITY>" id="City" class='reqField'/>
+  </li>
+   <li><label for="STATECD" class="required">State</label>
+   <select size="1" name="STATECD">
+  <option><#RTVSTATEREFSCVSTATECD></option>
+</select>
+  </li>
+   <li><label for="ZIP" class="required">Zip</label>
+   <input  type="text" name="ZIP" value="<#ZIP>" id="Zip" class='reqField'/>
+  </li>
+   <li><label for="COUNTRY" class="required">Country</label>
+   <select size="1" name="COUNTRY" id="Country" class='reqField' onChange="checkCountryMask(this.value);">
+        <option value=''>Select One...</option>
+        <#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+<script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+		</script>
+  </li>
+   <li><label for="CONTACTPHONE" class="required">Phone</label>
+   <input  type="text" name="CONTACTPHONE" value="<#WORKPHONE>" id="Phone" class='reqField'/>
+  </li>
+   <li><label for="FAXPHONE">Fax</label>
+   <input  type="text" name="FAXPHONE" value="<#FAXPHONE>" id="Fax"/>
+  </li>
+   <li><label for="EMAIL" class="required">Email</label>
+   <input  type="text" name="EMAIL" value="<#EMAIL>" id="Email" class='reqField'/>
+  </li>
+		</ul>
+</fieldset>
+<fieldset>
+		<legend>Career Information</legend>
+ <ul>
+   <li><label for="JOBSTARTDATE" class="required">Availability</label> 
+   <input name="JOBSTARTDATE" type="text" id="JobStartDate" value="<#JOBSTARTDATE>" class='reqField'>
+  </li>
+   <li><label for="MINSALARLYAMT">Min. Salary</label>
+   <input  type="text" name="MINSALARLYAMT" value="<#MINSALARLYAMT>"/>
+  </li>
+   <li><label for="EDUCATIONDEGREE" class="required">Highest Degree</label>
+   <select size="1" name="EDUCATIONDEGREE" id="HigestDegree" class='reqField'>
+  <option><#RTVEDUCATIONLEVELREFSCVEDUCATIONDEGREEFLTTYPECDFLVEDUC></option>
+</select>
+  </li>
+    <li><label for="EDUCATIONGPAAMT">GPA</label>
+   <input  type="text" name="EDUCATIONGPAAMT" value="<#EDUCATIONGPAAMT>"/>
+  </li>
+    <li>
+        <label class="required">Resume Options</label><input type="radio" checked="checked" id="enter" name="resumeSelect" class="reqField" onclick="$('#RESUMETEXT').show();$('#RESUMEUPLOAD').hide();$('#RESUMESELECT').hide();"> I want to enter a new resume.<br>
+        <label>&nbsp;</label><input type="radio" name="resumeSelect" class="reqField" id="new" onclick="$('#RESUMETEXT').hide();$('#RESUMEUPLOAD').show();$('#RESUMESELECT').hide();"> I want to upload a new resume.<br>
+        <label>&nbsp;</label><input type="radio" name="resumeSelect" class="reqField" id="existing" onclick="$('#RESUMETEXT').hide();$('#RESUMEUPLOAD').hide();$('#RESUMESELECT').show();"> I want to select an existing resume.
+        
+    </li>
+	<li id="RESUMETEXT"><label for="RESUMETEXT">Resume</label>
+   <textarea name="RESUMETEXT" id="RESUMETEXT" cols="60" rows="20"><#RESUMETEXT></textarea>
+  </li>
+	<li id="RESUMEUPLOAD" style="display: none"><label>Attach Resume</label>
+   <input type="file" name="file"/>
+  </li>
+    <li id="RESUMESELECT" style="display: none"><label>Select Resume</label>
+   <select size="1" name="RESUME_DOCNUM">
+    <option value="" selected="selected"> </option>
+    <#INCLUDE DLL="documentdll.dll" ACT="List" whp="none" wbp="docselect.htm" COOKIE="ownercd=CUSTOMERCD" PARAMS="doctype=Resume,OWNERTYPECD=I">
+</select>
+  </li>
+ </ul>
+</fieldset>
+
+<div class="buttons">
+		<input type="button" value="Submit" name="submit_form" onclick="formValidate()">
+        <input type="reset" value="Reset" name="RESET">
+</div>
+<div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+ <input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">  
+<input type="hidden" name="CUSTOMERCD" value="<#COOKIE_CUSTOMERCD>">
+    <input type="hidden" name="RESPONSEPAGE" value="AppInfo_Confirm.htm">
+    <input type="hidden" name="RESUMETYPE" value="TEXT">
+    <input type="hidden" name="PROPERCASEOFF" value="Y">
+    <input type="hidden" name="JOBREQUIREDSKILLSLST" value="">
+    <input type="hidden" name="OWNERNAME" value="<#LASTNAME>, <#FIRSTNAME>">
+    <input type="hidden" name="DOCSUBJECT" value="Resume">
+    <input type="hidden" name="OWNERTYPECD" value="I">
+    <input type="hidden" name="DOCTYPE" value="Resume">
+    <input type="hidden" name="TITLETXT" value="Resume">
+    <input type="hidden" name="FILETYPE" value="O">
+    <input type="hidden" name="FILENAMEPATTERN" value="#CUSTOMERCD_#FILENAME.#FILEEXT">
+    <input type="hidden" name="DOCDES" value="Resume">
+    <input type="hidden" name="ADDDOC" value="Y">
+    	</form>

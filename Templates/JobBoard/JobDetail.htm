@@ -1,0 +1,320 @@
+<script src="../../js/nicEdit.js" type="text/javascript"></script>
+<script language="javascript">
+function isPayee(){
+	if (document.order.ISORGORDER.value == "Y") {
+		document.order.CUSTOMERTYPECD.value = 'O';
+		document.order.PAYEETYPECD.value = 'O';
+		document.order.PAYEECD.value = document.order.ORGCD.value;
+        $.ajax({url:'../organizationdll.dll/info?wrp=ismemberflg.htm&wmt=none&orgcd='+document.order.ORGCD.value, type:"GET", async:false,
+			success:function(response){
+				if(response == 'Y'){
+                    $('#totalAmt').text('$175.00');
+                }else{
+                     $('#totalAmt').text('$250.00');
+                }
+			}
+		});
+	}else{
+		document.order.CUSTOMERTYPECD.value = 'I';
+		document.order.PAYEETYPECD.value = 'I';
+		document.order.PAYEECD.value = document.order.CUSTOMERCD.value;
+        if('<#ISMEMBERFLG>' == 'Y'){
+            $('#totalAmt').text('$175.00');
+        }else{
+            $('#totalAmt').text('$250.00');
+        }
+	}
+	return true;
+}
+
+function getSkills(){
+	var REQUIREDSKILLS = '';
+    for(var i=0; i<document.order.JOBREQUIREDSKILLS.options.length; i++){
+		if(document.order.JOBREQUIREDSKILLS.options[i].selected){
+			if (REQUIREDSKILLS == ''){
+				REQUIREDSKILLS = document.order.JOBREQUIREDSKILLS.options[i].value
+			}else{
+				REQUIREDSKILLS = REQUIREDSKILLS+','+document.order.JOBREQUIREDSKILLS.options[i].value
+			}	
+		}
+	}		
+    var PREFERREDSKILLS = '';
+	for(var i=0; i<document.order.JOBPREFERREDSKILLS.options.length; i++){
+		if(document.order.JOBPREFERREDSKILLS.options[i].selected){
+			if (PREFERREDSKILLS == ''){
+				PREFERREDSKILLS = document.order.JOBPREFERREDSKILLS.options[i].value
+			}else{
+				PREFERREDSKILLS = PREFERREDSKILLS+','+document.order.JOBPREFERREDSKILLS.options[i].value
+			}	
+		}
+	}
+	document.order.JOBREQUIREDSKILLSLST.value = REQUIREDSKILLS;
+	document.order.JOBPREFERREDSKILLSLST.value = PREFERREDSKILLS;
+	return true;
+}
+
+function GetJobCode(){
+    nicEditors.findEditor('ADVCOPYTEXT').saveContent();
+	var abstractText = $("#ADVCOPYTEXT").val();
+	abstractText = abstractText.replace("%", "");
+	$("#ADVCOPYTEXT").val(abstractText);
+	if($('#BILLME').attr('checked')=='checked' || $('#EFT').attr('checked')=='checked'){
+        getSkills();
+        if(validateAll(document.order,false)){
+            document.order.submit(); 
+        } 	
+    }else if(validateAll(document.order,true)) {
+        getSkills();
+        document.order.submit();	
+    }
+}
+$(function() {
+		$( "#JOBSTARTONTXT" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+//bkLib.onDomLoaded(nicEditors.allTextAreas);
+</script>
+
+	
+<h2>Job Posting Information</h2>
+<form method="POST" name="order" action="postjob" enctype="multipart/form-data">
+
+	
+	
+	
+	<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="info" data-expanded-icon="arrow-d" data-inset="true">
+		<h2>Job Information</h2>
+	
+		<div data-role="fieldcontain">
+			<label for="JOBTITLE_AC">Job Title<sup class="req_star">*</sup></label>
+			<input type="text" name="JOBTITLE_AC" id="JOBTITLE_AC" value="<#JOBTITLE_AC>"> 
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBSTARTONTXT">Job Starts<sup class="req_star">*</sup></label>
+			<input type="text" name="JOBSTARTONTXT" id="JOBSTARTONTXT" value="<#JOBSTARTONTXT>"> 
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBSALARYMINAMT">Salary Min.</label>
+			<input type="text" name="JOBSALARYMINAMT" id="JOBSALARYMINAMT"  value="<#JOBSALARYMINAMT>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBSALARYMAXAMT">Salary Max.</label>
+			<input type="text" name="JOBSALARYMAXAMT" id="JOBSALARYMAXAMT" value="<#JOBSALARYMAXAMT>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBEDUCATIONMINDEGREE">Min. Education</label>
+			<select size="1" name="JOBEDUCATIONMINDEGREE" id="JOBEDUCATIONMINDEGREE">
+                <option value="">...Select One</option>
+                <#RTVEDUCATIONLEVELREFFLTTYPECDFLVEDUC>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBGPAMINAMT">Min. GPA</label>
+			<input type="text" name="JOBGPAMINAMT" id="JOBGPAMINAMT" value="<#JOBGPAMINAMT>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBGPAMINAMT">Min. Years of Exp.</label>
+			<input type="text" name="JOBYEARSMINEXPERIENCEAMT" id="JOBYEARSMINEXPERIENCEAMT" size="12" value="<#JOBYEARSMINEXPERIENCEAMT>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBREQUIREDSKILLS">Required Skills</label>
+			<select size="4" name="JOBREQUIREDSKILLS" id="JOBREQUIREDSKILLS" multiple>
+          <#CBXREQSkillRef>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBPREFERREDSKILLS">Preferred Skills</label>
+			<select size="4" name="JOBPREFERREDSKILLS" id="JOBPREFERREDSKILLS" multiple>
+          <#CBXPREFSkillRef>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBMAJORCAT">Job Major Cat.</label>
+			<select size="1" name="JOBMAJORCAT" id="JOBMAJORCAT">
+				<#CBXJOBMAJORCAT>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCITY">Job City<sup class="req_star">*</sup></label>
+			<input type="text" name="JOBCITY" id="JOBCITY" value="<#JOBCITY>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBSTATE"">Job State<sup class="req_star">*</sup></label>
+			<select size="1" name="JOBSTATE" id="JOBSTATE">
+				<option>	<#RTVSTATEREFSRTFSTATENAME></option>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCOUNTRY">Job Country</label>
+			<select size="1" name="JOBCOUNTRY" id="JOBCOUNTRY">
+				<option><#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAME></option>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="ADVCOPYTEXT">Job Description<sup class="req_star">*</sup></label>
+			 <textarea name="ADVCOPYTEXT" id="ADVCOPYTEXT"></textarea>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTWWWADDRESS">Web Site</label>
+			<input type="text" name="JOBCONTACTWWWADDRESS" id="JOBCONTACTWWWADDRESS" value="<#JOBCONTACTWWWADDRESS>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="file">Company Logo:  </label>
+			 <input type="file" name="file" id="file" />
+		</div>
+	
+	</div>
+
+	
+	
+	
+	
+	<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="phone" data-expanded-icon="arrow-d" data-inset="true">
+		<h2>Contact Information</h2> 
+	
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTNAME">Contact Name</label>
+			<input type="text" name="JOBCONTACTNAME" id="JOBCONTACTNAME" value="<#LASTNAME>, <#FIRSTNAME>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBTITLE">Job Title</label>
+			<input type="text" name="JOBTITLE" id="JOBTITLE" value="<#JOBTITLE>" size="30">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTADDRESS">Address</label>
+			<input type="text" name="JOBCONTACTADDRESS" id="JOBCONTACTADDRESS" value="<#ADDRESS1> <#ADDRESS2> <#CITY> <#STATECD> <#ZIP> <#COUNTRY>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTPHONE">Contact Phone</label>
+			<input type="text" name="JOBCONTACTPHONE" id="JOBCONTACTPHONE" value="<#WORKPHONE>">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTFAX">Contact Fax</label>
+			<input type="text" name="JOBCONTACTFAX" id="JOBCONTACTFAX" value="<#FAXPHONE>" size="24">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTEMAIL">Contact Email</label>
+			<input type="text" name="JOBCONTACTEMAIL" id="JOBCONTACTEMAIL" value="<#EMAIL>" size="24">
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="JOBCONTACTMETHOD">Preferred Notification Mode</label>
+			<select size="1" name="JOBCONTACTMETHOD" id="JOBCONTACTMETHOD">
+				<#CBXJOBCONTACTMETHOD>
+              </select>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="ISORGORDER">Payee</label>
+			 <select size="1" name="ISORGORDER" id="ISORGORDER" onchange="isPayee()">
+                  <option selected value="N">Individual</option>
+                  <option value="Y">Organization</option>
+                </select>
+		</div>
+	
+	</div>
+   
+   
+   
+   
+   
+   
+   <div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="dollar" data-expanded-icon="arrow-d" data-inset="true">
+		<h2>Pricing</h2>
+    
+		<p>The posting total cost will change depending on whether <strong>the payee</strong> is a member or not.</p>
+		<div data-role="fieldcontain">
+			<label for="totalAmt">Posting Total Cost: </label>
+			<span id="totalAmt"></span>
+			<script>
+				if("<#ISMEMBERFLG>"=="Y"){
+					$('#totalAmt').html('$175.00');		
+				}else{
+					$('#totalAmt').html('$250.00');	
+				}
+			</script>
+		</div>
+	</div>
+		
+		
+		
+		
+	<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+	<input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+	<input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">	
+	<input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+	<input type="hidden" name="ADDRESS3" value="<#ADDRESS3>">
+	<input type="hidden" name="CITY" value="<#CITY>">
+	<input type="hidden" name="STATECD" value="<#STATECD>">
+	<input type="hidden" name="ZIP" value="<#ZIP>">
+	<input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+    <input type="hidden" name="RESPONSEPAGE" value="JobDetail_Confirm.htm">
+		<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="CUSTOMERCD">	
+		
+		
+		
+		
+		
+		<hr />
+		<input type="button" value="Submit Job" name="SUBMIT" onClick="GetJobCode()" data-inline="true" data-icon="check">
+		<input type="reset" value="RESET" name="RESET" data-inline="true" data-icon="refresh" data-theme="c">
+	
+	
+	<div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+			
+	<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+    
+    <input type="hidden" name="ISSUEBILLFLG" value="N">
+	<input type="hidden" name="CUSTOMERTYPECD" value="">
+	<input type="hidden" name="PAYEETYPECD" value="">
+	<input type="hidden" name="PAYEECD" value="">
+	<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+	<INPUT type="hidden" name="PRIMARYPUBLICATIONCD" value="JOBBOARD">
+    <input type="hidden" name="PROPERCASEOFF" value="Y">
+    <input type="hidden" name="PRODUCTQTY" value="1">
+	<input type="hidden" name="OWNERNAME" value="<#LASTNAME>, <#FIRSTNAME>">
+    <input type="hidden" name="DOCSUBJECT" value="Company Logo">
+    <input type="hidden" name="OWNERTYPECD" value="I">
+    <input type="hidden" name="DOCTYPE" value="JobPosting">
+    <input type="hidden" name="TITLETXT" value="Company Logo">
+    <input type="hidden" name="FILETYPE" value="O">
+    <input type="hidden" name="DOCDES" value="Company Logo">
+    <input type="hidden" name="ADDDOC" value="Y">
+	<input type="hidden" name="ORGCD" value="<#ORGCD>">
+    <input type="hidden" name="ORGTYPECODE" value="">
+    <input type="hidden" name="JOBPRICE" value="150.00">
+    <input type="hidden" name="JOBREQUIREDSKILLSLST" value="">
+    <input type="hidden" name="JOBPREFERREDSKILLSLST" value="">
+	<input type="hidden" name="SENDEMAIL" value="Y">
+	<input type="hidden" name="EMAILSUBJECT" value="Job Posting Confirmation">
+	<input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org">
+	<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+	<input type="hidden" name="EMAILREPLYFORM" value="JobDetail_Email.htm">  
+	
+</form>
+
+

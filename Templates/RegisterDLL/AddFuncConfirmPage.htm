@@ -1,0 +1,42 @@
+  <h2>Functions Successfully Added </h2>
+  <dl class="profile">
+    <dt>Confirmation ID</dt>
+    <dd><#ASSIGNEDSESSIONCD></dd>
+    <dt>Customer ID</dt>
+    <dd><#CUSTOMERCD></dd>
+    <dt>Customer Name</dt>
+    <dd><#CUSTOMERNAME></dd>
+    <dt>Event Name</dt>
+    <dd><#SESSIONNAME></dd>
+    <dt>Event ID</dt>
+    <dd><#SESSIONALTCD></dd>
+    <p class="clear"></p>   
+  </dl>
+
+<h4>Location Detail</h4>
+<dl class="profile">
+  <dt>Location Name</dt>
+  <dd><#LOCATIONNAME></dd>
+  <dt>City</dt>
+  <dd><#LOCATIONCITY></dd>
+  <dt>State</dt>
+  <dd><#LOCATIONSTATECD></dd>
+  <p class="clear"></p>
+</dl>
+
+<h4>Functions Added</h4>
+<table class="gutters">
+          <tr>
+            <th>Function Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+      <#FUNCTIONS>
+</table>
+<dl class="invoice">
+  <dt>Registration Total</dt>
+  <dd><#TOTALAMT FORMAT="$0.00"></dd>
+  <dt>Amount Charge to Credit Card</dt>
+  <dd><#ADDEDAMT FORMAT="$0.00"></dd>
+  <p class="clear"></p>
+</dl>

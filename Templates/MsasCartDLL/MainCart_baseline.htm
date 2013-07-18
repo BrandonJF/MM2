@@ -1,0 +1,41 @@
+<script>
+function changeSubQTY(itemName, qty){
+	$('changeQty').name = itemName;
+	$('changeQty').value = qty;
+
+	document.cartForm.submit();
+}
+</script>
+
+<p><h1>Shopping Cart</h1></p>
+<div class="info">
+
+  <form name="cartForm" method="post" action="GetCart">
+  <table>
+
+  <tr>
+    <th>Product ID</td>
+    <th>Name</td>
+    <th align='right'>Price</td>
+    <th align='right'>Quantity</td>
+    <th align='right'>Subtotal</td>
+    <th>&nbsp;</td>
+  </tr>
+
+  <#SHOPPINGCART>
+
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><b>TOTAL:</b></td>
+    <td align="right"><#CARTTOTAL FORMAT="$0.00"></td>
+    <td>&nbsp;</td>
+  </tr>
+
+  </table>
+  <input type='hidden' id='changeQty' value='' />
+  </form>
+</div>
+
+<p><h3><a href="../memberdll.dll/openpage?wrp=productsearch.htm">Keep Shopping</a> | <a href="../msascartdll.dll/Orderconfirm">Checkout</a></h3></p>

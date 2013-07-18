@@ -1,0 +1,365 @@
+<script>
+//form validation
+
+// function parameters are: field - the string field, count - the field for remaining characters number and max - the maximum number of characters
+function CountLeft(field, count, max) {
+	
+	//alert(field.value.length);
+	// if the length of the string in the input field is greater than the max value, trim it
+	if (field.value.length > max)
+		field.value = field.value.substring(0, max);
+	else
+	// calculate the remaining characters
+		count.innerHTML = max - field.value.length;
+}
+
+
+function checkCharacter(objId) {
+
+ var myStr = objId.value;
+ //var unAllowedChars = new Array ('a','b','c');
+ var unAllowedChars = new Array ("<",">","'","%",";",")","(","&","+","/","\\","!","?","$","^","#","*",":","@");
+ 
+ for (var i=0; i<unAllowedChars.length; i++) {
+	
+	for (var j=0; j<myStr.length; j++) {
+		
+		if (myStr[j] == unAllowedChars[i])
+		{
+			alert("The following character is not allowed in the Donation Note text box: " + unAllowedChars[i]); 
+		}
+	
+	}
+	
+	//alert(unAllowedChars[i]);
+ }
+ 
+
+
+
+}
+
+
+
+//NQ - 1-25-11 - if the user enters in a value into the donation box, then it unchecks any checked radio button above
+function clearDonationRadio() {
+	
+	for (var i=0; i < document.abc.DONATIONVALUE.length; i++) {
+		
+		document.abc.DONATIONVALUE[i].checked = false;
+			
+	}
+	
+}
+
+
+//NQ - 1-25-11 - if the user checks off a radio button for donation amount, it automatically fills in that value into the donation amount box
+function updateDonationAmount(radioObj) {
+	
+	if (radioObj.checked) {
+		
+	document.abc.donationAmt.value = "0.00";	
+	
+	}
+}
+
+
+
+
+function updateDonationPage(selectedDonItem) {
+
+	if (selectedDonItem.value == "005_IN_HONOR_OF")
+	{
+		document.getElementById("inmemoryoftitle").innerHTML="In Honor of:";		
+		document.getElementById("inmemoryoftitle").style.display="block";
+		document.getElementById("inmemoryoftexfield").style.display="block";
+		document.getElementById("shippinginfo").style.display="block";
+		document.getElementById("donationNoteTitle").style.display="block";
+		document.getElementById("donationNoteBox").style.display="block";		
+		
+		
+	} else if (selectedDonItem.value == "005_IN_MEMORY_OF") {
+		document.getElementById("inmemoryoftitle").innerHTML="In Memory of:";		
+		document.getElementById("inmemoryoftitle").style.display="block";
+		document.getElementById("inmemoryoftexfield").style.display="block";
+		document.getElementById("shippinginfo").style.display="block";
+		document.getElementById("donationNoteTitle").style.display="block";
+		document.getElementById("donationNoteBox").style.display="block";		
+		
+		
+	
+	} else if (selectedDonItem.value == "005_DIRECT_MAIL") {
+		document.getElementById("inmemoryoftitle").innerHTML="In Memory of:";		
+		document.getElementById("inmemoryoftitle").style.display="none";
+		document.getElementById("inmemoryoftexfield").style.display="none";
+		document.getElementById("shippinginfo").style.display="none";
+		document.getElementById("donationNoteTitle").style.display="block";
+		document.getElementById("donationNoteBox").style.display="block";		
+	
+	} else if (selectedDonItem.value == "005_DIRECT_MAIL_EZM") {
+		document.getElementById("inmemoryoftitle").innerHTML="In Memory of:";		
+		document.getElementById("inmemoryoftitle").style.display="none";
+		document.getElementById("inmemoryoftexfield").style.display="none";
+		document.getElementById("shippinginfo").style.display="none";
+		document.getElementById("donationNoteTitle").style.display="block";
+		document.getElementById("donationNoteBox").style.display="block";		
+	
+	}
+}
+
+
+//NQ - THIS WILL CHANGE PHONE TYPE, BASED ON WHICH ADDRESS TYPE THEY'VE SELECTED
+//		so, if they choose "work" addrtype, it'll change the phone to work...default here is homephone
+function setPhoneType() {
+
+	var selectedAddrType = document.abc.ADDRESSTYPE.value; 
+	//alert(selectedAddrType);
+	if (selectedAddrType == 'Work')
+	{
+		document.abc.WORKPHONE.value = document.abc.PHONE.value;
+		
+	} else 	if (selectedAddrType == 'Home') {
+			document.abc.HOMEPHONE.value = document.abc.PHONE.value;
+
+	}
+
+	
+}
+
+
+
+
+function formValidate(){
+	//populate SUBITEMS
+	//var donItem = '';
+	
+	
+	var donationSelected = false;
+	for (var i=0; i<document.abc.DONATIONNAME.length; i++) {
+		if (document.abc.DONATIONNAME[i].checked) 
+		{
+			var donItem  = document.abc.DONATIONNAME[i].value;
+			donationSelected =true;
+		}
+	}
+	
+	if (!donationSelected) {
+		alert("Please select the type of gift your making.");
+		document.getElementById("donationTypeContainer").style.border = "2px solid red";
+		window.location = "#donationTypeAnchor";
+		return false;
+	}
+	
+	for (var i=0; i<document.abc.DONATIONVALUE.length; i++) {
+		if (document.abc.DONATIONVALUE[i].checked) 
+			document.abc.donationAmt.value  = document.abc.DONATIONVALUE[i].value;
+	}
+	
+	
+	//var donItem  = document.abc.DONATIONNAME.value;
+	//alert("nq you have selected: " + donItem);
+	$A($$(".subItem")).each(function(element){
+		if(element.checked == true){
+			donItem = element.value;
+		}
+	});
+	
+	if(donItem == ''){
+		alert("Please select a donation fund.");
+		return false;
+	}else if(parseFloat(document.abc.donationAmt.value) > 0){
+		document.abc.SUBITEMS.value = donItem + '=' + document.abc.donationAmt.value;
+		//alert(document.abc.SUBITEMS.value);
+		if(validateAll(document.abc)){
+			setPhoneType(); // NQ - 1-24-11 see  function for explanation			
+			document.abc.submit();
+		}
+	} else{
+	
+		alert("Please select a donation amount");
+		return false;
+	}
+}
+
+
+
+//NQ - 11-23-11 - this function gets called every time a donation item is selected...if this is a monthly donation, check PAYMENTONFILE = Y.
+
+function checkRecurring() {
+	
+	document.abc.PAYMENTONFILE.value="N";
+	$('.subItem').each(function(element){
+		//alert(element.id);
+		if((element.checked) && (element.value=="005_DIRECT_MAIL_EZM"))
+			document.abc.PAYMENTONFILE.value="Y";
+	});
+	
+}
+</script>
+<h2>Make a Donation</h2>
+<form name="abc" method="POST" id="form_abc" action="../orderdll.dll/orderp">
+<fieldset>
+    <legend>Donation Funds</legend>
+    <ul>
+        <li>
+            <label>Donation Amount</label>
+ <input type="radio" name="DONATIONVALUE" value="25.00" onClick="updateDonationAmount(this)"  >$25&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="DONATIONVALUE" value="50.00"  onClick="updateDonationAmount(this)" >$50&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="DONATIONVALUE" value="100.00"  onClick="updateDonationAmount(this)" >$100&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="DONATIONVALUE" value="250.00"  onClick="updateDonationAmount(this)" >$250&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="DONATIONVALUE" value="500.00"  onClick="updateDonationAmount(this)" >$500&nbsp;&nbsp;&nbsp;
+        </li>
+        <li>
+            <label>Other Amount</label>
+            $<input type="text" name="donationAmt" value="0.00" onChange="clearDonationRadio()">
+        </li>
+        <li><a name="donationTypeAnchor"></a></li>
+    </ul>
+    <ul  id="donationTypeContainer">
+
+    <#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_donRadio_Header_donationpage.htm" WBP="INCLUDE_donRadio_list_donationpage.htm" PARAMS="UDEF1TXT=donation,ONWEBFLG=Y"> 
+	<li id="inmemoryoftitle">
+        <label>In Memory Of</label>
+        <input type="text" size="20" name="SS_UDEF5TXT">
+    </li>
+    <li id="donationNoteTitle">
+        <label>Donation Note</label>
+        <textarea name="SS_DONATIONNOTE" onBlur="checkCharacter(this);" onKeyDown="CountLeft(this,document.getElementById('countField'),250);"
+onKeyUp="CountLeft(this,document.getElementById('countField'),250);"></textarea><br>
+<label>&nbsp;</label><span id="countField" style="color:#990000">250</span> characters left
+    </li>
+    </ul>
+</fieldset>
+
+
+<fieldset id="shippinginfo" style="display:none">
+    <legend>Send an Acknowledgment to</legend>
+    <ul>
+        <li>
+            <label>Name</label>
+            <input type=text name='SHIPCONTACT' value=''  >
+        </li>
+        <li>
+            <label>Address 1</label>
+            <input type=text name='SHIPADDRESS1' value=''  >
+        </li>
+        <li>
+            <label>Address 2</label>
+            <input type=text name='SHIPADDRESS2' value=''  >
+        </li>
+        <li>
+            <label>City</label>
+            <input type=text name='SHIPCITY' value=''  >
+        </li>
+        <li>
+            <label>State</label>
+            <SELECT NAME="SHIPSTATECD"><option value=''>Select One...</option><option><#RTVSTATEREFSCVNONE></option></SELECT>
+        </li>
+        <li>
+            <label>Zip Code</label>
+            <input type=text name='SHIPZIP' value=''  >
+        </li>
+        <li>
+            <label>Country</label>
+            <select name="SHIPCOUNTRY"><option value=''>Select One...</option> <option value='USA'>USA</option><option><#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESCVNONE></option></SELECT>
+        </li>
+        <li>
+            <label>Email</label>
+            <input type=text name='INVOICENOTE' value=''  >
+        </li>
+    </ul>
+</fieldset>
+<fieldset>
+    <legend>Donor Information</legend>
+    <ul>
+        <li>
+            <label class="required">First Name</label>
+            <input type="text" name="FIRSTNAME" value="<#FIRSTNAME>" class='reqField'>
+        </li>
+         <li>
+            <label>Middle Initial</label>
+            <input type="text" name="MIDDLEINITIAL" value="<#MIDDLEINITIAL>">
+        </li>
+         <li>
+            <label class="required">Last Name</label>
+            <input type="text" name="LASTNAME" value="<#LASTNAME>" class='reqField'>
+        </li>
+         <li>
+            <label>Organization</label>
+            <input type="text" name="ORGNAME" value="<#ORGNAME>">
+        </li>
+          <li>
+            <label>Title</label>
+            <input type="text" name="JOBTITLE" value="<#JOBTITLE>">
+        </li>
+          <li>
+            <label>Phone</label>
+            <input type="text" name="PHONE" value="<#HOMEPHONE>" onkeypress="checkCountryPhone(this, event, '(###) ###-####',0)">
+                <input type="hidden" size="50" name="HOMEPHONE" value="<#HOMEPHONE>" > 
+	<input type="hidden" size="50" name="WORKPHONE" value="<#WORKPHONE>" > 
+        </li>
+          <li>
+            <label>Fax</label>
+            <input type="text" name="FAXPHONE" value="<#FAXPHONE>" onkeypress="checkCountryPhone(this, event, '(###) ###-####',0)">
+        </li>
+          <li>
+            <label class="required">Email</label>
+            <input type="text" name="EMAIL" value="<#EMAIL>" class='reqField'>
+        </li>
+          <li>
+            <label class="required">Address Type</label>
+            <select size="1" name="ADDRESSTYPE" class='reqField'>
+        <option value=''>Select One...</option>
+       <#RTVADDRTYPEREFFLD1ADDRESSTYPEFLD2ADDRESSTYPESCVADDRESSTYPE>
+        </select>
+        </li>
+          <li>
+            <label class="required">Address</label>
+            <input type="text" name="ADDRESS1" value="<#ADDRESS1>" class='reqField'>
+        </li>
+          <li>
+            <label>Address Continued</label>
+            <input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+        </li>
+          <li>
+            <label class="required">City</label>
+            <input type="text" name="CITY" value="<#CITY>" class='reqField'>
+        </li>
+           <li>
+            <label class="required">State</label>
+             <select size="1" name="STATECD" class='reqField'>
+    <option value='' >Select One...</option>
+    <#RTVSTATEREFSRTFSTATENAMESCVSTATECD>        
+    </select>
+        </li>
+           <li>
+            <label class="required">Zip</label>
+            <input type="text" name="ZIP" value="<#ZIP>" class='reqField'>
+        </li>
+           <li>
+            <label>Country</label>
+            <select size="1" name="COUNTRY" style="width:330px;" onChange="checkCountryMask(this.value);">
+    <option value=''>Select One...</option>
+	 <option value='USA'>USA</option>
+    <#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAMESCVCOUNTRY>        
+    </select>  
+        </li>
+           <script>
+	//set correct phone mask on load
+	checkCountryMask("<#COUNTRY>");
+	</script>
+    </ul>
+</fieldset>
+<div class="buttons">
+    <input type="button" value="Add To Cart" onclick="submitDonationToCart()">
+</div>
+
+<input type="hidden" name="SUBITEMS" value="">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="AUTOCUSTOMERCD" value="Y">
+<input type="hidden" name="WRP" value="customercd.htm">
+<input type="hidden" name="WMT" value="none">
+<input type="hidden" name="CHECKUSERDUP" value="N" />
+<input type="hidden" name="SENDEMAIL" value="N">
+<input type="hidden" name="PAYMENTONFILE" value="N">
+</form>

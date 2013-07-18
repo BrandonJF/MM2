@@ -1,0 +1,28 @@
+<script>
+	numDues++;
+</script>
+
+<table class="duesItem">
+	<tr>
+		<th><span class="addToCart">Add to Cart</span></th>
+		<th>Invoice #:</th>
+		<th>Issue Date:</th>
+		<th>Due Date:</th>
+		<th>Total Invoice Amount:</th>
+		<th>Amount Paid:</th>
+		<th>status:</th>
+		<th>Balance Due:</th>
+	</tr>
+  <tr>
+	<td><input type="checkbox" name="selectInv" value="<#INVOICENUM>" /></td>
+    <td><#INVOICENUM></td>
+	<td><#INVOICEDATE></td>
+	<td><#DUEDATE></td>
+	<td><#TOTALAMT FORMAT="$0.00"></td>
+	<td><#PAIDAMT FORMAT="$0.00"></td>
+	<td><#PAIDFLG></td>
+	<td><#BALANCEDUE FORMAT="$0.00"></td>
+  </tr> 	
+</table>
+<br />
+<br />

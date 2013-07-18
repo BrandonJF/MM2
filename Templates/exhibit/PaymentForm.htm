@@ -1,0 +1,63 @@
+<script language="javascript">
+
+function formValidate() {   
+	var formName = document.order;
+	if ( validateAll(formName, true) ){	
+		document.order.action="../exhibit.dll/post";
+		debug(document.order.action);
+		 document.order.submit();
+		 return true;
+	 }
+}   
+
+
+</script>
+
+<form name="order" method="POST" action="../exhibit.dll/post">
+
+<h2>Exhibit Booth Sales</h2>
+<div class="formIntro">
+   <p> By submitting this form you are authorizing your credit card to be charged for the indicated amount. There are no refunds available. Please see our full terms and conditions page for further details. If you have any questions, please contact Mike Smith at (555) 555-5555 or by email at <a href='mailto:info@domain.org'>info@domain.org</a>. Thank you for choosing this Association.</p>
+</div>
+<fieldset>
+    <legend>Booth Summary</legend>
+    <ul>
+        <li id='balance'>
+            <label>Booths</label><#BOOTHNUMLIST>
+        </li>
+        <li id='membership'>
+            <label># of Booths Purchased</label><#BOOTHCOUNT>
+        </li>
+        <li>
+            <label>Total Payment</label>$<#BOOTHPRICE>
+        </li>
+    </ul>
+</fieldset>
+<input type="hidden" name="RESPONSEPAGE" value="registerpost.htm">
+<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
+<div class="buttons">
+    <input type="button" value="Submit Payment" onClick="formValidate();">
+</div>
+<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+	<input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+	<input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+	<input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+	<input type="hidden" name="CITY" value="<#CITY>">
+	<input type="hidden" name="STATECD" value="<#STATECD>">
+	<input type="hidden" name="ZIP" value="<#ZIP>">
+	<input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="BOOTHINFO" value="<#BOOTHINFO>">
+<input type="hidden" name="ORGINFO" value="<#ORGINFO>">
+<input type="hidden" name="CUSTOMERINFO1" value="<#CUSTOMERINFO1>">
+<input type="hidden" name="CUSTOMERINFO2" value="<#CUSTOMERINFO2>">
+<input type="hidden" name="CUSTOMERINFO3" value="<#CUSTOMERINFO3>">
+<input type="hidden" name="CUSTOMERINFO4" value="<#CUSTOMERINFO4>">
+<input type="hidden" name="CUSTOMERINFO5" value="<#CUSTOMERINFO5>">
+<input type="hidden" name="BOOTHNUMLIST" value="<#BOOTHNUMLIST>">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+
+
+</form>
+

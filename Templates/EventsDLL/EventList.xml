@@ -1,0 +1,13 @@
+<featuredEventItem EVENTCD="<#SESSIONALTCD>">
+  <eventcode><#SESSIONALTCD></eventcode>
+  <eventname><#SESSIONNAME></eventname>
+  <description><#SESSIONDES></description>
+  <eventstartdate><#SESSIONBEGDATE FORMAT="mmm dd, yyyy"></eventstartdate>
+  <eventstartday><#SESSIONBEGDATE FORMAT="dd"></eventstartday>
+  <eventstartmonyear><#SESSIONBEGDATE FORMAT="mmmm yyyy"></eventstartmonyear>
+  <eventenddate><#SESSIONENDDATE  FORMAT="mmm dd, yyyy"></eventenddate>
+  <earlyregisterby><#EARLYREGISTERDATE></earlyregisterby>
+  <city><#LOCATIONCITY></city>
+  <state><#LOCATIONSTATECD></state>
+  <minorcategory><#MINORCAT></minorcategory>
+</featuredEventItem>

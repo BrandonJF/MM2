@@ -1,0 +1,222 @@
+<script>
+//alert('hello!');
+var toWrite = '';
+
+function formValidate(){
+
+		fObj=document.order;
+		var oRequiredCC = new Object();
+		
+		if(document.order.UPLOADFEE.value == ''){
+			//alert('submitting!');
+			//addFiles();
+			document.order.submit();
+		}else{
+			oRequiredCC.PAYMENTTYPECD = ['', 'PAY', '', '', "\nYou must choose a Card Type."];
+			oRequiredCC.expireyear = ['Y', 'PAY', '', '', "\nPlease enter the correct expiration year."];
+			oRequiredCC.expiremonth = ['', 'PAY', '', '', "\nYou must select the correct expiration month from the dropdown box."];
+		
+			if ( (isFormValidated(fObj, oRequiredCC, false)) && (CCNumValidate(fObj, "PAY", false, "\nCredit Card number is invalid.")) ) {
+				//addFiles();
+				document.order.submit();
+			}
+		}
+}
+
+function addFiles(){
+var fileString = '';
+if('<#FILEFIELD1>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD1" value="<#FILEFIELD1>">';
+}
+if('<#FILEFIELD2>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD2" value="<#FILEFIELD2>">';
+}
+if('<#FILEFIELD3>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD3" value="<#FILEFIELD3>">';
+}
+if('<#FILEFIELD4>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD4" value="<#FILEFIELD4>">';
+}
+if('<#FILEFIELD5>' != ''){
+	fileString=fileString + '<input type="file" name="FILEFIELD5" value="<#FILEFIELD5>">';
+}
+
+alert(fileString);
+document.getElementById('fileSection').innerHTML = fileString;
+}
+
+function writeAuthors(){
+	
+	
+	if('<#TEAMMBR1_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR1_FIRSTNAME></td>'+
+				'<td><#TEAMMBR1_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR1_LASTNAME></td>'+
+				'<td><#TEAMMBR1_UDEF1TXT></td>'+
+				'<td><#TEAMMBR1_UDEF2TXT></td>';
+	}
+	
+	if('<#TEAMMBR2_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR2_FIRSTNAME></td>'+
+				'<td><#TEAMMBR2_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR2_LASTNAME></td>'+
+				'<td><#TEAMMBR2_UDEF1TXT></td>'+
+				'<td><#TEAMMBR2_UDEF2TXT></td>';
+	}
+	
+		if('<#TEAMMBR3_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR3_FIRSTNAME></td>'+
+				'<td><#TEAMMBR3_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR3_LASTNAME></td>'+
+				'<td><#TEAMMBR3_UDEF1TXT></td>'+
+				'<td><#TEAMMBR3_UDEF2TXT></td>';
+	}
+		if('<#TEAMMBR4_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR4_FIRSTNAME></td>'+
+				'<td><#TEAMMBR4_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR4_LASTNAME></td>'+
+				'<td><#TEAMMBR4_UDEF1TXT></td>'+
+				'<td><#TEAMMBR4_UDEF2TXT></td>'
+	}
+		if('<#TEAMMBR5_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR5_FIRSTNAME></td>'+
+				'<td><#TEAMMBR5_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR5_LASTNAME></td>'+
+				'<td><#TEAMMBR5_UDEF1TXT></td>'+
+				'<td><#TEAMMBR5_UDEF2TXT></td>';
+	}
+		if('<#TEAMMBR6_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR6_FIRSTNAME></td>'+
+				'<td><#TEAMMBR6_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR6_LASTNAME></td>'+
+				'<td><#TEAMMBR6_UDEF1TXT></td>'+
+				'<td><#TEAMMBR6_UDEF2TXT></td>';
+	}
+		if('<#TEAMMBR7_FIRSTNAME>' != ''){
+		toWrite=toWrite+'<tr><td><#TEAMMBR7_FIRSTNAME></td>'+
+				'<td><#TEAMMBR7_MIDDLEINITIAL></td>'+
+				'<td><#TEAMMBR7_LASTNAME></td>'+
+				'<td><#TEAMMBR7_UDEF1TXT></td>'+
+				'<td><#TEAMMBR7_UDEF2TXT></td>';
+	  }
+}
+
+
+
+</script>
+
+<form name='order' Action="../documentdll.dll/UpdateInfo" Method="POST" enctype="multipart/form-data" >
+
+
+<input type='hidden' name='ABSTRACTTOPIC' value='<#ABSTRACTTOPIC>'>
+<input type='hidden' name='TITLETXT' value='<#TITLETXT>'>
+<input type='hidden' name='DOCCLASS' value='<#DOCCLASS>'>
+<input type='hidden' name='DOCTYPE' value='<#DOCTYPE>'>
+<input type='hidden' name='DOCDES_N0' value='<#DOCDES_N1>'>
+<input type='hidden' name='ABSTRACTTEXT_N0' value='<#ABSTRACTTEXT_N0>'>
+<input type='hidden' name='UPLOADFEE' value='<#UPLOADFEE>'>
+
+
+<input type='hidden' name='TEAMMBR1_FIRSTNAME' value='<#TEAMMBR1_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR1_MIDDLEINITIAL' value='<#TEAMMBR1_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR1_LASTNAME' value='<#TEAMMBR1_LASTNAME>'>
+<input type='hidden' name='TEAMMBR1_UDEF1TXT' value='<#TEAMMBR1_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR1_UDEF2TXT' value='<#TEAMMBR1_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR1_UDEF3TXT' value='<#TEAMMBR1_UDEF3TXT>'>
+
+<input type='hidden' name='TEAMMBR2_FIRSTNAME' value='<#TEAMMBR2_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR2_MIDDLEINITIAL' value='<#TEAMMBR2_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR2_LASTNAME' value='<#TEAMMBR2_LASTNAME>'>
+<input type='hidden' name='TEAMMBR2_UDEF1TXT' value='<#TEAMMBR2_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR2_UDEF2TXT' value='<#TEAMMBR2_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR2_UDEF3TXT' value='<#TEAMMBR2_UDEF3TXT>'>
+
+<input type='hidden' name='TEAMMBR3_FIRSTNAME' value='<#TEAMMBR3_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR3_MIDDLEINITIAL' value='<#TEAMMBR3_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR3_LASTNAME' value='<#TEAMMBR3_LASTNAME>'>
+<input type='hidden' name='TEAMMBR3_UDEF1TXT' value='<#TEAMMBR3_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR3_UDEF2TXT' value='<#TEAMMBR3_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR3_UDEF3TXT' value='<#TEAMMBR3_UDEF3TXT>'>
+
+<input type='hidden' name='TEAMMBR4_FIRSTNAME' value='<#TEAMMBR4_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR4_MIDDLEINITIAL' value='<#TEAMMBR4_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR4_LASTNAME' value='<#TEAMMBR4_LASTNAME>'>
+<input type='hidden' name='TEAMMBR4_UDEF1TXT' value='<#TEAMMBR4_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR4_UDEF2TXT' value='<#TEAMMBR4_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR4_UDEF3TXT' value='<#TEAMMBR4_UDEF3TXT>'>
+
+<input type='hidden' name='TEAMMBR5_FIRSTNAME' value='<#TEAMMBR5_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR5_MIDDLEINITIAL' value='<#TEAMMBR5_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR5_LASTNAME' value='<#TEAMMBR5_LASTNAME>'>
+<input type='hidden' name='TEAMMBR5_UDEF1TXT' value='<#TEAMMBR5_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR5_UDEF2TXT' value='<#TEAMMBR5_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR5_UDEF3TXT' value='<#TEAMMBR5_UDEF3TXT>'>
+
+<input type='hidden' name='TEAMMBR6_FIRSTNAME' value='<#TEAMMBR6_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR6_MIDDLEINITIAL' value='<#TEAMMBR6_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR6_LASTNAME' value='<#TEAMMBR6_LASTNAME>'>
+<input type='hidden' name='TEAMMBR6_UDEF1TXT' value='<#TEAMMBR6_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR6_UDEF2TXT' value='<#TEAMMBR6_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR6_UDEF3TXT' value='<#TEAMMBR6_UDEF3TXT>'>
+
+<input type='hidden' name='TEAMMBR7_FIRSTNAME' value='<#TEAMMBR7_FIRSTNAME>'>
+<input type='hidden' name='TEAMMBR7_MIDDLEINITIAL' value='<#TEAMMBR7_MIDDLEINITIAL>'>
+<input type='hidden' name='TEAMMBR7_LASTNAME' value='<#TEAMMBR7_LASTNAME>'>
+<input type='hidden' name='TEAMMBR7_UDEF1TXT' value='<#TEAMMBR7_UDEF1TXT>'>
+<input type='hidden' name='TEAMMBR7_UDEF2TXT' value='<#TEAMMBR7_UDEF2TXT>'>
+<input type='hidden' name='TEAMMBR7_UDEF3TXT' value='<#TEAMMBR7_UDEF3TXT>'>
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="PARENTGROUPCD" value="<#PARENTGROUPCD>">
+<input type="hidden" name="GROUPCD" value="<#GROUPCD>">
+<input type='hidden' name='ISABSTRACTFLG' value='<#ISABSTRACTFLG>'>
+<input type='hidden' name='FILETYPE' value='<#FILETYPE>'>
+<input type='hidden' name='TEAMMBR_TEAMROLE' value='<#TEAMMBR_TEAMROLE>' />
+<input type='hidden' name='ADDTEAMMEMBERS' value='<#ADDTEAMMEMBERS>' />
+<input type='hidden' name='CHECKFIELDNAME' value='<#CHECKFIELDNAME>'>
+
+<input type='hidden' name='PROCESSONLINECREDIT' value='N' />
+
+
+<h1>Review Abstract</h1>
+<p>
+
+
+<h3 class='highlight'>Abstract Title:</h3>
+<#TITLETXT>
+
+<br /><br />
+
+<h3 class='highlight'>Author(s):</h3>
+<table>
+  <tr >
+  <th width='140'><div align="left">First Name</div></th> 
+  <th width='55'><div align="left">M.I.</div></th> 
+  <th width='135'><div align="left">Last Name</div></th> 
+  <th width='150'><div align="left">Affiliation 1</div></th> 
+  <th width='130'><div align="left">Affiliation 2</div></th> 
+  </tr>
+  <script>	
+  	//alert('writeAuthors()');
+    writeAuthors();
+  	document.write(toWrite);
+   </script>
+</table>
+
+<br /><br />
+
+  <div class='info'>
+              <table >
+              	<tr>
+                	<th width='150'>Document #</th>
+                	<th width='150'>File Name</th>
+                	<th>&nbsp;</th>
+                </tr>
+                <#FILELIST>
+               </table>        
+               </div>
+        <input type='button' name='button2' value='Vote' onclick='vote()' />     
+</form>
+
+ 
+

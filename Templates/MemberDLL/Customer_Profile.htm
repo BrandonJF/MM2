@@ -1,0 +1,48 @@
+<h2 class="title"><#MLGLBL "TEXT=Member Profile"> <br>  <#FIRSTNAME> <#LASTNAME></h2>
+<script>
+	$(document).ready(function() { //add photo to profile if user has uploaded one - JW 08.13.12
+		var photoUrl = '../documentdll.dll/list?ownercd=<#CUSTOMERCD>&wbp=justphotos.htm&whp=none&wmt=none&DOCDES=Profile Photo&range=1/1&sort=DOCDATE DESC';
+          console.log( "photourl: " + photoUrl) ;
+		$.ajax({url:photoUrl, type:'GET', async:false,
+			success: function(response){
+        console.log( "response: " + response) ;
+				if(!isNaN(response)){
+					$("#profilePhoto").append("<img src='../documentdll.dll/view?DOCUMENTNUM="+response+"' width='150' height='150'>");
+				}else{
+					$("#profilePhoto").append("<img src='../../images/Photo-NotAvail.jpg' width='100' height='125'>");
+                    $("#profilePhoto").closest("li").remove();
+                }
+            },
+            error: function(){alert('An AJAX error has occured. Please ensure that you have Javascript-enabled browser and re-load the page to try again.');}
+        });
+    });
+    </script>
+
+
+    <ul data-role="listview" data-inset="true">
+      <li data-role="list-divider" data-theme="a">Basic Information</li>
+      <li><h2>Photo </h2>   <div id="profilePhoto"></div></li>
+      <!-- <li><h2>Prefix </h2><p><#PREFIX></p></li> -->
+      <li><h2>Name</h2><p><#FULLNAME></p></li>
+      <!-- <li><h2>Middle Initial</h2><p><#MIDDLENAME></p></li> -->
+      <!-- <li><h2>Last Name</h2><p><#LASTNAME></p></li> -->
+      <li><h2>Suffix</h2><p><#SUFFIX></p></li>
+      <li data-role="list-divider" data-theme="a">Preferred Contact Information</li>
+      <li><h2>Organization</h2><p><#ORGNAME></p></li>
+      <li><h2>Mailing Address </h2><p><#ADDRESS1></br><#CITY>,<#STATECD> <#ZIP></p></li>
+      <!-- <li><h2>Mailing Address Cont.</h2><p><#ADDRESS2></p></li> -->
+
+          <#ADDRESS2 LABEL="<li><h2>Mailing Address Cont.</h2><p>" RIGHTLABEL="</p></li>">
+      <!-- <li><h2>City</h2><p><#CITY></p></li> -->
+      <!-- <li><h2>State/Province</h2><p><#STATECD></p></li> -->
+      <!-- <li><h2>Zip/Postal Code</h2><p><#ZIP></p></li> -->
+      <li><h2>Country</h2><p><#COUNTRY></p></li>
+      <li><h2>Work Phone</h2><p><a href="tel:<#WORKPHONE>"><#WORKPHONE></a></p></li>
+      <li><h2>Work Extension</h2><p><a href="tel:<#WORKPHONEEXT>"><#WORKPHONEEXT></a></p></li>
+      <li><h2>Fax</h2><p><a href="tel:<#FAXPHONE>"><#FAXPHONE></a></p></li>
+      <li><h2>Cell Phone</h2><p><a href="tel:<#MOBILEPHONE>"><#MOBILEPHONE></a></p></li>
+      <li><h2>Home Phone</h2><p><a href="tel:<#HOMEPHONE>"><#HOMEPHONE></a></p></li>
+      <li> <a href="mailto:<#EMAIL>"><h2>Email Address</h2>  <#EMAIL></a></li>
+      <li><a href="<#WWWADDRESS>" target="_blank"><h2>Web Address</h2>   <#WWWADDRESS></a></li>
+  </ul>
+

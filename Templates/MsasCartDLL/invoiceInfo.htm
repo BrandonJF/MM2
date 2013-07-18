@@ -1,0 +1,68 @@
+<!-- <tr>
+    <td><a href="RemoveItem?INVOICENUM=<#INVOICENUM>"  data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true" title="Remove this item from the cart">Remove</a></td>
+	<td></td>
+    <td></td>
+    <td class="price"><strong></strong></td>
+
+</tr>
+<tr class="subtotal">
+	<td>&nbsp;</td>
+	<td>&nbsp;</td><p></p>
+	<td>&nbsp;</td>
+	<td class="text">
+		<a href="#" onClick="$('#<#INVOICENUM>_items').show(); $('#<#INVOICENUM>_showLink').hide();return false;" id="<#INVOICENUM>_showLink">View items</a>
+	</td>
+</tr>
+</table> -->
+
+<li>
+	<a href="../dues.dll/PaymentForm?INVOICENUM=<#INVOICENUM>" data-transition="slide">
+		<h3>Invoice #<#INVOICENUM></h3>
+		<p><#PAYEENAME></p>
+		<p class="ui-li-aside"><#TOTALAMT></p>
+		 <a href="#popupInvoiceMenu" data-rel="popup" data-position-to="window" data-transition="slideup" data-inline="true">Menu</a>
+	</a>
+</li>
+
+
+<div data-role="popup" id="popupInvoiceMenu" data-theme="a">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+            <li data-role="divider" data-theme="b">Choose an action</li>
+            <!-- <li><a href="#">View details</a></li> -->
+            <!-- <li><a href="#">Quantity</a></li> -->
+            <li><a href="../dues.dll/PaymentForm?INVOICENUM=<#INVOICENUM>">View Invoice</a></li>
+            <li><a href="RemoveItem?INVOICENUM=<#INVOICENUM>">Remove</a></li>
+        </ul>
+</div>
+
+
+
+
+
+<!--
+
+<table style="display:none;" id="<#INVOICENUM>_items" class="nobg">
+    <tr>
+                    <th>&nbsp;</th>
+					<th>Item Code</th>
+					<th>Description</th>
+					<th>Total</th>
+				</tr>
+				<#INVOICEITEMS>
+				<tr class="subtotal">
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td colspan="2" class="price">
+						<a href="#" onClick="$('#<#INVOICENUM>_items').hide();$('#<#INVOICENUM>_showLink').show();return false;">Hide invoice items</a>
+					</td>
+				</tr>
+     </table>
+<script>
+	$("#invoiceSection").show();
+	isInvoices=true;
+</script> -->
+
+<script>
+	$("#invoiceSection").show();
+	isInvoices=true;
+</script>

@@ -1,0 +1,92 @@
+
+Update Request at 6/19/2013 10:57:23 AMCannot create/update a record. The Query string is empty. Break point = start
+---- Request parameters: ---- 
+
+---- Cookie values: ---- 
+memberid=280828
+membername=Dan_Antonoff
+lastname=Antonoff
+firstname=Dan
+customertype=CBA_Senior
+ismemberflg=Y
+statusstt=Active
+committees="13THJD,ADLAW,AGPMC,AGRIC,AJCRT,AJEDU,AJRES,BGOT,CAAD,CABADEL,CALS,CAMB,CATS,CBNK,CBRI,CDWOJC,CLAS,CLEA,CONF,CORP,CRIM,DBACH,DPWAC,DPWAJ,WATER"
+subscriptions="YOUNG,CBA_Intermed,13THJD_Standard,CBA_Associate,CBA_Senior,LIFEALERT,TREEFARMER_MAG_3YEAR,TREEFARMER_MAG_2YEAR,TECHNOLOGYFUND,FOUNDATION,GENERALFUND"
+email=test@tester.com
+webusername=dantonoff
+customercd=280828
+zip=80257-1823
+primarycontact=
+orgcd=2084
+chapterid=
+orgname=TENTH CIRCUIT COURT OF APPEALS
+REDIRECTURL=
+sessionID={50D7BA50-FBA9-432A-A14E-3C9682C632A7}
+
+---- Session values: ---- 
+memberid=280828
+membername=Dan_Antonoff
+lastname=Antonoff
+firstname=Dan
+customertype=CBA_Senior
+ismemberflg=Y
+statusstt=Active
+committees="13THJD,ADLAW,AGPMC,AGRIC,AJCRT,AJEDU,AJRES,BGOT,CAAD,CABADEL,CALS,CAMB,CATS,CBNK,CBRI,CDWOJC,CLAS,CLEA,CONF,CORP,CRIM,DBACH,DPWAC,DPWAJ,WATER"
+subscriptions="YOUNG,CBA_Intermed,13THJD_Standard,CBA_Associate,CBA_Senior,LIFEALERT,TREEFARMER_MAG_3YEAR,TREEFARMER_MAG_2YEAR,TECHNOLOGYFUND,FOUNDATION,GENERALFUND"
+email=test@tester.com
+webusername=dantonoff
+customercd=280828
+zip=80257-1823
+primarycontact=
+orgcd=2084
+chapterid=
+orgname=TENTH CIRCUIT COURT OF APPEALS
+REDIRECTURL=
+
+-------------------------------------------
+
+Update Request at 6/19/2013 11:00:29 AMCannot create/update a record. The Query string is empty. Break point = start
+---- Request parameters: ---- 
+
+---- Cookie values: ---- 
+memberid=280828
+membername=Dan_Antonoff
+lastname=Antonoff
+firstname=Dan
+customertype=CBA_Senior
+ismemberflg=Y
+statusstt=Active
+committees="13THJD,ADLAW,AGPMC,AGRIC,AJCRT,AJEDU,AJRES,BGOT,CAAD,CABADEL,CALS,CAMB,CATS,CBNK,CBRI,CDWOJC,CLAS,CLEA,CONF,CORP,CRIM,DBACH,DPWAC,DPWAJ,WATER"
+subscriptions="YOUNG,CBA_Intermed,13THJD_Standard,CBA_Associate,CBA_Senior,LIFEALERT,TREEFARMER_MAG_3YEAR,TREEFARMER_MAG_2YEAR,TECHNOLOGYFUND,FOUNDATION,GENERALFUND"
+email=test@tester.com
+webusername=dantonoff
+customercd=280828
+zip=80257-1823
+primarycontact=
+orgcd=2084
+chapterid=
+orgname=TENTH CIRCUIT COURT OF APPEALS
+REDIRECTURL=
+sessionID={50D7BA50-FBA9-432A-A14E-3C9682C632A7}
+
+---- Session values: ---- 
+memberid=280828
+membername=Dan_Antonoff
+lastname=Antonoff
+firstname=Dan
+customertype=CBA_Senior
+ismemberflg=Y
+statusstt=Active
+committees="13THJD,ADLAW,AGPMC,AGRIC,AJCRT,AJEDU,AJRES,BGOT,CAAD,CABADEL,CALS,CAMB,CATS,CBNK,CBRI,CDWOJC,CLAS,CLEA,CONF,CORP,CRIM,DBACH,DPWAC,DPWAJ,WATER"
+subscriptions="YOUNG,CBA_Intermed,13THJD_Standard,CBA_Associate,CBA_Senior,LIFEALERT,TREEFARMER_MAG_3YEAR,TREEFARMER_MAG_2YEAR,TECHNOLOGYFUND,FOUNDATION,GENERALFUND"
+email=test@tester.com
+webusername=dantonoff
+customercd=280828
+zip=80257-1823
+primarycontact=
+orgcd=2084
+chapterid=
+orgname=TENTH CIRCUIT COURT OF APPEALS
+REDIRECTURL=
+
+-------------------------------------------

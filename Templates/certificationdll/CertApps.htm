@@ -1,0 +1,4 @@
+<h2>My Certifications</h2>
+<#INCLUDE DLL="certificationdll.dll" ACT="masterlist" WHP="masterlistheader.htm" WBP="masterlist.htm" PARAMS="STATUSSTT=Active" COOKIE="CUSTOMERCD">
+
+<#INCLUDE DLL="certificationdll.dll" ACT="masterlist" WHP="pending.htm" WBP="pendingList.htm" COOKIE="CUSTOMERCD" PARAMS="STATUSSTT=|IN|A_Pending|A_Exempt,C_CERTIFICATIONCD=|IN|SF_APPL|DA_APPL">

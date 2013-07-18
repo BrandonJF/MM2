@@ -1,0 +1,141 @@
+<script src="../../VerificationLib.js"></script>
+<script language="javascript">
+	function isEmpty( theField, displayName ) {
+		for ( i=0; i<theField.value.length; i++ )
+			if ( theField.value.charAt(i) != " " )
+				break;
+			if ( i == theField.value.length ) {
+				alert ( "Please enter your " + displayName +".");
+				theField.focus();
+				return true;
+			}
+		return false;
+	}
+
+	function validate(currForm)
+	{
+		//alert('in validate');
+		if((currForm.CERTIFICATIONCD[0].checked == false) && (currForm.CERTIFICATIONCD[1].checked == false)){
+			alert('Please select your Eligibility Status');
+		    return false;
+		}else if((currForm.radiobutton[0].checked == false) && (currForm.radiobutton[1].checked == false)){
+			alert('Please select whether you are currently certified in BCLS');
+			return false;
+		}else if(currForm.checkbox.checked == false){
+			alert('Please complete the Verification of Clinical and/or Educational Experience field');
+			return false;
+		}else{
+			//alert('submitting');
+			currForm.submit();
+			return true;
+		}
+    }
+	
+		function toggleSubmitBtn(currForm)
+	{
+		if (currForm.radiobutton[0].checked == false)
+			currForm.nextButton.disabled = true;
+		else
+			currForm.nextButton.disabled = false;
+	}
+</script>
+
+<style>
+<!--
+.style1 {
+	font-size: xx-small;
+	font-style: italic;
+}
+-->
+</style>
+
+<form name="event" method="POST" action="../memberdll.dll/nextform">
+  <table width="100%" border="0"  cellspacing="0" class="tableBorder">
+<tr>
+	<td colspan="2" class="subtitle"><h2><strong>2010 Application for the Comprehensive Registry Examination of Polysomnographic Technologists </strong></h2></td>
+</tr>
+<tr>
+	<td colspan="2"><p><b>Members, please <a href="../../MainLogin.shtml">login</a> to pay the member rate for certification enrollment.</b></p>
+	  <h3><strong>Eligibility Status * </strong></h3>
+	  <p>
+	    <input name="CERTIFICATIONCD" type="radio" value="RPSGT-APPL" />
+	    I am a <em>NEW APPLICANT </em> for the RPSGT Examination for Polysomnographic Technologists </p>
+	  <p>
+	    <input name="CERTIFICATIONCD" type="radio" value="RPSGT-RECE" />
+	    I am<em> RETESTING </em>for the RPSGT Examination for Polysomnographic Technologists. </p>
+	  <p>Date of last exam taken:</p>
+	  <h3><strong>Basic Cardiac Life Support Certification (BCLS)</strong> * </h3>
+	  <p><strong>Are you currently certified in BCLS or it's equivalent?</strong></p>
+	  <p><strong>
+	    <input name="radiobutton" type="radio" value="radiobutton" onClick="toggleSubmitBtn(this.form)"/>
+	  </strong>Yes. I am mailing proof of current certification. (Applications will be approved for one year or to the date of expiration on the BCLS/CPR card submitted, whichever is soonest.) </p>
+	  <p><strong>
+	    <input name="radiobutton" type="radio" value="radiobutton" onClick="toggleSubmitBtn(this.form)"/>
+	  </strong> No. If you do not have current certification that will remain valid through the end of the examination window for why you are applying <strong>stop here.</strong> You are <strong>NOT </strong> eligible to take the RPSGT Exam  </p>
+	  <h3><strong>Verification of Clinical and/or Educational Experience: </strong></h3>
+	  <p>All applicants must print this form and have ONLY the Medical Director, Administrative Director, Human Resources Representative, Immediate Supervisor, A-STEP or CAAHEP Program Director complete this section of the application.</p>
+	  <p>This form MUST be mailed to the BRPT in order to complete your online application. </p>
+	  <center>
+	    <p><a tabindex="-1" href="http://www.amg-inc.com/brptnewapplicant_verification_form.pdf" target="_blank"><strong>Click here to print form.</strong> </a>	      </p>
+	    <p align="left">
+	      <input type="checkbox" name="checkbox" value="checkbox"  />
+	      Yes. I understand that I must print this Verification of Clinical Experience   Form and have it completed only by those listed in the instructions, then mailed   to the BRPT by the application deadline in order to complete my online   application.</p>
+	  </center>	  
+	  <p>*=Required Fields <br>
+	      <br>	
+      </p></td>
+</tr>
+<tr>
+	<td colspan="2"><div align="center">
+    	<input type="hidden" name="RESPONSEPAGE" value="masterinfo2.htm">
+        
+        <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+        
+        <input type=hidden name="FIRSTNAME" value="<#FIRSTNAME>">
+        <input type=hidden name="LASTNAME" value="<#LASTNAME>">
+        <input type=hidden name="MIDDLEINITIAL" value="<#MIDDLEINITIAL>">
+        <input type=hidden name="SUFFIX" value="<#SUFFIX>">
+        <input type=hidden name="SPOUSENAME" value="<#SPOUSENAME>">
+        <input type=hidden name="EMAIL" value="<#EMAIL>">
+        <input type=hidden name="WORKPHONE" value="<#WORKPHONE>">
+        <input type=hidden name="WORKPHONEEXT" value="<#WORKPHONEEXT>">
+        <input type=hidden name="HOMEPHONE" value="<#HOMEPHONE>">
+        <input type=hidden name="BIRTHDATE" value="<#BIRTHDATE>">
+        <input type=hidden name="ADDRESS2" value="<#ADDRESS2>">
+        <input type=hidden name="ADDRESS1" value="<#ADDRESS1>">
+        <input type=hidden name="CITY" value="<#CITY>">
+        <input type=hidden name="STATECD" value="<#STATECD>">
+        <input type=hidden name="ZIP" value="<#ZIP>">
+        <input type=hidden name="COUNTRY" value="<#COUNTRY>">
+        
+        <input type=hidden name="ORGNAME" value="<#ORGNAME>">
+        <input type=hidden name="ALTADDRESS1" value="<#ALTADDRESS1>">
+        <input type=hidden name="ALTADDRESS2" value="<#ALTADDRESS2>">
+        <input type=hidden name="ALTCITY" value="<#ALTCITY>">
+        <input type=hidden name="ALTSTATE" value="<#ALTSTATE>">
+        <input type=hidden name="ALTZIP" value="<#ALTZIP>">
+        <input type=hidden name="ALTCOUNTRY" value="<#ALTCOUNTRY>">
+        <input type=hidden name="ALTPHONE" value="<#ALTPHONE>">
+        <input type=hidden name="ALTPHONEEXT" value="<#ALTPHONEEXT>">
+        <input type=hidden name="WWWADDRESSS" value="<#WWWADDRESSS>">
+        <input type=hidden name="SYSTEMDATE2" value="<#SYSTEMDATE2>">
+        <input type=hidden name="UDEF4TXT" value="<#UDEF4TXT>">
+        <input type=hidden name="UDEF3TXT" value="<#UDEF3TXT>">
+        <input type=hidden name="ISSTRAINERFLG" value="<#ISSTRAINERFLG>">
+        
+        <input type=hidden name="ALTADDRESS3" value="">
+        <input type=hidden name="INTERESTCDLST" value="<#INTERESTCDLST>">
+		<input type=hidden name="SYSTEMDATE2" value="<#SYSTEMDATE2>">
+        
+	  	<input type=button name="nextButton" value="Next >>" onClick="validate(this.form)">
+        
+
+        
+        
+		</div>
+    </td>
+</tr>
+</table>
+
+
+</form>

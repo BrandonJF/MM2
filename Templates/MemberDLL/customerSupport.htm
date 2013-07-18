@@ -1,0 +1,72 @@
+<script language="javascript">
+	function formValidate(){
+		if((validateAll(document.abc))){
+			document.abc.submit();}
+}
+</script>
+<div class="box single">
+<!-- box title-->
+<h2><#MLGLBL TEXT="Contact Us"></h2>
+<div class="formIntro">
+    <p><#MLGLBL TEXT="All fields marked * are required."></p>
+</div>
+<form method="POST" name="abc" Enctype="multipart/form-data" action='../MSASHELPDLL.dll/ActionItemAdd?RESPONSEPAGE=ACTIONITEMPOST.HTM'>
+    <fieldset>
+        <ul>
+            <li>
+                <label>Subject</label>
+                <select name="LISTNAME">
+						  <#RTVLIST>
+                </select>
+            </li>
+            <li>
+                <label>Priority</label>
+                <select name="ACTIONPRIORITY">
+						  <option value=""> </option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+                          <option value="5">5</option>
+	</select>
+            </li>
+            <li>
+                <label>Desired Action</label>
+                <select name="ACTIONTYPE">
+						  <#RTVACTIONITEMREFFLD1ACTIONITEMFLD2ACTIONITEM>
+	</select>
+            </li>
+            <li>
+                <label>Comments & Questions</label>
+                <textarea rows="8" cols="40" name="ACTIONCOMMENTS" ></textarea>
+            </li>
+            <li>
+                <label>&nbsp;</label>
+                <a href="#" id="uploadPhoto">Upload Supporting Documents</a>
+<script>
+
+    $(document).ready(function () {
+            $('a#uploadPhoto').live('click', function (e) {
+				e.preventDefault();
+				var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/utilities.dll/openpage?wrp=adddocument.htm&WMT=../main_template_none.htm';
+				var pagetitle = $(this).attr("title")
+				return parent.uiPopUp(page);
+            });
+		 });
+	
+</script>
+            </li>
+        </ul>
+    </fieldset>
+    <div class="buttons">
+        <input name="Button" onClick="formValidate(document.abc);" type="button" value="Submit">
+    </div>
+  
+<input type="hidden" value="<#ACTIONASSIGNEDDATE>" name="ACTIONASSIGNEDDATE">
+<input type="hidden" value="CV_EUCLID" name="ACTIONASSIGNEDTOCD">
+<input type="hidden" value="<#CUSTOMERCD>" name="UPDATEUSERCD">
+<input type="hidden" name="ACTIONSTT" value="Out-Standing">
+<input type="hidden" name="ACTIONASSIGNEDBYCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+
+  </form>

@@ -1,0 +1,22 @@
+<table class='gutters'>
+<tr>
+  <th colspan='2'><#SUBSCRIPTIONDES></th>
+</tr>
+
+<tr>
+	<td><img width='150px' src='../cvImage.dll/view?ENTITY=PROD&ENTITYCD=<#PRODUCTCD>'></td>
+    <td>
+	  <p><strong>Price:</strong> <#PRICEAMT FORMAT="$0.00"><br>
+	  <strong>Category:</strong> <#MAJORCAT><br>
+	  <strong>Frequency:</strong> <#BILLFREQUENCY><br>
+	  <strong>Company Code:</strong> <#COMPANYCD></p>
+	  <p>
+		<strong>Add to Cart: </strong>  <input type="checkbox" name="PRODUCTSELECTION" value="<#SUBSRIPTIONNAME>" onClick="checkValues(document.order);"/><br />
+	  <strong>Quantity:</strong> <input type="text" size="4" name="PRODUCTQTY" value='0' onChange="checkBoxes(document.order);"/>
+	  </p>
+    </td>
+</tr>
+</table>
+
+
+

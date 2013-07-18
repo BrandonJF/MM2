@@ -1,0 +1,63 @@
+<Job>
+<JobTitle>
+	<#JOBTITLE>
+</JobTitle>
+<ContractNumber>
+	<#CONTRACTNUM>
+</ContractNumber>
+<JobAltCode>
+	<#JOBALTCD>   
+</JobAltCode>
+<JobTitle>
+	<#JOBTITLE>
+</JobTitle>
+<JobCategory>
+	<#JOBMAJORCAT>
+</JobCategory>
+<JobStartDate>
+	<#JOBSTARTONTXT>
+</JobStartDate>
+<JobSalaryMin>
+	<#JOBSALARLYMINAMT>
+</JobSalaryMin>
+<JobSalaryMax>
+	<#JOBSALARYMAXAMT>
+</JobSalaryMax>
+<JobrequiredSkills>
+	<#JOBREQUIREDSKILLSLST>
+</JobrequiredSkills>
+<JobPreferredSkills>
+	<#JOBPREFERREDSKILLSLST>
+</JobPreferredSkills>
+<JobEducationRequired>
+	<#JOBEDUCATIONMINDEGREE>
+</JobEducationRequired>
+<JobYearsExpRequired>
+	<#JOBYEARSMINEXPERIENCEAMT>
+</JobYearsExpRequired>
+<JobContactName>
+	<#JOBCONTACTNAME>
+</JobContactName>
+<JobContactAddress>
+	<#JOBCONTACTADDRESS>
+</JobContactAddress>
+<JobContactEmail>
+	<#JOBCONTACTEMAIL>
+</JobContactEmail>
+<JobContactPhone>
+	<#JOBCONTACTPHONE>
+</JobContactPhone>
+<jobText>
+	<#ADVCOPYTEXT>
+</jobText>
+<JobCity>
+	<#JOBCITY>
+</JobCity>
+<JobState>
+	<#JOBSTATE>
+</JobState>
+<JobCountry>
+	<#JOBCOUNTRY>
+</JobCountry>
+</Job>
+

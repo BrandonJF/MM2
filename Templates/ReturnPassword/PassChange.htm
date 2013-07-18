@@ -1,0 +1,26 @@
+<h2><#MLGLBL TEXT="Password Change Form"></h2>
+
+<div class="formIntro">
+<p>Please enter the temporary password, your current username, and your new password in the form provided below. If you do not know your username you must contact our office for further assistance. </p></div>
+<form name="form" method="post" action="../ReturnPassword.dll/ChangePwd">
+<fieldset><ul>
+	<li>
+		<label for="ONETIMEPWD"><#MLGLBL TEXT="Temporary Password "></label>
+		<input name="ONETIMEPWD" type="text" value="<#ONETIMEPWD>" id="ONETIMEPWD" class='reqField' >
+	</li><li>
+		<label for="WEBUSERID"><#MLGLBL TEXT="Username"></label>
+		<input name="WEBUSERID" type="text" value="" id="WEBUSERID" class='reqField' autocomplete="off">
+	</li><li>
+		<label for="NEWPWD"><#MLGLBL TEXT="NEW Password"></label>
+		<input name="NEWPWD" type="password" value="" id="NEWPWD" class='reqField' autocomplete="off">
+	</li><li>
+		<label for="NEWPWDCONF"><#MLGLBL TEXT="CONFIRM NEW Password:"></label>
+		<input name="NEWPWDCONF" type="password" value="" id="NEWPWDCONF" class='reqField' autocomplete="off">
+	</li>
+	</ul>
+	</fieldset>
+	<div class="buttons">
+		<input type="submit" name="submit" value="Update My Password">
+	</div>	
+	<input type="hidden" name="WRP" value="PassChange_Confirm.htm" />
+	</form>

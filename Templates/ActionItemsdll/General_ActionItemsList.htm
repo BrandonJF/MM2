@@ -1,0 +1,38 @@
+<head>
+<style type="text/css">
+<!--
+.style1 {color: red;
+		 font-weight: bold}
+-->
+</style>
+</head>
+
+<tr 
+
+<#BGCOLOR>>
+   <!-- <td width="75"><a href="../actionitemsdll.dll/Info?listitemnum=<#LISTITEMNUM>&RESPONSEPAGE=General_ActionItemsInfo.htm"><#LISTITEMNUM></a></td> -->
+    <td width="75"><a href="../actionitemsdll.dll/info?listitemnum=<#LISTITEMNUM>&RESPONSEPAGE=General_ActionItemsInfo.htm" ><#LISTITEMNUM></a></td>
+
+    <td width="100"><#LISTNAME>&nbsp;</td>
+    <td width="100"><#ACTIONSTT>&nbsp;</td>
+	<td><#ACTIONDATE>&nbsp;</td>
+	<td><script>
+				if 
+					(<#ACTIONPRIORITY> == 1)
+					{
+					document.write("<span class='red''>High</span>");
+					}
+				if 
+					(<#ACTIONPRIORITY> == 2)
+					{
+					document.write("Medium");
+					}
+				if 
+					(<#ACTIONPRIORITY> == 3)
+					{
+					document.write("Low");
+					}
+					
+				</script>&nbsp;</td>
+	<td><#ACTIONCOMMENTS>&nbsp;</td> 
+</tr>

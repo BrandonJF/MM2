@@ -1,0 +1,29 @@
+<h2>Update Password Form</h2>
+<div class="formIntro">
+<p>To update your password, please fill all forms in the space below.</p>    
+</div>
+<form name="form" method="post" action="../ReturnPassword.dll/ChangePwd">
+<fieldset>
+    <ul>
+        <li>
+            <label for="WEBUSERID">User Name</label>
+            <input type="text" name="WEBUSERID">
+        </li>
+        <li>
+            <label for="ONETIMEPWD">Old Password</label>
+            <input type="password" name="ONETIMEPWD">
+        </li>
+        <li>
+            <label for="OLDPWD">New Password</label>
+            <input type="password" name="OLDPWD">
+        </li>
+        <li>
+            <label for="NEWPWDCONF">New Password (confirm)</label>
+            <input type="password" name="NEWPWDCONF">
+        </li>
+    </ul>
+</fieldset>
+<div class="buttons">
+    <input name="submit" type="submit" value="Send Login Information">
+</div>
+</form>

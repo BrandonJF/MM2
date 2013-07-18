@@ -1,0 +1,9 @@
+<MemberGroup>
+            <EndDate><#ENDDATE></EndDate>
+            <GroupKey><#COMMITTEECD></GroupKey>
+            <GroupName><#NAME></GroupName>
+            <GroupType><#TYPECD></GroupType>
+            <MemberRole><#CPOSITION></MemberRole>
+            <SinceDate><#JOINDATE></SinceDate>
+            <StartDate><#STARTDATE></StartDate>
+</MemberGroup>

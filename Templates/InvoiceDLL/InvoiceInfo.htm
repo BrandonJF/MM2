@@ -1,0 +1,139 @@
+<script>
+function formValidate() {
+       // if ($('#BILLME').attr('checked') == 'checked'){
+		//		document.order.ISSUEBILLFLG.value='Y';
+		//		document.order.RESPONSEPAGE.value='dPaymentconfirm_bm.htm';
+         //       document.order.submit();
+      //  }
+		//else
+		if ( validateAll(document.order )) {
+			document.order.submit();
+			return false;
+		}
+
+	}
+	</script>
+
+	<div align="center">
+		<h2>Invoice Information</h2>
+	</div>
+	<form name="order" method="POST" action="../billpayment.dll/payment">
+
+
+
+<!-- /*======================================================
+=            Invoice Information Table/List            =
+======================================================*/ -->
+
+
+
+
+
+<ul data-role="listview" data-inset="true">
+	<li data-role="list-divider" data-theme="a">Invoice #<#INVOICENUM> </li>
+	<!-- <li><h2>Invoice #</h2><#INVOICENUM></li> -->
+	<!-- <li><h2>Customer Name</h2><#PAYEENAME></li> -->
+	<!-- <li><h2>Customer ID</h2><#PAYEECD></li> -->
+
+	<!-- <li><h2>Order Status</h2><#INVOICESTT></li> -->
+	<li><h2>Invoice Date</h2><#INVOICEDATE></li>
+	<li><h2>Pmt. Due Date</h2><#DUEDATE></li>
+	<li><h2>Invoice Amt.</h2><#TOTALAMT FORMAT='$0.00' </li>
+	<li><h2>Balance Due</h2><#BALANCEDUE FORMAT='$0.00' </li>
+</ul>
+
+
+
+
+
+<!-- /*-----  End of Invoice Information Table/List  ------*/ -->
+
+<#INVOICEITEM>
+
+
+</fieldset>
+
+<ul data-role="listview" data-count-theme="c" data-inset="true">
+	<li data-role="list-divider" data-theme="b"><#MLGLBL TEXT="Totals">  </li>
+	<li>
+		<label for="ITEMTOTAL"><#MLGLBL TEXT="Price"></label>
+		<span class="ui-li-count"><#PRICEAMT FORMAT="$0.00"></span>
+	</li>
+	<li>
+		<label for="DISCOUNTSTOTAL"><#MLGLBL TEXT="Tax"></label>
+		<span class="ui-li-count"><#TAXAMT FORMAT='$0.00'></span>
+	</li>
+	<li>
+		<label for="TAXTOTAL"><#MLGLBL TEXT="Shipping"></label>
+		<span class="ui-li-count">$0.00</span>
+	</li>
+	<li id="invoiceTotals" style="display:none;">
+		<label for="INVOICESTOTAL"><#MLGLBL TEXT="Invoice Total"></label>
+		<span class="ui-li-count"><#TOTALAMT FORMAT="$0.00"></span>
+	</li>
+	<li>
+		<label for="CARTTOTAL"><#MLGLBL TEXT="Amount Paid"></label>
+		<span class="ui-li-count"><#PAIDAMT FORMAT="$0.00"></span>
+	</li>
+	<li class='finalTotal'>
+		<label for="totalAmt"><#MLGLBL TEXT="Balance Due"></label>
+		<span class="ui-li-count"><#BALANCEDUE FORMAT="$0.00"></span>
+	</li>
+</ul>
+
+<div class="buttons selectPayment">
+	<input type="button" value="Add to Cart" onClick='window.location="../msascartdll.dll/ShowCart?INVOICENUM=<#INVOICENUM>"';>
+	<input type="button" data-theme="g" value="Pay Now" onClick='$("#enterPayment").show();$(".selectPayment").hide(); $("#processPayment").show();'>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	if("<#BALANCEDUE>"=="$0.00"){
+		$(".selectPayment").hide();
+	}
+});
+
+</script>
+<div id="enterPayment" class="cartPayment" style='display:none;'>
+	<input type="hidden" name="RESPONSEPAGE" value="receipt.htm">
+	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
+	<div class="buttons selectPayment hidden" id="processPayment">
+		<input type="button" data-theme="g" value="Process Payment" id='paymentButton' onClick="formValidate(); return false;">
+	</div>
+</div>
+<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+<input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+<input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+<input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+<input type="hidden" name="CITY" value="<#CITY>">
+<input type="hidden" name="STATECD" value="<#STATECD>">
+<input type="hidden" name="ZIP" value="<#ZIP>">
+<input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+<input type="hidden" name="au_lid" value="0">
+<input type="hidden" name="sourceid" value="">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RPAYMENTREFNUM" value="<#PAYMENTREFNUM>">
+<input type="hidden" name="RPAYMENTREFEXPDATE" value="<#PAYMENTREFEXPDATE>">
+<input type="hidden" name="INVOICENUM" value="<#INVOICENUM>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N" />
+<input type="hidden" name="SENDEMAIL" value="Y" />
+<input type="hidden" name="EMAILSUBJECT" value="Payment Received for Invoice <#INVOICENUM>"/>
+<input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org"/>
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML" />
+<input type="hidden" name="ISSUEBILLFLG" value="N" />
+</form>
+
+
+<script>
+//hide payment section
+if('<#BALANCEDUE FORMAT=0.00>' == '0.00'){
+	$('.cartPayment').hide();
+	$('#paymentButton').hide();
+}
+$('#enterPayment .billOption').hide();
+isBillMe = false;
+if(!isBillMe){
+	$('.billOption').detach();
+}
+</script>

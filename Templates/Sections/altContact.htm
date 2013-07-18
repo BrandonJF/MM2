@@ -1,0 +1,49 @@
+<fieldset>
+<legend><#MLGLBL TEXT="Alternate Contact Information"></legend>
+<p>
+	<a href='javascript:copyAddress(document.order)'>Click Here</a> to copy the address from your Primary Contact Information.
+</p>
+<ul>
+	<li>
+		<label for="ALTADDRESSTYPE"><#MLGLBL TEXT="Address Type"></label>
+		<select name="ALTADDRESSTYPE">
+			<option value=''>Select One...</option>
+	        <#REFTABLEVALS TABLENAME="ADDRTYPEREF" SCV="ALTADDRESSTYPE" FLD2="ADDRESSTYPE" FLQ="ONWEBFLG=Y" MLG="Y">
+	    </select>   
+	</li>
+	<li>
+		<label for="ALTADDRESS1"><#MLGLBL TEXT="Mailing Address"></label>
+		<input name="ALTADDRESS1" type="text" value="<#ALTADDRESS1>">
+	</li>
+	<li>
+		<label for="ALTADDRESS2"><#MLGLBL TEXT="Mailing Address Cont."></label>
+		<input name="ALTADDRESS2" type="text" value="<#ALTADDRESS2>">
+	</li>
+		<li>
+		<label for="ALTCITY"><#MLGLBL TEXT="City"></label>
+		<input name="ALTCITY" type="text" value="<#ALTCITY>">
+	</li>
+			<li>
+		<label for="ALTSTATE"><#MLGLBL TEXT="State/Province"></label>
+		<select name="ALTSTATE" >
+			<option value='' >Select One...</option>
+			<#RTVSTATEREFSRTFSTATENAMESCVALTSTATE>        
+        </select>
+	</li>
+	<li>
+		<label for="ALTZIP"><#MLGLBL TEXT="Zip/Postal Code"></label>
+		<input name="ALTZIP" type="text" value="<#ALTZIP>">
+	</li>
+					<li>
+		<label for="ALTCOUNTRY"><#MLGLBL TEXT="Country"></label>
+		<select name="ALTCOUNTRY">
+			<option value=''>Select One...</option>
+			<#RTVCOUNTRYREFFLD1COUNTRYNAMEFLD2COUNTRYNAMESRTFCOUNTRYNAMESCVALTCOUNTRY>          
+        </select>
+	</li>
+	<li>
+		<label for="ALTEMAIL"><#MLGLBL TEXT="Email"></label>
+		<input name="ALTEMAIL" type="text" value="<#ALTEMAIL>">
+	</li>				
+</ul>
+</fieldset>

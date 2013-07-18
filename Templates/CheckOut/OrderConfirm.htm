@@ -1,0 +1,65 @@
+<script>
+ isInvoices= false;
+</script>
+
+
+<h2>Order Confirmed</h2>
+<p>Thank you! Your order is complete, and you can now track your order with the order number. You will receive any products you have ordered in 5-7 business days.</p>
+<ul  data-role="listview" data-count-theme="c" data-inset="true" class="profile">
+ <li><h2>Order Number</h2>
+ <p><#INVOICENUM></p></li>
+ <li><h2>Payment Number:</h2>
+ <p><#PAYMENTNUM></p></li>
+ <li><h2>Bill To Address:</h2>
+ <p><#ADDRESS1><br />
+  <#ADDRESS2 RIGHTLABEL="<BR />">
+  <#CITY>, <#STATECD>, <#ZIP></p></li>
+ <li><h2>Ship To Address:</h2>
+ <p><#SHIPADDRESS1><br />
+  <#SHIPADDRESS2 RIGHTLABEL="<BR />">
+  <#SHIPCITY>, <#SHIPSTATECD>, <#SHIPZIP></p></li>
+ <p class="clear"></p>
+</ul>
+
+
+
+<br />
+<div id="invoiceSection" style="display:none;">
+    <h3>Other Invoices</h3>
+    <table class="gutters">
+    <tr>
+        <th width="20%">Invoice Number</th>
+        <th width="40%">Member Name</th>
+        <th width="20%">Invoice Total</th>
+    </tr>
+    <#INVOICELIST>
+    </table>
+    <br />
+</div>
+
+<ul class="invoice" data-role="listview" data-count-theme="c" data-inset="true">
+  <li data-role="list-divider" data-theme="b"><#MLGLBL TEXT="Totals">  </li>
+ <li><label>Cart Total:</label>
+ <span class="ui-li-count"><#PRICEAMT ALIAS="I" FORMAT='$0.00'></span></li>
+ <li><label>Shipping:</label>
+ <span class="ui-li-count"><#FREIGHTAMT FORMAT='$0.00' EMPTY="$0.00" ALIAS="I"></span></li>
+ <li><label>Tax:</label>
+ <span class="ui-li-count"><#TAXAMT FORMAT='$0.00'></span></li>
+ <li><label>Other Invoices:</label>
+ <span class="ui-li-count"><#ADDINVTOTALAMT></span></li>
+ <li><label>Total Amount Paid:</label>
+ <span class="ui-li-count"><#PAIDAMT FORMAT="$0.00"></span></li>
+ <li><label>Balance Due:</label>
+ <span class="ui-li-count"><#BALANCEDUE FORMAT='$0.00'></span></li>
+ <p class="clear"></p>
+</ul>
+<p>
+<strong>Thank you for shopping with us, please come again!</strong><br />
+</p>
+
+
+<script>
+if(isInvoices){
+		$("#invoiceSection").show();
+	}
+</script>

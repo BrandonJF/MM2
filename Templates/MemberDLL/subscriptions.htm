@@ -1,0 +1,53 @@
+<script>
+	function formValidate(){ //form validation
+		var subItems = ''; //populate SUBITEMS
+		$(".subItem").each(function(){
+			if(this.checked == true){
+				if(subItems != ''){
+					subItems += ",";
+				}
+				subItems  += this.id;
+			}
+		});
+		if(subItems == ''){
+			alert("Please select at least one subscription to purchase.");
+			return false;
+		}else{
+			document.order.SUBITEMS.value = subItems;
+			if(validateAll(document.order)){
+				document.order.submit();
+			}
+		}
+	}
+	function updateSubTotals(){
+		var totalAmt = 0.00;
+		$(".subItem").each(function(){
+			if(this.checked == true){
+				totalAmt += parseFloat(this.value);
+			}
+		});
+		$('#subsTotal').html(parseFloat(totalAmt).toFixed(2));
+	}
+</script>
+<h2>Purchase Subscriptions</h2>
+<form name="order" method="POST" action="../orderdll.dll/orderp">
+
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_subItems_Header.htm" WBP="INCLUDE_subItems_list2.htm" PARAMS="UDEF1TXT=subscription,ONWEBFLG=Y">
+	<#SECTION NAME="subBasicInfo.htm">
+	<#SECTION NAME="subPrimContact.htm">
+    <input type="hidden" name="RESPONSEPAGE" value="orderConfirm.htm">
+	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="CUSTOMERCD">
+<div class="buttons">
+	<input name="Button" type="button" onClick="formValidate()" value="Submit">
+</div>
+	<input type="hidden" name="SUBITEMS" value="">
+	<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+	
+	<input type="hidden" name="SENDEMAIL" value="Y">
+	<input type="hidden" name="EMAILREPLYFORM" value="orderConfirm.htm">
+	<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+	<input type="hidden" name="EMAILSUBJECT" value="Thank you for Purchasing Subscriptions">
+	<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+	<input type="hidden" name="PROCESSONLINECREDIT" value="N"> 
+</form>
+

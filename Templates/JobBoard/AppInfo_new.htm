@@ -1,0 +1,98 @@
+<script language = "javascript">
+function formValidate(){
+	if(validateAll(document.appJob,false)){
+		document.appJob.action = "ApplyJob";
+		document.appJob.submit();			  
+	} 		  			
+} 
+</script>
+<h1>Apply for a Job</h1>
+<ul class="nobullet">
+			  <li> <#MLGLBL TEXT="All fields marked"> <span class="spanReq">*</span> <#MLGLBL TEXT="are required">.</li>
+			  <li><#MLGLBL TEXT="Please enter all dates in the format"> mm/dd/yyyy</li>
+  </ul>
+<form method="POST" name="appJob" enctype="multipart/form-data">
+<table class="standard">
+<tr>
+	<td>Job Title</td>
+	<td><#JOBTITLE_AC></td>
+</tr>
+<tr>
+		<td>First Date Available</td>
+		<td><input name="JOBSTARTDATE" type="text" id="JOBSTARTDATE" value="<#JOBSTARTDATE>" size="12" onkeypress="autoformat(this, event, '##/##/####')" onpaste='return false'></td>
+	</tr>
+    <tr>
+      <td>        
+        Minimum Salary      </td>
+      <td><input name="MINSALARLYAMT" id="MINSALARLYAMT" type="text" value="<#MINSALARLYAMT FORMAT=0.00>" size="12"></td>
+    </tr>
+    <tr>
+      <td>        
+        Highest Degree      </td>
+      <td><select size="1" name="EDUCATIONDEGREE">
+		<option value=''>Select One</option>
+		<#RTVEDUCATIONLEVELREFFLTTYPECDFLVJOB>
+        </select></td>
+    </tr>
+    <tr>
+      <td>GPA</td>
+      <td><input name="EDUCATIONGPAAMT" type="text" value="<#EDUCATIONGPAAMT FORMAT=0.00>" size="12" /></td>
+    </tr>
+    <tr>
+      <td>        
+        Resume<span class="spanReq">*</span></td>
+      <td></td>
+    </tr>
+    <tr align="left">
+      <td colspan="2"><textarea name="RESUMETEXT" id="RESUMETEXT" cols="60" rows="20"><#RESUMETEXT></textarea></td>
+    </tr>
+	<tr>
+		<td>Attach Resume</td>
+		<td><input type="file" name="resumefile" id="resumefile" size="43" /></td>
+	</tr>
+
+<#INCLUDE DLL="memberdll.dll" ACT="info" WHP="none" WRP="include_preferredContact.htm">
+<tr>
+      <td colspan="2">
+        <div align="center">
+          <input type="button" value="Submit" name="SUBMIT" onClick="formValidate()">      
+          <input type="reset" value="Reset" name="RESET">      
+        </div></td>
+    </tr>
+</table>
+
+
+        
+          <input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">  
+    <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+    <input type="hidden" name="RESPONSEPAGE" value="AppInfo_Confirm.htm">
+    <input type="hidden" name="RESUMETYPE" value="TEXT">
+    <input type="hidden" name="CHECKDUPLICATE" value="Y">
+    <input type="hidden" name="PROPERCASEOFF" value="Y">
+    <input type="hidden" name="JOBREQUIREDSKILLSLST" value="">
+    <input type="hidden" name="OWNERNAME" value="<#LASTNAME>, <#FIRSTNAME>">
+    <input type="hidden" name="DOCSUBJECT" value="Resume">
+    <input type="hidden" name="OWNERTYPECD" value="I">
+    <input type="hidden" name="DOCTYPE" value="Resume">
+    <input type="hidden" name="TITLETXT" value="Resume">
+    <input type="hidden" name="FILETYPE" value="O">
+    <input type="hidden" name="DOCDES" value="resume">
+    <input type="hidden" name="ADDDOC" id="ADDDOC" value="Y">
+	
+	<!-- cust info -->
+	<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+   <input type="hidden" name="MIDDLEINITIAL" value="<#MIDDLEINITIAL>">
+   <input type="hidden" name="LASTNAME" value="<#LASTNAME>">
+   <input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+   <input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+   <input type="hidden" name="CITY" value="<#CITY>">
+   <input type="hidden" name="STATECD" value="<#STATECD>">
+   <input type="hidden" name="ZIP" value="<#ZIP>">
+   <input type="hidden" name="COUNTRY" value="<#COUNTRY>">
+   <input type="hidden" name="FAXPHONE" value="<#FAXPHONE>">
+   <input type="hidden" name="CONTACTPHONE" value="<#HOMEPHONE>">
+   <input type="hidden" name="EMAIL" value="<#EMAIL>">
+    	</form>
+      
+
+</html>

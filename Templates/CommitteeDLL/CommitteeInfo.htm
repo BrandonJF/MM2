@@ -1,0 +1,14 @@
+<h2><#NAME></h2>
+
+<ul data-role="listview" data-inset="true">
+      <li data-role="list-divider" data-theme="a">Committee Profile</li>
+      <li><h2>Chairperson:</h2><#CHAIRPERSON></li>
+      <li><h2>Purpose</h2><p class="Description"><#PURPOSE></p></li>
+</ul>
+
+<div data-role="collapsible" data-collapsed="true" data-theme="a" data-content-theme="d">
+	 <h2><#INCLUDE DLL="committeedll.dll" ACT="IndFullList" WHP="IndCommittee.htm" WBP=none PARAMS="IC.COMMITTEECD={COMMITTEECD},IC.COMMITTEESTATUSSTT=ACTIVE,SORT=CPOSITION"></h2>
+<ul data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Filter Members..." >
+<#INCLUDE DLL="committeedll.dll" ACT="IndFullList" WHP=none WBP="indcommitteelist.htm" PARAMS="IC.COMMITTEECD={COMMITTEECD},IC.COMMITTEESTATUSSTT=ACTIVE,SORT=CPOSITION">
+</ul>
+</div>

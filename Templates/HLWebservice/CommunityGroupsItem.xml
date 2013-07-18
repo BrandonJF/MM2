@@ -1,0 +1,5 @@
+<GroupInfo>
+          <GroupKey><#COMMITTEECD></GroupKey>
+          <GroupName><#NAME></GroupName>
+          <GroupType><#TYPECD></GroupType>
+</GroupInfo>

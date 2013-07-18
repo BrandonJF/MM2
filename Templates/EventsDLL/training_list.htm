@@ -1,0 +1,35 @@
+<tr <#BGCOLOR>>
+	<td>
+	<script>
+		if("<#REGONLINEFLG>" == "Y"){
+			document.write("<a href=''><#SESSIONALTCD></a>");
+		}else{
+			document.write("<#SESSIONALTCD>");
+		}
+	</script>
+	</td>
+	
+	<td>
+		<table>
+		<tr>
+			<th>Course Date:</th>
+			<td><#SESSIONRANGE></td>
+		</tr>
+		<tr>
+			<th>Course Option:</th>
+			<td><#STATUSSTT></td>
+		</tr>
+		<tr>
+			<th>Course Instructor:</th>
+			<td><#CONTACTNAME></td>
+		</tr>
+		<tr>
+			<th>Course Location:</th>
+			<td><#LOCATIONNAME><BR><#LOCATIONADDRESS1><BR><#LOCATIONCITY>, <#LOCATIONSTATECD>, <#LOCATIONZIP></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<script>
+	minorcat = "<#MINORCAT>";
+</script>

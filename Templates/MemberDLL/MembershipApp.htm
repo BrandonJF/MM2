@@ -1,0 +1,168 @@
+<script>
+	function setvalues(){};
+    var isOrgapp = false;
+
+
+function GetZipInfo(zipValue){
+	var updStr='../memberdll.dll/ZipInfo?ZIP='+zipValue+'&WRP=zipInfo.htm&WMT=none&WNR=none';
+	$.ajax({url:updStr, type:'GET',
+		success:function(response){
+			//alert(response);
+			if (response != '')
+			{
+				var ZipList = new Array();
+				ZipList =  response.split(',');
+				ZipList[1] = ZipList[1].substr(0,ZipList[1].length-2);
+
+
+
+				document.order.CHAPTERID.value  = ZipList[0];
+				//alert(document.order.CHAPTERID.value);
+				for (var i = 0; i < document.order.STATECD.length; i++)
+				{
+					if (document.order.STATECD.options[i].value == ZipList[1])
+  					{
+						document.order.STATECD.options[i].selected=true;
+						break;
+    					}
+				}
+			}
+			else
+			{
+				alert('The Zip Code that you entered is not valid. Please try again!');
+				document.order.ZIP.value = '';
+		        	document.order.ZIP.select();
+        			document.order.ZIP.focus();
+			}
+		}
+	});
+}
+
+
+
+</script>
+
+<h2><#MLGLBL TEXT="Join"></h2>
+
+<div style="text-align:center; padding-bottom:15px; font-size: 13px;"><strong>
+					This form is for New Members					</strong></div>
+
+<form method="POST" name="order" action='updateInfo' id="user_profile">
+
+
+	<#SECTION name="basicInfo.htm" >
+	<#SECTION name="primContact.htm">
+
+	<!--<zzzSECTION name="altContact.htm">
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_subItems_Header.htm" WBP="INCLUDE_subItems_list.htm" PARAMS="UDEF1TXT=subscription,ONWEBFLG=Y">
+	<zzINCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_donItems_Header.htm" WBP="INCLUDE_donItems_list.htm" PARAMS="UDEF1TXT=donation,ONWEBFLG=Y">-->
+
+
+
+
+	<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_membership_Header.htm" WBP="INCLUDE_membership_list.htm" PARAMS="UDEF1TXT=membership,ONWEBFLG=Y">
+	<div class='totalContainer'>
+		<fieldset>
+			<legend><#MLGLBL TEXT="Totals"></legend>
+			<div class='cartTotals'>
+				<ul>
+					<li class='section' id='balance'>
+						<label for="balanceTotal"><#MLGLBL TEXT="Balance Due:"></label>
+						$<span id='balanceTotal'>0.00</span>
+					</li>
+					<li class='section' id='membership'>
+						<label for="membershipTotal"><#MLGLBL TEXT="Membership Dues:"></label>
+						$<span id='membershipTotal'>0.00</span>
+					</li>
+					<!--<li class='section' id='subscription'>
+						<label for="subsTotal"><#MLGLBL TEXT="Optional Subscriptions:"></label>
+						$<span id='subsTotal'>0.00</span>
+					</li>
+					<li class='section' id='donation'>
+						<label for="donsTotal"><#MLGLBL TEXT="Optional Donations:"></label>
+						$<span id='donsTotal'>0.00</span>
+					</li>-->
+					<li class='section' id='taxes'>
+						<label for="taxTotal"><#MLGLBL TEXT="Taxes:"></label>
+						$<span id='taxTotal'>0.00</span>
+					</li>
+					<li class='finalTotal'>
+						<label for="totalAmt"><#MLGLBL TEXT="Total Payment:"></label>
+						$<span id='totalAmt'>0.00</span>
+					</li>
+				</ul>
+			</div>
+		</fieldset>
+
+		<div class="buttons" id="selectPayment">
+			<input type="button" value="Add to Cart" onClick='$("#cartPayment").remove();membershipApp_addToCart(document.order)';>
+			<input type="button" data-theme="g" value="Pay Now" onClick='$("#cartPayment").show();$("#selectPayment").hide();'>
+		</div>
+
+		<div id="cartPayment" class="cartPayment" style='display:none;'>
+             <input type="hidden" name="RESPONSEPAGE" value="membershipapp_confirm.htm">
+			<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="SECTIONS=membership-subscription-donation-taxes">
+			<div class="buttons">
+				<input type="button" value="Submit Payment" onClick="membershipApp_payNow(document.order)">
+			</div>
+		</div>
+        <div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+	</div>
+
+
+	<input type="hidden" name="AUTOCUSTOMERCD" value="Y">
+	<input type="hidden" name="WMT" value="../main_template_css.htm" />
+	<!--<input type="hidden" name="SUBITEMS" id="SUBITEMS" value="">-->
+	<input type="hidden" name="CHECKWEBUSERID" value="Y" />
+	<input type="hidden" name="CHECKUSERDUP" value="Y" />
+   <input type="hidden" name="DUPCHECKLIST" value="EMAIL" />
+	<input type="hidden" name="PROCESSONLINECREDIT" value="N" >
+	<input type="hidden" name="SENDEMAIL" id="SENDEMAIL" value="Y" />
+	<input type='Hidden' name='ISSUEBILLFLG' value='N'>
+	<input type="hidden" name="CHAPTERID" value="">
+	<input type="hidden" name="CUSTOMERTYPE" value="">
+	<!-- <input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>" id="CUSTOMERTYPE">-->
+	<input type="hidden" name="CUSTOMERCD" value="-1">
+	<!--<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">-->
+	<input type="hidden" name="ORGCD" value="">
+	<!--<input type="hidden" name="ORGCD" value="<#ORGCD>" />-->
+	<input type="hidden" name="ADDRESSTYPE" value="Work">
+	<input type="hidden" name="INFOSTATUSSTT" value="Valid">
+	<input type="hidden" name="ISMEMBERFLG" value="N">
+	<input type="hidden" name="STATUSSTT" value="Active">
+	<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+	<input type="hidden" name="JOINDATE" value ="">
+	<input type="hidden" name="TERMINATIONDATE" value ="">
+	<input type="hidden" name="CONTACTSTT" value="Any">
+
+	<input type="hidden" name="EMAILFROMADDRESS" value="NCURA">
+	<input type="hidden" name="EMAILREPLYFORM" value="WelcomeEmail.txt">
+	<input type="hidden" name="EMAILSUBJECT" value="Welcome to NCURA">
+	<input type="hidden" name="EMAILRESPONSEFORMAT" value="TEXT">
+
+</form>
+
+<script>
+    $('input.subItem').click(function(){
+	var customerType = $('#CUSTOMERTYPE').get();
+	if($(':checked')){ //grabs the id of checked subscription and passes value to ORGTYPE
+		$(customerType).val($(':checked').attr("id"));
+	}
+});
+	updateTotals();
+        $('#submit').hide();
+        $("#form .buttons").append('<img src="assets/img/loading.gif" alt="Loading..." id="loading" />');
+        /*$.post("sendmail.php",
+                        {emailFrom: nameVal, subject: subjectVal, message: messageVal},
+                        function(data){
+                                jQuery("#form").slideUp("normal", function() {
+                                        $("#form").before('<h1>Success</h1><p>Your email was sent.</p>');
+                                });
+                        }
+        );*/
+
+
+
+</script>

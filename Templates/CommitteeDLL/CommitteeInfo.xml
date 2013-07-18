@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Header></SOAP-ENV:Header>
+<SOAP-ENV:Body>
+<Response>
+<CommitteeInformation COMMITTEECD="<#COMMITTEECD>">
+<committee><#NAME></committee>
+<purpose><#PURPOSE></purpose>
+<chairperson><#CHAIRPERSON></chairperson>
+<employeecontact><#EMPLOYEECONTACTNAME></employeecontact>
+<startdate><#STARTDATE></startdate>
+<enddate><#ENDDATE></enddate>
+<members>
+<#INCLUDE DLL="committeedll.dll" ACT="IndFullList" WBP="indcommitteelist.xml" PARAMS="IC.COMMITTEECD={COMMITTEECD},IC.COMMITTEESTATUSSTT=ACTIVE,SORT=LASTNAME">
+</members>
+</CommitteeInformation>
+</Response>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+

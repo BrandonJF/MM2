@@ -1,0 +1,120 @@
+<script language = "javascript">
+
+function formValidate() {
+
+		var fObj = document.order;
+
+		var oRequired= new Object();
+		oRequired.FIRSTNAME = ['S', '', '', '', "\nThe First Name field only accepts letters.\n\nPlease re-enter."];
+		oRequired.LASTNAME = ['S', '', '', '', "\nThe Last Name field only accepts letters.\n\nPlease re-enter."];
+		oRequired.ADDRESS1 = ['', '', '', '', "\nThe Address field is blank.\n\nPlease enter your Address."];
+		oRequired.CITY = ['', '', '', '', "\nThe City field is blank.\n\nPlease enter your City."];
+		oRequired.STATECD = ['', '', '', '', "\nYou must select your State from the dropdown box."];
+		oRequired.ZIP = ['N', '', '', '', "\nThe Zip field accepts only numbers. \n\nPlease re-enter your Zip."];
+		oRequired.EMAIL = ['E', '', '', '', "\nThe E-MAIL field must contain a \"@\" and a \".\" \n\nPlease re-enter your E-mail address."];
+		oRequired.EDUCATIONDEGREE = ['', '', '', '', "\nThe Education Degree field is blank.\n\nPlease select your highest degree earned."];
+		
+		if  (isFormValidated(fObj, oRequired, false))
+		{
+			   	fObj.action = "../../cgi-bin/JobBoard.dll/ApplyJob";
+		      	fObj.submit();			  
+		} 		  			
+}
+$(function() {
+		$( "#JobStartDate" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+ 
+	   <h2>Update Resume/Job Application </h2>
+	   <form method="get" name="order" action="../../cgi-bin/JobBoard.dll/ApplyJob" onSubmit="" enctype="multipart/form-data">
+	   <fieldset>
+		<legend><#JOBTITLE_AC> Application</legend>
+		<ul>
+				<li><label for="FIRSTNAME" class="required">First Name</label>
+   <input  type="text" name="FIRSTNAME" value="<#FIRSTNAME>" id="FirstName" class='reqField'/>
+  </li>
+  <li><label for="MIDDLEINIT">Middle Name</label>
+   <input  type="text" name="MIDDLEINIT" value="<#MIDDLEINITIAL>"/>
+  </li>
+  <li><label for="LASTNAME" class="required">Last Name</label>
+   <input  type="text" name="LASTNAME" value="<#LASTNAME>" id="LastName" class='reqField'/>
+  </li>
+  <li><label for="ADDRESS1" class="required">Address</label>
+   <input  type="text" name="ADDRESS1" value="<#ADDRESS1>" id="Address" class='reqField'/>
+  </li>
+   <li><label for="ADDRESS2">Suite/Apt</label>
+   <input  type="text" name="ADDRESS2" value="<#ADDRESS2>"/>
+  </li>
+   <li><label for="CITY" class="required">City</label>
+   <input  type="text" name="CITY" value="<#CITY>" id="City" class='reqField'/>
+  </li>
+   <li><label for="STATECD" class="required">State</label>
+   <select size="1" name="STATECD">
+  <option><#RTVSTATEREFSCVSTATECD></option>
+</select>
+  </li>
+   <li><label for="ZIP" class="required">Zip</label>
+   <input  type="text" name="ZIP" value="<#ZIP>" id="Zip" class='reqField'/>
+  </li>
+   <li><label for="COUNTRY" class="required">Country</label>
+   <select size="1" name="COUNTRY" id="Country" class='reqField' onChange="checkCountryMask(this.value);">
+        <option value=''>Select One...</option>
+        <#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+<script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+            
+		</script>
+  </li>
+   <li><label for="CONTACTPHONE" class="required">Phone</label>
+   <input  type="text" name="CONTACTPHONE" value="<#WORKPHONE>" id="Phone" class='reqField' />
+  </li>
+   <li><label for="FAXPHONE">Fax</label>
+   <input  type="text" name="FAXPHONE" value="<#FAXPHONE>" id="Fax"/>
+  </li>
+   <li><label for="EMAIL" class="required">Email</label>
+   <input  type="text" name="EMAIL" value="<#EMAIL>" id="Email" class='reqField'/>
+  </li>
+   <li><label for="JOBSTARTDATE" class="required">Availability (MM/DD/YYYY)</label>
+   <input name="JOBSTARTDATE" type="text" id="JobStartDate" value="<#JOBSTARTDATE>" class='reqField'>
+  </li>
+   <li><label for="MINSALARLYAMT">Min. Salary</label>
+   <input  type="text" name="MINSALARLYAMT" value="<#MINSALARLYAMT FORMAT=0.00>"/>
+  </li>
+   <li><label for="JOBSTARTDATE" class="required">Highest Degree</label>
+   <select size="1" name="EDUCATIONDEGREE" id="HigestDegree" class='reqField'>
+  <option><#RTVEDUCATIONLEVELREFSCVEDUCATIONDEGREEFLTTYPECDFLVEDUC></option>
+</select>
+  </li>
+    <li><label for="EDUCATIONGPAAMT">GPA</label>
+   <input  type="text" name="EDUCATIONGPAAMT" value="<#EDUCATIONGPAAMT FORMAT=0.00>"/>
+  </li>
+	<li><label for="RESUMETEXT" class="required">Resume Text</label>
+   <textarea name="RESUMETEXT" cols="60" rows="20"><#RESUMETEXT></textarea>
+    </li>
+    <li id="resumeView">
+        <label>Attached Resume</label> <a href="../documentdll.dll/view?DOCUMENTNUM=<#RESUME_DOCNUM>">Preview Document</a>
+    </li>
+		</ul>
+	   </fieldset>
+<div class="buttons">
+		<input type="submit" value="Submit">       
+          <input type="reset" value="Reset" name="RESET"> 
+</div>
+    <input type="hidden" name="JOBAPPNUM" value="<#JOBAPPNUM>">
+    <input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="WRP" value="AppInfo_Update_Confirm.htm">
+    <input type="hidden" name="RESUMETYPE" value="TEXT">
+</form>
+       <script>
+        if('<#RESUME_DOCNUM>'==''){
+                $('#resumeView').hide();
+            }else{
+                $('#resumeView').show();
+            }
+       </script>

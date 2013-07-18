@@ -1,0 +1,18 @@
+<tr>
+    <td>
+        <input type="radio" name="<#FUNCTIONCD>" title="<#DISPLAYPRICE FORMAT=0.00>" alt="<#STARTDATE FORMAT=DDD>|<#STARTTMS>" id="<#TITLE>" size="2" value="1" class="collectThisFunc" onclick="checkFunctionTime(document.event,'<#STARTDATE FORMAT=DDD>','<#STARTTMS>','<#FUNCTIONCD>');updatePrice();">
+    </td>
+    <td>
+     <span id="overMsgStar_<#FUNCTIONCD>" class="warning" style="display:none;">*</span> <#TITLE> 
+     <span id="overMsg_<#FUNCTIONCD>" class="warning" style="display:none;"><br><#OVERLIMITMSG></span>
+     <p style="margin-top:0;" class="pFuncComm" id="<#FUNCTIONCD>_comments"><#FCOMMENTDESC> <#FCOMMENT></p>
+    </td>
+    <td class="price">
+        <#DISPLAYPRICE>
+    </td>
+</tr>
+<script>
+    isFunctions = true;
+    if ('<#FUNCTIONSTATUSCD>'=='1') {$('#overMsg_<#FUNCTIONCD>').show();$('#overMsgStar_<#FUNCTIONCD>').show();$('#<#FUNCTIONCD>').hide();$('#<#FUNCTIONCD>_comments').hide();}
+    if ('<#FCOMMENTDESC>' == ''){$('#<#FUNCTIONCD>_comments').hide()}
+</script>

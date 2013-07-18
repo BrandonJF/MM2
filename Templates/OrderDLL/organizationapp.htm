@@ -1,0 +1,40 @@
+<h2><#MLGLBL TEXT="Organization Membership Application Confirmation"></h2>
+ <p>Thank you for applying. Please check your email for a confirmation letter. </p>
+
+
+<h4><#MLGLBL TEXT="Items Ordered"></h4>
+<table class='gutters'>
+	<tr>
+		<th>Item</th>
+		<th>Item Price</th>
+		<th>Quantity</th>
+		<th>Subtotal</th>
+	</tr>
+	<#INVOICEITEMS>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="text">Shipping &amp; Handling: </td>
+		<td class="price"><#SHIPTOTAL FORMAT="$0.00"></td>
+	</tr>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="text">Tax: </td>
+		<td class="price"><#TAXTOTAL FORMAT="$0.00"></td>
+	</tr>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td class="text">Final Total: </td>
+		<td class="price"><#TOTALAMT FORMAT="$0.00"></td>  
+	</tr>
+</table>
+
+<#SECTION NAME="ORG_basicInfo_confirm.htm" >
+<div class="clear"></div>
+<#SECTION NAME="ORG_contactInfo_confirm.htm" >
+
+
+   
+ 

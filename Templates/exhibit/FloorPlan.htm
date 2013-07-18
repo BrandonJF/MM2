@@ -1,0 +1,327 @@
+<style type="text/css">
+div#tipDiv {
+  position:absolute; visibility:hidden; left:0; top:0; z-index:10000;
+  background-color:#f5f5f5; border:1px solid #dddddd;
+  width:220px; padding:4px;
+font-size:11px; line-height:1.2;
+}
+
+span.tip { background-color:#eef0f4 }
+.busy {
+	font-weight:none;
+	font-size:10px;
+	color:#FFFFFF;
+	font-style:italic;
+	background-color: #353F3F;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+.available {
+	font-family:Arial;
+	font-weight:none;
+	color:#000000;
+	/*padding-top:45%;*/
+	background-color: #FFAD42;
+	font-size: 10px;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+	
+}
+.inprocess {
+	font-weight:bolder;
+	color:#000000;
+	/*padding-top:45%;*/
+	background-color:#FFFF33;
+	font-size: 10px;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+	
+}
+.onhold {
+	font-weight:bolder;
+	color:#000000;
+	/*padding-top:45%;*/
+	background-color: #FF0010;
+	font-size: 10px;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+.myonhold {
+	font-weight:bolder;
+	color:green;
+	/*padding-top:45%;*/
+	background-color: green;
+	font-size: 10px;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+
+
+
+#infoDiv {
+
+}		
+/* styles for infoDiv content */	
+info	{ font-family: verdana, arial, helvetica, sans-serif;
+	font-size:12px; }
+hot { color:red; }	
+
+
+table.exhibitInstructions{
+	margin:5px;
+	background:#EEEEEE;
+	padding:5px;
+}
+
+table.exhibitInstructions th{
+	font-size:1.4em;
+	font-wieght:bold;
+	padding:8px;
+	background:#CCCCCC;
+}
+
+table.exhibitInstructions td{
+	padding:5px;
+}
+
+</style>
+
+<script src='../../js/exhibits/dw_tooltip.js'></script>
+<script src='../../js/exhibits/dw_write.js'></script>
+<script src='../../js/exhibits/dw_event.js'></script>
+<script src='../../js/exhibits/dw_viewPort.js'></script>
+
+<script type="text/javascript">
+
+var busyMsg = '<div class="error">This booth has already been reserved by<br></div>';
+var openMsg = '<form name="form" method="post" action="../exhibit.dll/setbooth">'+'<div class="buttons"><input type="button" value="Reset" onClick="window.location = window.location"> &nbsp; <input type="button" value="Continue" onclick="RegisterForBooth()">'+'<br>'+'<input type="hidden" name="BOOTHNUMLIST" value=????> </div></form>';
+var availableMsg = 'Available';
+var boothlist = '';
+var boothinfolist = '';
+var boothqty = 0; //current number of selected booths
+var boothMaxQty = 10; //maxiumum booths a user can select at one time
+
+<#ARRAYS>
+
+function doTooltip(e, objID) 
+{
+     
+  	if ( typeof Tooltip == "undefined" || !Tooltip.ready ) return;
+	if (eval('booth_'+objID+'[0]')==0 )
+	{
+		  var companyname=eval('booth_'+objID+'[2]');
+		  var boothnum=eval('booth_'+objID+'[1]');
+		  Tooltip.show(e, 'Booth #: '+boothnum+'<br>Company Name: '+companyname);
+	}
+	if (eval('booth_'+objID+'[0]')==1 )
+	{
+		  Tooltip.show(e, availableMsg);
+	}
+	if (eval('booth_'+objID+'[0]')==2 )
+	{
+		  Tooltip.show(e, 'Unavailable');
+	}
+	if (eval('booth_'+objID+'[0]')==3 )
+	{
+		  Tooltip.show(e, availableMsg);
+	}
+
+}
+
+function hideTip() {
+  if ( typeof Tooltip == "undefined" || !Tooltip.ready ) return;
+  Tooltip.hide();
+}
+
+
+
+function showInfo(objID) {
+    var companyname=eval('booth_'+objID+'[2]');
+	var price=eval('booth_'+objID+'[3]');
+	var bootnum=eval('booth_'+objID+'[1]');
+	var parentbooth=eval('booth_'+objID+'[4]');
+	if (parentbooth=='') 
+	{
+			parentbooth=bootnum;
+            
+	};	
+	
+	if (eval('booth_'+objID+'[0]')==0 )
+	{
+//		var cntnt = '<div class="info">'+'Booth#:'+bootnum+'<br>'+busyMsg+companyname+'<br>'+'</div>';
+		alert("Booth#:"+bootnum+" "+"\nThis booth has already been reserved by \n"+companyname);
+	}
+	else if ((eval('booth_'+objID+'[0]')==1 ) || (eval('booth_'+objID+'[0]')==3 ))
+	{
+		
+        if (boothqty < boothMaxQty)
+		{		 
+			
+			var divList = document.getElementsByTagName("div");
+			for(i=0;i<divList.length;i++)
+			{
+                
+				//MUST exclude all divs on page that are not "booth_" divs
+				if ((divList[i].id != 'infoDiv') && (divList[i].id != 'content') && (divList[i].id != 'navNM') && (divList[i].id != 'navM') && (divList[i].id != 'tipDiv') && (divList[i].id != '') && (divList[i].id != 'loginDiv') && (divList[i].id != 'myAccountDiv') && (divList[i].id != 'menuDiv')&& (divList[i].id != 'container')  && (divList[i].id != 'header')  && (divList[i].id != 'cartHeaderSummary')  && (divList[i].id != 'container1') && (divList[i].id != 'container2') && (divList[i].id != 'container3') && (divList[i].id != 'footer')  && (divList[i].id != 'eventDiv'))
+				
+				{			
+					var divID=divList[i].id;
+					if ((eval('booth_'+divID+'[4]')==parentbooth) || (eval('booth_'+divID+'[1]')==parentbooth))
+					{
+						if (boothlist.indexOf(divID) ==-1 )
+						{		
+							document.getElementById(divID).className='inprocess';
+							boothinfolist = boothinfolist + '<tr>'+'<td>#'+eval('booth_'+divID+'[1]')+'</td><td>'+eval('booth_'+divID+'[5]')+'</td>'; 
+							if (boothlist=='')
+							{
+								boothlist = divID;
+								boothqty = boothqty+1;		
+							}
+							else 
+							{
+								boothlist = boothlist+','+divID;
+								boothqty = boothqty+1;		
+							}
+					    } 		
+					}	
+				}	
+			}	
+//			var Msg=openMsg.replace("????",boothlist);
+//			var cntnt = Msg+'<b>Selected Booths</b>'+'<div class="info">'+boothinfolist+'</div>';	
+		}else{
+			alert("You may only select "+boothMaxQty+" booths.");
+		}
+    }
+	
+	if (eval('booth_'+objID+'[0]')==2 )
+	{
+		alert('Booth #: '+bootnum+' is not available for purchase. \nPlease select another booth.');
+//		var cntnt = '<div class="info">'+'Booth#:'+bootnum+' is not available for purchase. Please select another booth.<br>'+'</div>';
+	}
+	if (boothlist != '')
+	{
+		
+		var Msg=openMsg.replace("????",boothlist);
+		var cntnt = '<h4>Selected Booths</h4>'+'<table class="gutters"><tr><th>Booth Number</th><th>Price</th></tr>'+boothinfolist+'</table>'+Msg;	
+		
+	}
+	else
+	{
+		var cntnt = '';	
+	}
+
+
+	document.getElementById('infoDiv').innerHTML = cntnt;
+}
+
+function setColor()
+{
+	var divList = document.getElementsByTagName("div")
+	for(i=0;i<divList.length;i++)
+	{		
+			//MUST exclude all divs on page that are not "booth_" divs
+			if ((divList[i].id != 'infoDiv') && (divList[i].id != 'content') && (divList[i].id != 'navNM') && (divList[i].id != 'navM') && (divList[i].id != 'tipDiv') && (divList[i].id != '') && (divList[i].id != 'loginDiv') && (divList[i].id != 'myAccountDiv') && (divList[i].id != 'menuDiv')&& (divList[i].id != 'container')  && (divList[i].id != 'header')  && (divList[i].id != 'cartHeaderSummary')  && (divList[i].id != 'container1') && (divList[i].id != 'container2') && (divList[i].id != 'container3') && (divList[i].id != 'footer')  && (divList[i].id != 'eventDiv'))
+			{			
+				var objname = document.getElementById(divList[i].id);
+				if (eval('booth_'+objname.id+'[0]')==0 )
+				{
+					objname.className='busy';
+				}
+				if (eval('booth_'+objname.id+'[0]')==1 )
+				{
+					objname.className='available';
+				}
+				if (eval('booth_'+objname.id+'[0]')==2 )
+				{
+					objname.className='onhold';
+				}
+				if (eval('booth_'+objname.id+'[0]')==3 )
+				{
+					objname.className='myonhold';
+				}
+			}		
+	}
+}
+
+function RegisterForBooth()
+{
+	if (ORGCD == '')
+	{
+		alert('You must be associated with a member organization to purchase a booth.')
+	}
+	else
+	{
+		document.form.submit();
+	}	
+}
+
+
+
+
+
+</script>
+
+
+
+  <h2><#SESSIONNAME> - Exhibit Booth Sales</h2>
+<div class="formIntro">
+    <p>Click on the desired booths to add them to your purchase list. See the below legend to determine booth availability. If you make a mistake, click &quot;Reset&quot; to clear all booth selections.</p>
+</div>
+
+<table class="nobg">
+<tr>
+	<td width="<#FLOORPLANWIDTH>" style="vertical-align:top;padding-right:15px;padding-left:15px;">
+    <div style="position:relative; vertical-align:top; align:center;margin:auto;text-align:center;"><#FLOORPLANDATA></div>
+    </td>
+	<td>
+    	<table>
+    	  <tr>
+        	<th colspan="2">Legend</th>
+        </tr>
+        <tr>
+        	<td width="30" class="available">&nbsp;</td>
+            <td>Available</td>
+        </tr>
+        
+        <tr>
+        	<td class="inprocess">&nbsp;</td>
+            <td>Your Selection(s)</td>
+        </tr>
+    
+         
+        <tr>
+        	<td class="busy">&nbsp;</td>
+            <td>Unavailable</td>
+        </tr>
+    
+         
+          <tr>
+        	<td class="myonhold">&nbsp;</td>
+            <td>On Hold by You</td>
+        </tr>
+         
+        <tr>
+        	<td class="onhold">&nbsp;</td>
+            <td>On Hold by Another User</td>
+        </tr>
+
+	   </table>
+             
+    </td>
+</tr>
+
+</table>
+ <div id="infoDiv"><h4>Selected Booths</h4><p>None</p></div>
+
+<script>
+//ON-LOAD FUNCTIONS!!
+window.onload = function(){
+	Tooltip.init(); 
+	setColor();
+} 
+</script>

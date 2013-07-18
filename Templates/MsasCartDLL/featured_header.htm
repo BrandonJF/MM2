@@ -1,0 +1,14 @@
+<form name="order" method="POST">
+<h2>Featured Products</h2>
+<div class="formIntro">
+    <p><#PREVNAV> <#NEXTNAV> |  <a href="GetCart">[?] View Cart</a> | <a href="javascript:emptyCartConfirmation();">[-] Empty Cart </a>|</p>
+</div>
+<#CONTENT>
+
+<input type="hidden" name="ADD" />
+<div class="buttons">
+    <input type="button" name="button" value="Add Items To Cart" onClick="addToCart(document.order);" />
+</div>
+    <input type="hidden" name="PRODUCTSELECTION">
+    <input type="hidden" name="PRODUCTQTY">          
+</form>

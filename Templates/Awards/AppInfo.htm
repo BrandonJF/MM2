@@ -1,0 +1,201 @@
+<script language="javascript">
+function formValidate(){
+         if($.trim($('#award_File').val()).length > 0){
+            document.order.ADDDOC.value = "Y";
+        }else{
+            document.order.ADDDOC.value = "N";
+        }
+     if("<#AWARDPRICE>" == "$0.00"){
+        if(validateAll(document.order, false)){
+		document.order.submit();
+	}}else{
+          if ($('#BILLME').attr('checked')=='checked'){
+            if(validateAll(document.order, false)){
+		document.order.submit();
+            }
+          }else{
+            if(validateAll(document.order)){
+		document.order.submit();
+          }
+
+	}
+    }
+
+}
+</script>
+
+ <h2><#AWARDNAME> Application</h2>
+<div class="formIntro">
+    <p><#AWARDDESC></p>
+</div>
+<form action="Apply" method="POST" enctype="multipart/form-data" name="order">
+<fieldset>
+    <legend>Applicant Information</legend>
+    <ul>
+        <li>
+            <label class="required">Organization</label>
+            <input name="ORGNAME" value="<#ORGNAME>" size=50 class='reqField'>
+            <a href="#" id="orgSearch">Search</a>
+<script>
+
+//opens org search results in a jquery dialog
+
+	$(document).ready(function () {
+            $('a#orgSearch').live('click', function (e) {
+                e.preventDefault();
+				var newSearch = document.order.ORGNAME.value;
+                var page = '../organizationdll.dll/List?ORGNAME='+newSearch+'~&SORT=ORGNAME&WMT=../main_template_none.htm&WHP=addOrg_header.htm&WBP=addOrg_list.htm&WNR=addOrg_noRec.htm&RANGE=1/25'
+                var pagetitle = $(this).attr("title");
+                return parent.uiPopUp(page);
+        });
+	});
+</script>
+        </li>
+        <li>
+            <label>Prefix</label>
+            <SELECT size=1 name=PREFIX>
+			      <#CBXPREFIX>
+			      </SELECT>
+        </li>
+        <li>
+            <label class="required">First Name</label>
+            <input type=text name="FIRSTNAME" value="<#FIRSTNAME>" class='reqField'>
+
+        </li>
+        <li>
+            <label class="required">Last Name</label>
+            <input type=text name="LASTNAME" value="<#LASTNAME>" class='reqField'>
+        </li>
+        <li>
+            <label class="required">Title</label>
+            <input type=text name="JOBTITLE" value="<#JOBTITLE>" size=50 class='reqField'>
+        </li>
+        <li>
+            <label class="required">Address</label>
+            <input type=text name="ADDRESS1" value="<#ADDRESS1>" size=50 class='reqField'>
+        </li>
+        <li>
+            <label>Address Cont.</label>
+<input type=text name="ADDRESS2" value="<#ADDRESS2>" size=50>
+        </li>
+        <li>
+            <label class="required">City</label>
+            <input type=text name="CITY" value="<#CITY>" size=50 class='reqField'>
+        </li>
+        <li>
+            <label class="required">State</label>
+            <select size="1" name="STATECD" class='reqField'>
+			      <option ><#RTVSTATEREFSRTFSTATENAMESCVSTATECD></option>
+			      </select>
+        </li>
+        <li>
+             <label class="required">Zip</label>
+             <input type=text name="ZIP" value="<#ZIP>" size=50 class='reqField'>
+        </li>
+        <li>
+            <label>Country</label>
+            <select size="1" name="COUNTRY" onChange="checkCountryMask(this.value);">
+			      <option value=''>Select One...</option>
+			      <#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">
+			      </select>
+			      <script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+		      </script>
+        </li>
+        <li>
+            <label class="required">Work Phone</label>
+            <input type=text name="WORKPHONE" value="<#WORKPHONE>" size=25 class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+        </li>
+        <li>
+            <label>Fax</label>
+            <input type=text name="FAXPHONE" value="<#FAXPHONE>" size=50 onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+        </li>
+        <li>
+            <label class="required">Email</label>
+            <input type=text name="EMAIL" value="<#EMAIL>" size=50 class='reqField'>
+        </li>
+        <li>
+            <label>Accepted by Name</label>
+            <input type=text name="ACCEPTEDBYNAME" value="<#ACCEPTEDBYNAME>" size=50>
+        </li>
+        <li>
+            <label>Document Upload</label>
+            <input type="hidden" name="OWNERCD" value="<#AWARDNUM>">
+            <input type="hidden" name="OWNERTYPECD" value="R">
+            <input type="hidden" name="OWNERNAME" value="<#AWARDNAME>">
+            <input type="file" name="file" id="award_File">
+        </li>
+        <li>
+            <label>Award Application Price</label>
+            <#AWARDPRICE>
+        </li>
+    </ul>
+</fieldset>
+<!--<div class="buttons">
+            <input name="button" type="button" onClick="formValidate();" value="Complete Registration" id="submitNow">
+            <input type="button" value="Add to Cart" onClick='$("#paymentSection").remove();award_addToCart(document.order)';
+                   id="addToCart">
+			<input type="button" data-theme="g" value="Pay Now" onClick='$("#paymentSection").show();$("#addToCart").hide();$("#payNow").hide();' id="payNow">
+        </div>-->
+<div id="paymentSection">
+    <input type="hidden" name="RESPONSEPAGE" value="ApplyConf.htm">
+	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm" >
+</div>
+<div class="buttons">
+            <input name="button" type="button" onClick="formValidate();" value="Complete Registration">
+        </div>
+<div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+			<input type="hidden" name="customercd" value="<#CUSTOMERCD>">
+			<input type="hidden" name="SENDEMAIL" value="Y">
+			<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+			<input type="hidden" name="REGSTATUSCD" value="1">
+			<input type="hidden" name="INFOSTATUSSTT" value="Valid">
+			<input type="hidden" name="EMAILREPLYFROM" value="info@domain.org">
+			<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+			<input type="hidden" name="EMAILSUBJECT" value="Thanks for registering online">
+			<input type="hidden" name="CHECKWEBUSERID" value="Y">
+			<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+			<input type="hidden" name="ISMEMBERFLG" value="<#ISMEMBERFLG>">
+			<input type="hidden" name="CHECKDUPLICATE" value="Y">
+			<input type="hidden" name="AWARDCD" value="<#AWARDCD>">
+            <input type="hidden" name="AWARDSTT" value="Nominated">
+			<input type="hidden" name="AWARDNUM" value="<#AWARDNUM>">
+			<input type="hidden" name="DOCUMENTNUM" value="<#DOCUMENTNUM>">
+			<input type="hidden" name="ADDDOC" value="Y">
+			<input type="hidden" name="TITLETXT" value="Award Document - <#FIRSTNAME> <#LASTNAME>">
+            <input type="hidden" name="EMAILREPLYFORM" value="ApplyConf.htm">
+            <input type="hidden" name="ISSUEBILLFLG" value="N">
+			<input type="hidden" name="DOCDES" value="Award">
+
+            <input type="hidden" name="DOCTYPE" value="Bio">
+</form>
+<script>
+    if("<#AWARDPRICE>" == "$0.00"){
+        $('#paymentSection').remove();
+        $("#addToCart").hide();
+        $("#payNow").hide();
+   }else{
+    $("#submitNow").hide();
+        $('#paymentSection').show();
+    }
+function award_addToCart(formName){
+	if(validateAll(formName,false)){
+
+		var customercd='';
+		$.ajax({url:'../memberdll.dll/updateInfo', type:"GET", async:false, data:$('#user_profile').serialize(),
+			success:function(response){
+					customercd = removeNL(response);
+			}
+		});
+
+		var addURL = '../msascartdll.dll/showcart?ADD=ORDERTYPE=A,ITEMCD=<#AWARDPRODUCTCD>,SUBITEMCD=<#AWARDPRODUCTCD>';
+		$.ajax({url:addURL, type:"GET", async:false});
+		window.location = '../msascartdll.dll/showcart';
+	}
+}
+</script>
+
+

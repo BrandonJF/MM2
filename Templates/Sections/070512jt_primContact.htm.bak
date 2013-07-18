@@ -1,0 +1,115 @@
+<legend><#MLGLBL TEXT="Primary Contact Information"></legend>
+<ul>
+
+	<li><label for="ADDRESSTYPE"><#MLGLBL TEXT="Address Type"></label>
+		<select name="ADDRESSTYPE">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="ADDRTYPEREF" SCV="ADDRESSTYPE" FLD2="ADDRESSTYPE" FLQ="ONWEBFLG=Y" MLG="Y">
+        </select>
+	</li>
+
+	<li>
+		<label for="ADDRESS1" class="required"><#MLGLBL TEXT="Mailing Address"></label>
+		<input type="text" name="ADDRESS1" value="<#ADDRESS1>" class='reqField'>
+	</li>
+
+	<li>
+		<label for="ADDRESS2"><#MLGLBL TEXT="Mailing Address Cont."></label>
+		<input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+	</li>
+
+	<li>
+		<label for="CITY" class="required"><#MLGLBL TEXT="City"></label>
+		<input type="text"  name="CITY" value="<#CITY>" class='reqField'>
+	</li>
+
+	<li><label for="STATECD" class="required"><#MLGLBL TEXT="State/Province"></label>
+		<select name="STATECD" class='reqField'>
+			<option value='' >Select One...</option>
+			<#REFTABLEVALS TABLENAME="STATEREF" SORT="STATENAME" SCV="STATECD">
+        </select>
+	</li>
+	
+	<li><label for="ZIP" class="required"><#MLGLBL TEXT="Zip/Postal Code"></label>
+		<input type="text" name="ZIP" value="<#ZIP>" class='reqField'></td>
+	</li>
+
+	<li><label for="COUNTRY"><#MLGLBL TEXT="Country"></label>
+        <select size="1" name="COUNTRY" onChange="checkCountryMask(this.value);">
+			<option value=''>Select One...</option>
+			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">  
+        </select>
+        <script>
+			//set correct phone mask on load
+			checkCountryMask("<#COUNTRY>");
+		</script>
+	</li>
+
+	<li><label for="WORKPHONE" class="required"><#MLGLBL TEXT="Work Phone"></label>
+		<input type="text"  name="WORKPHONE" value="<#WORKPHONE>" class='reqField' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+
+	<li><label for="WORKPHONEEXT" ><#MLGLBL TEXT="Work Extension"></label>
+		<input type="text" size="10" name="WORKPHONEEXT" value="<#WORKPHONEEXT>" >
+	</li>
+
+	<li><label for="FAXPHONE" ><#MLGLBL TEXT="Fax"></label>
+		<input type="text"  name="FAXPHONE" value="<#FAXPHONE>" onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+
+	<li><label for="MOBILEPHONE" ><#MLGLBL TEXT="Cell Phone"></label>
+		<input name='MOBILEPHONE' value='<#MOBILEPHONE>'  onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+
+	<li><label for="HOMEPHONE" ><#MLGLBL TEXT="Home Phone"></label>
+		<input name='HOMEPHONE' value='<#HOMEPHONE>' onkeypress="autoformatWithPool(this, event, '(###) ###-####',0)">
+	</li>
+
+	<li><label for="EMAIL" class="required"><#MLGLBL TEXT="Email Address"></label>
+		<input type="text" name="EMAIL" value="<#EMAIL>" class='reqField'>
+	</li>
+
+	<li><label for="WWWADDRESS"><#MLGLBL TEXT="Website"></label>
+		<input type="text"  name="WWWADDRESS" value="<#WWWADDRESS>">
+	</li>
+
+	<li class="checkbox">
+		<div>
+			<label for="NOEMAILFLG">
+				<input type="checkbox" class="flag" name="NOEMAILFLG" id="NOEMAILFLG" />
+				Check here if you do not wish to receive email correspondence.
+			</label>
+			<label for="NOMAILFLG">
+				<input type="checkbox" class="flag" name="NOMAILFLG" id="NOMAILFLG" />
+				Check here if you do not wish to receive USPS mailings.
+			</label>
+		</div>
+	</li>
+
+</ul>
+	
+	<script>
+		$(".flag").each(function(){
+			$(this).click(function() {
+				if ($(this).attr('checked')) {			
+					$(this).val('Y');
+				}
+				else{$(this).val('N');}
+				});
+			});
+	</script>
+	<script>
+	if (CUSTOMERCD != ''){
+		$(function(){
+			if ('<#NOEMAILFLG>' == 'Y') 
+				{$('input[name=NOEMAILFLG]:eq(0)').attr('checked', true);}
+			else
+				{$('input[name=NOEMAILFLG]:eq(1)').attr('checked', true);}		
+				
+			if ('<#NOMAILFLG>' == 'Y') 
+				{$('input[name=NOMAILFLG]:eq(0)').attr('checked', true);}
+			else
+				{$('input[name=NOMAILFLG]:eq(1)').attr('checked', true);}
+			});
+		}
+	</script>

@@ -1,0 +1,58 @@
+<li id="<#PRODUCTCD>">
+    <a href="../msascartdll.dll/ProductInfo?productcd=<#productcd>" data-ajax="false">
+
+<!--    <img  src="../cvImage.dll/view?ENTITY=PROD&ENTITYCD=<#PRODUCTCD>" class="image product_image preload" alt="" /> -->
+   <img  src="../cvImage.dll/view?ENTITY=PROD&ENTITYCD=<#PRODUCTCD>"  width="100px" height="100px"/>
+    <h3><#PRODUCTNAME></h3>
+
+<p>    <script>
+function outputText(textToOutput){
+    $("#<#PRODUCTCD> p").append(textToOutput);
+}
+
+
+                //displays correct prices for member or non-member
+
+                //if no member price, displays member price
+
+                //if no non-member price, price is $0
+
+                outputText("Member: ");
+
+                if('<#UDEF2AMT>' == ''){
+
+                    if('<#UNITPRICE>' == ''){
+
+                        outputText('$0.00 USD');
+
+                    }else{
+
+                        outputText('<#UNITPRICE FORMAT="$0.00"> USD<br>');
+
+                    }
+
+                }else{
+
+                    outputText('<#UDEF2AMT FORMAT="$0.00"> USD<br>');
+
+                }
+
+
+
+                outputText("Non-Mbr: ");
+
+                if('<#UNITPRICE>' == ''){
+
+                    outputText('$0.00 USD <br>');
+
+                }else{
+
+                    outputText('<#UNITPRICE FORMAT="$0.00"> USD <br>');
+
+                }
+
+
+
+        </script></p>
+    </a>
+</li>

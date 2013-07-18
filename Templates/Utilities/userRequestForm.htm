@@ -1,0 +1,43 @@
+
+<h2><#MLGLBL "TEXT=Username Request Form"> </h2>
+<div class="formIntro">
+	<p>If you have lost or forgotten your username, please enter your email, first name and last name below. Once you click Send Username and your account is confirmed, the system will send you an email with your username.</p>
+	<p><a href="../utilities.dll/openpage?wrp=forgotPasswordForm.htm">Forgot your  Password?</a></p>
+	</div>
+	<form name="abc" id="abc" method="post" action="../memberdll.dll/List">
+	<fieldset><ul>
+	<li>
+		<label for="FIRSTNAME" class="required"><#MLGLBL TEXT="First Name"></label>
+		<input name="FIRSTNAME" type="text" value="" id="FirstName" class='reqField' >
+	</li>
+	<li>
+		<label for="LASTNAME" class="required"><#MLGLBL TEXT="Last Name"></label>
+		<input name="LASTNAME" type="text" value="" id="LastName" class='reqField' >
+	</li>
+	<li>
+		<label for="EMAIL" class="required"><#MLGLBL TEXT="Email"></label>
+		<input name="EMAIL" type="text" value="" id="Email" class='reqField' >
+	</li>
+	<li>
+		<label for="ZIP" class="required"><#MLGLBL TEXT="Zip"></label>
+		<input name="ZIP" type="text" value="" id="Zip" class='reqField' >
+	</li>
+</ul></fieldset>
+		
+<div class="buttons">
+		
+		<input name="Button" type="submit" value="Send Username">
+	</div>
+		
+	  <input type="hidden" name="WBP" value="userList.htm" />
+	  <input type="hidden" name="WHP" value="userList_Header.htm" />
+	 
+      </form>
+<script>
+ $(function() { 
+        $("#abc").validity(function() {
+            $(".reqField").require("#{field} is required.");
+			$("#Email").require().match("email","Please enter your email address in the correct format. XXX@XXX.XXX");
+		});
+    });
+</script>

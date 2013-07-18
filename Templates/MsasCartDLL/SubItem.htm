@@ -1,0 +1,17 @@
+<tr>
+    <td><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true" title="Remove this item from the cart">Remove</a></td>
+        <td><#UDEF1TXT></td>
+        <td><#SUBSCRIPTIONDES><span class="appeal" style="display: none"><br><input name="APPEALCD_<#ORDERITEMCD>" type="text" onBlur="submit();" value="<#APPEALCD>"></span></td>
+        <td>
+		<script>
+		if('<#UDEF1TXT>' == 'Donation'){
+			document.write('$<input name="PRICEAMT_<#ORDERITEMCD>" type="text" onBlur="submit();" value="<#PRICE FORMAT=0.00>" size="2">');
+		}else{
+			document.write('<#PRICE FORMAT="$0.00">');
+		}
+		</script>
+		</td>
+        <td><#ITEMQTY></td>
+		<td class="prices"><#ITEMTOTAL FORMAT='$0.00'></td>
+        
+</tr>

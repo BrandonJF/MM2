@@ -1,0 +1,33 @@
+<h3>Dues Payment Confirmed</h3>
+
+<p>Thank you <#FIRSTNAME>, your membership has been renewed. See below for detailed information on this transaction:</p>
+<table>
+	<tr>
+    <td>Payment Number:</td>
+    <td><#PAYMENTNUM></td>
+	</tr><tr>
+    <td>Customer Code: </td>
+    <td><#CUSTOMERCD></td>
+ </tr><tr>
+    <td>Amount Paid:</td>
+    <td><#TOTALAMT FORMAT="$0.00"></td>
+ </tr><tr>
+    <td>Balance Due:</td>
+    <td><#STATEMENTBALANCE FORMAT="$0.00"></td></tr>
+</table>
+
+<h3>Invoice #: <#INVOICENUM></h3>
+
+<table class="gutters">
+  <tr>
+    <th>Item ID</th>
+    <th>Description</th>
+    <th>Amount</th>
+  </tr>
+  <#INVOICELIST>
+    <tr>&nbsp;</tr>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td class="text">Total Amount Paid:</td>
+		<td><#TOTALAMT FORMAT="$0.00"></td>
+</table>

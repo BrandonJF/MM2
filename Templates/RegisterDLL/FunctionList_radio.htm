@@ -1,0 +1,15 @@
+<tr>
+    <td><input name="<#FUNCTIONCD>" id="<#FUNCTIONCD>" value="1" title="<#TITLE>"  type="radio" onBlur="checkAllFunctions('<#ATTENDEEREGQTY>', '<#ATTENDEECANCELQTY>', '<#ATENDEEMAXQTY>', this.value, '<#FUNCTIONCD>', this.id, this.value);" class="collectThisFunc"></td>
+    <td><#TITLE> <#STARTTMS> <#ENDTMS LABEL="- "></td>
+    <td class="price">
+        <#DISPLAYPRICE>
+        <input type="hidden" name="D_<#FUNCTIONCD>" value="<#STARTDATE>">
+        <input type="hidden" name="T_<#FUNCTIONCD>" value="<#STARTTMS>">
+        <input type="hidden" name="TITLE_<#FUNCTIONCD>" value="<#TITLE>">
+        <script>
+	isFunctions = true;
+</script>
+    </td>
+</tr>
+
+

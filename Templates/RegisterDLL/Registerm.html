@@ -1,0 +1,839 @@
+<script language="javascript">
+<!--
+
+//function GetMultiRegMessage() 
+//{
+//	var memberopt = GetCookieValue('memberoptions');
+//	var pos = memberopt.indexOf('SUPER');
+//	if (pos != -1) 
+//	{
+//		var txt = 'If you would like to register someone else from your organization? <a href="#" onClick="RunSearchORGmember()">Click here</a>';
+//		return txt;
+//	}
+//	else
+//	{
+//		return '';
+//	}
+//}
+
+function RunSearch() {	
+var tmpsearch = document.abc.ORGNAME.value;
+if (tmpsearch.length <2) {
+   alert('Please enter the first two characters (or more) of the organization name');
+   document.abc.ORGNAME.focus();
+   return false;
+ }  
+else 
+{
+ tmpsearch = '~' + tmpsearch + '~';   
+	window.open("/online/cgi-bin/organizationdll.dll/List?ORGNAME="+tmpsearch+"&SORT=ORGNAME&WMT=none&WHP=OrganizationHeader_update.htm&WBP=OrganizationAddForm.htm","","fullscreen=no,location=yes,toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=640,height=480")
+      return true;
+	  }
+}   
+
+function setHFields()
+{
+	if (document.abc.CUSTOMERCD.value=="") //new customer
+	{
+		document.abc.CUSTOMERTYPE.value="Regular";
+		document.abc.ISMEMBERFLG.value="Y";
+		var today = new Date();
+		var tdate = ( (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getYear());
+		document.abc.JOINDATE.value = tdate;
+	}
+		document.abc.PAYMENTTYPECD[0].checked=true;
+}
+
+
+function formValidate() {
+     if ( (isFirstname()) && (isLastname()) && (isAddress()) && (isCity()) && (isState()) && (isZip()) && (isorgcd())
+     && (isPhone()) && (isEmail()) && (formatAllPhoneNum()) &&
+     (isCardtype()) && (confirm()) )
+   		
+ 		{
+ 	  		document.abc.action = "../../cgi-bin/Registerdll.dll/Post";
+   			document.abc.submit();
+   			return true;
+		}
+  
+     else return false;
+}
+
+function isorgcd()
+
+{
+
+ if (document.abc.ORGCD.value == '') 
+
+ {
+
+   alert('To use the online form you must select an organization name from the organization search list. If your organization is not listed, please either use the PDF form to register or call Membership Services at 202-466-3894.');
+
+    document.abc.ORGNAME.focus();
+
+   return false;
+
+  }
+
+ else {
+
+  return true;
+
+  } 
+
+}
+
+
+function formatAllPhoneNum()
+{
+	tmpnum = document.abc.WORKPHONE.value;
+	document.abc.WORKPHONE.value = formatPhoneNum(tmpnum);
+	tmpnum = document.abc.FAXPHONE.value;
+	document.abc.FAXPHONE.value = formatPhoneNum(tmpnum);
+	return true;
+}
+ 
+function formatPhoneNum(inputStr)
+{
+			if (inputStr != "")
+			{ 
+            //alert("Your text contains:  " + inputStr);
+            var phoneNum = filterChars(inputStr);
+            phoneNum = addFormat(phoneNum);       
+			return phoneNum;
+			}
+			else {
+			      return "";
+				  }
+}
+
+
+
+function filterChars(phoneNumStr)
+{
+            var validchars = "0123456789";
+            var letter;
+            var strA;
+            var strB;
+            i = 0;
+            //alert("Your phoneNumStr length:  " + phoneNumStr.length);
+            while (i <= phoneNumStr.length)
+            {
+                        letter = phoneNumStr.charAt(i).toLowerCase();
+                        if (validchars.indexOf(letter) < 0)
+                        {
+                                    //remove char @ index i
+                                    strA = phoneNumStr.substring(0, i);
+                                    strB = phoneNumStr.substring(i+1, phoneNumStr.length);
+                                    phoneNumStr = strA + strB;
+                        }
+                        else
+                        {
+                                    i++;
+                        }
+            }
+            return phoneNumStr;      
+}
+
+function addFormat(inputStr)
+{
+            // Add Slash
+            var strA = inputStr.substring(0, 3);
+            var strB = inputStr.substring(3, 6);
+            var strC = inputStr.substring(6, inputStr.length);
+            phoneNumStr = strA + "-" + strB +"-" + strC;
+            return phoneNumStr;
+} 
+
+// Checks the First Name field.
+function isFirstname()
+   {
+var str = document.abc.FIRSTNAME.value;
+   // Return false if First Name field is blank.
+   if (document.abc.FIRSTNAME.value == "" || document.abc.FIRSTNAME.value == " ") 
+      {
+      alert("\nThe First Name field is blank.\n\nPlease enter your first name.")
+      document.abc.FIRSTNAME.focus();
+      return false; 
+      }
+      
+    if (str.length > 50)
+    	{
+    	alert("\nYou have exceeded the 50 character limit.  \n\nPlease re-enter.")  
+       document.abc.FIRSTNAME.focus();
+       return false; 
+       }
+    	
+   // Return false if characters are not a-z, A-Z.
+   for (var i = 0; i < str.length; i++) 
+      {
+      var ch = str.substring(i, i + 1);
+      if ((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) 
+         {
+         alert("\nThe First Name field only accepts letters.\n\nPlease re-enter.");
+         document.abc.FIRSTNAME.select();
+         document.abc.FIRSTNAME.focus();
+         return false;
+         }
+   else  {
+      return true;
+ 		  }	     
+      }       
+   }
+   
+   
+
+   
+// Checks the Last Name field.
+function isLastname()
+   {
+var str = document.abc.LASTNAME.value;
+   // Return false if Last Name field is blank.
+   if (document.abc.LASTNAME.value == "" || document.abc.LASTNAME.value == " ") 
+      {
+      alert("\nThe Last Name field is blank.\n\nPlease enter your last name.")
+      document.abc.LASTNAME.focus();
+      return false; 
+      }
+
+   // Return false if characters are not a-z, A-Z.
+   for (var i = 0; i < str.length; i++) 
+      {
+      var ch = str.substring(i, i + 1);
+      if ((ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch)) 
+         {
+         alert("\nThe Last Name field only accepts letters.\n\nPlease re-enter.");
+         document.abc.LASTNAME.select();
+         document.abc.LASTNAME.focus();
+         return false;
+         }
+   else  {
+      return true;
+ 		  }	     
+      }       
+   }
+
+ 
+   
+// Checks the Address1 field.
+function isAddress()
+   {
+   // Return false if Address1 field is blank.
+   if (document.abc.ADDRESS1.value == "" || document.abc.ADDRESS1.value == " " ) 
+      {
+       alert("\nThe Address field is blank.\n\nPlease enter your Address.")
+       document.abc.ADDRESS1.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+   }
+   
+
+ // Checks the City field.
+function isCity()
+   {
+   // Return false if City field is blank.
+   if (document.abc.CITY.value == "" || document.abc.CITY.value == " " ) 
+      {
+       alert("\nThe City field is blank.\n\nPlease enter your City.")
+       document.abc.CITY.focus();
+       return false; 
+      }
+   else  {
+      return true;
+ 		  }	     
+   }
+
+
+// Checks the State field.
+function isState()
+   {
+	var mystate=document.abc.STATECD.selectedIndex;
+	/*var mycountry=document.abc.COUNTRY.selectedIndex;*/
+	if (mystate==0 /*&& mycountry==0*/) {
+	alert("\nYou must select your State from the dropdown box.");
+	document.abc.STATECD.focus();
+   	return false; 
+      }
+   	else  {
+      return true;
+ 		  }	     
+}
+
+function isPrefix()
+   {
+	var mysel=document.abc.PREFIX.selectedIndex;
+	if (mysel==0) {
+	alert("\nYou must select Prefix from the dropdown box.");
+	document.abc.PREFIX.focus();
+   	return false; 
+      }
+   	else  {
+      return true;
+ 		  }	     
+}
+
+// Checks the zip field.
+function isZip()
+   {
+   var str = document.abc.ZIP.value;
+     // Return false if Zip field is blank.
+   
+   if (document.abc.ZIP.value == "") 
+         {
+         alert("\nPlease enter your zip code.");
+         document.abc.ZIP.focus();
+         return false;
+         }
+   // Return false if characters are not '0-9', 'a-z', 'A-Z', '-'. 
+   for (var i = 0; i < str.length; i++) 
+  
+      {
+      var ch = str.substring(i, i + 1);
+      if ((ch < "0" || "9" < ch) && (ch < "a" || "z" < ch) && (ch < "A" || "Z" < ch) && (ch != '-'))
+         {
+         alert("\nThe Zip field accepts only numbers and letters. \n\nPlease re-enter your Zip.");
+         document.abc.ZIP.select();
+         document.abc.ZIP.focus();
+         return false;
+         }
+    		return true;
+      }         
+   }
+
+
+
+function isPhone() {
+   var str = document.abc.WORKPHONE.value;
+     // Return false if Daytime Phone Number field is blank.
+   
+   if (document.abc.WORKPHONE.value == "" || document.abc.WORKPHONE.value == " ") {
+         alert("\nThe Work Phone Number is required.");
+         document.abc.WORKPHONE.focus();
+         return false;
+   }
+   // Return false if characters are not '0-9', '-', '(', ')'. 
+   for (var i = 0; i < str.length; i++) {
+      var ch = str.substring(i, i + 1);
+      if ((ch < "0" || "9" < ch) && (ch != '-') && (ch != '(') && (ch != ')')) {
+         alert("\nDaytime Phone Number is invalid.");
+         document.abc.WORKPHONE.select();
+         document.abc.WORKPHONE.focus();
+         return false;
+      }
+    		return true;
+   }         
+}
+
+function isEmail()
+   {
+   // Return false if E-mail field is blank.
+   if (document.abc.EMAIL.value == "" || document.abc.EMAIL.value == " " ) 
+      {
+      alert("\nThe Email Address field is blank.\n\nPlease enter your Email Address.")
+      document.abc.EMAIL.focus();
+      return false; 
+      }
+   // Return false if E-mail field does not contain a '@' and '.' .
+   if (document.abc.EMAIL.value.indexOf ('@',0) == -1 || 
+       document.abc.EMAIL.value.indexOf ('.',0) == -1)
+      {
+      alert("\nThe Email Address field must contain a \"@\" and a \".\" \n\nPlease re-enter your Email Address.")
+      document.abc.EMAIL.select();
+      document.abc.EMAIL.focus();
+      return false;
+      }
+   else  {
+      return true;
+ 		  }	     
+   }
+
+
+// Make sure a Card Type is selected.
+function isCardtype()
+	{
+	var count = 0;
+	for (var i = 0; i <= 2; i++)
+		{
+		
+		if (document.abc.PAYMENTTYPECD[i].checked==true)
+			{
+			count = count + 1;
+			}
+		}
+		
+	 if (count==0)
+		{
+			alert("\nYou must choose a Card Type.")
+			document.abc.PAYMENTTYPECD[0].focus();
+			return false;
+		}
+		else
+		{
+		  return true;
+		}	
+	}	
+       
+
+function verify_ccard(inNumber, type)
+{// returns 0 if valid, positive number if invalid.
+        total = 1*0;
+        tmp = 1*0;
+
+        number = "";
+
+        // make sure there are only numbers in the string...
+        for(i = 0; i < inNumber.length; i++)
+        {
+		if(inNumber.charAt(i) >= "0" && inNumber.charAt(i) <= "9")
+                {
+                        number = number + inNumber.charAt(i);
+                }
+        }
+
+        if(number.length < 13) return 10; // too short for anything
+
+        first = "" + number.charAt(0);
+        second = "" + number.charAt(1);
+        third = "" + number.charAt(2);
+        firstTwo = first + second;
+        firstFour = firstTwo + third + number.charAt(3);
+
+        if(type == "MC")
+        {
+                if(first != "5" || second < "1" || second > "5")
+                        return 11;// invalid Mastercard prefix
+                if(number.length != 16)
+                        return 21;
+        }
+        else if(type == "VISA")
+        {
+                if(first != "4")
+                        return 12;// invalid Visa prefix
+                if(number.length != 13 && number.length != 16)
+                        return 22;
+        }
+        else if(type == "AMEX")
+        {
+                if(first != "3" || (second != "4" && second != "7"))
+                        return 13;// invalid American Express Prefix
+                if(number.length != 15) 
+                        return 23;
+        }
+        else if(type == "DI")
+        {
+                        if(firstFour != "6011")
+                                return 14;// invalid prefix.
+                        if(number.length != 16)
+                                return 24;
+        }
+        // now check the credit card suffix and length vs. the type
+
+    
+         // do the check sum
+        for(loc = number.length - 2; loc >= 0; loc -= 2)
+        {
+
+
+                total += 1 * number.charAt(loc +1);
+                tmp = number.charAt(loc) * 2;
+		if(tmp > 9) total += 1;
+		total += tmp%10;
+        }
+	if(number.length % 2 > 0)
+	total += 1 * number.charAt(0);
+
+
+        return (total % 10);
+}
+
+function confirm()
+{
+	for (var i = 0; i <= 3; i++)
+	{
+		if (document.abc.PAYMENTTYPECD[i].checked==true)
+		{
+			var cardtype = document.abc.PAYMENTTYPECD[i].value;
+		
+			if (cardtype == 'BILLME')
+			{
+				document.abc.ISSUEBILLFLG.value='Y';
+				document.abc.RESPONSEPAGE.value='RegisterPost_BM.htm';
+				return true;
+			}	
+        		else
+        		{
+	        		if((reason = verify_ccard(document.abc.PAYMENTREFNUM.value, cardtype)) == 0)
+			        {
+					 if ( (isExpmonth()) && (isExpyear()) && (isExpdate()) )
+						 return true;
+		        	}
+		        	else
+			        {
+			                alert("Card Number Invalid.");
+	        		        document.abc.PAYMENTREFNUM.focus();
+	                		return false;
+			        }
+			}
+		}
+ 	}       
+}
+
+
+// Checks the Expmonth field.
+function isExpmonth()
+   {
+	var mymonth=document.abc.expiremonth.selectedIndex;
+	if (mymonth==0) {
+	alert("\nYou must select a month from the dropdown box.");
+	document.abc.expiremonth.focus();
+   	return false; 
+      }
+   	else  {
+      return true;
+ 		  }	     
+}
+
+function isExpyear() {
+   var str = document.abc.expireyear.value;
+     // Return false if Exp. Date year is blank.
+   
+   if (document.abc.expireyear.value == "") {
+         alert("\nThe Exp. Date is required.");
+         document.abc.expireyear.focus();
+         return false;
+   }
+   // Return false if characters are not any of the following. 
+		var ch = document.abc.expireyear.value;
+		if ( (ch != "09") && (ch != "10") && (ch != "11") && (ch != "12") && (ch != "05") && (ch != "06") && (ch != "07") && (ch != "08") ) {
+         alert("\nPlease enter the correct expiration year.");
+         document.abc.expireyear.select();
+         document.abc.expireyear.focus();
+         return false;
+      }
+    		return true;
+}
+
+function formatPhoneNum(inputStr)
+{
+			if (inputStr != "")
+			{ 
+            //alert("Your text contains:  " + inputStr);
+            var phoneNum = filterChars(inputStr);
+            phoneNum = addFormat(phoneNum);       
+			return phoneNum;
+			}
+			else {
+			      return "";
+				  }
+}
+
+function filterChars(phoneNumStr)
+{
+            var validchars = "0123456789";
+            var letter;
+            var strA;
+            var strB;
+            i = 0;
+            //alert("Your phoneNumStr length:  " + phoneNumStr.length);
+            while (i <= phoneNumStr.length)
+            {
+                        letter = phoneNumStr.charAt(i).toLowerCase();
+                        if (validchars.indexOf(letter) < 0)
+                        {
+                                    //remove char @ index i
+                                    strA = phoneNumStr.substring(0, i);
+                                    strB = phoneNumStr.substring(i+1, phoneNumStr.length);
+                                    phoneNumStr = strA + strB;
+                        }
+                        else
+                        {
+                                    i++;
+                        }
+            }
+            return phoneNumStr;      
+}
+
+function addFormat(inputStr)
+{
+            // Add Slash
+            var strA = inputStr.substring(0, 3);
+            var strB = inputStr.substring(3, 6);
+            var strC = inputStr.substring(6, inputStr.length);
+            phoneNumStr = strA + "-" + strB +"-" + strC;
+            return phoneNumStr;
+}
+
+function isExpdate() {
+	var month = document.abc.expiremonth.selectedIndex + 1;
+	var year = document.abc.expireyear.value;
+	var expiredate;
+	expiredate = month + "/" + year;
+	document.abc.PAYMENTREFEXPDATE.value = expiredate;
+	return true;
+}
+
+
+
+--> 		
+</script>
+
+
+<body onLoad="setHFields()"> 
+<div >
+  <table border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+              <td>
+              
+                <form name=abc method="POST" action="../../cgi-bin/Registerdll.dll/Post">
+                  <div align="center">                     <br>
+                    <h3 align="center"><#SESSIONNAME> Registration</h2>
+                    <!--<p align="center"><a href="../../cgi-bin/eventsdll.dll/EventList?Range=1/10&SESSIONBEGDATE=>getdate()-1&SORT=SESSIONBEGDATE">Back to Events List </a> | <a href="../../cgi-bin/eventsdll.dll/EventInfo?sessionaltcd=<#SESSIONALTCD>" target="_blank">View the Event Description</a> </p>-->
+                    <p>     <!--                 <strong>Event: <#SESSIONALTCD></strong><br>-->
+                    <span class="style2"><#WAITLISTNOTE></span>                      <p>
+                  
+					</p>
+					
+                    <table width="650" border="0" cellpadding="3">
+                      <tr bgcolor="#ccdbd8">
+                        <td colspan="2"><div align="left"><strong>Registration 
+							Information</strong></div>
+                        <div align="left"></div></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" valign="top"><div align="left">If you would like to update your contact information please <a href="http://www.ncura.edu/online/cgi-bin/memberdll.dll/Info?WRP=Customer_Update.htm">click here</a>. </div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>First Name: </strong></div></td>
+                        <td valign="top"><p align="left"><#FIRSTNAME></p></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Last name: </strong></div></td>
+                        <td valign="top"><div align="left"><#LASTNAME></div></td>
+                      </tr>
+                       <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>First Name 
+                          on Badge
+                          (if different from first name above): </strong></div></td>
+                        <td valign="top"><p align="left">
+                            <input type=text name="BADGENAME" value="" size=30>
+                        </p></td>
+                      </tr>
+
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Institution/Organization: </strong></div></td>
+                        <td valign="top"><div align="left" class="style10">
+                          <div align="left"><#ORGNAME><a href="#" onClick="RunSearch()"></a></div>
+                        </div></td>
+                      </tr>
+                                            <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Title:</strong></div></td>
+                        <td valign="top"><div align="left" class="style10">
+                          <div align="left"><#JOBTITLE>                            </div>
+                        </div></td>
+                      </tr>
+                      
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Email: </strong></div></td>
+                        <td valign="top"><div align="left" class="style10">
+                          <div align="left"><#EMAIL>                            </div>
+                        </div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Phone: </strong></div></td>
+                        <td valign="top"><div align="left"><span class="style10"><#WORKPHONE>
+                        </span></div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Fax: </strong></div></td>
+                        <td valign="top"><div align="left" class="style10">
+                          <div align="left"><#FAXPHONE>                            </div>
+                        </div></td>
+                      </tr>
+                      
+                    
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Address: </strong></div></td>
+                        <td valign="top"><div align="left" class="style10">
+                          <div align="left"><#ADDRESS1>                            </div>
+                        </div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Address2: </strong></div></td>
+                        <td valign="top"><div align="left" class="style10">
+                          <div align="left"><#ADDRESS2>                            </div>
+                        </div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>City: </strong></div></td>
+                        <td valign="top"><div align="left"><#CITY></div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>State:</strong></div></td>
+                        <td valign="top"><div align="left"><#STATECD></div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" width="30%"><div align="left"><strong>Zip:</strong></div></td>
+                        <td valign="top"><div align="left"><#ZIP></div></td>
+                      </tr>
+                    
+                      <tr bgcolor="#ccdbd8">
+                        <td colspan="2"><div align="left"><strong>Event Cost:</strong></div></td>
+                      </tr>
+                     
+                      <tr>
+                        <td colspan="2"><div align="left">Workshop(s): <br>
+                        <#LISTCART></div></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><div align="left">Total Fee: $<#LISTTOTAL> </div></td>
+                      </tr>
+                    </table>
+                    
+                    <table width="650" border="0" cellpadding="3" align="center">
+                      <tr bgcolor="#ccdbd8">
+                        <td colspan="2"><strong>Payment Method:</strong></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><div align="left"><b>Bill My Credit Card *:</b></div>
+                            <div align="left"></div></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><table width="650" border="0" align="center" cellpadding="0" cellspacing="0" class="body">
+                          <tr>
+                            <td>
+                              <div align="left">
+                                <input type=radio name=PAYMENTTYPECD value=VISA checked>
+                                <img src=../../images/visa.gif align=top alt="Visa"> Visa</div></td></tr>
+                                <tr>
+                            <td ><input type=radio name=PAYMENTTYPECD value=MC>
+                              <img src=../../images/mastercard.gif align=top alt="MasterCard"> MasterCard</td>
+                          </tr>
+                          <tr>
+                            <td><div align="left">
+                                <input type=radio name=PAYMENTTYPECD value=AMEX>
+                                <img src=../../images/amx.gif align=top alt="American Express"> American Express</div></td>
+                            <td>&nbsp;							</td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                      <tr>
+                        <td valign="top"><div align="left"><b>Card Number* (Only 
+							Numbers, No Spaces):</b></div></td>
+                        <td valign="top"><div align="left">
+                            <input type=text name="PAYMENTREFNUM" value="" size=20>
+                        </div></td>
+                      </tr>
+                      <tr>
+                        <td valign="top"><div align="left"><b>Exp. Date*:</b></div></td>
+                        <td valign="top"><div align="left">
+                            <select name=expiremonth size="1">
+                              <option value=0>Select
+                              <option value=01>Jan
+                              <option value=02>Feb
+                              <option value=03>Mar
+                              <option value=04>Apr
+                              <option value=05>May
+                              <option value=06>Jun
+                              <option value=07>Jul
+                              <option value=08>Aug
+                              <option value=09>Sep
+                              <option value=10>Oct
+                              <option value=11>Nov
+                              <option value=12>Dec
+                          </select>
+        /
+        <input type=text name="expireyear" value="" size=5 maxlength=2>
+        (YY - only the last two digits)</div></td>
+                      </tr>
+                      <!--
+                      <tr>
+                        <td colspan="2"><strong>Pay Later </strong></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><input type=radio name=PAYMENTTYPECD value=BILLME>
+Bill Me </td>
+                      </tr>-->
+                    </table>
+                    <p align="center">
+                      <input name="button" type="button" onClick="formValidate()" value="Submit">
+                    </p>
+                    <p>&nbsp;</p>
+                  </div>
+                  <center>
+                  <p>&nbsp;                  </p>
+                  </center>
+                
+<input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
+<input type="hidden" name="LASTNAME" value ="<#LASTNAME>">
+<input type="hidden" name="ORGNAME" value="<#ORGNAME>">
+<input type="hidden" name="JOBTITLE" value="<#JOBTITLE>">
+<input type="hidden" name="EMAIL" value="<#EMAIL>">
+<input type="hidden" name="WORKPHONE" VALUE="<#WORKPHONE>">
+<input type="hidden" name="FAXPHONE" value="<#FAXPHONE>">
+<input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
+<input type="hidden" name="ADDRESS2" value="<#ADDRESS2>">
+<input type="hidden" name="CITY" value="<#CITY>">
+<input type="hidden" name="STATECD" value="<#STATECD>">
+<input type="hidden" name="ZIP" value="<#ZIP>">
+
+<input type="hidden" name="ADDRESSTYPE" value="Work">
+<input type="hidden" name="JOINDATE" value ="<#JOINDATE>">
+<input type="hidden" name="ISMEMBERFLG" value="<#ISMEMBERFLG>">
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="SHIPTOCD" value="O">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="Your Registration Info">
+<input type="hidden" name="ENTERUSERCD" value="Webuser">
+
+<input type="hidden" name="ENTERUSERCD" value="Webuser">
+<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+<input type="hidden" name="EMAILREPLYFORM" value="EmailConfirm.txt">
+<input type="hidden" name="EMAILSUBJECT" value="Thank You For Your Registration">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="TEXT">
+
+
+<input type="hidden" name="POSTSUBSCRIPTIONPRICE" value="">
+<input type="hidden" name="POSTSUBSCRIPTIONNAME" value="">
+<input type="hidden" name="POSTCREDITCARDTYPE" value="">
+
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONS" value="<#FUNCTIONS>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="RESPONSEPAGE" value="">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="CHECKDUPLICATE" value="Y">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N"> 
+
+                </form>
+
+              
+              </td>
+            </tr>
+  </table>
+</div>
+</body>
+

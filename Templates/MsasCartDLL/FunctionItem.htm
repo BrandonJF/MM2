@@ -1,0 +1,17 @@
+<li>
+	<a href="#" data-transition="slide">
+		<h3> <#TITLE><#COMMENTS LABEL="<br>Notes:"></h3>
+		<p><#QTY> x <#PRICE FORMAT='$0.00'>  </p>
+		<p class="ui-li-aside"><#ITEMTOTAL FORMAT='$0.00'></p>
+		 <a href="#popupMenuFor<#ORDERITEMCD>" data-rel="popup" data-position-to="window" data-transition="slideup" data-inline="true">Menu</a>
+	</a>
+</li>
+
+<div data-role="popup" id="popupMenuFor<#ORDERITEMCD>" data-theme="a">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+            <li data-role="divider" data-theme="b">Choose an action</li>
+            <!-- <li><a href="#">View details</a></li> -->
+            <!-- <li><a href="#">Quantity</a></li> -->
+            <li><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>">Delete</a></li>
+        </ul>
+</div>

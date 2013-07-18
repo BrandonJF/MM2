@@ -1,0 +1,120 @@
+<script language="javascript">
+function formValidate() {
+     if  (getFunction() )
+	 {
+		 
+	  document.addFunc.submit();
+	  return true;
+	  }
+	  
+}   
+
+function getFunction(){
+var tmpqty = "";
+var pos="";
+var size="";
+for (var i=0; i<document.addFunc.length; i++) 
+    {
+	   if (document.addFunc.elements[i].type =='text') 
+	   {
+	        if (document.addFunc.elements[i].value>0) 
+		{
+	        		tmpqty = tmpqty + ','+document.addFunc.elements[i].name+'='+document.addFunc.elements[i].value;
+	        }
+	    }
+   }  
+
+pos = tmpqty.indexOf(',');
+pos = pos +1;
+size = tmpqty.length;
+var finalstr = tmpqty.substring(pos,size);
+document.addFunc.FUNCTIONSADDED.value=finalstr;
+
+return true;
+}
+
+
+	
+</script>
+</head>
+
+<body>
+<h2>Registration Info</h2>
+<form name="addFunc" method="POST" action="ConfirmChange">
+<dl class="profile">
+	 <dt>Confirmation ID:</dt>
+	 <dd><#ASSIGNEDSESSIONCD></dd>
+	 
+	 <dt>Customer ID:</dt>
+	 <dd><#CUSTOMERCD></dd>
+	 
+	 <dt>Customer Name :</dt>
+	 <dd><#CUSTOMERNAME></dd>
+	 
+	 <dt>Event Name:</dt>
+	 <dd><#SESSIONNAME></dd>
+	 
+	 <dt>Event ID:</dt>
+	 <dd><#SESSIONALTCD></dd>
+	 
+	 <dt>Location Name:</dt>
+	 <dd><#LOCATIONNAME></dd>
+	 <dt>City:</dt>
+	 <dd><#LOCATIONCITY></dd>
+	 <dt>State:</dt>
+	 <dd><#LOCATIONSTATECD></dd>
+	 <p class="clear"></p>
+</dl>
+
+<fieldset>
+	 <legend>Enrolled Functions</legend>
+
+<table class="gutters">
+	 <tr>
+		  <th>Name</th>
+		  <th>Total Amount</th>
+	 </tr>
+		  <#ENROLLEDFUNCTIONS>
+	 <tr class="subtotal">
+		  <td class="text">Registration Total:</td>
+		  <td><#PRICEAMT FORMAT="$0.00"></td>  
+	 </tr>
+	 <tr class="subtotal">
+		  <td class="text">Registered Function Totals:</td>
+		  <td><#UDEF1AMT FORMAT="$0.00"></td>  
+	 </tr>
+</table>
+<p><a href="../../cgi-bin/Registrationdll.dll/Info?assignedsessioncd=<#ASSIGNEDSESSIONCD>&WRP=RegistrationInfo.htm&WFL=FunctionList.htm">View Function Options as Checkboxes </p>
+</fieldset>
+<fieldset class="myevents">
+	 <legend>Available Functions</legend>
+	 <table class="gutters">
+	 <tr>
+		  <th> </th>
+		  <th>Name</th>
+		  <th>Price</th>
+	 </tr>
+		  <#AVAILABLEFUNCTIONS HIDEENROLLED=N>
+	 </table>
+</fieldset>  
+<div class="buttons">
+	 <input name="button" class="myevents" type="button" onClick="formValidate()" value="Continue">
+</div> 
+<input type="hidden" name="ASSIGNEDSESSIONCD" value="<#ASSIGNEDSESSIONCD>">    
+<input type="hidden" name="FUNCTIONSADDED" value="">  
+</form>     
+<script>
+	 var now = new Date(); //hide available functions and continue button if event already happened
+	 var curDay = now.getDate();
+	 var curMonth = now.getMonth();
+	 curMonth++;
+	 var curYear = now.getFullYear();
+	 var today = Date.parse(curMonth + '/' + curDay + '/' + curYear); 
+	 var eventDate = Date.parse('<#SESSIONBEGDATE>');
+	 if(eventDate < today){
+		  $('.myevents').hide();
+	 }
+	 else {
+		  $('.myevents').show();
+	 }
+</script>

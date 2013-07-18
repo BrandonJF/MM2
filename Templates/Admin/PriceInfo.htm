@@ -1,0 +1,84 @@
+
+<script language="javascript">
+function checkNobox(itemname, elmname)
+{
+	if (eval('document.priceform.'+elmname+'.checked'))
+	{
+		eval('document.priceform.'+itemname+'.value="Y"');
+	}
+	else
+	{
+		eval('document.priceform.'+itemname+'.value="N"');
+	}
+	return true;
+}
+
+function setvalues()
+{
+	document.priceform.FORMEMBERFLAG.checked = ("<#FORMEMBERFLG>"=="Y");
+	document.priceform.ISWEBFLAG.checked = ("<#ISWEBFLG>"=="Y");
+	document.priceform.STANDARDFLAG.checked = ("<#STANDARDFLG>"=="Y");
+	document.priceform.EARLYFLAG.checked = ("<#EARLYFLG>"=="Y");
+	document.priceform.LATEFLAG.checked = ("<#LATEFLG>"=="Y");
+}
+
+</script>
+
+<h2>Pricing Information</h2>
+
+<form method="POST" action="PriceSave" name="priceform">
+	<table class='profileForm'>
+      <tr>
+        <td><table>
+	
+			<tr>
+              <td><div align="left">Event CD:</div></td>
+              <td><#ITEMALTCD></td>
+            </tr>
+            <tr>
+              <td>Price Type<br> (do not add spaces):</td>
+              <td><input type="text" name="PRICENAME" size="59" value="<#PRICENAME>"></td>
+            </tr>
+            <tr>
+              <td>Price Description:</td>
+              <td><input type="text" name="PRICEDES" size="59" value="<#PRICEDES>"></td>
+            </tr>
+            <tr>
+              <td>Amount: $</td>
+              <td><input type="text" name="PRICE" size="`5" value="<#PRICE>"></td>
+            </tr>
+          </table>
+          <p><strong>Please select Pricing type below. Select all that apply. </strong></p>
+          <p class="style1">
+            <input type="checkbox" name="FORMEMBERFLAG" onClick="checkNobox('FORMEMBERFLG', 'FORMEMBERFLAG')"  value="<#FORMEMBERFLG>">
+            Member Price?
+  <input type="checkbox" name="ISWEBFLAG" onClick="checkNobox('ISWEBFLG', 'ISWEBFLAG')"  value="<#ISWEBFLG>">
+            Available on Web?
+  <input type="checkbox" name="STANDARDFLAG" onClick="checkNobox('STANDARDFLG', 'STANDARDFLAG')"  value="<#STANDARDFLG>">
+            Standard  Price?
+  <input type="checkbox" name="EARLYFLAG" onClick="checkNobox('EARLYFLG', 'EARLYFLAG')"  value="<#EARLYFLG>">
+            Early Price?
+  <input type="checkbox" name="LATEFLAG" onClick="checkNobox('LATEFLG', 'LATEFLAG')"  value="<#LATEFLG>">
+            Late Price? </p>
+          <p class="style1"><span class="red">Note: &quot;Available on Web?&quot; MUST be checked to display price online. </span></p>
+          <p>
+            <input type="submit" value="Update Pricing" name="submit">
+          </p>
+          <input type="hidden" name="ITEMALTCD" value="<#ITEMALTCD>">
+          <input type="hidden" name="PRICELISTCD" value="<#PRICELISTCD>">
+          <input type="hidden" name="FORMEMBERFLG" value="<#FORMEMBERFLG>">
+          <input type="hidden" name="ISWEBFLG" value="<#ISWEBFLG>">
+          <input type="hidden" name="STANDARDFLG" value="<#STANDARDFLG>">
+          <input type="hidden" name="EARLYFLG" value="<#EARLYFLG>">
+          <input type="hidden" name="LATEFLG" value="<#LATEFLG>">
+          <input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>"></td>
+      </tr>
+    </table>
+	<p>&nbsp;</p>
+	<p>
+	  <input type="hidden" name="SESSIONCD" value="<#SESSIONCD>">
+</p>
+</form>
+<script>
+setvalues();
+</script>

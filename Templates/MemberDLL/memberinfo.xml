@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GetMemberInfoResult>
+	<FirstName><#FIRSTNAME ENCODE=JSON></FirstName>
+	<MiddleName><#MIDDLENAME ENCODE=JSON></MiddleName>
+	<LastName><#LASTNAME ENCODE=JSON></LastName>
+	<IsActive><#STATUSSTT></IsActive>
+	<IsMember><#ISMEMBERFLG></IsMember>
+	<MemberID><#CUSTOMERCD ENCRYPT=N></MemberID>
+	<MemberType><#CUSTOMERTYPE></MemberType>
+	<OrganizationName><#ORGNAME ENCODE=JSON></OrganizationName>
+	<OrgCD><#ORGCD></ORGCD>
+	<Suffix><#SUFFIX></Suffix>
+	<Title><#JOBTITLE ENCODE=JSON></Title>
+	<Username><#WEBUSERID></Username>
+	<Password><#WEBUSERPASSWORD></Password>
+	<WebsiteUrl><#WWWADDRESS></WebsiteUrl>
+	<EmailAddress><#EMAIL></EmailAddress>
+	<Addresses>
+		<MemberAddress>
+			<AddressLine1><#ADDRESS1 ENCODE=JSON></AddressLine1>
+			<AddressLine2><#ADDRESS2 ENCODE=JSON></AddressLine2>
+			<AddressLine3><#ADDRESS3 ENCODE=JSON></AddressLine3>
+			<AddressType><#ADDRESSTYPE></AddressType>
+			<City><#CITY></City>
+			<PostalCode><#ZIP></PostalCode>
+			<StateProvince><#STATECD></StateProvince>
+			<Country><#COUNTRY></Country>
+		</MemberAddress>
+	</Addresses>
+	<Phones>
+		<MemberPhone>
+			<PhoneNumber><#WORKPHONE></PhoneNumber>
+			<PhoneType>work</PhoneType>
+		</MemberPhone>
+		<MemberPhone>
+			<PhoneNumber><#HOMEPHONE></PhoneNumber>
+			<PhoneType>home</PhoneType>
+		</MemberPhone>
+		<MemberPhone>
+			<PhoneNumber><#MOBILEPHONE></PhoneNumber>
+			<PhoneType>mobile</PhoneType>
+		</MemberPhone>
+		<MemberPhone>
+			<PhoneNumber><#FAXPHONE></PhoneNumber>
+            <PhoneType>fax</PhoneType>
+		</MemberPhone>
+		<MemberPhone>
+			<PhoneNumber><#ALTPHONE></PhoneNumber>
+			<PhoneType>altphone</PhoneType>
+		</MemberPhone>
+	</Phones>
+</GetMemberInfoResult>

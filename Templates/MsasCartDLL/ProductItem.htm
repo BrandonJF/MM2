@@ -1,0 +1,26 @@
+<!-- <tr>
+        <td><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>" data-role="button" title="Remove this item from the cart" data-icon="delete" data-iconpos="notext" data-inline="true"></a></td>
+        <td>Product</td>
+        <td ><#PRODUCTNAME><span class="appeal" style="display: none"><br><input name="APPEALCD_<#ORDERITEMCD>" type="text" onBlur="submit();" value="<#APPEALCD>"></span></td>
+        <td><#PRICE FORMAT='$0.00'></td>
+        <td><input type="text" name="ITEMQTY_<#ORDERITEMCD>" value="<#QTY>" size="2" onChange="document.cartForm.submit()"></td>
+		<td class="prices"><#ITEMTOTAL FORMAT='$0.00'></td>
+</tr>
+ -->
+<li>
+	<a href="Info?ORDERITEMCD=<#ORDERITEMCD>" data-transition="slide">
+		<h3> <#PRODUCTNAME></h3>
+		<p><#ITEMQTY> x <#PRICE FORMAT='$0.00'>  </p>
+		<p class="ui-li-aside"><#ITEMTOTAL FORMAT='$0.00'></p>
+		 <a href="#popupMenuFor<#ORDERITEMCD>" data-rel="popup" data-position-to="window" data-transition="slideup" data-inline="true">Menu</a>
+	</a>
+</li>
+
+<div data-role="popup" id="popupMenuFor<#ORDERITEMCD>" data-theme="a">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+            <li data-role="divider" data-theme="b">Choose an action</li>
+            <!-- <li><a href="#">View details</a></li> -->
+            <!-- <li><a href="#">Quantity</a></li> -->
+            <li><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>">Delete</a></li>
+        </ul>
+</div>

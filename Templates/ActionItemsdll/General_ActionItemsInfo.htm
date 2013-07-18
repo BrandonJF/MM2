@@ -1,0 +1,72 @@
+
+<form method="POST" action="../../cgi-bin/MSASHELPDLL.dll/ActionItemUpdate?RESPONSEPAGE=ACTIONITEMPOST.HTM">
+				<h1>Servest Request Info</h1>
+                        <div align="center">
+                          <table border="0" cellpadding="0" cellspacing="0" width="473" height="461" class="body">
+                            <tr>
+    <td width="414" height="26" colspan="2"><p c></p></td>
+                            </tr>
+                          </center>
+                           
+          <center>
+                           
+                            <tr>
+    <td width="414" height="1"><strong>Item Number:</strong></td>
+    <td width="368" height="1"><#LISTITEMNUM></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Customer Service Request:</strong></td>
+    <td width="368" height="1"><#LISTNAME></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Action:</strong></td>
+    <td width="368" height="1"><#ACTIONTYPE></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Due Date:</strong></td>
+    <td width="368" height="1"><#ACTIONDATE></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1" valign="top"><strong>Current Status:</strong></td>
+    <td width="368" height="1">
+       <#ACTIONSTT></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Priority:</strong></td>
+    <td width="368" height="1"><#ACTIONPRIORITY></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Assigned To:</strong></td>
+    <td width="368" height="1"><#ACTIONASSIGNEDTOCD></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Assigned By:</strong></td>
+    <td width="368" height="1"><#UPDATEUSERCD></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1"><strong>Assigned Date:</strong></td>
+    <td width="368" height="1"><#ACTIONASSIGNEDDATE></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1">&nbsp;</td>
+    <td width="368" height="1">&nbsp;</td>
+                            </tr>
+                            <tr>
+    <td width="414" height="133" valign="top"><strong>Customer Service Request:</strong></td>
+    <td width="368" height="133"><textarea rows="8" cols="40" name="ACTIONCOMMENTS" disabled><#ACTIONCOMMENTS></textarea></td>
+                            </tr>
+ <tr>
+    <td width="414" height="133" valign="top"><strong>Response:</strong></td>
+    <td width="368" height="133"><textarea rows="8" cols="40" name="ACTIONRESPONSETXT" disabled><#ACTIONRESPONSETXT></textarea></td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1" valign="top">&nbsp;</td>
+    <td width="368" height="1">&nbsp;</td>
+                            </tr>
+                            <tr>
+    <td width="414" height="1" valign="top">&nbsp;</td>
+    <td width="368" height="1"></td>
+                            </tr>
+                          </table>
+                        </div>
+</form>

@@ -1,0 +1,138 @@
+ <h2>Submit Resume/Job Application     </h2> 
+<form method="POST" action="Applyjob" onSubmit="" >
+      
+<fieldset>
+      <ul>
+            <li>
+                  <label for="FIRSTNAME">First Name</label>
+                  <input type="text" name="FIRSTNAME" value="<#FIRSTNAME>">
+            </li>
+            <li>
+                  <label for="MIDDLEINIT">Middle Name</label>
+                  <input type="text" name="MIDDLEINIT" value="<#MIDDLEINITIAL>">
+            </li>
+            <li>
+                  <label for="LASTNAME">Last Name</label>
+                  <input type="text" name="LASTNAME" value="<#LASTNAME>">
+            </li>
+            <li>
+                  <label for="ADDRESS1">Address</label>
+                  <input type="text" name="ADDRESS1" value="<#ADDRESS1>">
+            </li>
+            <li>
+                  <label for="ADDRESS2">Suite/Apt</label>
+                  <input type="text" name="ADDRESS2" value="<#ADDRESS2>">
+            </li>
+            <li>
+                  <label for="CITY">City</label>
+                  <input type="text" name="CITY" value="<#CITY>">
+            </li>
+            <li>
+                  <label for="STATECD">State</label>
+                  <select size="1" name="STATECD">
+                <#CBXSTATECD>
+            </select>
+            </li>
+            <li>
+                  <label for="ZIP">Zip</label>
+                  <input type="text" name="ZIP" value="<#ZIP>" size="10">
+            </li>
+            <li>
+                  <label for="ADDRESS1">Country</label>
+                  <select size="1" name="COUNTRY">
+                <#CBXCOUNTRY>
+            </select>
+            </li>
+            <li>
+                  <label for="CONTACTPHONE">Phone</label>
+                  <input type="text" name="CONTACTPHONE" value="<#WORKPHONE>">
+            </li>
+            <li>
+                  <label for="FAXPHONE">Fax</label>
+                  <input type="text" name="FAXPHONE" value="<#FAXPHONE>">
+            </li>
+            <li>
+                  <label for="EMAIL">Email</label>
+                  <input type="text" name="EMAIL" value="<#EMAIL>">
+            </li> 
+            <li>
+                  <label for="PREFERREDCONTACTMETHOD">Contact Method</label>
+                  <select size="1" name="PREFERREDCONTACTMETHOD">
+                <#CBXJOBCONTACTMETHOD>
+            </select>
+            </li>
+            <li>
+                  <label for="JOBSTARTDATE">Availability</label>
+                  <input type="text" name="JOBSTARTDATE" value="<#JOBSTARTDATE>">
+                  
+            </li>
+            <li>
+                  <label for="MINSALARLYAMT">Min. Salary</label>
+                  <input type="text" name="MINSALARLYAMT" value="<#MINSALARLYAMT>">
+                  
+            </li>
+            <li>
+                  <label for="MAXSALARLYAMT">Max. Salary</label>
+                  <input type="text" name="MAXSALARLYAMT" value="<#MAXSALARLYAMT>">
+                  
+            </li>
+            <li>
+                  <label for="MAXSALARLYAMT">Highest Degree</label>
+                  <select size="1" name="EDUCATIONDEGREE">
+                  <option><#RTVEDUCATIONLEVELREFSCVEDUCATIONDEGREEFLTTYPECDFLVEDUC></option>
+            </select>   
+            </li>
+            <li>
+                  <label for="EDUCATIONGPAAMT">GPA</label>
+                  <input type="text" name="EDUCATIONGPAAMT">
+            </li>
+            <li>
+                  <label for="JOBREQUIREDSKILLSLST">Required Skills</label>
+                  <select size="5" name="JOBREQUIREDSKILLSLST" multiple>
+                 <#CBXREQSkillRef>
+            </select>
+            </li>
+            <li>
+                  <label for="JOBPREFERREDSKILLSLST">Other Skills</label>
+                  <select size="5" name="JOBPREFERREDSKILLSLST" multiple>
+                 <#CBXPREFSkillRef>
+            </select>
+            </li>
+             <li>
+                  <label for="RESUMETEXT">Resume</label>
+                  <textarea rows="31" name="RESUMETEXT" cols="52"><#RESUMETEXT></textarea>
+            </li>
+             <li>
+                  <label for="CALLFLG">OK to Call?</label> <input type="radio" value="Y" name="CALLFLG" checked>Yes
+               <input type="radio" name="CALLFLG" value="N">No
+            </li>
+            <li>
+                  <label for="CALLFLG">OK to Email?</label> <input type="radio" value="Y" name="EMAILFLG" checked>Yes
+               <input type="radio" name="EMAILFLG" value="N">No
+            </li>
+            <li>
+                  <label for="FAXFLG">OK to Fax?</label> <input type="radio" value="Y" name="FAXFLG" checked>Yes
+               <input type="radio" name="FAXFLG" value="N">No
+            </li>
+            <li>
+                  <label for="IMMEDIATESTARTFLG">Start Now?</label> <input type="radio" value="Y" name="IMMEDIATESTARTFLG" checked>Yes
+               <input type="radio" name="IMMEDIATESTARTFLG" value="N">No
+            </li>
+            <li>
+                  <label for="EMPLOYEDFLG">Employed?</label> <input type="radio" value="Y" name="EMPLOYEDFLG" checked>Yes
+               <input type="radio" name="EMPLOYEDFLG" value="N">No
+            </li>
+      </ul>
+</fieldset>
+
+<div class="buttons">
+      <input type="submit" value="Submit" name="SUBMIT"> 
+                <input type="reset" value="Reset" name="RESET">
+</div>
+      
+          
+        <input type="hidden" name="CONTRACTNUM" value="<#CONTRACTNUM>">
+          <input type="hidden" name="RESUMETYPE" value="TEXT">
+		  <input type="hidden" name="CHECKDUPLICATE" value="Y">
+      </form>
+

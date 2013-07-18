@@ -1,0 +1,136 @@
+<script language="javascript">
+	var orgnamevar = "";
+	var orgcdvar = "";
+	var parentcdvar = "";
+    var firstSearch = false;
+</script>
+
+<h3>Register Additional Attendees</h3>
+<div class="formIntro">
+	<p>If an individual is not listed below, please enter their email address to search for them in the database. If no record is found, click on "Add New Atteendee".</p>
+</div>
+<form name="searchForm">
+	<fieldset>
+		<ul>
+            <li>
+				<label>My Organization Only</label><input type="checkbox" id="chkMyOrgOnly" name="chkMyOrgOnly">
+			</li>
+			<li>
+				<label for="LASTNAME">Last Name</label>
+				<input name="LASTNAME" onkeypress="checkFirstSearch()">
+			</li>
+			<li>
+				<label for="EMAIL">Email</label>
+				<input name="EMAIL" onkeypress="checkFirstSearch()">
+			</li>
+			<li>
+				<label for="ORGNAME">Organization</label>
+				<input name="ORGNAME" onkeypress="checkFirstSearch()">
+			</li>
+		</ul>
+		<div class="buttons">
+			<input type="button" name="Sbtn" value="Search" onClick="$('#searchResults').show();searchGuests_ajax(document.searchForm)">
+				<input type="button" value="Add New Attendee" name="ADDUSER" onClick="window.location='../memberdll.dll/openpage?WRP=Customer_New_event.htm&WMT=../main_template_none.htm'; ">
+		</div>
+	</fieldset> 
+	<input type="hidden" name="RANGE" value="1/50">
+        <input type="hidden" name="ORGCD" value="<#COOKIE_ORGCD>">
+    <input type="hidden" name="WMT" value="../main_template_none.htm">
+    <input type="hidden" name="WHP" value="guestSearch_header.htm">
+    <input type="hidden" name="WBP" value="guestSearch_list.htm">
+    <input type="hidden" name="WNR" value="guestSearch_noRec.htm">
+</form>
+<div style="display: none;" id="loadingSection"><p><img src="../../images/loading.gif">  Loading search results...</p></div>
+   
+	<div id="searchResults" style='display: none;'>
+		
+		<#CONTENT>    
+	</div>
+
+<script>
+   
+    var lastSearchValue = "";
+    var showTopValue = 5;
+    var noMoreRecords= false;
+    function searchGuests_ajax(formName){
+        //alert(formName.name);
+        var orgcd = 0;
+        var doorgonly = false;
+        var isorgsearch = document.getElementById('chkMyOrgOnly');
+        if (isorgsearch != null) {
+            doorgonly = isorgsearch.checked;
+            var orgcd = formName.ORGCD.value;
+        };
+        if(orgcd == 0){
+            doorgonly = false;
+        }
+        var lastNameSearch = "" + formName.LASTNAME.value;
+        var emailSearch = "" + formName.EMAIL.value;
+        var orgNameSearch = "" + formName.ORGNAME.value;
+        var newSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch + orgcd;
+        if (newSearchValue != lastSearchValue) { //NQ - 1-21-12 - meaning the search criteria has changed...
+            $("#loadingSection").show();
+            noMoreRecords = false;
+            showTopValue = 5;
+            if (doorgonly) {
+                var searchGuestUrl = "../memberdll.dll/list?orgcd=" + orgcd + "&email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=guestSearch_header.htm&WBP=guestSearch_list.htm&wnr=guestsearch_norecords.htm&sort=lastname&RANGE=1/5&wmt=none&SHOWTOP=5";// + showTopValue;
+            }
+            else{
+                var searchGuestUrl = "../memberdll.dll/list?email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=guestSearch_header.htm&WBP=guestSearch_list.htm&wnr=guestsearch_norecords.htm&sort=lastname&RANGE=1/5&wmt=none&SHOWTOP=5";
+                }
+            lastSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch + orgcd;
+            $.ajax({url:searchGuestUrl, type:"get",async:true,
+                success:function(response){
+                    $("#searchResults").html(response);
+                    $("#loadingSection").hide();
+                }
+            });
+        }
+        setTimeout("searchGuests_ajax(document." +formName.name+")", 500);
+    }   
+    function searchGuests_ajax_loadMore(formName){
+        var orgcd = 0;
+        var doorgonly = false;
+        var isorgsearch = document.getElementById('chkMyOrgOnly');
+        if (isorgsearch != null) {
+            doorgonly = isorgsearch.checked;
+            var orgcd = formName.ORGCD.value;
+        };
+        if (orgcd == 0){
+            doorgonly = false;
+        }
+        var lastNameSearch = "" + formName.LASTNAME.value;
+        var emailSearch = "" + formName.EMAIL.value;
+        var orgNameSearch = "" + formName.ORGNAME.value;
+        var newSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch;
+        if (!noMoreRecords){
+            showTopValue +=5;
+            $("#loadingMoreSection").show();
+            if (doorgonly) {
+                var searchGuestUrl = "../memberdll.dll/list?orgcd=" + orgcd + "&email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=none&WBP=guestSearch_list.htm&wnr=guestsearch_norecords.htm&wmt=none&sort=lastname&RANGE=" + (showTopValue-4)+ "/5&wmt=none&SHOWTOP=" + showTopValue;
+            }else{
+                var searchGuestUrl = "../memberdll.dll/list?email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=none&WBP=guestSearch_list.htm&wnr=guestsearch_norecords.htm&wmt=none&sort=lastname&RANGE=" + (showTopValue-4)+ "/5&wmt=none&SHOWTOP=" + showTopValue;
+            }
+            lastSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch + orgcd;
+            $.ajax({url:searchGuestUrl, type:"get",async:true,
+                success:function(response){
+                    if (response.length < 5) {
+                        noMoreRecords = true;
+                        $("#loadMoreContainer").hide();
+                        $("#noMoreResults").show();
+                    }
+                    $("#searchResultsTable").append(response);
+                    $("#loadingMoreSection").hide();
+                    
+                }
+            });
+        }
+    }
+    function checkFirstSearch() {
+        if (!firstSearch) {
+            $('#searchResults').show();
+            searchGuests_ajax(document.searchForm);
+        }
+        firstSearch = true;
+    }
+</script>

@@ -1,0 +1,164 @@
+<SCRIPT LANGUAGE="JavaScript1.2" TYPE="text/javascript">
+
+var isFunctions = false;
+
+function formValidate() {
+     if ((priceTest(document.event)) && (getFunctions(document.event)))
+	  {
+		eventReg_addToCart_noProfile(document.event, "");
+		return true; 
+	  }
+}   
+
+
+</script>
+<div id="eventOpen">
+<form name="event" method="POST" action="../Registerdll.dll/Customer" >
+    
+        <legend>Register Now</legend>
+        <script>
+
+if("<#ISMEMBERFLG>" === "Y"){
+	document.write("");
+	}
+	else if("<#CUSTOMERCD>" != ""){
+	document.write("<p><a href='../memberdll.dll/info?wrp=membershipapp.htm'>Become a member</a> and get member pricing!</p>");    
+} else{
+    document.write("<p>If you are a member, please <a href='../utilities.dll/openpage?wrp=mainlogin.htm'>login</a> for member pricing.</p>")
+}
+
+</script>
+        
+            <div data-role="fieldcontain">
+				<label for="selPrice">Price List</label>
+			   <select size="1" name="PRICETYPESTT" onchange="RegistrationPriceChange()" id="selPrice"><#PRICELIST SORT="pricedes" ONLYOPTIONS=Y></select>
+            </div>
+            
+        <div style="display:none;" id="alreadyAddedToCart">
+            Your items have been added to <a href="../msascartdll.dll/showcart">your cart</a>.
+        </div>
+        
+		
+		
+		
+         
+		<a href="#" id="addToCartButton" data-icon="plus" data-role="button">Add to Cart</a>
+		
+		<!--<input type="button" value="Select Functions" id="addToCartButton" data-rel="popup" data-position-to="window" data-icon="plus" onclick="$( '#popupBasic' ).popup( 'open' )">-->
+		
+		<a href="#popupBasic" data-rel="popup" data-position-to="window" id="selectFunctions" data-role="button">Select Functions</a>
+		
+		<div data-role="popup" id="popupBasic" data-overlay-theme="a" data-theme="a" data-tolerance="15,15" class="ui-content">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			<iframe id="frame" width="497" height="298" seamless></iframe>
+		</div>
+		 
+		 
+		 
+    <p style="text-align: center"><br><strong><a href="#" onclick="EventRegister('<#REGSTATUSCD>', '<#sessionaltcd>')" data-role="button">Register multiple people for this event</a></strong></p>
+    
+<div class="functionSection">
+    <#FUNCTIONLIST SORT="FUNCTIONLEVEL">
+</div>
+</div>
+<div id="eventFull">
+    <fieldset>
+        <legend>Registration Closed</legend>
+        <p>This event has already reached its maximum attendee capacity.</p>
+    </fieldset>
+</div>
+<div id="eventClosed">
+    <fieldset>
+        <legend>Registration Closed</legend>
+        <p>This online registration for this event has been closed.</p>
+    </fieldset>
+</div>
+
+
+
+
+
+
+<input type="hidden" name="CUSTOMERCD" value="<#COOKIE_CUSTOMERCD>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="FPRICEAMT" value="">
+<input type="hidden" name="FPRICETYPESTT" value="">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="FUNCTIONSQTY" value="">
+<input type="hidden" name="PAYEETYPECD" value="I">
+<input type="hidden" name="REGSTATUSCD" value="<#REGSTATUSCD>">
+<input type="hidden" name="COUNTQTY" value="1">
+	 <input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>">
+</form>
+
+   
+
+<script>
+//NQ  - 1-6-12 
+if("<#REGSTATUSCD>" == "1"){
+    $("#eventOpen").hide();
+            $("#eventClosed").hide();
+        
+        }else if("<#REGSTATUSCD>" == "2"){
+            $("#eventFull").hide();
+            $("#eventOpen").hide();
+        }else{
+            
+            $("#eventFull").hide();
+        $("#eventClosed").hide();
+        }
+if (isFunctions) {
+	$('#addToCartButton').hide();
+	$('.functionSection').hide();
+	
+	$("#selectFunctions").click(function(e) {
+		e.preventDefault();
+		 
+		var page = '../registerdll.dll/RegistrationForm?sessionaltcd=<#SESSIONALTCD>&WRP=RegistrationForm_popup.htm&wmt=../main_template_none.htm';
+		$('#frame').attr('src', page);
+	
+		$( "#popupBasic iframe" )
+			.attr( "width", 0 )
+			.attr( "height", 0 );
+		  
+		$( "#popupBasic" ).on({
+			popupbeforeposition: function() {
+				var size = scale( 900, 800, 15, 1 ),
+					w = size.width,
+					h = size.height;
+
+				$( "#popupBasic iframe" )
+					.attr( "width", w )
+					.attr( "height", h );
+			},
+			popupafterclose: function() {
+				$( "#popupBasic iframe" )
+					.attr( "width", 0 )
+					.attr( "height", 0 );    
+			}
+		});
+	          
+	
+	
+	
+	
+	
+	
+	
+	
+	});//end
+
+	
+	
+	
+} else {
+	$("#addToCartButton").show();
+	$("#selectFunctions").hide();
+	$("#addToCartButton").click(function() {
+		
+		formValidate();
+	});
+}
+
+</script>

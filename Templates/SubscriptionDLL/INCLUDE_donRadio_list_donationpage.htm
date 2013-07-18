@@ -1,0 +1,33 @@
+
+
+
+<li><input type="radio" name="DONATIONNAME" id="<#SUBSRIPTIONNAME>" value="<#SUBSRIPTIONNAME>"  size="10"  onclick=" updateDonationPage(this);checkRecurring();" class="subItem">   <span id="section_<#SUBSRIPTIONNAME>"><#SUBSCRIPTIONDES></span></li>
+
+
+<script type="text/javascript">
+
+	//alert("<#SUBSRIPTIONNAME>");
+	var subscriptionName = "<#SUBSRIPTIONNAME>";
+	
+	if (subscriptionName == "005_DIRECT_MAIL" )
+	{
+		document.getElementById("section_<#SUBSRIPTIONNAME>").innerHTML = "<strong>General Gift:</strong> Your donation will support the American Forest Foundation's mission to ensure the sustainability of family forests for future generations.";
+	} 
+	
+	else 	if (subscriptionName == "005_IN_HONOR_OF" )
+	{
+		document.getElementById("section_<#SUBSRIPTIONNAME>").innerHTML = "<strong>Honor Gift:</strong> Honor a friend or loved one with a donation in their name, perfect for birthdays, holidays, weddings, anniversaries, and more.";
+	} 
+
+	else if (subscriptionName == "005_IN_MEMORY_OF" )
+	{
+		document.getElementById("section_<#SUBSRIPTIONNAME>").innerHTML = "<strong>Memorial Gift:</strong> Commemorate a friend or loved one with a memorial gift in their name.";
+	} 
+	
+	else if (subscriptionName == "005_DIRECT_MAIL_EZM" )
+	{
+		document.getElementById("section_<#SUBSRIPTIONNAME>").innerHTML = "<strong>Monthly Gift:</strong> Monthly giving allows the deductions to be automatically taken every month - and you don't have to lift a finger.";
+	}
+
+
+</script>

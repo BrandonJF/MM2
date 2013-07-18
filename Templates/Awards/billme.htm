@@ -1,0 +1,21 @@
+<h2>Award Application - Confirmation</h2>
+<p>Thank you registering. Please print out this invoice and send it to us, along with your payment, to complete the registration.</p>
+<SCRIPT> 
+if (window.print) { document.write('<input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()">'); }</script>
+<dl class="profile">
+    <dt>Balance Due</dt><dd><#TOTALAMT></dd>
+    <dt>Award Name</dt><dd><#AWARDNAME></dd>
+    <dt>Application #</dt><dd><#AWARDCD></dd>
+    <dt>Applicant</dt><dd><#FIRSTNAME> <#LASTNAME></dd>
+    <dt>Company/Organzation</dt>
+    <dd><#ORGNAME><br>
+    <#ADDRESS1> <#ADDRESS2><br>
+     <#CITY>, <#STATECD> <#ZIP>
+    </dd>
+    <dt>Work Phone</dt><dd><#WORKPHONE></dd>
+    <dt>Email</dt><dd><#EMAIL></dd>
+    <dt>&nbsp;</dt><dd><a href="../Documentdll.dll/view?DOCUMENTNUM=<#DOCUMENTNUM>">View Document</a></dd>
+    <p class="clear"></p>
+</dl>
+
+

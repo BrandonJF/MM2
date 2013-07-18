@@ -1,0 +1,45 @@
+<h2>Search Resumes</h2>
+<form method="POST" action="../jobboard.dll/ApplicantList" onSubmit="">
+<fieldset>
+	  <ul>
+			<li>
+				  <input type="checkbox" name="A_ONLY" value="Y"> Only my advertisements (Click here to view applicants for your specific
+			job board ad)
+			</li>
+			<li>
+				  <label for="JOBREQUIREDSKILLSLST">Required Skills</label>
+				  <select size="3" name="JOBREQUIREDSKILLSLST" multiple>
+<#CBXREQSkillRef>
+              </select>
+			</li>
+			<li>
+				  <label for="EDUCATIONDEGREE">Highest Degree</label>
+				  <select size="1" name="EDUCATIONDEGREE">
+<#CBXDEGREE>
+              </select>
+			</li>
+			<li>
+				   <label for="CITY">City</label>
+				   <input type="text" name="CITY">
+			</li>
+			<li>
+				   <label for="STATECD">State</label>
+				   <select size="1" name="STATECD">
+				  <#CBXSTATECD>
+              </select>
+			</li>
+			<li>
+				  <label for="COUNTRY">Country</label>
+				  <select size="1" name="COUNTRY">
+	<#CBXCOUNTRY>
+              </select>
+			</li>
+	  </ul>
+	  <div class="buttons">
+			<input type="submit" value="Search" name="SUBMIT">
+				  <input type="reset" value="Reset" name="RESET">
+	   </div>
+</fieldset>
+     <input type="hidden" name="RANGE" value=5>
+
+      </form>

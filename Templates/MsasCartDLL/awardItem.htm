@@ -1,0 +1,8 @@
+<tr>
+        <td><a href="RemoveItem?ORDERITEMCD=<#ORDERITEMCD>" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true" title="Remove this item from the cart">Remove</a></td>
+        <td>Award</td>
+        <td><#PRODUCTNAME></td>
+        <td><#PRICE FORMAT='$0.00'></td>
+        <td><input type="text" name="ITEMQTY_<#ORDERITEMCD>" value="<#QTY>" size="2" onChange="document.cartForm.submit()"></td>
+		<td class="prices"><#ITEMTOTAL FORMAT='$0.00'></td>
+</tr>

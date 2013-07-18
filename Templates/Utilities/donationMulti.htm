@@ -1,0 +1,61 @@
+<h2>Make a Donation</h2>
+		<#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_donItems_Header.htm" WBP="INCLUDE_donItems_list.htm" PARAMS="UDEF1TXT=donation,ONWEBFLG=Y,SORT=SUBSCRIPTIONDES">
+        <#INCLUDE DLL="subscriptiondll.dll" ACT="subitems" WHP="INCLUDE_donRadio_Header.htm" WBP="INCLUDE_donRadio_list.htm" PARAMS="UDEF1TXT=donation,ONWEBFLG=Y,SORT=SUBSCRIPTIONDES">
+<div class="buttons"><input type="button" id="button" value="Add to Cart" ></div>
+			
+			<!-- begin validation tooltip -->
+			<div style="padding-left: 300px;" >
+			<div style="float:left; padding-left: 20px;">
+				<div class="validity-tooltip" style="display:none;">
+					Please enter a value for at least one of the donation funds.
+					<div class="validity-tooltip-outer">
+						<div class="validity-tooltip-inner"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- end validation tooltip -->
+
+<!-- the section below is here because the donation item templates are calling updateTotals(), which requires these ID's be present-->
+<div style="display:none;">
+<div id="subsTotal"></div>
+<div id="membershipTotal"></div>
+<div id="donsTotal"></div>
+<div id="totalAmt"></div>
+<div id="SUBITEMS"></div>
+</div>
+
+<script>
+
+$('#button').click(function(){
+	var donURL = '../msascartdll.dll/showcart?';
+	$('.subItem').each(function(){
+        if((this.type=="text") && (parseFloat(this.value) > 0.00)){
+			donURL += 'ADD=ORDERTYPE=D,ITEMCD='+this.id+',PRICEAMT='+parseFloat(this.value)+'&';
+        }
+      if(this.checked){
+        donURL += 'ADD=ORDERTYPE=D,ITEMCD='+this.id+',PRICEAMT='+parseFloat(this.value)+'&';
+      }
+	});
+		
+	if(donURL != '../msascartdll.dll/showcart?'){
+		window.location = donURL;
+	}else{
+		showTip();
+	}
+});
+
+
+	$('.validity-tooltip').click(function() {
+		$('.validity-tooltip').fadeOut('slow');
+  
+	});
+
+
+function showTip(){
+	
+	$('.validity-tooltip').toggle();
+}
+
+-->
+</script>

@@ -1,0 +1,343 @@
+<SCRIPT LANGUAGE="JavaScript1.2" TYPE="text/javascript">
+<!--
+//store whether or not there are functions in order to hide function section
+var isFunctions = false;
+
+function formValidate(addAnother) {
+     if (checkAttendee() && (priceTest(document.event)) && (getFunctions(document.event)))
+	  //document.event.submit();
+	  //return true;
+	  eventReg_addToCart(document.event, addAnother);
+}
+
+//NQ -5-5-11 - get the user emergency contact info first;
+var custCdVal = "<#CUSTOMERCD ENCRYPT='N'>";
+
+function checkAutoFunctions() {
+ var functioncd = document.event.AUTOFUNCTIONCD.value;
+ for (var i=0; i<document.event.length; i++) {
+	   if (document.event.elements[i].type =='text') {
+	        //alert(document.event.elements[i].name + functioncd);
+	        if (document.event.elements[i].name==functioncd) {
+	        		document.event.elements[i].value=1;
+	        }
+	     }
+    }
+ }
+
+-->
+</script>
+<h2><#SESSIONNAME> Registration</h2>
+<form name="event" method="POST" action="../Registerdll.dll/NextForm" >
+<fieldset>
+	 <legend>Who are you registering for this event?</legend>
+
+			   <label for="spanRegName">Registrant</label>
+			   <span id="spanRegName"></span>
+
+	 <div class="buttons">
+		  <input type="button" style="margin-left:8px;" name="regMe" id="regMe" value="Register Myself" onclick="fillSelfRegInfo('<#COOKIE_CUSTOMERCD>');" />
+		  <input type="button" value="Register Different Attendee" name="addb2" onClick="selectAttendeeActions();openSearchGuests();">
+	 </div>
+</fieldset>
+
+<fieldset>
+	 <legend>Price Selectio</legend>
+	 <ul>
+		<li>
+			<label for="PRICELIST">Price List</label>
+			<select size="1" name="PRICETYPESTT" id="price_dropDown" onChange="priceChanged(document.event)">
+			<#PRICELIST>
+			</select>
+		</li>
+	 </ul>
+</fieldset>
+
+<fieldset id="functionSection">
+	 <legend>Function Selection</legend>
+	 <ul>
+		 <#FUNCTIONLIST>
+	 </ul>
+</fieldset>
+
+<tr class='functionSection'>
+	<th colspan='2' class='sectionHeading'>Functions</th>
+</tr>
+<tr class="functionSection">
+	<td colspan="2">
+		<table class="hasFunc">
+		<#FGROUP_WKSHP HEADER="Workshops">
+		</table>
+		<table>
+		<#FGROUP_EDU HEADER="Educational Sessions">
+		</table>
+		<table>
+		<#FGROUP_ADA HEADER="Lunch Options">
+		</table>
+		<table>
+		<#FGROUP_SOCIAL HEADER="Social Events">
+		</table>
+	</td>
+</tr>
+<tr>
+	<td class="sectionHeading" colspan="2">Do you need to add another attendee to your registration?</td>
+</tr>
+<tr>
+	<td colspan="2"><p>To add this registration to your cart and continue with adding guests or additional attendees click Add Another Attendee. Next, proceed with the registration process by clicking Register Different Attendee at the top of the page.  When you have finished your registration click Go To Cart.</p>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" class="holdButtons sectionDivider">
+		<input type='button' name='Add To Cart' value='Add Another Attendee' onClick='formValidate(true);'>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" class="holdButtons">
+	<input type='button' name='btnCheckout' value='Go To Cart' onClick='formValidate(false);'>
+	</td>
+</tr>
+</table>
+
+
+
+<input type="hidden" name="MAINCUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="COUNTQTY" value="1">
+<input type="hidden" name="FPRICEAMT" value="<#FPRICEAMT>">
+<input type="hidden" name="FPRICETYPESTT" value="<#FPRICETYPESTT>">
+<input type="hidden" name="PAYEETYPECD" value="I">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="FUNCTIONSQTY" id="FUNCTIONSQTY" value="">
+<input type="hidden" name="FCOMMENTS" id="FCOMMENTS" value="<#FCOMMENTS>">
+<input type="hidden" name="REGSTATUSCD" value="1">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="LISTCART" value="<#LISTCART>">
+<input type="hidden" name="LISTTOTAL" value="<#LISTTOTAL>">
+<input type="hidden" name="CHECKDUPLICATE" value="Y">
+
+
+</form>
+
+<script>
+	//hide functions section if no functions
+	if(!isFunctions){
+		$('#functionSection').hide();
+	}
+	initRegForm('<#FIRSTNAME> <#LASTNAME>');
+</script>
+
+<SCRIPT LANGUAGE="JavaScript1.2" TYPE="text/javascript">
+	 var isFunctions = false;
+	 var sessionaltcd = '<#SESSIONALTCD>'; //REQUIRED!!!
+</script>
+
+<h2><#SESSIONNAME> Registration</h2>
+<!--<form name="event" method="POST" action="../Registerdll.dll/MPaymentForm">-->
+<form name="order" id="order" method="POST" action="../registerdll.dll/mpost">
+<fieldset>
+	 <legend>Price Selection</legend>
+	 <ul>
+		<li><input type="checkbox" checked id="registerMe_button" onClick="toggleRegisterMe(this);" /> Register Me For This Event
+		</li>
+		<li id="registerMe_section">
+			<label for="PRICELIST">Price List</label>
+			<select size="1" name="PRICETYPESTT" id="price_dropDown" onChange="priceChanged(document.event)">
+			<#PRICELIST>
+			</select>
+		</li>
+	 </ul>
+</fieldset>
+
+<fieldset>
+	 <legend>Function Selection</legend>
+	 <ul>
+		 <#FUNCTIONLIST>
+	 </ul>
+</fieldset>
+
+<fieldset>
+	 <legend>Add Guests</legend>
+	 <ul id="AddUser">
+		<#CONTENT>
+	 </ul>
+	 <div class="buttons">
+		  <input type="button" class="boldfont" value="Register Additional Attendees" name="addb2" id="guestSearch">
+		<input type="button" class="boldfont" value="Register Guests from my Organization" id="orgGuestSearch">
+		<script>
+
+	$(document).ready(function () {
+            $('#guestSearch').live('click', function (e) {
+                e.preventDefault();
+				var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/memberdll.dll/list?email=3929093jjoijjji&whp=guestSearch_header.htm&wbp=guestSearch_list.htm&wnr=guestSearch_noRec.htm&wmt=../main_Template_none.htm&sort=lastname';
+                return parent.uiPopUp(page);
+        });
+
+		 $('orgGuestSearch').live('click', function (e) {
+                e.preventDefault();
+				var newSearch = document.order.ORGNAME.value;
+                var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/memberdll.dll/list?orgcd='+ORGCD+'&whp=guestSearchOrg_header.htm&wbp=guestSearchOrg_list.htm&wnr=guestSearchOrg_noRec.htm&wmt=../main_Template_none.htm&sort=lastname';
+                var pagetitle = $(this).attr("title");
+                return parent.uiPopUp(page);
+        });
+	});
+		</script>
+	 </div>
+</fieldset>
+<div class="buttons">
+        <input type="button" value="Add to Cart" onClick='multiEventReg_addToCart(document.order)';>
+        <input type="button" data-theme="g" value="Pay Now" onClick='$("#cartPayment").show(); $("#selectPayment").hide();'>
+    </div>
+<div class='cartPayment' id='cartPayment' style="display:none;">
+    <input type="hidden" name="RESPONSEPAGE" value="MultiRegisterPost.htm">
+<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm" >
+<div class="buttons">
+  <input type="submit" id='submitButton' value="Submit Registration"  />
+</div>
+</div>
+
+<input type="hidden" name="MAINCUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" id="SESSIONALTCD" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="REGSTATUSCD" value="<#REGSTATUSCD>">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="WSI" value="none">
+
+<input type="hidden" name="CUSTOMERTYPE" value="<#CUSTOMERTYPE>">
+<input type="hidden" name="CUSTOMERCLASSSTT" value="<#CUSTOMERCLASSSTT>">
+<input type="hidden" name="HEADOFHOUSEHOLDFLG" VALUE="<#HEADOFHOUSEHOLDFLG>">
+<input type="hidden" name="STATUSSTT" value="<#STATUSSTT>">
+<input type="hidden" name="CONTACTSTT" value="<#CONTACTSTT>">
+<input type="hidden" name="INFOSTATUSSTT" value="<#INFOSTATUSSTT>">
+<input type="hidden" name="SHIPTOCD" value="O">
+<input type="hidden" name="PAYMENTREFEXPDATE" value="">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="ADDRESSFLOWFLG" value="<#ADDRESSFLOWFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="USESUFFIXFLG" value="<#USESUFFIXFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="UPDATEUSERCD" value="N">
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="FUNCTIONSQTY" value="<#FUNCTIONSQTY>">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="MULTICUSTOMERLIST" value="<#MULTICUSTOMERLIST>">
+<input type="hidden" name="MULTIFUNCTIONLIST" value="<#MULTIFUNCTIONLIST>">
+<input type="hidden" name="SESSIONNAME" value="<#SESSIONNAME>">
+<input type="hidden" name="TOTALREGPRICE" value="<#TOTALREGPRICE>">
+
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILSUBJECT" value="<#SESSIONNAME> Event Registration Confirmation for <#FIRSTNAME> <#LASTNAME>">
+<input type="hidden" name="ENTERUSERCD" value="WEBUSER">
+<input type="hidden" name="EMAILFROMADDRESS" value="info@domain.org">
+<input type="hidden" name="EMAILCCADDRESS" value="">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="EMAILREPLYFORM" value="MultiRegisterPost.htm">
+
+<input type="hidden" name="WER" value="">
+<input type="hidden" name="WSI" value="none">
+<input type="hidden" name="PAYEETYPECD" value="<#PAYEETYPECD>">
+<input type="hidden" name="PRICETYPESTT" value="<#PRICETYPESTT>">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+<input type="hidden" name="ISSUEBILLFLG" value="N">
+<input type="hidden" name="PAYMENTTYPECD" value="<#PAYMENTTYPECD>">
+<input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>" id="FCOMMENTS">
+</form>
+<script>
+if(!isFunctions){ //hide functions section if no functions
+	$('.functionSection').hide();
+}
+if("<#ORGCD>" == ""){
+	$('#orgGuestSearch').hide();
+}
+
+function checkFirstSearch() {
+if (!firstSearch) {
+$('#searchResults').show();
+searchGuests_ajax(document.searchForm);
+}
+firstSearch = true;
+}
+var lastSearchValue = "";
+var showTopValue = 5;
+var noMoreRecords= false;
+function searchGuests_ajax(formName){
+	 //alert(formName.name);
+	 var orgcd = 0;
+	 var doorgonly = false;
+	 var isorgsearch = document.getElementById('chkMyOrgOnly');
+	 if (isorgsearch != null) {
+		  doorgonly = isorgsearch.checked;
+		  var orgcd = formName.ORGCD.value;
+	 };
+if (orgcd == 0) doorgonly = false;
+var lastNameSearch = "" + formName.LASTNAME.value;
+var emailSearch = "" + formName.EMAIL.value
+var orgNameSearch = "" + formName.ORGNAME.value;
+var newSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch + orgcd;
+if (newSearchValue != lastSearchValue) { //NQ - 1-21-12 - meaning the search criteria has changed...
+$("#loadingSection").show();
+noMoreRecords = false;
+showTopValue = 5;
+if (doorgonly) {
+var searchGuestUrl = "../memberdll.dll/list?orgcd=" + orgcd + "&email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=ajax_guestSearch_header.htm&WBP=mr_guestSearch_list_dnn_modal.htm&wnr=guestsearch_ajax_norecords.htm&sort=lastname&RANGE=1/5&wmt=none&SHOWTOP=5";// + showTopValue;
+}
+else var searchGuestUrl = "../memberdll.dll/list?email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=ajax_guestSearch_header.htm&WBP=mr_guestSearch_list_dnn_modal.htm&wnr=guestsearch_ajax_norecords.htm&sort=lastname&RANGE=1/5&wmt=none&SHOWTOP=5";// + showTopValue;
+lastSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch + orgcd;
+$.ajax({url:searchGuestUrl, type:"get",async:true,
+success:function(response){
+$("#searchResults").html(response);
+$("#loadingSection").hide();
+}
+});
+}
+setTimeout("searchGuests_ajax(document." +formName.name+")", 500);
+}
+function searchGuests_ajax_loadMore(formName){
+/*alert(formName.name);
+var lastNameSearch = "" + formName.LASTNAME.value;
+var emailSearch = "" + formName.EMAIL.value
+var orgNameSearch = "" + formName.ORGNAME.value;*/
+var orgcd = 0;
+var doorgonly = false;
+var isorgsearch = document.getElementById('chkMyOrgOnly');
+if (isorgsearch != null) {
+doorgonly = isorgsearch.checked;
+var orgcd = formName.ORGCD.value;
+};
+if (orgcd == 0) doorgonly = false;
+var lastNameSearch = "" + document.getElementById("searchLastName").value;
+var emailSearch = "" + document.getElementById("searchEmail").value;
+var orgNameSearch = "" + document.getElementById("searchOrgname").value;
+var newSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch;
+if (!noMoreRecords)
+{
+showTopValue +=5;
+$("#loadingMoreSection").show();
+if (doorgonly) {
+var searchGuestUrl = "../memberdll.dll/list?orgcd=" + orgcd + "&email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=none&WBP=mr_guestSearch_list_dnn_modal.htm&wnr=guestsearch_ajax_norecords.htm&wmt=none&sort=lastname&RANGE=" + (showTopValue-4)+ "/5&wmt=none&SHOWTOP=" + showTopValue;
+}
+else
+var searchGuestUrl = "../memberdll.dll/list?email="+emailSearch+ "~&ORGNAME=" + orgNameSearch+ "~&LASTNAME=" + lastNameSearch + "~&WHP=none&WBP=mr_guestSearch_list_dnn_modal.htm&wnr=guestsearch_ajax_norecords.htm&wmt=none&sort=lastname&RANGE=" + (showTopValue-4)+ "/5&wmt=none&SHOWTOP=" + showTopValue;
+//alert(searchGuestUrl);
+lastSearchValue = "" + lastNameSearch + emailSearch + orgNameSearch + orgcd;
+$.ajax({url:searchGuestUrl, type:"get",async:true,
+success:function(response){
+if (response.length < 5) {
+noMoreRecords = true;
+$("#loadMoreContainer").hide();
+$("#noMoreResults").show();
+}
+$("#searchResultsTable").append(response);
+$("#loadingMoreSection").hide();
+}
+});
+}
+}
+</script>

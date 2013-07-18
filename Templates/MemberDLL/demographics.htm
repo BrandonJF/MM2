@@ -1,0 +1,127 @@
+
+<SCRIPT LANGUAGE="Javascript">
+<!--
+
+function getCheckboxes(){
+
+	for (var i=0; i<document.abc.length; i++) {
+   		if ((document.abc.elements[i].type == "radio") && (document.abc.elements[i].name=='EDUCATIONCDLST') && (document.abc.elements[i].value=='<#EDUCATIONCDLST>'))
+
+   		 {
+       		document.abc.elements[i].checked=true;
+  		 }
+  														  }
+
+  	for (var i=0; i<document.abc.length; i++) {
+   		if ((document.abc.elements[i].type == "radio") && (document.abc.elements[i].name=='GENDER') && (document.abc.elements[i].value=='<#GENDER>'))
+
+   		 {
+       		document.abc.elements[i].checked=true;
+  		 }
+  														  }
+
+
+  	for (var i=0; i<document.abc.length; i++) {
+  		if ((document.abc.elements[i].type == "radio") && (document.abc.elements[i].name=='ETHNICITY') && (document.abc.elements[i].value=='<#ETHNICITY>'))
+
+		{
+			document.abc.elements[i].checked=true;
+		}
+
+											  }
+
+
+}
+
+function formValidate() {
+      	{
+      	  document.abc.action = "UpdateInfo";
+	  	  document.abc.submit();
+	  	  return true;
+		}
+
+	}
+-->
+</SCRIPT>
+
+
+
+    <form method="POST" name="abc" action="UpdateInfo">
+	<fieldset>
+		<!--<legend><#MLGLBL TEXT="Primary Contact Information"></legend>-->
+		<ul>
+			<li>
+				<label for="GENDER"><#MLGLBL TEXT="Gender:"></label>
+				<input type="radio" name="GENDER" id="EDUCATIONCDLST" value="M"> Male<br />
+				<input type="radio" name="GENDER" id="EDUCATIONCDLST" value="F"> Female
+			</li>
+			<li>
+				<label for="ETHNICITY"><#MLGLBL TEXT="Ethnicity:"></label>
+				<input type="radio" name="ETHNICITY" id="ETHNICITY" value="African Am"> African American<br />
+				<input type="radio" name="ETHNICITY" id="ETHNICITY" value="American I"> American Indian or Alaskan Native<br />
+				<input type="radio" name="ETHNICITY" id="ETHNICITY" value="ASIAN (FAR"> Asian (Far East, India)<br />
+				<input type="radio" name="ETHNICITY" id="ETHNICITY" value="CAUCASIAN"> Caucasian<br />
+				<input type="radio" name="ETHNICITY" id="ETHNICITY" value="Hispanic/L"> Hispanic/Latino<br />
+				<input type="radio" name="ETHNICITY" id="ETHNICITY" value="NativeHaw"> Native Hawaiian
+			</li>
+			<li>
+				<label for="EDUCATIONCDLST"><#MLGLBL TEXT="Highest Degree:"></label>
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="ASSOC">&nbsp;Associate's<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="BA">&nbsp;Bachelor<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="Ed">&nbsp;Education<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="HS">&nbsp;High School<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="MD">&nbsp;Medical Degree<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="HS">&nbsp;High School<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="JD">&nbsp;Juris Doctor<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="PHD">&nbsp;PHD<br />
+				<input type="radio" name="EDUCATIONCDLST" id="EDUCATIONCDLST" value="Other">&nbsp;Other
+			</li>
+			<li>
+				<label for="ADDRESSTYPE"><#MLGLBL TEXT="Certifications:"></label>
+				<!--<input type="checkbox" name="DESIGNATIONS" id="DESIGNATIONS" value="CPA">&nbsp;CPA<br />
+				<input type="checkbox" name="DESIGNATIONS" id="DESIGNATIONS" value="CRA">&nbsp;CRA<br />
+				<input type="checkbox" name="DESIGNATIONS" id="DESIGNATIONS" value="MCP">&nbsp;MCP<br />
+				<input type="checkbox" name="DESIGNATIONS" id="DESIGNATIONS" value="MCSE">&nbsp;MCSE<br />
+				<input type="checkbox" name="DESIGNATIONS" id="DESIGNATIONS" value="NCE">&nbsp;NCE-->
+				<#REFCHECKBOX TABLENAME="DESIGNATIONREF" FLD1="DESIGNATIONCD" FLD2="DESIGNATIONCD" SEARCHF="DESIGNATIONLST">
+			</li>
+			<li>
+				<label for="ADDRESSTYPE"><#MLGLBL TEXT="Other Professional Organizations:"></label>
+				<#INTERESTCDLSTCHECKBOX>
+			</li>
+			<li>
+				<label for="HTMLNOTE"><#MLGLBL TEXT="Member Profile:"></label>
+				<textarea name="HTMLNOTE" cols="70" rows="10"><#WEBPROFILE></textarea>
+			</li>
+		</ul>
+	</fieldset>
+	<div class="buttons"><input type="submit" class="button" value="Update Your Demographics"></div>
+	<div class="buttons"><input type="reset" name="Submit2" value="Reset Form"></div>
+
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RESPONSEPAGE" value="changes_saved.htm">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="MULTIEDUCATIONLIST">
+<!--<input type="hidden" name="INT100" value="">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="INTERESTCDLST" value="">-->
+</form>
+
+<script language="javascript">
+getCheckboxes();
+</script>

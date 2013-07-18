@@ -1,0 +1,37 @@
+<h2>Job Posting Invoice</h2>
+<p>Thank you for your order. Please print out this invoice and send it to us, along with your payment, to complete this transaction.</p>
+<SCRIPT> 
+if (window.print) { document.write('<p><input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()"></p>'); }</script>
+<dl class="profile">
+ <dt>Order Number</dt>
+ <dd><#INVOICENUM></dd>
+ <dt>Job Number</dt>
+ <dd><#CONTRACTNUM></dd>
+  <dt>Job Title</dt>
+ <dd><#JOBTITLE_AC></dd>
+ <dt>Bill To Address</dt>
+ <dd><#BILLTOADDRESS></dd>
+  <dt>Balance Due</dt>
+ <dd><#BALANCEDUE FORMAT='$0.00'></dd>
+ <p class="clear"></p>
+</dl>
+
+
+<h4>Payment Options</h4>
+<dl class="profile">
+    <dt>Check</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Credit Card</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <p class="clear"></p>
+</dl>
+<h4>Credit Card Information</h4>
+<dl class="profile">
+    <dt>Visa</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Master Card</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>American Express</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Discover</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Card Number</dt><dd>__________________________________________</dd>
+    <dt>Exp Date</dt><dd>________/_________</dd>
+    <dt>Total Payment</dt><dd>$ __________________________________________</dd>
+    <dt>Signature</dt><dd>__________________________________________</dd>
+    <p class="clear"></p>
+</dl>

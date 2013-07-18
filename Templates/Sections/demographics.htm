@@ -1,0 +1,158 @@
+
+<SCRIPT LANGUAGE="Javascript">
+<!--
+
+function getCheckboxes(){
+
+	for (var i=0; i<document.demo.length; i++) {
+   		if ((document.demo.elements[i].type == "radio") && (document.demo.elements[i].name=='EDUCATIONCDLST') && (document.demo.elements[i].value=='<#EDUCATIONCDLST>'))
+
+   		 {
+       		document.demo.elements[i].checked=true;
+  		 }
+  														  }
+
+  	for (var i=0; i<document.demo.length; i++) {
+   		if ((document.demo.elements[i].type == "radio") && (document.demo.elements[i].name=='GENDER') && (document.demo.elements[i].value=='<#GENDER>'))
+
+   		 {
+       		document.demo.elements[i].checked=true;
+  		 }
+  														  }
+
+
+  	for (var i=0; i<document.demo.length; i++) {
+  		if ((document.demo.elements[i].type == "radio") && (document.demo.elements[i].name=='ETHNICITY') && (document.demo.elements[i].value=='<#ETHNICITY>'))
+
+		{
+			document.demo.elements[i].checked=true;
+		}
+
+											  }
+
+
+}
+
+
+-->
+</SCRIPT>
+
+
+<h2><#MLGLBL TEXT="Demographics"></h2>
+<form method="POST" name="demo" action="UpdateInfo">
+
+
+	<div data-role="fieldcontain">
+
+	<fieldset data-role="controlgroup">
+		<legend><#MLGLBL TEXT="Gender:"></legend>
+
+				<input type="radio" name="GENDER" class="req" id="Educationcdlst-1" value="M">
+				<label for="Educationcdlst-1">Male</label>
+				<input type="radio" name="GENDER" class="req" id="Educationcdlst-2" value="F">
+				<label for="Educationcdlst-2">Female</label>
+
+	</fieldset>
+	</div>
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend><#MLGLBL TEXT="Ethnicity:"></legend>
+
+				<input type="radio" name="ETHNICITY" id="Ethnicity-1" value="African Am">
+				<label for="Ethnicity-1">African American</label>
+				<input type="radio" name="ETHNICITY" id="Ethnicity-2" value="American I">
+				<label for="Ethnicity-2">American Indian or Alaskan Native</label>
+				<input type="radio" name="ETHNICITY" id="Ethnicity-3" value="ASIAN (FAR">
+				<label for="Ethnicity-3">Asian (Far East, India)</label>
+				<input type="radio" name="ETHNICITY" id="Ethnicity-4" value="CAUCASIAN">
+				<label for="Ethnicity-4">Caucasian</label>
+				<input type="radio" name="ETHNICITY" id="Ethnicity-5" value="Hispanic/L">
+				<label for="Ethnicity-5">Hispanic/Latino</label>
+				<input type="radio" name="ETHNICITY" id="Ethnicity-6" value="NativeHaw">
+				<label for="Ethnicity-6">Native Hawaiian</label>
+
+	</fieldset>
+	</div>
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend><#MLGLBL TEXT="Highest Degree:"></legend>
+
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-1" value="ASSOC">
+				<label for="Educationcdlst-1">Associate's</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-2" value="BA">
+				<label for="Educationcdlst-2">Bachelor</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-3" value="Ed">
+				<label for="Educationcdlst-3">Education</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-4" value="HS">
+				<label for="Educationcdlst-4">High School</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-5" value="MD">
+				<label for="Educationcdlst-5">Medical Degree</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-6" value="HS">
+				<label for="Educationcdlst-6">High School</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-7" value="JD">
+				<label for="Educationcdlst-7">Juris Doctor</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-8" value="PHD">
+				<label for="Educationcdlst-8">PHD</label>
+				<input type="radio" name="EDUCATIONCDLST" id="Educationcdlst-9" value="Other">
+				<label for="Educationcdlst-9">Other</label>
+
+
+	</fieldset>
+	</div>
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend><#MLGLBL TEXT="Certifications:"></legend>
+
+
+				<#REFCHECKBOX TABLENAME="DESIGNATIONREF" FLD1="DESIGNATIONCD" FLD2="DESIGNATIONCD" SEARCHF="DESIGNATIONLST">
+
+
+	</fieldset>
+	</div>
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend><#MLGLBL TEXT="Other Pro. Organizations:"></legend>
+
+				<#INTERESTCDLSTCHECKBOX>
+
+	</fieldset>
+	</div>
+	<div data-role="fieldcontain">
+
+				<label for="HTMLNote"><#MLGLBL TEXT="Member Profile:"></label>
+				<textarea name="HTMLNOTE" id="HTMLNote" cols="70" rows="10"><#HTMLNOTE></textarea>
+	</div>
+	<!--<a href="#" data-role="button" data-icon="check" data-inline="true" onclick="formValidate2()">Update Your Demographics</a>-->
+	<input type="submit"  class="button" value="Update" data-theme="g" data-icon="check">
+	<input type="reset" name="Submit2" value="Reset Form" href="#" data-theme="c" data-icon="refresh">
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="RESPONSEPAGE" value="changes_saved.htm">
+<input type="hidden" name="ORGCD" value="<#ORGCD>">
+<input type="hidden" name="MULTIEDUCATIONLIST">
+<!--<input type="hidden" name="INT100" value="">
+<input type="hidden" name="NOCALLFLG" value="<#NOCALLFLG>">
+<input type="hidden" name="NOMAILFLG" value="<#NOMAILFLG>">
+<input type="hidden" name="NOEMAILFLG" value="<#NOEMAILFLG>">
+<input type="hidden" name="NOFAXFLG" value="<#NOFAXFLG>">
+<input type="hidden" name="NOWEBFLG" value="<#NOWEBFLG>">
+<input type="hidden" name="NOSELLFLG" value="<#NOSELLFLG>">
+<input type="hidden" name="INTERESTCDLST" value="">-->
+
+
+</form>
+
+<script language="javascript">
+getCheckboxes();
+</script>

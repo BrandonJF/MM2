@@ -1,0 +1,14 @@
+<MemberAddress>
+            <AddressKey><#ADDRESSNUM></AddressKey>
+            <AddressLine1><#ADDRESS1></AddressLine1>
+            <AddressLine2><#ADDRESS2></AddressLine2>
+            <AddressLine3><#ADDRESS3></AddressLine3>
+            <AddressType><#ADDRESSTYPE></AddressType>
+            <City><#CITY></City>
+            <Country><#COUNTRY></Country>
+            <IsPreferredBill></IsPreferredBill>
+            <IsPreferredList></IsPreferredList>
+            <IsPreferredMail></IsPreferredMail>
+            <PostalCode><#ZIP></PostalCode>
+            <StateProvince><#STATECD></StateProvince>
+</MemberAddress>

@@ -1,0 +1,30 @@
+<h2><#AWARDNAME> Information</h2>
+<dl class="profile">
+    <dt>Award Number</dt><dd><#AWARDNUM></dd>
+    <dt>Award Date</dt><dd><#AWARDDATE></dd>
+    <dt>Apply By Date</dt><dd><#NOMINATEBYDATE></dd>
+    <dt>Award Status</dt><dd><#EVALUATIONSTT></dd>
+    <dt>Description</dt><dd><#AWARDDESC></dd>
+    <dt>Rules</dt><dd><#AWARDRULES></dd>
+    <p class="clear"></p>
+</dl>
+<p>
+    <a href="appinfo?awardnum=<#AWARDNUM>" data-role="button" data-mini="true">Apply For <#AWARDNAME></a>
+</p>
+<h4>Related Awards</h4>
+<table class="gutters">
+  	<thead>
+    <tr>
+          <th>#</th>
+           <th>Award Name</th>     
+			<th>Award Date</th>     
+           <th>Apply</th>     
+					   
+      </tr>
+     </thead>
+     
+    <tbody>
+    <#RELATEDAWARDS>
+    </tbody>
+  </table>
+

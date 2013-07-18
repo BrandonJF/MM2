@@ -1,0 +1,127 @@
+<script language="javascript">
+<!--
+function fillOrgName(obj){
+	if (obj.selectedIndex == 1)
+	{alert ('Please Enter the Name of the Organization');
+	document.getElementById('orgnameDiv').style.display = "block"; 	
+	}
+	else {
+	document.getElementById('orgnameDiv').style.display = "none";
+	}
+}
+
+
+//perfoms validation on all fields where class="reqField"
+function formValidate(){
+	//check to make sure that an organization is selected
+	var selind = document.certification.IGNORE_ORGCD.selectedIndex;
+	var orgname = document.certification.IGNORE_ORGNAME.value;
+	if (selind == 0)	{
+		alert('You must specify an Accrediting Organization');
+		return;
+	 }
+	else if (selind ==1) {
+		if (orgname=="") {
+	  		alert('You must specify an organization name');
+			return;
+			}
+		else {
+		 document.certification.CR_UDEF3TXT.value = orgname;		
+		}
+		
+	}
+	else if (selind > 1)	{
+	   document.certification.CR_UDEF3QTY.value = document.certification.IGNORE_ORGCD.options[selind].value;
+	   document.certification.CR_UDEF3TXT.value = document.certification.IGNORE_ORGCD.options[selind].text;
+	   document.certification.CR_STATUSSTT.value = 'A';
+
+	}
+
+
+	if(validateAll(document.certification, false)){
+		document.certification.submit();
+	}
+}
+$(function() {
+		$( "#CR_CERTIFICATIONDATE" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<h3>Add Education Credits</h3>
+
+<form name="certification" method="post" action="updatecert">
+<fieldset>
+	<legend>Enter Education Detail</legend>
+	<ul>
+		<li><label for="CR_CERTIFICATIONCD" class="required">Course/Credit Type</label>
+		<select name="CR_CERTIFICATIONCD" class="reqField" id="CR_CERTIFICATIONCD" onchange='ceuCheck()'>
+    <option value="">Select One</option>
+	  <!--<#REFTABLEVALS TABLENAME="VW_CERTIFICATION_RELATION_WITHTITLE" SVC="CERTIFICATIONCD" FLQ="MASTERFLG=N,ONWEBFLG=Y">-->
+      <#REFTABLEVALS TABLENAME="certificationref" SVC="CERTIFICATIONCD" FLD2="CERTIFICATIONTITLE" FLQ="MASTERFLG=N,ONWEBFLG=Y">
+    </select>
+		</li>
+        <li id="CERTIFICATIONREQUIREMENT" style="display: none">
+            
+        </li>
+                <script>
+            function ceuCheck(){
+                $('#CR_CERTIFICATIONCD option:selected').each(function(){
+		if(this.value != ''){
+            var certUrl = '../certificationdll.dll/info?wrp=certreq.htm&wmt=none&CERTIFICATIONCD='+this.value;
+	$.ajax({url:certUrl, type:'GET', async:false,
+		success: function(response){
+            $('#CERTIFICATIONREQUIREMENT').html('<label>Requirements</label>'+response).show();
+		}
+	});
+	}});
+            }
+        </script>
+		<li>
+			<label for="CR_CERTIFICATIONDATE" class="required">Date Earned On (##/##/####)</label>
+			<input name="CR_CERTIFICATIONDATE" type="text" id="CR_CERTIFICATIONDATE" value="<#CERTIFICATIONDATE>" class='reqField'>
+		</li>
+		<li>
+			<label for="IGNORE_ORGCD" class="required">Accrediting Organization</label>
+			<select name="IGNORE_ORGCD" id="IGNORE_ORGCD" onchange="fillOrgName(this)" >
+    <option value="Select One" selected="selected">Select One</option>
+    <option value="Other">Organization is Not in List</option>
+	  <#REFTABLEVALS TABLENAME="VW_CERTIFICATION_APPROVEDORGANIZATIONS" SVC="UDEF3QTY" SORT="ORGNAME" >
+      </select>
+		</li>
+		<li id="orgnameDiv" style="display:none;">
+  <label for="IGNORE_ORGNAME">Accrediting Organization</label>
+  <input name="IGNORE_ORGNAME" type="text" id="IGNORE_ORGNAME" value="<#UDEF3TXT ALIAS='CR'>" >
+		</li>
+		<li>
+			<label for="CR_UDEF4TXT">Course Title</label>
+			<input name="CR_UDEF4TXT" type="text" id="CR_UDEF4TXT" value="<#UDEF4TXT ALIAS='CR'>">
+		</li>
+		<li>
+			<label for="CR_UDEF5TXT">Course ID</label>
+			<input name="CR_UDEF5TXT" type="text" id="CR_UDEF5TXT" value="<#UDEF5TXT ALIAS='CR'>">
+		</li>
+		<li>
+			<label for="CEU1QTY" class="required">Hours Earned (#.##)</label>
+			<input name="CR_CEU1QTY" type="text" id="CR_CEU1QTY" value="<#CEU1QTY>" class='reqField'>
+		</li>
+		<li>
+			<label for="TESTCOMMENT">Comments</label> <textarea name="CR_TESTCOMMENT" id="CR_TESTCOMMENT" cols="45" rows="3"><#TESTCOMMENT></textarea>
+		</li>
+	</ul>
+</fieldset>
+
+<div class="buttons">
+	<input type="button" name="back" onclick="window.location.href='../certificationdll.dll/MasterList?customercd=<#CUSTOMERCD>&statusstt=Active';" value='Back to My Certifications'>  
+	<input type="button" name="BTNSUBMIT" id="BTNSUBMIT" onClick="formValidate()" value="Submit Education Credit">
+</div>
+  <input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+  <input type="hidden" name="TRANSACTIONNUM" value="<#TRANSACTIONNUM>">
+  <input type="hidden" name="CR_UDEF3QTY" value="<#CR_UDEF3QTY>">
+<input type="hidden" name="CEU5QTY" value="0">
+  <input type="hidden" name="CR_UDEF3TXT" value="<#CR_UDEF3TXT>">
+  <input type="hidden" name="CR_STATUSSTT" value="P">
+  <input type="hidden" name="WRP" value="CertUpdateConfirm.htm">
+</form>
+

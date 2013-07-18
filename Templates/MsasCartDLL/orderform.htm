@@ -1,0 +1,303 @@
+<script>
+function checkOrgOrder(){ //makes an org order
+	if(document.order.ISORGORDER[0].checked){
+		$.ajax({url:'../msascartdll.dll/REFRESHCART?ORGORDERFLG=Y', type:"GET", async:false});
+		return true;
+	}else{
+		return true;
+	}
+}
+function getDonations(){ //gets donations and adds to cart right before submitting
+	var url = '../msascartdll.dll/showCart?'
+	$(".donation").each(
+		function(){
+			if(parseFloat(this.value) > 0){
+				url = url + 'ADD=ordertype=D,itemcd='+this.title+',priceamt='+parseFloat(this.value)+'&';
+			}
+		}
+	);
+	$.ajax({url:url, type:"GET", async:false});
+}
+var isInvoices = false;
+var isPromo = false;
+</script>
+
+<h2>Cart Confirmation & Checkout</h2>
+<div id='cartPage'>
+
+
+<form name="order" id="order" action="../checkout.dll/order" method="post" enctype="multipart/form-data">
+
+<div id='hideCartDiv'>
+
+	<ul data-role="listview" data-count-theme="c" data-inset="true" class="subtotal">
+
+<table data-role="table" class="ui-responsive table-stroke ui-shadow table-stripe">
+ <thead> <tr>
+ 		<th>Type</th>
+ 	  <th>Item</th>
+ 	  <th>Price</th>
+ 	  <th>Qty</th>
+ 	  <th>Total</th>
+ 	</tr> </thead>
+<tbody><#SHOPPINGCART></tbody>
+
+</table>
+
+</ul>
+<ul data-role="listview" data-count-theme="c" data-inset="true" class="subtotal">
+	<li><h2>Cart Total:</h2>
+   <#ITEMTOTAL FORMAT='$0.00'></li>
+</ul>
+
+</div>
+<br><br>
+<div id="invoiceSection" style="display:none;">
+  <!--   <h3>Other Invoices</h3>
+    <table class="gutters">
+    <tr>
+        <th width="20%">Invoice Number</th>
+        <th width="40%">Member Name</th>
+        <th width="20%">Invoice Total</th>
+    </tr>
+    <#INVOICELIST>
+    </table> -->
+</div>
+
+
+
+<hr />
+
+
+<!-- <div id='notLoggedIn' class="nonmember">
+	<h5>You are currently not logged in to the site.</h5>
+	<a href="../utilities.dll/openpage?wrp=mainlogin.htm&REDIRECTURL=../msascartdll.dll/showcart">Log In</a> | <a href='#' onClick='$("#profileInformation").show();$("#notLoggedIn").hide();$("profileInformation").show().trigger("expand");return false;'>Create a Profile</a>
+</div> -->
+
+
+<div data-role="collapsible" data-theme="a" data-content-theme="a"  data-expanded-icon="arrow-d" data-inset="true" id='profileInformation'>
+
+	<h2 id="epi">Edit Profile Information</h2>
+
+
+
+
+
+
+
+
+	<div >
+
+	<#SECTION NAME="basicInfo_cart.htm">
+	<#SECTION NAME="primcontact_cart.htm">
+	</div>
+
+
+
+
+
+
+
+</div>	 <!-- /collapsible -->
+
+
+
+
+
+
+
+
+
+ <div data-role="collapsible" data-theme="a" data-content-theme="a"  data-expanded-icon="arrow-d" data-inset="true">
+
+
+	<h2>Shipping Address</h2>
+
+
+
+	<fieldset data-role="controlgroup" data-type="horizontal" DATA-MINI="true">
+		<legend><strong>Ship to my...</strong></legend>
+			<input type='radio' name='shipTo' id='primaryAd' checked="checked" onClick='switchAddress(document.order,"home","")' />
+			<label for="primaryAd">Primary Address</label>
+
+			<input type='radio' name='shipTo' id="orgAd" onClick='switchAddress(document.order,"org","<#ORGCD>")' />
+			<label for="orgAd">Organization Address</label>
+
+			<input type='radio' name='shipTo' id="altAd" onClick='switchAddress(document.order,"work","")' />
+			<label for="altAd">Alternate Address</label>
+
+			<input type='radio' name='shipTo' id="newAd"  onClick='switchAddress(document.order,"new","")' />
+			<label for="newAd">New Shipping Address</label>
+	</fieldset>
+
+
+
+
+
+	 <div id='shipSection' style="padding-left: 100px;">
+
+	 </div>
+</div>	<!-- /collapsible -->
+
+
+
+
+
+
+
+
+
+
+ <div data-role="collapsible" data-theme="a" data-content-theme="a" data-expanded-icon="arrow-d" data-inset="true">
+
+
+	<h2>Totals/Promotional Code</h2>
+	<div class='cartTotals'>
+
+	<ul class="left prices">
+		<li>
+			<label for="cartTotal"><#MLGLBL TEXT="Cart Total:"></label>
+			$<span id='cartTotal'><#ITEMTOTAL FORMAT="0.00"></span>
+		</li>
+        <li>
+        <label for="DISCOUNTSTOTAL"><#MLGLBL TEXT="Discounts:"></label>
+        <#DISCOUNTSTOTAL>
+		</li>
+		<li>
+			<label for="shipTotal"><#MLGLBL TEXT="Shipping:"></label>
+			$<span id='shipTotal'>0.00</span>
+		</li>
+		<li>
+			<label for="taxTotal"><#MLGLBL TEXT="Tax:"></label>
+			$<span id='taxTotal'>0.00</span>
+		</li>
+		<li id="invoiceTotals" style="display:none;">
+			<label for="invoiceTotal_num"><#MLGLBL TEXT="Other Invoices:"></label>
+			$<span id="invoiceTotal_num"><#INVOICESTOTAL FORMAT=0.00></span>
+		</li>
+		<li class='finalTotal'>
+			<label for="totalAmt"><#MLGLBL TEXT="Total Payment:"></label>
+			$<span id='totalAmt'><#CARTTOTAL FORMAT="0.00"></span>
+		</li>
+	</ul>
+
+	  <div class="right">
+            <br>
+            <p><strong>Enter Promo Code:</strong><br>
+            <input name="PRODUCTPROMOTIONALCODE_input" id='promo_code' />
+            </p>
+
+			<input type='button' class="submit" onclick='checkPromo_newCart(document.order)' value='Apply Code' id='promo_button'/>
+        </div>
+    <div class="clear"></div>
+	</div>
+
+
+ </div><!-- /collapsible -->
+
+
+
+
+
+
+
+
+
+   <input type="hidden" name="RESPONSEPAGE" id="RESPONSEPAGE" value="orderconfirm.htm">
+
+		<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
+
+
+
+	<hr />
+	<div class="buttons" id="selectPayment">
+		<input type="button" value="Process Order" data-icon="check"  onclick="formValidate()" data-theme="g" />
+	</div>
+<div data-role="popup" id="errorPop" data-overlay-theme="a" data-theme="a" style="max-width:400px;" class="ui-corner-all">
+<h3 class="ui-title" id="error_content"></h3>
+<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">OK</a>
+</div>
+<a href="#errorPop" data-rel="popup" data-position-to="window" data-transition="pop"  id="popBtn" style="display:none;"></a>
+
+
+
+
+
+
+
+<input type="hidden" name="SENDEMAIL" value="Y">
+<input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML">
+<input type="hidden" name="EMAILFORMAT" value="HTML">
+<input type="hidden" name="EMAILSUBJECT" value="Order Confirmation">
+<input type="hidden" name="SENDINDEMAILS" value="N">
+<input type="hidden" name="EMAILREPLYFORM" value="EmailOrderConfirm.htm">
+<input type="hidden" name="D_UDEF2TXT" value="COMMON">
+<input type="hidden" name="U_TITLETXT" value="Uploaded2">
+<input type="hidden" name="A_TITLETXT" value="Award2">
+<input type="hidden" name="J_TITLETXT" value="Job2">
+<input type='Hidden' name='PROCESSONLINECREDIT' value='N'>
+<input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>">
+<input type="hidden" name="PAYEECD" value="<#CUSTOMERCD>">
+<input type='Hidden' name='ISSUEBILLFLG' value='N'>
+<input type="hidden" name="CHAPTERID" value="">
+</form>
+
+
+</div>
+
+<script>
+$('#hideCartDiv .extra').hide();
+
+
+
+cartInitialize(document.order); //initialize cart
+switchAddress(document.order,"home","");//get home shipping address
+if('<#ORGCD>' == ''){ //hide org option if they have no org
+	$('#shipToOrg').hide();
+}
+
+if('<#ORGORDERFLG>' == 'Y'){ //hide org option if they have no org
+	$('#editProfile').remove();
+	$('#profileInformation').hide();
+	document.order.PAYEECD.value = '<#ORGCD>';
+
+}
+if("<#INVOICESTOPAY>" == "1"){ //show partial payment if not multiple invoices
+	$("#partialPayment_button").show();
+}
+if(isInvoices){
+		$("#invoiceTotals").show();
+	}
+if(isPromo){
+	$('#promoCode_section').hide();
+}
+$("#BILLME").click(function() {
+	document.order.ISSUEBILLFLG.value = 'Y';
+	$('.cardInfo').removeClass('reqField')
+});
+
+$(".cardType").click(function() {
+	document.order.ISSUEBILLFLG.value = 'N';
+	if (!$('.cardInfo').hasClass){
+		$(this).addClass('reqField')
+	}
+});
+function formValidate() {
+
+	var fObj = document.order;
+
+	var oRequired= new Object();
+	if ($("#BILLME").attr("checked")){
+		//fObj.PARTPAYAMT.name = 'Unused';
+		fObj.ISSUEBILLFLG.value = 'Y';
+		if(validateAll(document.order,false)){
+			fObj.submit();
+		}
+	} else{
+		fObj.ISSUEBILLFLG.value='N';
+		if(validateAll(document.order,true)){
+			fObj.submit();
+		}
+	}
+}
+</script>

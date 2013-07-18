@@ -1,0 +1,41 @@
+<SCRIPT LANGUAGE="JavaScript1.2" TYPE="text/javascript">
+	 var isFunctions = false;
+</script>
+<form name="event" method="POST" action="">
+<fieldset class='priceSelect'>
+	 <legend><#FIRSTNAME> <#LASTNAME></legend>
+	 <ul>
+		  <li>
+			   <label for="PRICETYPESTT">Price List</label>
+			   <select size="1" name="PRICETYPESTT" onchange="priceChanged()" id="selPrice"><#PRICELIST SORT="pricedes" ONLYOPTIONS=Y></select>
+
+		  </li>
+	 </ul>
+</fieldset>
+
+<fieldset class='functionSection'>
+	 <legend>Function Selection</legend>
+	 <ul>
+		 <#FUNCTIONLIST> 
+	 </ul>
+</fieldset>
+
+<div class="buttons">
+	<input type="button" value="Save" onClick="passGuestFunctions(document.event)">
+		<input type="reset" value="Cancel" onClick="window.close()">
+</div>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="SESSIONALTCD" value="<#SESSIONALTCD>">
+<input type="hidden" name="FUNCTIONS" value="">
+<input type="hidden" name="AUTOFUNCTIONCD" value="<#AUTOFUNCTIONCD>">
+<input type="hidden" name="FUNCTIONDESC" value="">
+<input type="hidden" name="FCOMMENTS" value="<#FCOMMENTS>">
+</form>
+
+<script>
+checkAutoFunctions();
+//hide functions section if no functions
+if(!isFunctions){
+	$('.functionSection').hide();
+}
+</script>

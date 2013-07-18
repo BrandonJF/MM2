@@ -1,0 +1,73 @@
+<script type="text/javascript" src="../../js/jQuery.print.min.js"></script>
+<script>
+function formValidate() {
+    var startDate = $("#fromDate").val();
+    var endDate = $("#toDate").val();
+    document.abc.certificationdate.value = "BETWEEN "+startDate+" AND "+endDate;
+     $.ajax({url:'../certificationdll.dll/certlist', type:"GET", async:false,  data:$('#dateFilter').serialize(),
+			success:function(response){
+            $('#creditHours').html(response);		
+				
+			}
+		});
+}   
+$(function() {
+		$( ".datePicker" ).datepicker({
+			changeMonth: true,
+			changeYear: true
+		});
+	});
+</script>
+<h3>Certification Summary</h3>
+<table class="nobg">
+    <tr>
+        <th>Certification</th>
+        <th>Granted On</th>
+        <th>Expires On</th>
+    </tr>
+    <tr>
+        <td><#CERTIFICATIONTITLE></td>
+        <td><#STARTDATE FORMAT="dddd mmmm dd, yyyy"></td>
+        <td><#ENDDATE FORMAT="dddd mmmm dd, yyyy"></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <th>Credits Required for Renewal</th>
+        <th>Credits Earned To Date</th>
+        <th>Remaining Credits for Renewal</th>
+    </tr>
+    <tr>
+        <td><#TOTALREQUIREDCEUQTY FORMAT="0.00"></td>
+        <td><#CEU1QTY FORMAT="0.00"></td>
+        <td><#DELIQCEUQTY FORMAT="0.00"></td>
+    </tr>
+</table>
+
+<p></p>
+<h4>Credits Earned Transcript</h4>
+<form name="abc" method="POST" action="../certificationdll.dll/certlist" id="dateFilter">
+<p><strong>Display Credits 
+			From <input name="fromDate" id="fromDate" size="20" class="datePicker"> To <input name="toDate" id="toDate" size="20" class="datePicker"> <input name="buttonB" type="button" onClick="formValidate()" value="Display"></strong>
+		</p> 
+            
+	    <input type="hidden" name="certificationdate" value="">
+	    <input type="hidden" name="ONWEBFLG" value="Y">
+  	    <input type="hidden" name="RANGE" value="1/25">
+        <input type="hidden" name="c.certificationcd" value="A-STEP~">
+        <input type="hidden" name="WHP" value="CertListHeader_RU.htm">
+        <input type="hidden" name="WBP" value="CertList_RU.htm">
+        <input type="hidden" name="WMT" value="none">
+        <input type="hidden" name="CUSTOMERCD" value="<#COOKIE_CUSTOMERCD>">
+		</form>
+<div id="creditHours">
+<#INCLUDE DLL="certificationdll.dll" ACT="certlist" PARAMS="customercd={CUSTOMERCD},certificationdate=BETWEEN {STARTDATE} AND {ENDDATE},c.certificationcd=A-STEP~,WHP=CertListHeader_RU.htm,WBP=CertList_RU.htm,SORT=CERTIFICATIONDATE DESC" SHOWURL="N">
+</div>
+<div class="buttons">
+   <a href="#" class="button" onClick="$('#creditHours').printElement({printMode:'popup',overrideElementCSS:[
+		'../../css/default.css',
+		{ href:'../../css/default.css',media:'print'}]});">Print This Page</a>  &nbsp;&nbsp; <a href="../certificationdll.dll/CertInfo?TRANSACTIONNUM=-1&CUSTOMERCD=<#CUSTOMERCD>&WRP=CertUpdate.htm" class="button">Add Education Credits</a> &nbsp;&nbsp; <a class="button" href="../certificationdll.dll/MasterInfo?wrp=certApps.htm">Back to My Certifications</a> 
+</div>

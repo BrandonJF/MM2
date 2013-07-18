@@ -1,0 +1,59 @@
+<h1>Event Registration ( Email Confirmation)</h1>
+<br /><br />
+<h2>Total Amount Paid: <#TOTALAMOUNT format='$0.00'><br />
+Total Amount Due: <#BALANCEDUE format='$0.00'><br />
+Confirmation Number: <#ASSIGNEDSESSIONCD></h2>
+
+<table  class='profileForm'>
+  <tr>
+    <td colspan="3" class="highlight">Registration Summary </td>
+  </tr>
+  <tr>
+    <td width="178"><strong>Event</strong></td>
+    <td colspan="2"><#SESSIONNAME></td>
+  </tr>
+  <tr>
+    <td><strong>Location</strong></td>
+    <td colspan="2"><#LOCATIONCITY>, <#LOCATIONSTATECD></td>
+  </tr>
+  <tr>
+    <td><strong>Date</strong></td>
+    <td colspan="2"><#SESSIONBEGDATE> - <#SESSIONENDDATE></td>
+  </tr>
+  <tr>
+    <td><strong>Name</strong></td>
+    <td colspan="2"><#FIRSTNAME> <#LASTNAME> </td>
+  </tr>
+  <tr>
+    <td><strong>Organization Name </strong></td>
+    <td colspan="2"><#ORGNAME></td>
+  </tr>
+  <tr>
+    <td style='vertical-align:top'><strong>Address</strong></td>
+    <td colspan="2"><#ADDRESS1><br />
+      <#ADDRESS2><br />
+      <#CITY>, <#STATECD> <#ZIP></td>
+  </tr>
+  <tr>
+    <td><strong>Work Phone</strong></td>
+    <td colspan="2"><#WORKPHONE></td>
+  </tr>
+  <tr>
+    <td><strong>Email</strong></td>
+    <td colspan="2"><#EMAIL></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td width="4">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="3" class="highlight">Invoice Summary </td>
+  </tr>
+  <#LISTCART>
+  <tr class="regTotals">
+    <td colspan="2"><strong>Event Registration Totals </strong></td>
+    <td width="233"><#LISTTOTAL FORMAT="$0.00"></td>
+  </tr>
+</table>
+<h2>&nbsp;</h2>

@@ -1,0 +1,61 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Euclid Technology</title>
+		<meta charset="iso-8859-1" >
+		<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+		<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+		<link href="../../CSS/reset.css" rel="stylesheet" type="text/css">
+		<link href="../../CSS/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css">
+		<link href="../../CSS/default.css" rel="stylesheet" type="text/css">
+		<link href="../../CSS/jquery.validity.css" rel="stylesheet" type="text/css">
+            <script type="text/javascript" src="../../js/jquery-1.8.1.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery-ui-1.8.23.custom.min.js"></script>
+		<script type="text/javascript" src="../../js/jquery.tablesorter.min.js"></script>
+       <script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
+		<script language="javascript" src="../../js/euclidScripts.js"></script>
+		<script language="javascript" src="../../js/eventScripts.js"></script>
+		<script language="javascript" src="../../js/customerScripts.js"></script>
+		<script language="javascript" src="../../js/duesScripts.js"></script>
+		<script language="javascript" src="../../js/cartScripts.js"></script>
+		<script type="text/javascript" src="../../js/jQuery.validity.js"></script>
+        <script language="javascript" src="../../js/VerificationLib.js"></script>
+		<script> //GLOBAL VARIABLES FOR LOGGED IN USER
+			var CUSTOMERCD = '<#COOKIE_CUSTOMERCD>';
+			var ISMEMBERFLG = '<#COOKIE_ISMEMBERFLG>';
+			var MEMBERNAME = '<#COOKIE_MEMBERNAME>';
+			var STATUSSTT = '<#COOKIE_STATUSSTT>';
+			var CUSTOMERTYPE = '<#COOKIE_CUSTOMERTYPE>';
+			var ORGCD = '<#COOKIE_ORGCD>';
+			var DEBUG = false; //turns on or off debug alerts
+            var isBillMe = true;
+		</script>
+		
+	</head>
+	<body>		    			  
+		<div id="container" class="static">
+			<div id="content" class="clearfix">
+				<div class="leftnav">
+					<#PAGEHEADER>
+					<#LEFTNAV>
+				</div>
+				<div class="article">
+					<#CONTENT>
+				</div>
+				<div class="footer">
+					<#PAGEFOOTER>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+// 		<script>
+//Taken out until I can figure out what is keeping functions from loading on click -BJF
+// 				$(document).ready(function() 
+//     { 
+//         $("#myTable").tablesorter(); 
+//     } 
+// );
+        
+// 		</script>
+	</body>
+</html>

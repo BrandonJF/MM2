@@ -1,0 +1,138 @@
+<div id='updateDiv' style='display:none;'></div>
+<script src='../../js/scriptsAJAX.js'></script>
+<script>
+//alert('hello!');
+var toWrite = '';
+
+function openResponse(testcd,rgroupnum){
+    var page = 'http://cvconnect.ncura.edu/cvweb/cgi-bin/msastestdll.dll/displayq?testcd='+testcd+'&responsegroup='+rgroupnum+'&WRP=testInfo_readonly.htm&WMT=../main_template_none.htm';
+	return parent.uiPopUp(page);
+}
+
+function formValidate(){
+	//alert('Voting!');
+	//AJAX to update status on all documents
+	var updateURL = '../documentdll.dll/updateInfo?wmt=none&abstractstatus='+document.abc.ABSTRACTSTATUS.value+'&documentnum=';
+	var updateURL_final = '';
+	for(var i=0;i<docList.length;i++){
+		//alert(docList[i]);
+		updateURL_final = updateURL + docList[i];
+		doAjaxFill(updateURL_final, 'updateDiv');
+	}
+	
+    $( "#dialog-message" ).dialog({
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$( this ).dialog( "close" );
+				}
+			}
+		});
+	
+	
+}
+
+
+var documentnum = '';
+var titletxt='';
+
+var docList = [];
+</script>
+<h2 id='titleDiv'></h2>
+<form name='abc' Action="updateInfo" Method="POST"  >
+
+
+<h4>Author(s):</h4>
+<div id='authorsDiv'></div>
+<p>&nbsp;</p>
+
+
+<h4>Files:</h4>
+
+              <table class="gutters">
+              	<tr>
+                	<th>Document #</th>
+                	<th>File Name</th>
+                	<th>&nbsp;</th>
+                </tr>
+                <#CONTENT>
+               </table>        
+<p>&nbsp;</p>
+
+<h4>Survey Responses</h4>
+<div id='surveyResponseDiv'></div>
+<p>&nbsp;</p>
+<fieldset>
+    <legend>Abstract Selection</legend>
+    <ul>
+        <li>
+            <label for="ABSTRACTSTATUS">Abstract Status</label>
+            <select name='ABSTRACTSTATUS' />
+  		<option value=''></option>
+        <option value='Selected'>Selected</option>
+        <option value='Not Selected'>Not Selected</option>
+        <option value='Alternate'>Alternate</option>
+        </select>
+        </li>
+    </ul>
+</fieldset>
+<div class="buttons">
+    <input type='button' name='back' value='Back to Abstract Selection List' onclick="createPOST('../memberdll.dll/openpage',{'WRP':'abstractSelect.htm','WMT':'../main_template_css.htm'}); return false"> 
+    <input type='button' name='STATUSBUTTON' value='Update Status' onClick='formValidate()' />
+</div>
+
+
+ <div id='surveyDiv' style='display:none;'></div>
+ 
+<input type='hidden' name='TESTCD' value=''>   
+</form>
+
+ <div id="dialog-message" title="Abstract Status Updated" style="display: none">
+	<p>
+		<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+		Abstract status has been updated!
+	</p>
+
+</div>
+ 
+<script>
+//set abstract status field
+//alert(status);
+for(var j=0; j<document.abc.ABSTRACTSTATUS.length; j++){
+	if(document.abc.ABSTRACTSTATUS[j].value == status){
+		document.abc.ABSTRACTSTATUS[j].selected = true;
+	}
+}
+
+document.abc.ABSTRACTSTATUS.value = status;
+
+//alert('TITLE: '+titletxt+'\nDocumentNum: '+documentnum);
+document.getElementById('titleDiv').innerHTML = titletxt;
+
+//get Authors
+var authorURL = '../memberdll.dll/customlist?sqlname=AUTHORS&wmt=none&wnr=noAuthors.htm&whp=authors_header.htm&wbp=authors_list.htm&docnum='+documentnum;
+doAjaxFill(authorURL, 'authorsDiv');
+
+
+//get survey
+var surveyURL = '../memberdll.dll/customlist?sqlname=getSurvey2&wmt=none&whp=getSurvey_header.htm&wbp=getSurvey_list.htm&wnr=noSurvey.htm&groupcd='+groupcd+
+				'&abstractTopic='+topic;
+//alert('survey url:'+surveyURL);
+doAjaxFill(surveyURL, 'surveyDiv');
+
+var surveyCode = document.getElementById('surveyDiv').innerHTML;
+if(surveyCode == ''){
+	//nothing
+}else{
+	//alert(surveyCode);
+	document.abc.TESTCD.value=surveyCode;
+}
+
+
+
+//Get Survey Responses list and populate surveyResponseDiv
+var responseURL = '../memberdll.dll/customlist?sqlname=surveyResponses&testcd='+surveyCode+'&linkcd='+parentgroupcd+'&whp=responseHeader.htm&wbp=responseList.htm&wmt=none&WNR=noResponse.htm';
+
+doAjaxFill(responseURL, 'surveyResponseDiv');
+
+</script>

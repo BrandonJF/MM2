@@ -1,0 +1,13 @@
+<script>
+	var goToURL = 'cgi-bin/utilities.dll/openpage?wrp=mainlogin.htm';
+	var loc = window.location+'';
+	var temp = loc.split("REDIRECTURL=");
+	var redirectURL = temp[1];
+	
+	if((redirectURL != '') && (redirectURL != undefined)){
+		goToURL = goToURL + "&REDIRECTURL="+redirectURL;
+	}
+
+
+	window.location=goToURL;
+</script>

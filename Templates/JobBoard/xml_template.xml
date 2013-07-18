@@ -1,0 +1,15 @@
+<Job>
+    <JobTitle>
+        <#JOBTITLE>
+    </JobTitle>
+    <ContractNumber>
+	<#CONTRACTNUM>
+    </ContractNumber>
+    <JobCity>
+	<#JOBCITY>
+    </JobCity>
+    <JobState>
+	<#JOBSTATE>
+    </JobState>
+</Job>
+

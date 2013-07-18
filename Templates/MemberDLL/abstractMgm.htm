@@ -1,0 +1,173 @@
+<script>
+	function printLink(address){
+		var addressNew = address.replace('http://','');
+		addressNew = '<a href="http://'+addressNew+'">'+addressNew+'</a>';
+		document.write(addressNew);
+	}
+	function Add_Author(AuthorIndex){
+		var el = document.getElementById('Author'+AuthorIndex);
+		var nextAuthor = AuthorIndex+1;
+        $("#button"+AuthorIndex).hide();
+		var tmptext = "<ul>"+
+						"<li><label for='TEAMMBR"+AuthorIndex+"_FIRSTNAME'>First Name</label><input type='text' name='TEAMMBR"+AuthorIndex+"_FIRSTNAME' id='Author"+AuthorIndex+"FirstName' class='reqField' /></li>" + 
+						"<li><label for='TEAMMBR"+AuthorIndex+"_MIDDLEINITIAL'>M.I.</label><input type='text' name='TEAMMBR"+AuthorIndex+"_MIDDLEINITIAL' id='Author"+AuthorIndex+"MiddleInitial'/></li>" + 
+						"<li><label for='TEAMMBR"+AuthorIndex+"_LASTNAME'>Last Name</label><input type='text' name='TEAMMBR"+AuthorIndex+"_LASTNAME' id='Author"+AuthorIndex+"LastName' class='reqField'/></li>" +
+						"<li><label for='TEAMMBR"+AuthorIndex+"_UDEF1TXT'>Affiliation 1</label><input type='text' name='TEAMMBR"+AuthorIndex+"_UDEF1TXT' id='Author"+AuthorIndex+"Affiliation1'/></li>" + 
+						"<li><label for='TEAMMBR"+AuthorIndex+"_UDEF2TXT'>Affiliation 2</label><input type='text' name='TEAMMBR"+AuthorIndex+"_UDEF2TXT' id='Author"+AuthorIndex+"Affiliation2'/></li>" +
+					  "</ul>"+
+					  "<div class='buttons'><input type='button' name='RemoveAuthor' value='Remove this Author' onclick='Remove_Author("+AuthorIndex+")' /> <input type='button' name='AddAuthor' id='button"+nextAuthor+"' value='Add New Author' onclick='Add_Author("+nextAuthor+")' /></div>"+
+					  "<div id='Author"+nextAuthor+"'></div>";
+		el.innerHTML = tmptext;			  
+	}
+	function Remove_Author(AuthorIndex){
+		var el = document.getElementById('Author'+AuthorIndex);
+        $("#button"+AuthorIndex).show();
+		el.innerHTML = '';	
+	}
+</script>
+
+	<h2>Abstract Submission</h2>
+    <dl class="profile">
+        <dt>Name</dt><dd><#FIRSTNAME> <#MIDDLEINITIAL> <#LASTNAME></dd>
+        <dt>Address</dt><dd><#ADDRESS1> <#ADDRESS2><br>
+<#CITY>, <#STATECD> <#ZIP><br><#COUNTRY></dd>
+        <dt>Phone</dt><dd><#WORKPHONE></dd>
+        <dt>Email</dt><dd><#EMAIL></dd>
+        <p class="clear"></p>
+    </dl>
+	<Form Action="NextForm" Method="POST" name="abc" id="abc">
+		<fieldset>
+            <legend>Abstract Information</legend>
+			<ul>
+				<li>
+					<label for="GROUPCD" class="required">Topic Group</label>
+					<select name='GROUPCD' class='reqField'>
+						<option value="">Select One</option>
+						<#RTVABSTRACTGROUP>
+					</select>
+				</li>
+				<li>
+					<label for="ABSTRACTTOPIC" class="required">Topic Category</label>
+					<select name='ABSTRACTTOPIC' class='reqField'>
+						<option value=''></option>
+						<#RTVABSTRACTTOPICREFFLD1ABSTRACTTOPICFLD2ABSTRACTTOPIC>
+					</select>
+				</li>
+				<li>
+					<label for="TITLETXT" class="required">Abstract Title</label>
+					<input type="text" name="TITLETXT" id="AbstractTitle" value="" class='reqField'>
+				</li>
+                <li>
+					<label for="ABSTRACTTEXT_N0">Abstract Text</label>
+					<textarea name='ABSTRACTTEXT_N0' id="AbstractText" cols='40' rows='10' class='reqField'></textarea>
+				</li>
+			</ul>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Author(s):</legend>
+			<ul>
+				<li>
+					<label for="TEAMMBR1_FIRSTNAME" class="required">First Name</label>
+					<input name="TEAMMBR1_FIRSTNAME" id="Author1FirstName" type="text" class='reqField'>
+				</li>
+				<li>
+					<label for="TEAMMBR1_MIDDLEINITIAL">M.I.</label>
+					<input name="TEAMMBR1_MIDDLEINITIAL" id="Author1MiddleInitial" type="text">
+				</li>
+				<li>
+					<label for="TEAMMBR1_LASTNAME"  class="required">Last Name</label>
+					<input name="TEAMMBR1_LASTNAME" id="Author1LastName" type="text" class='reqField'>
+				</li>
+				<li>
+					<label for="TEAMMBR1_UDEF1TXT">Affiliation 1</label>
+					<input name="TEAMMBR1_UDEF1TXT" id="Author1Affiliation1" type="text">
+				</li>
+				<li>
+					<label for="TEAMMBR1_UDEF2TXT">Affiliation 2</label>
+					<input name="TEAMMBR1_UDEF2TXT" id="Author1Affiliation2" type="text">
+				</li>
+			</ul>
+			<div class="buttons">
+				<input type="button" name="AddAuthor" value="Add New Author" id="button2" onclick="Add_Author(2)" />
+			</div>
+			<div id="Author2"></div>
+		</fieldset>
+	
+		<div class="buttons">
+		<span id="loader"></span>	<INPUT TYPE="submit" name='BUTTON' value="Preview" id="submitButton">
+		</div>
+        <div class="missing" style="display: none;">
+        <p>Required fields are missing. Please fill those in before continuing.</p>
+    </div>
+		<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+		<input type="hidden" name="DOCTYPE" value="Abstract">
+		<input type="hidden" name="PARENTGROUPCD" value="">
+		<input type='hidden' name='ISABSTRACTFLG' value='Y'>
+		<input type='hidden' name='FILETYPE' value='O'>
+		<input type='hidden' name='RESPONSEPAGE' value='nextAbstract.htm'>
+		<input type='hidden' name='WMT' value='main_template_css.htm'>
+		<input type='hidden' name='TEAMMBR_TEAMROLE' value='Author'>
+		<input type='hidden' name='ADDAuthorS' value='Y'>
+        <input type='hidden' name='ADDTEAMMEMBERS' value='Y'>
+		<input type='hidden' name='UPLOADFEE' value=''>
+		<input type='hidden' name='CHECKFIELDNAME' value='ABSTRACTTEXT'>
+		<input type='hidden' name='GROUPCD' value='TG1'>
+	</form>
+</div>
+
+<script type="text/javascript">
+	function checkFields(){
+		if(document.abc.ABSTRACTTEXT_N0.value == ''){
+		//if(document.abc.fileField1.value == ''){
+			alert('Please enter your abstract information or upload a document.');
+			return false;
+		//}
+		}
+		return true;
+	}
+	function checkForNum(element){
+		var text=element.value;
+		var check=0;
+		for(i=0; i<text.length; i++){
+			if((text.charCodeAt(i)>64&&text.charCodeAt(i)<96)||(text.charCodeAt(i)>96&&text.charCodeAt(i)<123)||text.charCodeAt(i)==39||text.charCodeAt(i)==45){
+				check=check;
+			}else{
+				check++;
+				break;
+			}
+		}
+		if(check > 0){
+			return false;
+		}else{
+			return true;
+		}		
+	};	
+	function checkResUL(){
+		setAddDoc('#Resume_File');
+		if ($.trim($('#Resume_File').val()).length > 0 || $.trim($('#Resume_Text').val()).length > 0){
+			return true;
+		}else{
+			return false;
+		}
+	};
+    // Select all of the forms on the page (in this case the only one)
+    // and call 'validity' on the result.
+    $(function() { 
+        $("#abc").validity(function() {
+			$(".reqField").require("#{field} is required.");
+			$("#FirstName").require("#{field} is required.").assert(checkForNum,"The #{field} field only accepts letters.\n\nPlease re-enter.");
+			$("#LastName").require("#{field} is required.").assert(checkForNum,"The #{field} field only accepts letters.\n\nPlease re-enter.");
+			$(".resume").assert(
+				checkResUL, 
+				"Please paste or upload your resume"
+			);
+			$("#Email").require().match("email","Please enter your email address in the correct format. XXX@XXX.XXX");
+            
+        });
+    });
+/*   $("#submitButton").click(function(){
+        $("#submitButton").attr("class","disabled");
+        $("#loader").append("<img src='../../images/loading.gif'>");
+    }) */
+</script>

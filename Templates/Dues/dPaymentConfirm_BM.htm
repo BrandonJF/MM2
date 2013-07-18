@@ -1,0 +1,49 @@
+<h2>Membership Dues Invoice</h2>
+<p>Thank you for your order. Please print out this invoice and send it to us, along with your payment, to complete this order.</p>
+<SCRIPT> 
+if (window.print) { document.write('<p><input type="button" name="print" class="submit" value="Print This Page" onClick="javascript:window.print()"></p>'); }</script>
+
+<fieldset>
+	<legend>MEMBER ID: <#CUSTOMERCD></legend>
+	<p>
+		<#FIRSTNAME> <#LASTNAME><br>
+		<#ADDRESS1><br>
+		<#CITY>, <#STATECD>, <#ZIP>
+	</p>
+</fieldset>
+<fieldset>
+	<legend>INVOICE NUMBER : <#INVOICENUM></legend>
+	<table class="gutters">
+      <tr>
+        <th><strong>Code</td>
+        <th><strong>Description</td>
+        <th><strong>Balance</td>
+      </tr>
+      <#INVOICELIST>
+		<tr>&nbsp;</tr>
+	<tr class="subtotal">
+		<td>&nbsp;</td>
+		<td class="text">Balance Due:</td>
+		<td class="price">$<#TOTALAMT FORMAT=0.00></td>
+	</tr>
+    </table>
+</fieldset>
+<h4>Payment Options</h4>
+<dl class="profile">
+    <dt>Check</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Credit Card</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <p class="clear"></p>
+</dl>
+<h4>Credit Card Information</h4>
+<dl class="profile">
+    <dt>Visa</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Master Card</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>American Express</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Discover</dt><dd><input type="checkbox" name="checkbox" value="checkbox"></dd>
+    <dt>Card Number</dt><dd>__________________________________________</dd>
+    <dt>Exp Date</dt><dd>________/_________</dd>
+    <dt>Total Payment</dt><dd>$ __________________________________________</dd>
+    <dt>Signature</dt><dd>__________________________________________</dd>
+    <p class="clear"></p>
+</dl>
+<p><a href="javascript:history.go(-1)">Return to Invoice</a></p>

@@ -1,0 +1,115 @@
+
+
+<script language="javascript">
+<!--
+
+
+//adds wildcards and verifies at least one field is specified
+function searchValidater() {
+
+	//make sure at least one search option is selected
+	if ((document.searchform.LASTNAME_field.value != '') ||
+	  (document.searchform.FIRSTNAME_field.value != '') ||      
+	  (document.searchform.STATECD.selectedIndex < 51) || 
+	  (document.searchform.ZIP_field.value != '')){	  
+			  
+		if(document.abc.FIRSTNAME_field.value != ''){	
+			document.abc.FIRSTNAME.value = document.abc.FIRSTNAME_field.value+'~';	
+		}
+		if(document.abc.LASTNAME_field.value != ''){	
+			document.abc.LASTNAME.value = document.abc.LASTNAME_field.value+'~';
+		}
+		if(document.abc.ORGNAME_field.avalue != ''){	
+			document.abc.ORGNAME.value = document.abc.ORGNAME_field.value+'~';
+		}
+		if(document.abc.CITY_field.value != ''){	
+			document.abc.CITY.value = document.abc.CITY_field.value+'~';
+		}
+		if(document.abc.EMAIL_field.value != ''){	
+			document.abc.EMAIL.value = document.abc.EMAIL_field.value+'~';
+		}
+			  
+		document.searchform.submit();
+		return true;
+	}else {
+		alert('You must select at least one criteria');
+		return false;
+	}
+}   
+--> 		
+</script>
+
+
+
+
+<form name="searchform" method="POST" action="../memberdll.dll/List">
+<h1>Member Searc</h1>
+<div class="search">        
+  <table>
+  <tr>
+    <td>Last Name</td>
+    <td><input type="text" name="LASTNAME_field" size="50" tabindex="0"></td>
+  </tr>
+  <tr>
+    <td>First Name</td>
+    <td><input type="text" name="FIRSTNAME_field" size="50"></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><input type="text" name="EMAIL_field" size="50"></td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td><input type="text" name="CITY_field" size="50"></td>
+  </tr>
+  <tr>
+    <td>State</td>
+    <td>
+    	<select name="STATECD">
+    	<option selected value="">(All)</option>
+    	<#RTVSTATEREF>
+      </select>
+      </td>
+  </tr>
+  <tr>
+    <td>Zip</td>
+    <td><input type="text" name="ZIP" size="50"></td>
+  </tr>
+  <tr>
+    <td>Sort By</td>
+    <td><select size="1" name="SORT">
+      <option selected value="LASTNAME, FIRSTNAME">Last Name</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <input type="button" value="Search" onClick="searchValidater();"> 
+      <input type="reset" value="Reset"> </td>
+  </tr>
+</table>
+<div class="search" style="background-color:#FFFFFF;">
+    <table>
+      <tr>
+        <td><p><h3>Search Help</h3></p>
+            <p>To search the directory of active members, enter criteria
+              into one field or a combination of the fields
+              above, and then click <b>Submit</b>.&nbsp; Different ways to search for
+              John Smith include:&nbsp; &nbsp; </p>
+            <p>1. If you know how to spell the name of the member you are looking
+              for, type in the <b>Last Name</b> and <b>First Name</b> above.&nbsp; This will search the directory and display exact matches.</p><p>2. If you are not sure how to spell a member's name, you can do a <b>pattern
+                match </b>using the % wild card character<b>.</b> For example, type
+              &quot;Sm%&quot; in the <b>Last Name</b> field and type &quot;John&quot; in
+              the <b>First Name</b> field.&nbsp; This will give you a list of members with the first name &quot;John&quot; and
+              a last name starting with &quot;Sm&quot;.&nbsp;Note: do not type in the
+              quotes. </p></td>
+      </tr>
+    </table>
+    </div>
+
+<input type="hidden" name="ISMEMBERFLG" value="Y">
+<input type="hidden" name="ONWEBFLG" value="Y">
+<input type="hidden" name="RANGE" value="1/25">
+</form>
+
+

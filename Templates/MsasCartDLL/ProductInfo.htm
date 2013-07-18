@@ -1,0 +1,357 @@
+<h2>
+	<#PRODUCTNAME>
+</h2>
+<div>
+	<form id="formAdd" name="formAdd" method="post">
+		<ul class="profile" id="basicInfo" data-role="listview" data-inset="true">
+			<!--   <form id="formAdd" name="formAdd" method="post"> -->
+
+			<li><h2>Photo</h2>
+				    <div id="profilePhoto">
+    	<img width='150px' src="../cvImage.dll/view?ENTITY=PROD&ENTITYCD=<#PRODUCTCD>"
+    	class="image product_image preload" alt="<#PRODUCTNAME>" />
+    </div>
+</li>
+			<li>
+				<h2>
+					Product Code
+				</h2>
+				<#PRODUCTCD>
+			</li>
+
+			<li>
+				<h2>
+					Product Type
+				</h2>
+				<#PRODUCTTYPE>
+			</li>
+
+			<li class="majorcat">
+				<h2>
+				Major Cat:
+				</h2>
+
+				<#MAJORCAT>
+			</li>
+
+			<SCRIPT>
+			if ("<#MAJORCAT>" == "") {
+				$('.majorcat').hide();
+			}
+			</SCRIPT>
+			<li class="minorcat">
+				<h2>
+				Minor Cat:
+			</h2>
+
+				<#MINORCAT>
+			</li>
+			<SCRIPT>
+			if ("<#MINORCAT>" == "") {
+				$('.minorcat').hide();
+			}
+			</SCRIPT>
+                                    <!--<li class="size">Size</h2><dd class="size"><#PRODUCTSIZE></li>
+
+		<SCRIPT>
+
+			//if ("<#PRODUCTSIZE>"==""){
+
+			//	$('.size').hide();
+
+			//}
+
+		</SCRIPT>-->
+		<li>
+			<h2>
+				Standard Price
+			</h2>
+			<#UNITPRICE>
+			USD
+		</li>
+		<li>
+			<h2>
+				Member Price
+			</h2>
+			<#UDEF2AMT>
+			USD
+		</li>
+		<li>
+			<h2>
+				In Stock
+			</h2>
+			<script>
+			if ("<#INSTOCKSTT>" == "Y") {
+				document.write(" Yes</li>");
+			} else {
+				document.write(" No</li>");
+			}
+			</script>
+			<li>
+				<h2>
+					Description
+				</h2>
+				<#SHORTDES>
+			</li>
+			<!--<li><h2>Tags</h2><#TAGS></li>-->
+			<li>
+				<h2>
+					Quantity
+				</h2>
+				<input type="text" id="ITEMQTY" name="ITEMQTY" value='1' size="3">
+				&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+				<input type="button" value="Add to Cart" onClick="addProductCheckQty()"
+				data-mini="true" data-icon="plus" data-theme="g">
+			</li>
+			<!--    </form> -->
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="rateForm" style="display:none;">
+	<form name="form2" method="post" action="../cvrating.dll/add">
+		<legend>
+			Rate This Product
+		</legend>
+		<div data-role="fieldcontain">
+			<label for="USERRATING">
+				Select Rating:
+			</label>
+			<select name="USERRATING" id="USERRATING" data-mini="true">
+				<option>
+					1
+				</option>
+				<option>
+					2
+				</option>
+				<option>
+					3
+				</option>
+				<option>
+					4
+				</option>
+				<option>
+					5
+				</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="USERCOMMENT">
+				Comments:
+			</label>
+			<textarea name="USERCOMMENT" id="USERCOMMENT" cols="30" rows="4">
+			</textarea>
+		</div>
+		<input type="hidden" name="ENTITYCD" value="<#PRODUCTCD>">
+		<input type="hidden" name="ENTITYTYPECD" value="P">
+		<input type="submit" name="button" id="rateSubmitButton" value="Submit"
+		data-icon="check" data-mini="true" data-theme="g"/>
+		<input type="button" name="button" id="cancelRate"  data-rel="popup"  data-position-to="window"  data-transition="pop" value="Cancel" onClick="$('#rateForm').slideUp(2000);$('#rateButton').show();return false;"
+		data-icon="back" data-mini="true"/>
+
+
+
+
+
+	</form>
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--   <div data-role="popup" id="popupRating" data-theme="a">
+       <form name="form2" method="post" action="../cvrating.dll/add">
+            <div style="padding:10px 20px;">
+            	<legend>
+			Rate This Product
+		</legend>
+		<div data-role="fieldcontain">
+			<label for="USERRATING">
+				Select Rating:
+			</label>
+			<select name="USERRATING" id="USERRATING" data-mini="true">
+				<option>
+					1
+				</option>
+				<option>
+					2
+				</option>
+				<option>
+					3
+				</option>
+				<option>
+					4
+				</option>
+				<option>
+					5
+				</option>
+			</select>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="USERCOMMENT">
+				Comments:
+			</label>
+			<textarea name="USERCOMMENT" id="USERCOMMENT" cols="30" rows="4">
+			</textarea>
+		</div>
+		<input type="hidden" name="ENTITYCD" value="<#PRODUCTCD>">
+		<input type="hidden" name="ENTITYTYPECD" value="P">
+		<input type="submit" name="button" id="rateSubmitButton" value="Submit"
+		data-icon="check" data-mini="true" data-theme="g"/>
+		<input type="button" name="button" id="cancelRate" value="Cancel" onClick="$('#rateForm').slideUp(2000);$('#rateButton').show();return false;"
+		data-icon="back" data-mini="true"/>
+            </div>
+        </form>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+$(function() {
+	$("#tabs").tabs({
+		fx: {
+			height: 'toggle',
+			opacity: 'toggle'
+		}
+	});
+
+
+});
+
+function addProductCheckQty() {
+	if (isNumeric(document.formAdd.ITEMQTY.value)) {
+		var returnUrl = "../msascartdll.dll/showcart?ADD=ORDERTYPE=P,ITEMCD=<#PRODUCTCD>,";
+		if (document.formAdd.ITEMQTY.value < 1) {
+			document.formAdd.ITEMQTY.value = 1;
+			returnUrl += "ITEMQTY=1";
+		} else {
+			returnUrl += "ITEMQTY=" + document.formAdd.ITEMQTY.value;
+		}
+		window.location = returnUrl;
+	} else {
+		alert('Item quantity must be a whole number');
+	}
+}
+</script>
+<!-- tab content-->
+<div data-role="collapsible-set" data-theme="a" data-content-theme="b"
+data-inset="true">
+<!-- details-->
+<div data-role="collapsible" data-theme="a" data-content-theme="d" data-collapsed-icon="info"
+data-expanded-icon="arrow-d" data-inset="true">
+<h2>
+	Product Details
+</h2>
+<#HTMLNOTE>
+</div>
+<!-- / details-->
+<!-- photos -->
+<div data-role="collapsible" data-theme="a" data-content-theme="d" data-collapsed-icon="picture"
+data-expanded-icon="arrow-d" data-inset="true">
+<h2>
+	Product Photos
+</h2>
+<img width='300px' src='../cvImage.dll/view?ENTITY=PROD&ENTITYCD=<#PRODUCTCD>'>
+</div>
+<!-- / photos -->
+<!-- technical details -->
+<div data-role="collapsible" data-theme="a" data-content-theme="d" data-collapsed-icon="cogs"
+data-expanded-icon="arrow-d" data-inset="true">
+<h2>
+	Technical Details
+</h2>
+<div class="size" Size: <#PRODUCTSIZE>
+	>
+</div>
+<SCRIPT>
+if ("<#PRODUCTSIZE>" == "") {
+	$('.size').hide();
+}
+</SCRIPT>
+<#HTMLNOTE2>
+</div>
+<!-- / technical details -->
+<!-- Related Products -->
+<div data-role="collapsible" data-theme="a" data-content-theme="d" data-collapsed-icon="magnet"
+data-expanded-icon="arrow-d" data-inset="true">
+<h2>
+	Related Products
+</h2>
+<div id="related_products">
+</div>
+</div>
+<!-- / Related Products -->
+<div data-role="collapsible" data-theme="a" data-content-theme="d" data-collapsed-icon="star"
+data-expanded-icon="arrow-d" data-inset="true">
+<h2>
+	Reviews
+</h2>
+<div id="prodreview">
+</div>
+</div>
+<script>
+    			//get related products
+    			var url = '../utilities.dll/customlist?SQLNAME=RELATEDPRODUCTS&productcd=<#PRODUCTCD>&wmt=none&wnr=relProd_none.htm&whp=relProd_header.htm&wbp=relProd_list.htm';
+    			$.ajax({
+    				url: url,
+    				async: 'false',
+    				success: function(rp_response) {
+    					$("#related_products").html(rp_response);
+			        //update fields with newly entered info
+			        //$("#related_products").trigger('create');
+			    }
+			});
+
+
+
+
+    			var url = '../CVRating.dll/list?ENTITYCD=<#PRODUCTCD>&ENTITYTYPECD=P&wmt=none&whp=ratingheader.htm&wbp=ratinglist.htm';
+    			$.ajax({
+    				url: url,
+    				async: 'false',
+    				success: function(response) {
+    					$("#prodreview").html(response);
+			        //update fields with newly entered info
+			        //$("#prodreview").trigger('create');
+			    }
+			});
+    			</script>
+    		</div>
+    		<!-- product content end -->

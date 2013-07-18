@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GetEventInfo>
+	<EventInformation EVENTCD="<#SESSIONALTCD>">
+		<eventid>
+			<#SESSIONALTCD>
+		</eventid>
+		<program>
+			<#PROGRAMALTCD>
+		</program>
+		<eventname>
+			<#SESSIONNAME>
+		</eventname>
+		<description>
+			<#SESSIONDES>
+		</description>
+		<eventstartdate>
+			<#SESSIONBEGDATE>
+		</eventstartdate>
+		<eventenddate>
+			<#SESSIONENDDATE>
+		</eventenddate>
+		<eventstarttime>
+			<#SESSIONSTARTTM>
+		</eventstarttime>
+		<eventtimezone>
+			<#UDEF3QTY>
+		</eventtimezone>
+		<earlyregisterby>
+			<#EARLYREGISTERDATE>
+		</earlyregisterby>
+		<location>
+			<#LOCLOCATIONNAME>
+		</location>
+		<address1>
+			<#LOCADDRESS1>
+		</address1>
+		<address2>
+			<#LOCADDRESS2>
+		</address2>
+		<city>
+			<#LOCCITY>
+		</city>
+		<state>
+			<#LOCSTATECD>
+		</state>
+		<zip>
+			<#LOCZIP>
+		</zip>
+		<country>
+			<#LOCCOUNTRY>
+		</country>
+		<speakers>
+		<#TRAINERLIST>
+		</speakers>
+	</EventInformation>
+</GetEventInfo>

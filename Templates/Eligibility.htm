@@ -1,0 +1,197 @@
+<script language="javascript">
+function validate(currForm)
+{
+		if (currForm.policies_agreement[0].checked == false)
+		{
+			alert("Please agree with our exam policies before proceeding.");
+			return false;
+		}
+		
+		if (currForm.ethics_agreement[0].checked == false)
+		{
+			alert("Please agree with our Standards of Conduct Agreement before proceeding.");
+			return false;
+		}
+}
+	
+function toggleSubmitBtn(currForm)
+{
+	
+		if ((currForm.policies_agreement[0].checked == false) || (currForm.ethics_agreement[0].checked == false))
+		{
+			currForm.SubmitBtn.disabled = true;
+		}
+		else
+		{
+			currForm.SubmitBtn.disabled = false;
+		}
+}
+</script>
+<form name="event" method="post" action="UpdateMasterPay" onSubmit="return validate(this);">
+<table width="100%" border="0"  cellspacing="0" class="tableBorder">
+  <tr>
+    <td colspan="2" class="subtitle"><h1><strong>Application for Certification as a REGISTERED DENTAL ASSISTANT RDA (AMT)</strong> </h1>
+      <h3>RDA Certification Application</h3>
+      <h5>&nbsp;</h5></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="right"><hr /></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="left"><div align="left">
+      <h2>Part II - Eligibility</h2>
+      <table  border="0" cellpadding="3" cellspacing="0">
+        <tr>
+          <td><strong>
+            <input type="radio" name="radio" id="radio" value="radio" />
+          </strong></td>
+          <td>I attest that I am of good moral character</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><p>Applicant must be certified in cardiopulmonary&nbsp;  resuscitation (CPR) by the American Heart Association or the American Red  Cross, or show proof of comparable training.&nbsp; Photocopy of CURRENT CPR  card or proof of comparable training MUST be included with application. The  date on the CPR card should be current at the time of AMT certification.&nbsp;  (If physical limitations prevent CPR certification, contact the AMT Office.)&#13;</p></td>
+        </tr>
+        <tr>
+          <td><strong>
+            <input type="radio" name="radio" id="radio4" value="radio" />
+          </strong></td>
+          <td>I attest that I am fully trained and certified in Cardio Pulmonary Resuscitation (CPR)</td>
+        </tr>
+      </table>
+      <h3>Choose Eligibility Route
+      </h3>
+      <p>Applicant shall meet one of the following requirements (Check one box only);</p>
+      <blockquote>
+        <p>&nbsp;</p>
+      </blockquote>
+      <p><strong>
+        <input type="radio" name="radio" id="radio2" value="radio" />
+        </strong><br />
+      </p>
+      <ol>
+        <li><strong>Validity Assurance and Score Cancellation</strong><br />
+          AMT reserves the right to cancel any examination score if, in AMT&rsquo;s professional judgment, there is any reason to question the score&rsquo;s validity. Circumstances warranting score cancellation may include, but are not limited to: copying from notes or from another examinee&rsquo;s answers;
+          speaking or otherwise communicating with others during the test administration; aiding or receiving aid from other examinees; consulting study aids of any type during the exam; copying, transcribing, or otherwise reproducing test materials; removing test materials from the examination room; or having improper access to AMT exam content prior to the exam administration. Significant score increases upon retesting may also be investigated to ensure the authenticity of results. Misconduct may disqualify you from all future examination attempts and from AMT
+          certification.</li><br />
+        <li><strong>Exam Confidentiality and Non-Disclosure Agreement</strong><br />
+          The content of all AMT certification exams is copyrighted and is the property of AMT. Exam materials will be provided to you on a temporary basis for the sole purpose of testing your knowledge and competency in the discipline for which you seek certification. You are required to
+          return any exam materials to the test administrator immediately after completing the exam, and you are prohibited from using or possessing AMT examination content for any other purpose or at any other time. You agree not to disclose, publish, copy, reproduce, transmit or distribute exam content, in whole or in part, in any form or by any means, for any purpose, without the express prior written authorization of AMT&rsquo;s<br />
+          Director of Testing and Competency Assurance. The unauthorized disclosure, publication, copying, reproduction, transmission, distribution or possession of exam content or materials in any form is a crime and may subject you to civil liability and/or criminal prosecution.</li><br />
+        <li><strong>Consent and Validation of information</strong><br />
+          I consent to give AMT the authority to request the necessary information from individuals, institutions, and/or organizations named herein in order to validate credentials for certification.</li><br />
+        <li><strong>Retesting</strong><br />
+          Because performance is evaluated with respect to all content areas, failing candidates who choose to retake the test are required to retake the entire examination. Candidates are allowed to retake the examination three additional times after the first failure. After the first failure, candidates may retake the examination ONE additional time without filing a new application. However, candidates must file a new application and provide documentation of additional training or retraining prior to attempting the examination a third time. The applicant may not be considered for certification if he/she fails the examination the fourth time.<br />
+          <br />
+        </li>
+      </ol>
+      <p><strong>I certify that the statements made herein are true and correct, to my knowledge and belief, and realize that certification is subject to revocation for misrepresentation. If accepted as a certificant, I agree to uphold and abide by the standards of practice and bylaws of the American Medical Technologists.Please indicate your agreement with these policies.</strong></p>
+      <p align="center">
+        <input type="radio" value="agree" name="policies_agreement" onclick="toggleSubmitBtn(this.form)"/>
+        Agree
+        <input type="radio" checked="checked" value="disagree" name="policies_agreement" onclick="toggleSubmitBtn(this.form)" />
+        Disagree
+        </p>
+         <p> <strong>IMPORTANT NOTES:</strong></p>
+      <p> <strong>APPLICATION FEE IS NON-REFUNDABLE. </strong>Applicant may take the examination two times on this application. A retake is permitted no sooner 
+        than three (3) months from the first attempt and no later than two (2) years after the date of the application. A retesting fee of $70.00 will 
+        be required for a second administration. If the applicant fails to show for a scheduled examination, a fee of $70.00 will be required before
+        he/she may sit for the rescheduled examination. If the applicant fails the second administration, he/she must file a new application with a new
+        fee of $95.00, and proof of further education/training to be tested a third time. The applicant may also take the examination two times on the
+        second application but must adhere to the time frames and fees as stated above. If the applicant fails to honor any application within two (2)
+        years of submitting, a new application with appropriate fees must be filed. 
+        American Medical Technologists (AMT) is a private, non-profit certifying organization. Certification by AMT as a Registered Dental Assistant, RDA
+        (AMT), indicates that an individual meets certain educational and/or experience requirements established by AMT and has passed AMT&rsquo;s written
+        examination. The RDA (AMT) certification does NOT, however, indicate that the individual has complied with any licensure, registration, or other
+        regulatory requirements of the state(s) in which he or she intends to practice. A number of states administer licensure and/or registration programs for dental assistants. Some states&rsquo; programs are mandatory for all dental assistants practicing within the state; others are voluntary for those dental
+        assistants who wish to perform expanded duties. Certification by AMT does NOT take the place of any state program, mandatory or voluntary. In
+        addition to obtaining the RDA (AMT) credential, you should contact your state&rsquo;s dental licensing board to determine whether you are in compliance
+        with any state laws and regulations governing the practice of dental assisting. Your signature on this application indicates that you have read
+        and understand the foregoing.
+        By sending your completed, signed check to AMT, you authorize AMT to use the account information from your check to make a one-time electronic
+        fund transfer from your account for the same amount as the check. If the electronic fund transfer cannot be processed for technical reasons, you
+        authorize us to process the copy of your check. Please contact the account receivable department at jackie.leibach@amt1.com for other payment
+        options.
+        Please be aware that AMT&rsquo;s certification application forms are amended from time to time with changes impacting those eligibility requirements
+        set forth in the application. Therefore, if you are submitting an application form that was printed several months or years ago, it may not disclose
+        current criteria and conditions added subsequent to the printing of that form. All applicants are held to compliance with current eligibility
+        requirements (including payment of current fee amounts) that are in place at the time of submission of their application, notwithstanding
+        differences from the older, printed application being submitted. All current AMT certification applications are available for viewing and printing at
+        AMT&rsquo;s website, www.amt1.com. </p>
+      <p><strong>By completing and submitting this application to AMT, I confirm that I have read and agree to the provisions stated herein.</strong></p>
+      <p align="center">
+        <input type="radio" value="agree" name="ethics_agreement" onclick="toggleSubmitBtn(this.form)" />
+        Agree
+        <input type="radio" checked value="disagree" name="ethics_agreement" 	onclick="toggleSubmitBtn(this.form)" />
+        Disagree </p>
+    </div></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="right"><div align="left">* = Required Fields </div></td>
+  </tr>
+  <tr>
+    <td width="25%" align="right">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"><b>Credit Card Information  *:</b></td>
+  </tr>
+  <tr>
+    <td colspan="2"><table width="400" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td><input type=radio name=PAYMENTTYPECD value=VISA checked />
+          <img src=../../images/visa.gif align=top /> Visa</td>
+        <td><input type=radio name=PAYMENTTYPECD value=MC />
+          <img src=../../images/mastercard.gif align=top /> Master Card </td>
+      </tr>
+      <tr>
+        <td><input type="radio" name="PAYMENTTYPECD" value="DISC"  />
+          <img src="../../images/discover.gif" align="top" width="37" height="24" /> Discover </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="right"><b>Card Number*:</b></td>
+    <td><input type=text name="PAYMENTREFNUM" value="" size=30 class='reqField' /></td>
+  </tr>
+  <tr>
+    <td align="right"><strong>CVV Number*: </strong></td>
+    <td><input type="text" name="CSC" value="" size="10" class='reqField' /></td>
+  </tr>
+  <tr>
+    <td align="right"><b>Expiration Date*:</b></td>
+    <td><select name="EXPIREMONTH" size="1" class='reqField'>
+      <option value=""></option>
+      <option value="01">01 - January</option>
+      <option value="02">02 - February</option>
+      <option value="03">03 - March</option>
+      <option value="04">04 - April</option>
+      <option value="05">05 - May</option>
+      <option value="06">06 - June</option>
+      <option value="07">07 - July</option>
+      <option value="08">08 - August</option>
+      <option value="09">09 - September</option>
+      <option value="10">10 - October</option>
+      <option value="11">11 - November</option>
+      <option value="12">12 - December</option>
+    </select>
+      <select name="EXPIREYEAR" class='reqField'>
+        <script>writeYear("NOW",2020);</script>
+      </select></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><input type="submit" name="SubmitBtn" value="Submit" disabled /></td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">&nbsp;</td>
+  </tr>
+</table>
+<input type="hidden" name="CUSTOMERCD" value="<#CUSTOMERCD>">
+<input type="hidden" name="CR_ISEXEMPTFLG" value="N">
+<input type="hidden" name="CR_STATUSSTT" value="A_Received">
+<input type="hidden" name="CR_STARTDATE" value='<#STARTDATE NOW="Y">'>
+<input type="hidden" name="CR_ENDDATE" value='<#ENDDATE NOW="730">'>
+<input type="hidden" name="MASTERID" value="<#MASTERID>">
+<input type="hidden" name="CERTIFICATIONCD" value="RDA_APPL">
+<input type="hidden" name="PROCESSONLINECREDIT" value="N">
+</form>
