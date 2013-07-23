@@ -32,7 +32,11 @@
 			<#REFTABLEVALS TABLENAME="COUNTRYREF" FLD1="COUNTRYNAME" FLD2="COUNTRYNAME" SORT="COUNTRYNAME" SCV="COUNTRY">
         </select>
         <script>
-			checkCountryMask("<#COUNTRY>"); //set correct phone mask on load
+			//checkCountryMask("<#COUNTRY>"); //set correct phone mask on load
+			////test
+			$(function() {
+				checkCountryMask("<#COUNTRY>");
+			});
 		</script>
 		<!-- <div style="padding-left: 170px; padding-bottom:10px;"> Only select Country if your office is located outside of the United States.</div> -->
 	</div>
