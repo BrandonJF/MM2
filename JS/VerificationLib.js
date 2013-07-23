@@ -376,7 +376,8 @@ function ElementValidated(FormElement, MaskType)
 			return false;
 			break;
 		case "select-one":
-			if (FormElement.selectedIndex==0) return false;
+			//alert();
+			if (FormElement[FormElement.selectedIndex].value=="") return false;
 			break;
 	}
 	return true;
