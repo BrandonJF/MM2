@@ -269,6 +269,7 @@ function validateAll(formName, validatePayment){
 						oRequired.CSC = ['N', 'PAY', '', '', "\nYou must enter the card verification code."];
 						break;
 					case "PAYMENTREFNUM":
+						
 						checkCCNum = true;
 						break;
 				}
@@ -309,7 +310,7 @@ function validateAll(formName, validatePayment){
 				formName.ALTPHONE.value = '+'+formName.ALTPHONE.value;
 			}}
 		}
-
+		
 		if(checkCCNum){
 			if(CCNumValidate(formName, "PAY", false, "\nCredit Card number is invalid.")){
 				return true;
@@ -434,6 +435,7 @@ function isFormValidated(form, oRequired, isResultList)
 }
 
 //checks the credit card number
+//(formName, "PAY", false, "\nCredit Card number is invalid.")){
 function CCNumValidate(form, mode, isResultList, Msg)
 {
 
@@ -444,18 +446,20 @@ function CCNumValidate(form, mode, isResultList, Msg)
 			if (form.PAYMENTTYPECD[i].checked==true)
 				var cardtype = form.PAYMENTTYPECD[i].value;
 		}
-
+		
         if (verify_ccard(form.PAYMENTREFNUM.value, cardtype) != 0)
   		{
+			if (isResultList) return "";
+			else {
+				$('#error_content').html(Msg);
+			
+				$('#popBtn').click();
+				if (typeof el.type != 'undefined') el.focus();
+				return false;
+			}
 
-
-            $("#PAYMENTREFNUM").assert(
-        '1' == '0',
-        Msg
-    );
-       return false;
-		  	form.PAYMENTREFNUM.focus();
-
+            /*$("#PAYMENTREFNUM").assert('1' == '0',  Msg );*/
+       
 		}
 	}
 
