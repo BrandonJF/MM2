@@ -85,35 +85,16 @@ function committeeWindow(customercd) {
 }
 
 function copyBillingInfo(formName) {
-	if (formName.FIRSTNAME && formName.CREDITFIRSTNAME) {
-		formName.CREDITFIRSTNAME.value = formName.FIRSTNAME.value;
-	}
-	if (formName.LASTNAME && formName.CREDITLASTNAME) {
-		formName.CREDITLASTNAME.value = formName.LASTNAME.value;
-	}
-	if (formName.ADDRESS1 && formName.CREDITADDRESS1) {
-		formName.CREDITADDRESS1.value = formName.ADDRESS1.value;
-	}
-	if (formName.ADDRESS2 && formName.CREDITADDRESS2) {
-		formName.CREDITADDRESS2.value = formName.ADDRESS2.value;
-	}
-	if (formName.ADDRESS3 && formName.CREDITADDRESS3) {
-		formName.CREDITADDRESS3.value = formName.ADDRESS3.value;
-	}
-	if (formName.CITY && formName.CREDITCITY) {
-		formName.CREDITCITY.value = formName.CITY.value;
-	}
-	if (formName.STATECD && formName.CREDITSTATECD) {
-		formName.CREDITSTATECD.selectedIndex = formName.STATECD.selectedIndex;
-		formName.CREDITSTATECD.value = formName.STATECD.value;
-	}
-	if (formName.ZIP && formName.CREDITZIP) {
-		formName.CREDITZIP.value = formName.ZIP.value;
-	}
-	if (formName.COUNTRY && formName.CREDITCOUNTRY) {
-		formName.CREDITCOUNTRY.selectedIndex = formName.COUNTRY.selectedIndex;
-		formName.CREDITCOUNTRY.value = formName.COUNTRY.value;
-	}
+	$("input[name=CREDITFIRSTNAME]").val($("input[name=FIRSTNAME]").val());
+	$("input[name=CREDITLASTNAME]").val($("input[name=LASTNAME]").val());
+	$("input[name=CREDITADDRESS1]").val($("input[name=ADDRESS1]").val());
+	$("input[name=CREDITADDRESS2]").val($("input[name=ADDRESS2]").val());
+	$("input[name=CREDITADDRESS3]").val($("input[name=ADDRESS3]").val());
+	$("input[name=CREDITCITY]").val($("input[name=CITY]").val());
+	$("select[name=CREDITSTATECD]").val($("select[name=STATECD]").val()).selectmenu('refresh', true);;
+	$("input[name=CREDITZIP]").val($("input[name=ZIP]").val());
+	$("select[name=CREDITCOUNTRY]").val($("select[name=COUNTRY]").val()).selectmenu('refresh', true);;
+	
 }
 /*////////////////////// ORGNAIZTION SEARCH ////////////////////////////////*/
 
