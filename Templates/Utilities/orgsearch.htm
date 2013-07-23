@@ -42,10 +42,10 @@ data-ajax="false">
 	</select>
 </div>
 <div data-role="fieldcontain">
-	<label for="ZIP">
+	<label for="ZIP_field">
 		<#MLGLBL TEXT="Zip">
 	</label>
-	<input type="text" id="ZIP" name="ZIP">
+	<input type="text" id="ZIP_field" name="ZIP_field">
 </div>
 <div data-role="fieldcontain">
 	<label for="COUNTRY">
@@ -62,12 +62,13 @@ data-ajax="false">
 	</select>
 </div>
 <div class="buttons">
-	<input type="submit" value="Search" onClick="orgSearchValidater(searchform);" data-theme="g" data-icon="search">
+	<input type="button" value="Search" onClick="orgSearchValidater(searchform);" data-theme="g" data-icon="search">
 	<input type="reset" value="Reset">
 </div>
 <input type="hidden" id="EMAIL" name="EMAIL" />
 <input type="hidden" id="ORGNAME" name="ORGNAME" />
 <input type="hidden" id="CITY" name="CITY" />
+<input type="hidden" id="ZIP" name="ZIP" />
 <input type="hidden" id="RANGE" name="RANGE" value="1/25">
 <input type="hidden" id="NOWEBFLG" name="NOWEBFLG" value="<>Y">
 <input type="hidden" id="SHOWSQL" name="SHOWSQL" value="N">

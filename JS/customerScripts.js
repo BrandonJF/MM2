@@ -262,6 +262,9 @@ function memberSearchValidater(formName) {
 	if (formName.EMAIL_field.value != '') {
 		formName.EMAIL.value = formName.EMAIL_field.value + '~';
 	}
+	if (formName.ZIP_field.value != '') {
+		formName.ZIP.value = formName.ZIP_field.value + '~';
+	}
 	// if(formName.ISMEMBERFLG_field.checked){
 	// 	formName.ISMEMBERFLG.value = "Y";
 	// }else{
@@ -281,8 +284,9 @@ function orgSearchValidater(formName) {
 	if (formName.CITY_field.value != '') {
 		formName.CITY.value = formName.CITY_field.value + '~';
 	}
-	if (formName.EMAIL_field.value != '') {
-		formName.EMAIL.value = formName.EMAIL_field.value + '~';
+	
+	if (formName.ZIP_field.value != '') {
+		formName.ZIP.value = formName.ZIP_field.value + '~';
 	}
 
 	formName.submit();
