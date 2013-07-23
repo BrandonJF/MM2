@@ -53,15 +53,11 @@ var isPromo = false;
 </div>
 <br><br>
 <div id="invoiceSection" style="display:none;">
-  <!--   <h3>Other Invoices</h3>
-    <table class="gutters">
-    <tr>
-        <th width="20%">Invoice Number</th>
-        <th width="40%">Member Name</th>
-        <th width="20%">Invoice Total</th>
-    </tr>
-    <#INVOICELIST>
-    </table> -->
+   <ul data-role="listview" data-inset="true"  data-split-theme="d">
+	
+	 <li>Other Invoices</li>
+	<#INVOICELIST>
+</ul>
 </div>
 
 

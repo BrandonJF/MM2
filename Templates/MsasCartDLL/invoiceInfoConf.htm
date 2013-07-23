@@ -1,29 +1,15 @@
-<tr>
-	<td><#INVOICENUM></td>
-    <td><#PAYEENAME></td>
-    <td class="price"><strong><#TOTALAMT></strong></td>
-</tr>
-<tr class="subtotal">
-	<td>&nbsp;</td>
-	<td>&nbsp;</td>
-	<td>
-		<a href="#" onClick="$('#<#INVOICENUM>_items').show(); $('#<#INVOICENUM>_showLink').hide();return false;" id="<#INVOICENUM>_showLink">View invoice items</a>
-</td></tr>
-</table>
-<table style="display:none;" id="<#INVOICENUM>_items" class="nobg">
-    <tr>
-					<th width="20%">Item Code</th>
-					<th width="40%">Description</th>
-					<th width="20%">Total</th>
-				</tr>
-				<#INVOICEITEMS>
-				<tr class="subtotal">
-					<td>&nbsp;</td>
-					<td colspan="2" class="price">
-						<a href="#" onClick="$('#<#INVOICENUM>_items').hide();$('#<#INVOICENUM>_showLink').show();return false;">Hide invoice items</a>
-					</td>
-				</tr>
-     </table>
+
+
+
+<li>
+			
+		<h3>Invoice #<#INVOICENUM></h3>
+		<p><#PAYEENAME></p>
+		<p class="ui-li-aside"><#TOTALAMT></p>
+
+</li>
+
+
 <script>
 	$("#invoiceSection").show();
 	isInvoices = true;
