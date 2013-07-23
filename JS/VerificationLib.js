@@ -90,10 +90,10 @@ function validateAll(formName, validatePayment){
 				oRequired.ORGNAME = ['','','','',"\nThe Organization field is required. \n\nPlease select your Organization."];
 				break;
 			case "EMAIL":
-				if ($('#EMAIL').is(":visible"))
-				{
+				// if ($('#EMAIL').is(":visible") || $('#Email').is(":visible"))
+				// {
 					oRequired.EMAIL = ['E', '', '', '', "\nThe Email field must contain a \"@\" and a \".\" \n\nPlease re-enter your E-mail address."];
-				}
+				// }
 				break;
 
 			case "ADDRESSTYPE":
@@ -269,7 +269,7 @@ function validateAll(formName, validatePayment){
 						oRequired.CSC = ['N', 'PAY', '', '', "\nYou must enter the card verification code."];
 						break;
 					case "PAYMENTREFNUM":
-						
+
 						checkCCNum = true;
 						break;
 				}
@@ -310,7 +310,7 @@ function validateAll(formName, validatePayment){
 				formName.ALTPHONE.value = '+'+formName.ALTPHONE.value;
 			}}
 		}
-		
+
 		if(checkCCNum){
 			if(CCNumValidate(formName, "PAY", false, "\nCredit Card number is invalid.")){
 				return true;
@@ -447,20 +447,20 @@ function CCNumValidate(form, mode, isResultList, Msg)
 			if (form.PAYMENTTYPECD[i].checked==true)
 				var cardtype = form.PAYMENTTYPECD[i].value;
 		}
-		
+
         if (verify_ccard(form.PAYMENTREFNUM.value, cardtype) != 0)
   		{
 			if (isResultList) return "";
 			else {
 				$('#error_content').html(Msg);
-			
+
 				$('#popBtn').click();
 				if (typeof el.type != 'undefined') el.focus();
 				return false;
 			}
 
             /*$("#PAYMENTREFNUM").assert('1' == '0',  Msg );*/
-       
+
 		}
 	}
 
