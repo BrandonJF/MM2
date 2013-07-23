@@ -95,6 +95,19 @@ $(document).ready(function() {
 });
 
 </script>
+<div id="enterPayment" class="cartPayment" style='display:none;'>
+	<input type="hidden" name="RESPONSEPAGE" value="receipt.htm">
+	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
+	<div class="buttons selectPayment hidden" id="processPayment">
+		<input type="button" data-theme="g" value="Process Payment" id='paymentButton' onClick="formValidate(); return false;">
+	</div>
+</div>
+
+<div data-role="popup" id="errorPop" data-overlay-theme="a" data-theme="a" style="max-width:400px;" class="ui-corner-all">
+<h3 class="ui-title" id="error_content"></h3>
+<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">OK</a>
+</div>
+<a href="#errorPop" data-rel="popup" data-position-to="window" data-transition="pop"  id="popBtn" style="display:none;"></a>
 
 <input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
 <input type="hidden" name="LASTNAME" value="<#LASTNAME>">
@@ -117,23 +130,6 @@ $(document).ready(function() {
 <input type="hidden" name="EMAILFROMADDRESS" value="admin@domain.org"/>
 <input type="hidden" name="EMAILRESPONSEFORMAT" value="HTML" />
 <input type="hidden" name="ISSUEBILLFLG" value="N" />
-
-
-
-<div id="enterPayment" class="cartPayment" style='display:none;'>
-	<input type="hidden" name="RESPONSEPAGE" value="receipt.htm">
-	<#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm">
-	<div class="buttons selectPayment hidden" id="processPayment">
-		<input type="button" data-theme="g" value="Process Payment" id='paymentButton' onClick="formValidate(); return false;">
-	</div>
-</div>
-
-<div data-role="popup" id="errorPop" data-overlay-theme="a" data-theme="a" style="max-width:400px;" class="ui-corner-all">
-<h3 class="ui-title" id="error_content"></h3>
-<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">OK</a>
-</div>
-<a href="#errorPop" data-rel="popup" data-position-to="window" data-transition="pop"  id="popBtn" style="display:none;"></a>
-
 </form>
 
 
