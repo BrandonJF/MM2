@@ -1,7 +1,7 @@
 
 
 <h2 class="title">Membership Dues Renewal Payment</h2>
-<form method="post" ACTION="Post" name="order" id="order">
+<form method="post" ACTION="Post" name="order" id="orderForm">
                <input type="hidden" name="FIRSTNAME" value="<#FIRSTNAME>">
                         <input type="hidden" name="LASTNAME" value="<#LASTNAME>">
                         <input type="hidden" name="ADDRESS1" value="<#ADDRESS1>">
@@ -96,8 +96,16 @@
                                 <input type="hidden" name="RESPONSEPAGE" value="DPaymentConfirm.htm">
                             <#INCLUDE DLL="utilities.dll" ACT="nextForm" WRP="INCLUDE_payment.htm"  PARAMS="CUSTOMERCD">
                                 <div class="buttons" id="selectPayment">
-                                    <input type="submit" id="submit" value="Pay Now"  class='searchButton'  data-theme="g"/>
+                                    <input type="button" onclick= "formValidate()" value="Pay Now"  class='searchButton'  data-theme="g"/>
                                 </div>
+								
+								<div data-role="popup" id="errorPop" data-overlay-theme="a" data-theme="a" style="max-width:400px;" class="ui-corner-all">
+								<h3 class="ui-title" id="error_content"></h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a">OK</a>
+								</div>
+								<a href="#errorPop" data-rel="popup" data-position-to="window" data-transition="pop"  id="popBtn" style="display:none;"></a>
+
+								
                                 <div class="missing" style="display: none;">
                                     <p>Required fields are missing. Please fill those in before continuing.</p>
                                 </div>
@@ -122,12 +130,18 @@ function dues_showRenewDons(){
     })
 
 
+function formValidate() {
+	if ( validateAll(document.order )) {
+			document.order.submit();
+			return false;
+		}
 
-
-    $("#order").validity(function() {
+}
+	/*
+    $("#orderForm").validity(function() {
         $(".reqField").require("#{field} is required.");
 
     });
-
+*/
 
     </script>
